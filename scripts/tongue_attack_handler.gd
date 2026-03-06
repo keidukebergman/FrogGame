@@ -58,7 +58,7 @@ func _process(delta: float) -> void:
 	var start_pos = mouth_marker.global_position
 	var dir = target_pos - start_pos
 	var dist = dir.length()
-
+	
 #TODO: Put this in separate function
 	if dist > 0.01: 
 		tongue_line_node.visible = true 
@@ -81,6 +81,9 @@ func _process(delta: float) -> void:
 		TongueState.EXTENDING:
 			_test_for_retracting()
 			tongue_tip_node.position = tongue_tip_node.position.move_toward(tongue_target_position, delta*extension_speed)
+			if dist > 0.1 && !tongue_hitbox.is_active:
+				tongue_hitbox.is_active = true
+				tongue_hitbox.start_detecting_hits()
 			if tongue_tip_node.position.distance_to(tongue_target_position) < 0.01:
 				_start_retracting()
 		TongueState.RETRACTING:
@@ -120,9 +123,7 @@ func tongue_attack_raycast():
 	var target_point:Vector3 = self.global_position + Vector3(-inputvector.x, 0, -inputvector.y) * 5
 	target_point.y = self.global_position.y
 	tongue_state = TongueState.EXTENDING
-	tongue_hitbox.is_active = true
 	tongue_tip_node.reparent(get_tree().get_root())
-	tongue_hitbox.start_detecting_hits()
 	tongue_tip_node.visible = true
 	tongue_line_node.visible = true
 	tongue_target_position = target_point

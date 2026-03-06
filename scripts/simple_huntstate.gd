@@ -21,7 +21,7 @@ func _enter_state() -> void:
 func _set_nav_target() -> void:
 	while true:
 		if aggro_manager.target != null:
-			await get_tree().create_timer(randf_range(0.3, 3)).timeout;
+			await get_tree().create_timer(randf_range(0.3, 1)).timeout;
 			nav.target_position = aggro_manager.target.global_position
 		else:
 			await get_tree().create_timer(randf_range(0.3, 9)).timeout;
@@ -49,7 +49,10 @@ func _state_physics_update(delta: float) -> void:
 	var acceleration_parameter = acceleration if direction_dot > 0 else deceleration 
 	
 	var yvel = body.velocity.y
-	body.velocity = body.velocity.move_toward(movement_direction*movement_speed, delta*acceleration_parameter)
-	yvel -= 9.82*delta
+	yvel -= 9.82 * delta
+	body.velocity = body.velocity.move_toward(movement_direction * movement_speed,\
+		delta * acceleration_parameter)
 	body.velocity.y = yvel
+	
+	nav.velocity = Vector3(body.velocity.x, 0, body.velocity.z)
 	body.move_and_slide()

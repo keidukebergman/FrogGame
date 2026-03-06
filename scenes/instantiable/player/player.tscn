@@ -210,7 +210,7 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.066467285, 0, 0)
 shape = SubResource("BoxShape3D_c6rvn")
 
 [node name="TongueOrigin" type="Node3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler"]
-transform = Transform3D(1, 0, 0, 0, 0.9999995, 0, 0, 0, 0.9999995, 0, 0.30144215, 0.1681477)
+transform = Transform3D(1, 0, 0, 0, 0.99999946, 0, 0, 0, 0.99999946, 0, 0.40144205, 0.16814768)
 
 [node name="Visual" type="Node3D" parent="FrogCharacter"]
 
