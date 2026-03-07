@@ -7,7 +7,7 @@ class_name EnemyManager
 signal requested_player_information(aggro_manager:AggroManager)
 
 func _ready() -> void:
-	for n in 120:
+	for n in 20:
 		await get_tree().create_timer(randf_range(0, 0.01)).timeout
 		var spawn_vec:Vector3 = Vector3(randf_range(-1,1), 0, randf_range(-1, 1)).normalized() * randf_range(0, 5)
 		var enemy = spawn_enemy(test_enemy, spawn_vec) as EnemyEntity
