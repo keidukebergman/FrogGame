@@ -39,7 +39,7 @@ func _state_update(_delta: float) -> void:
 		pass
 
 
-func _state_physics_update(delta: float) -> void:
+func _state_physics_updates(delta: float) -> void:
 	var destination = nav.get_next_path_position()
 	var local_destination = destination - body.global_position
 	var direction = local_destination.normalized()
