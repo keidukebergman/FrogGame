@@ -2,6 +2,7 @@ extends State
 class_name PlayerAirborneState
 
 @export var grounded_state:PlayerGroundState
+@export var dash_state:PlayerDashState
 @export var movement_speed:float = 4
 @export var acceleration:float = 2
 @export var duration_before_fall:float = 0.5
@@ -21,14 +22,14 @@ func _exit_state():
 	super._exit_state()
 	pass
 
-func _state_update(_delta: float):	
+func _state_update(_delta: float):
+	if Input.is_action_just_pressed("dash"):
+		state_machine._change_state(dash_state)
 	fall_timer += _delta
 	var input_vector = Vector3(-InputReader.movement_vector.x, 0, InputReader.movement_vector.y).normalized()
 	var horizontal_velocity = root.velocity
-	
 	horizontal_velocity.y = 0
 	horizontal_velocity = lerp(horizontal_velocity, input_vector * movement_speed, _delta * acceleration)
-	
 	if fall_timer < duration_before_fall:
 		root.velocity = root.velocity.move_toward(Vector3.ZERO, _delta*air_drag)
 		return

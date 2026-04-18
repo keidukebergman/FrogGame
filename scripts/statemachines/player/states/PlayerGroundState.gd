@@ -34,8 +34,6 @@ func _state_update(_delta: float):
 		state_machine._change_state(dash_state)
 	if not state_machine._is_grounded():
 		state_machine._change_state(airborne_state)
-	
-
 	var mouse_vector = InputReader._get_mouse_object_offset(root).normalized()
 	var renderer = state_machine.renderer
 	if mouse_vector.x < 0:

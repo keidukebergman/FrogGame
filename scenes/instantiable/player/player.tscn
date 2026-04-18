@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://w3oxfr1xotrg" path="res://scripts/tongue_attack_state.gd" id="5_xmha0"]
 [ext_resource type="Script" uid="uid://b2ifomelrlmfr" path="res://scripts/statemachines/player/states/PlayerAirborneState.gd" id="7_v47df"]
 [ext_resource type="Script" uid="uid://dmj61wc554x8h" path="res://scripts/player_death_manager.gd" id="9_3qxr5"]
-[ext_resource type="Script" uid="uid://calbyq6tluyu" path="res://scenes/instantiable/player/player_death_state.gd" id="9_gnc5k"]
+[ext_resource type="Script" path="res://scenes/instantiable/player/player_death_state.gd" id="9_gnc5k"]
 [ext_resource type="Script" uid="uid://1rqaiis71irb" path="res://scripts/health_manager.gd" id="10_c7xul"]
 [ext_resource type="Script" uid="uid://miugg8jpe2ku" path="res://scripts/effect_manager.gd" id="11_7r8gw"]
 [ext_resource type="Script" uid="uid://tp7u7qxjy8l5" path="res://scripts/knockback_manager.gd" id="12_pcexo"]
@@ -48,7 +48,7 @@ material = SubResource("StandardMaterial3D_mf4mk")
 [sub_resource type="SphereShape3D" id="SphereShape3D_ppyta"]
 radius = 0.264354
 
-[node name="Player" type="Node" node_paths=PackedStringArray("health_manager", "death_manager", "state_machine", "state_grounded", "state_attack", "state_tongue_attack", "state_airborne", "state_jump", "effect_manager", "water_splash_manager", "hurtbox")]
+[node name="Player" type="Node" node_paths=PackedStringArray("health_manager", "death_manager", "state_machine", "state_grounded", "state_attack", "state_tongue_attack", "state_airborne", "effect_manager", "water_splash_manager", "hurtbox")]
 script = ExtResource("1_gnc5k")
 health_manager = NodePath("FrogCharacter/Systems/HealthManager")
 death_manager = NodePath("FrogCharacter/Systems/DeathManager")
@@ -57,7 +57,6 @@ state_grounded = NodePath("FrogCharacter/Systems/StateMachine/Grounded")
 state_attack = NodePath("FrogCharacter/Systems/StateMachine/GroundAttack")
 state_tongue_attack = NodePath("FrogCharacter/Systems/StateMachine/TongueAttackHeavy")
 state_airborne = NodePath("FrogCharacter/Systems/StateMachine/Airborne")
-state_jump = NodePath("")
 effect_manager = NodePath("FrogCharacter/Systems/EffectManager")
 water_splash_manager = NodePath("FrogCharacter/Systems/WaterSplashManager")
 hurtbox = NodePath("FrogCharacter/Systems/HitAndHurt/Hurtbox/Hurtbox")
@@ -96,7 +95,7 @@ script = ExtResource("5_gnc5k")
 airborne_state = NodePath("../Airborne")
 grounded_state = NodePath("../Grounded")
 
-[node name="GroundAttack" type="Node3D" parent="FrogCharacter/Systems/StateMachine" node_paths=PackedStringArray("slash_hitbox", "slash_fx", "jump_state", "airborne_state", "ground_state", "effect_manager")]
+[node name="GroundAttack" type="Node3D" parent="FrogCharacter/Systems/StateMachine" node_paths=PackedStringArray("slash_hitbox", "slash_fx", "airborne_state", "ground_state", "effect_manager")]
 script = ExtResource("4_isv8f")
 slice_movement_force = 9.0
 attack_time = 0.3
@@ -104,23 +103,22 @@ attack_windup_time = 0.1
 slice_movement_curve = SubResource("Curve_at5dv")
 slash_hitbox = NodePath("../../HitAndHurt/Hitboxes/hitbox_slash")
 slash_fx = NodePath("../../../Visual/Slash-fx")
-jump_state = NodePath("")
 airborne_state = NodePath("../Airborne")
 ground_state = NodePath("../Grounded")
 effect_manager = NodePath("../../EffectManager")
 attack_deceleration = 30.0
 
-[node name="TongueAttackHeavy" type="Node3D" parent="FrogCharacter/Systems/StateMachine" node_paths=PackedStringArray("jump_state", "airborne_state", "ground_state", "tongue_attack_manager", "body")]
+[node name="TongueAttackHeavy" type="Node3D" parent="FrogCharacter/Systems/StateMachine" node_paths=PackedStringArray("airborne_state", "ground_state", "tongue_attack_manager", "body")]
 script = ExtResource("5_xmha0")
-jump_state = NodePath("")
 airborne_state = NodePath("../Airborne")
 ground_state = NodePath("../Grounded")
 tongue_attack_manager = NodePath("../../SpecialHandler/TongueAttackHandler")
 body = NodePath("../../..")
 
-[node name="Airborne" type="Node3D" parent="FrogCharacter/Systems/StateMachine" node_paths=PackedStringArray("grounded_state")]
+[node name="Airborne" type="Node3D" parent="FrogCharacter/Systems/StateMachine" node_paths=PackedStringArray("grounded_state", "dash_state")]
 script = ExtResource("7_v47df")
 grounded_state = NodePath("../Grounded")
+dash_state = NodePath("../DashState")
 
 [node name="Death" type="Node3D" parent="FrogCharacter/Systems/StateMachine"]
 script = ExtResource("9_gnc5k")
@@ -182,6 +180,7 @@ script = ExtResource("17_hdudl")
 attach_force = 12.0
 mouth_marker = NodePath("TongueOrigin")
 tongue_hitbox = NodePath("TonguePoint/Hitbox")
+max_length = 10.0
 extension_speed = 15.0
 retraction_speed = 20.0
 retraction_acceleration_speed = 1.5
