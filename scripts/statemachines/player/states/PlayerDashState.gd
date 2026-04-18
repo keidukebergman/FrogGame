@@ -25,7 +25,7 @@ func _exit_state():
 
 func _state_update(_delta: float):
 	state_machine._change_state(grounded_state)
-	root.move_and_slide()
 
 func _state_physics_update(_delta: float):
+	root.move_and_slide()
 	pass

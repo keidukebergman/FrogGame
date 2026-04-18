@@ -1,0 +1,221 @@
+[gd_scene load_steps=21 format=3 uid="uid://cp56kp11t4ngg"]
+
+[ext_resource type="AudioStream" uid="uid://pmc3kysxqlc6" path="res://sound/sfx/pixabay/lake-wavelet-27909.mp3" id="1_1dqgb"]
+[ext_resource type="Script" uid="uid://dhd6d8l44t7yn" path="res://scenes/game_manager.gd" id="1_ajshl"]
+[ext_resource type="Script" uid="uid://cpuxx83goq5ye" path="res://scripts/path_manager.gd" id="2_2cnsr"]
+[ext_resource type="Script" uid="uid://b32r0eqcdgkju" path="res://scenes/player_manager.gd" id="2_at5dv"]
+[ext_resource type="Script" uid="uid://14an4j5nwxnn" path="res://scenes/enemy_manager.gd" id="2_jcd4p"]
+[ext_resource type="Script" uid="uid://cdrfstpx35r12" path="res://scenes/ui_manager.gd" id="2_uacia"]
+[ext_resource type="PackedScene" uid="uid://b427eeltoq12o" path="res://scenes/instantiable/player/player.tscn" id="3_lpvoh"]
+[ext_resource type="Script" uid="uid://d4km7624424c" path="res://scenes/health_bar_manager.gd" id="3_yk7ts"]
+[ext_resource type="PackedScene" uid="uid://bcs7ck8bsbe0q" path="res://scenes/instantiable/enemies/enemy_mosquito.tscn" id="4_at5dv"]
+[ext_resource type="PackedScene" uid="uid://bg1owrrruuh0w" path="res://scenes/lily_pad.tscn" id="7_44saj"]
+[ext_resource type="Material" uid="uid://cq31wu4xny0ql" path="res://materials/water.tres" id="26_kay4s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_75pfo"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.09921973, 0.09921973, 0.09921973, 0.60784316)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gv2t6"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.9999731, 0.72762823, 0.6849262, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1xwo4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5civd"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 1, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[sub_resource type="Environment" id="Environment_g14j6"]
+ambient_light_color = Color(0.30311, 0.608761, 0.511145, 1)
+glow_enabled = true
+glow_intensity = 2.3
+glow_hdr_threshold = 0.48
+glow_hdr_scale = 1.15
+fog_light_energy = 2.0
+fog_sun_scatter = 0.09
+fog_density = 0.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0157
+volumetric_fog_albedo = Color(0.505316, 0.907296, 0.968455, 1)
+volumetric_fog_emission = Color(0.194426, 0.825317, 0.832815, 1)
+volumetric_fog_emission_energy = 0.0
+volumetric_fog_gi_inject = 0.92
+volumetric_fog_length = 8.0
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_ajshl"]
+vertices = PackedVector3Array(1.6810184, -0.78305817, 7.203495, 3.6810184, -0.78305817, 6.703495, 5.4310184, -0.78305817, 5.453495, 7.1810184, -0.78305817, 2.203495, 7.1810184, -0.78305817, -2.296505, 6.4310184, -0.78305817, -4.046505, 4.9310184, -0.78305817, -5.796505, -7.3189816, -0.78305817, 1.953495, -6.8189816, -0.78305817, 3.453495, -5.0689816, -0.78305817, 5.703495, -2.8189816, -0.78305817, 6.953495, -1.8189816, -0.78305817, -7.296505, -3.8189816, -0.78305817, -6.546505, -6.0689816, -0.78305817, -4.546505, -7.3189816, -0.78305817, -1.796505, 1.9310184, -0.78305817, -7.296505)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 3), PackedInt32Array(8, 7, 9), PackedInt32Array(9, 7, 10), PackedInt32Array(10, 7, 0), PackedInt32Array(13, 12, 11), PackedInt32Array(7, 14, 13), PackedInt32Array(13, 11, 7), PackedInt32Array(7, 11, 6), PackedInt32Array(7, 6, 3), PackedInt32Array(7, 3, 0), PackedInt32Array(11, 15, 6)]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_g14j6"]
+height = 0.564941
+radius = 10.1396
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gm488"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gm488"]
+material = ExtResource("26_kay4s")
+size = Vector2(50, 50)
+subdivide_width = 90
+subdivide_depth = 90
+
+[node name="Node3D" type="Node3D"]
+
+[node name="GameManager" type="Node3D" parent="." node_paths=PackedStringArray("player_manager", "enemy_manager", "ui_manager")]
+script = ExtResource("1_ajshl")
+player_manager = NodePath("PlayerManager")
+enemy_manager = NodePath("EnemyManager")
+ui_manager = NodePath("UI_Manager")
+
+[node name="AudioManager" type="Node3D" parent="GameManager"]
+
+[node name="AudioListener3D" type="AudioListener3D" parent="GameManager/AudioManager"]
+current = true
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer" parent="GameManager/AudioManager"]
+stream = ExtResource("1_1dqgb")
+volume_db = -11.378
+autoplay = true
+mix_target = 2
+parameters/looping = true
+
+[node name="UI_Manager" type="Node3D" parent="GameManager" node_paths=PackedStringArray("health_bar_manager")]
+script = ExtResource("2_uacia")
+health_bar_manager = NodePath("Control/Health_Bar_Manager")
+
+[node name="Control" type="Control" parent="GameManager/UI_Manager"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Health_Bar_Manager" type="Control" parent="GameManager/UI_Manager/Control" node_paths=PackedStringArray("damage_bar", "health_bar")]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_yk7ts")
+health_interpolation_speed = 90.0
+damage_interpolation_speed = 90.0
+damage_bar = NodePath("DamageBar")
+health_bar = NodePath("DamageBar/HealthBar")
+
+[node name="DamageBar" type="ProgressBar" parent="GameManager/UI_Manager/Control/Health_Bar_Manager"]
+layout_mode = 0
+offset_right = 332.0
+offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxFlat_75pfo")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gv2t6")
+value = 50.0
+show_percentage = false
+
+[node name="HealthBar" type="ProgressBar" parent="GameManager/UI_Manager/Control/Health_Bar_Manager/DamageBar"]
+layout_mode = 0
+offset_right = 332.0
+offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_1xwo4")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5civd")
+value = 45.0
+show_percentage = false
+
+[node name="EnemyManager" type="Node3D" parent="GameManager"]
+script = ExtResource("2_jcd4p")
+test_enemy = ExtResource("4_at5dv")
+
+[node name="PlayerManager" type="Node3D" parent="GameManager" node_paths=PackedStringArray("player")]
+script = ExtResource("2_at5dv")
+player = NodePath("../../Player")
+
+[node name="PathManager" type="Node3D" parent="GameManager" node_paths=PackedStringArray("dynamic_scene_node", "effect_scene_node")]
+script = ExtResource("2_2cnsr")
+dynamic_scene_node = NodePath("Scene/DynamicScene")
+effect_scene_node = NodePath("Scene/DynamicScene/Effects")
+
+[node name="Scene" type="Node3D" parent="GameManager/PathManager"]
+
+[node name="DynamicScene" type="Node3D" parent="GameManager/PathManager/Scene"]
+
+[node name="Effects" type="Node3D" parent="GameManager/PathManager/Scene/DynamicScene"]
+
+[node name="WaveManager" type="Node3D" parent="GameManager"]
+
+[node name="Player" parent="." instance=ExtResource("3_lpvoh")]
+
+[node name="StaticSceneObjects" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="StaticSceneObjects"]
+transform = Transform3D(1, 0, 0, 0, 0.55629563, 0.8309845, 0, -0.8309845, 0.55629563, 14, 7, 0)
+light_angular_distance = 16.05
+shadow_enabled = true
+shadow_bias = 2.145
+shadow_normal_bias = 10.0
+shadow_transmittance_bias = -1.162
+shadow_opacity = 0.66
+shadow_blur = 0.076
+directional_shadow_split_1 = 0.395
+directional_shadow_split_2 = 0.389
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 267.5
+directional_shadow_pancake_size = 0.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="StaticSceneObjects"]
+environment = SubResource("Environment_g14j6")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="StaticSceneObjects"]
+navigation_mesh = SubResource("NavigationMesh_ajshl")
+
+[node name="Lily_pad" type="Node3D" parent="StaticSceneObjects/NavigationRegion3D"]
+transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.556708e-08, -0.0105181, -4.28093, 0.0119583)
+
+[node name="lily_pad2" parent="StaticSceneObjects/NavigationRegion3D/Lily_pad" instance=ExtResource("7_44saj")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 1.78668, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="StaticSceneObjects/NavigationRegion3D/Lily_pad"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticSceneObjects/NavigationRegion3D/Lily_pad/StaticBody3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.96958, 0)
+shape = SubResource("CylinderShape3D_g14j6")
+
+[node name="Water" type="Area3D" parent="StaticSceneObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.1886096, 0)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticSceneObjects/Water"]
+shape = SubResource("BoxShape3D_gm488")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticSceneObjects/Water"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8398261, 0)
+mesh = SubResource("PlaneMesh_gm488")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.7660445, 0.6427876, 0, -0.6427876, 0.7660445, 0, 9.191, 12.335)
+projection = 1
+current = true
+fov = 44.9
+size = 11.849
+far = 30.64

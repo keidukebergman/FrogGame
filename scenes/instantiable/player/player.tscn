@@ -1,10 +1,11 @@
-[gd_scene load_steps=30 format=3 uid="uid://b427eeltoq12o"]
+[gd_scene load_steps=31 format=3 uid="uid://b427eeltoq12o"]
 
 [ext_resource type="Script" uid="uid://yfk7mr61a5eo" path="res://scripts/character_physics_body.gd" id="1_e5ctq"]
 [ext_resource type="Script" uid="uid://7bo813l14n7" path="res://scripts/entity_handling/player_entity.gd" id="1_gnc5k"]
 [ext_resource type="Script" uid="uid://nspaq3db88q3" path="res://scripts/statemachines/player/FrogStateMachine.gd" id="2_gnc5k"]
 [ext_resource type="Script" uid="uid://begne7xovp0ms" path="res://scripts/statemachines/player/states/PlayerGroundState.gd" id="3_7hh1b"]
 [ext_resource type="Script" uid="uid://b27hyhwdgjwjk" path="res://scripts/statemachines/player/states/PlayerGroundAttackState.gd" id="4_isv8f"]
+[ext_resource type="Script" uid="uid://b6ef3ieheg63b" path="res://scripts/statemachines/player/states/PlayerDashState.gd" id="5_gnc5k"]
 [ext_resource type="Script" uid="uid://w3oxfr1xotrg" path="res://scripts/tongue_attack_state.gd" id="5_xmha0"]
 [ext_resource type="Script" uid="uid://b2ifomelrlmfr" path="res://scripts/statemachines/player/states/PlayerAirborneState.gd" id="7_v47df"]
 [ext_resource type="Script" uid="uid://dmj61wc554x8h" path="res://scripts/player_death_manager.gd" id="9_3qxr5"]
@@ -81,15 +82,19 @@ renderer = NodePath("../../Visual/Sprite3D")
 current_state = NodePath("Grounded")
 root = NodePath("../..")
 
-[node name="Grounded" type="Node3D" parent="FrogCharacter/Systems/StateMachine" node_paths=PackedStringArray("jump_state", "airborne_state", "ground_attack_state")]
+[node name="Grounded" type="Node3D" parent="FrogCharacter/Systems/StateMachine" node_paths=PackedStringArray("dash_state", "airborne_state", "ground_attack_state")]
 script = ExtResource("3_7hh1b")
 acceleration = 25.0
 deceleration = 25.0
 idle_velocity_dampening = 23.0
-g = -19.64
-jump_state = NodePath("")
+dash_state = NodePath("../DashState")
 airborne_state = NodePath("../Airborne")
 ground_attack_state = NodePath("../GroundAttack")
+
+[node name="DashState" type="Node3D" parent="FrogCharacter/Systems/StateMachine" node_paths=PackedStringArray("airborne_state", "grounded_state")]
+script = ExtResource("5_gnc5k")
+airborne_state = NodePath("../Airborne")
+grounded_state = NodePath("../Grounded")
 
 [node name="GroundAttack" type="Node3D" parent="FrogCharacter/Systems/StateMachine" node_paths=PackedStringArray("slash_hitbox", "slash_fx", "jump_state", "airborne_state", "ground_state", "effect_manager")]
 script = ExtResource("4_isv8f")

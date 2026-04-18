@@ -6,7 +6,6 @@ var movement_vector:Vector3
 @export var acceleration:float = 10
 @export var deceleration:float = 10
 @export var idle_velocity_dampening:float = 8
-@export var g:float = -9.82
 var dash_timer = 0;
 @export var dash_state:PlayerDashState
 @export var airborne_state:PlayerAirborneState
@@ -31,6 +30,8 @@ func _exit_state():
 func _state_update(_delta: float): 
 	if Input.is_action_just_pressed("attack"):
 		state_machine._change_state(ground_attack_state)
+	if Input.is_action_just_pressed("dash"):
+		state_machine._change_state(dash_state)
 	if not state_machine._is_grounded():
 		state_machine._change_state(airborne_state)
 	
@@ -53,8 +54,6 @@ func calculate_new_velocity(target_velocity:Vector3, current_velocity:Vector3, d
 	else:
 		new_velocity = new_velocity.move_toward(target_velocity, delta*deceleration)
 	return new_velocity
-	
-
 
 func _state_physics_update(_delta: float):
 	var input_vector = Vector3(-InputReader.movement_vector.x, 0, InputReader.movement_vector.y).normalized()
@@ -62,8 +61,7 @@ func _state_physics_update(_delta: float):
 	target_velocity.y = 0
 	target_velocity = input_vector * movement_speed
 	target_velocity.z /= sin(deg_to_rad(60))
-	
 	var new_velocity = calculate_new_velocity(target_velocity, root.velocity, _delta)
-	new_velocity.y = root.velocity.y + g * _delta
 	root.velocity = new_velocity
+	root.velocity.y = 0
 	root.move_and_slide()
