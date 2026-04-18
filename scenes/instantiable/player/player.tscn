@@ -121,6 +121,9 @@ body = NodePath("../../..")
 [node name="Airborne" type="Node3D" parent="FrogCharacter/Systems/StateMachine" node_paths=PackedStringArray("grounded_state")]
 script = ExtResource("7_v47df")
 grounded_state = NodePath("../Grounded")
+movement_speed = 1.0
+acceleration = 0.2
+air_drag = 10
 
 [node name="Death" type="Node3D" parent="FrogCharacter/Systems/StateMachine"]
 script = ExtResource("9_gnc5k")

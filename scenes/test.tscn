@@ -73,7 +73,7 @@ polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Arr
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_g14j6"]
 height = 0.564941
-radius = 10.1396
+radius = 10.706055
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gm488"]
 size = Vector3(50, 1, 50)
@@ -197,7 +197,7 @@ transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 1.78668, 0)
 [node name="StaticBody3D" type="StaticBody3D" parent="StaticSceneObjects/NavigationRegion3D/Lily_pad"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticSceneObjects/NavigationRegion3D/Lily_pad/StaticBody3D"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.96958, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.9695799, 0)
 shape = SubResource("CylinderShape3D_g14j6")
 
 [node name="Water" type="Area3D" parent="StaticSceneObjects"]

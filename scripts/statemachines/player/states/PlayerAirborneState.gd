@@ -5,7 +5,7 @@ class_name PlayerAirborneState
 @export var movement_speed:float = 4
 @export var acceleration:float = 2
 @export var duration_before_fall:float = 0.5
-@export var fall_timer = 0
+var fall_timer = 0
 @export var air_drag = 5
 
 func _initialize_state(state_machine_node:FiniteStateMachine, root_node:Node):
