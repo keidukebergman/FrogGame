@@ -7,8 +7,8 @@ var movement_vector:Vector3
 @export var deceleration:float = 10
 @export var idle_velocity_dampening:float = 8
 @export var g:float = -9.82
-var jump_timer = 0;
-@export var jump_state:PlayerJumpState
+var dash_timer = 0;
+@export var dash_state:PlayerDashState
 @export var airborne_state:PlayerAirborneState
 @export var ground_attack_state:PlayerGroundAttackState
 @export var sprite:Sprite3D
@@ -18,7 +18,7 @@ func _initialize_state(state_machine_node:FiniteStateMachine, root_node:Node):
 	root = root_node
 
 func _enter_state():
-	jump_timer = 0
+	dash_timer = 0
 	is_active = true
 	super._enter_state()
 	pass
@@ -29,11 +29,6 @@ func _exit_state():
 	pass
 
 func _state_update(_delta: float): 
-	if Input.is_action_pressed("jump"):
-		jump_timer += _delta
-	if Input.is_action_just_released("jump"):
-		state_machine._change_state(jump_state)
-		#root.add_force(Vector3.RIGHT*10)
 	if Input.is_action_just_pressed("attack"):
 		state_machine._change_state(ground_attack_state)
 	if not state_machine._is_grounded():

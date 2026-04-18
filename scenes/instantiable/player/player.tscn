@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://b427eeltoq12o"]
+[gd_scene load_steps=30 format=3 uid="uid://b427eeltoq12o"]
 
 [ext_resource type="Script" uid="uid://yfk7mr61a5eo" path="res://scripts/character_physics_body.gd" id="1_e5ctq"]
 [ext_resource type="Script" uid="uid://7bo813l14n7" path="res://scripts/entity_handling/player_entity.gd" id="1_gnc5k"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://begne7xovp0ms" path="res://scripts/statemachines/player/states/PlayerGroundState.gd" id="3_7hh1b"]
 [ext_resource type="Script" uid="uid://b27hyhwdgjwjk" path="res://scripts/statemachines/player/states/PlayerGroundAttackState.gd" id="4_isv8f"]
 [ext_resource type="Script" uid="uid://w3oxfr1xotrg" path="res://scripts/tongue_attack_state.gd" id="5_xmha0"]
-[ext_resource type="Script" uid="uid://bbfpwggwbsg57" path="res://scripts/statemachines/player/states/PlayerJumpState.gd" id="6_qsdt6"]
 [ext_resource type="Script" uid="uid://b2ifomelrlmfr" path="res://scripts/statemachines/player/states/PlayerAirborneState.gd" id="7_v47df"]
 [ext_resource type="Script" uid="uid://dmj61wc554x8h" path="res://scripts/player_death_manager.gd" id="9_3qxr5"]
 [ext_resource type="Script" uid="uid://calbyq6tluyu" path="res://scenes/instantiable/player/player_death_state.gd" id="9_gnc5k"]
@@ -57,7 +56,7 @@ state_grounded = NodePath("FrogCharacter/Systems/StateMachine/Grounded")
 state_attack = NodePath("FrogCharacter/Systems/StateMachine/GroundAttack")
 state_tongue_attack = NodePath("FrogCharacter/Systems/StateMachine/TongueAttackHeavy")
 state_airborne = NodePath("FrogCharacter/Systems/StateMachine/Airborne")
-state_jump = NodePath("FrogCharacter/Systems/StateMachine/Jump")
+state_jump = NodePath("")
 effect_manager = NodePath("FrogCharacter/Systems/EffectManager")
 water_splash_manager = NodePath("FrogCharacter/Systems/WaterSplashManager")
 hurtbox = NodePath("FrogCharacter/Systems/HitAndHurt/Hurtbox/Hurtbox")
@@ -88,7 +87,7 @@ acceleration = 25.0
 deceleration = 25.0
 idle_velocity_dampening = 23.0
 g = -19.64
-jump_state = NodePath("../Jump")
+jump_state = NodePath("")
 airborne_state = NodePath("../Airborne")
 ground_attack_state = NodePath("../GroundAttack")
 
@@ -100,7 +99,7 @@ attack_windup_time = 0.1
 slice_movement_curve = SubResource("Curve_at5dv")
 slash_hitbox = NodePath("../../HitAndHurt/Hitboxes/hitbox_slash")
 slash_fx = NodePath("../../../Visual/Slash-fx")
-jump_state = NodePath("../Jump")
+jump_state = NodePath("")
 airborne_state = NodePath("../Airborne")
 ground_state = NodePath("../Grounded")
 effect_manager = NodePath("../../EffectManager")
@@ -108,17 +107,11 @@ attack_deceleration = 30.0
 
 [node name="TongueAttackHeavy" type="Node3D" parent="FrogCharacter/Systems/StateMachine" node_paths=PackedStringArray("jump_state", "airborne_state", "ground_state", "tongue_attack_manager", "body")]
 script = ExtResource("5_xmha0")
-jump_state = NodePath("../Jump")
+jump_state = NodePath("")
 airborne_state = NodePath("../Airborne")
 ground_state = NodePath("../Grounded")
 tongue_attack_manager = NodePath("../../SpecialHandler/TongueAttackHandler")
 body = NodePath("../../..")
-
-[node name="Jump" type="Node3D" parent="FrogCharacter/Systems/StateMachine" node_paths=PackedStringArray("airborne_state", "grounded_state")]
-script = ExtResource("6_qsdt6")
-airborne_state = NodePath("../Airborne")
-grounded_state = NodePath("../Grounded")
-jump_power = 10
 
 [node name="Airborne" type="Node3D" parent="FrogCharacter/Systems/StateMachine" node_paths=PackedStringArray("grounded_state")]
 script = ExtResource("7_v47df")
