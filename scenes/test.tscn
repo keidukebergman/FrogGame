@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cp56kp11t4ngg"]
+[gd_scene load_steps=23 format=3 uid="uid://cp56kp11t4ngg"]
 
 [ext_resource type="AudioStream" uid="uid://pmc3kysxqlc6" path="res://sound/sfx/pixabay/lake-wavelet-27909.mp3" id="1_1dqgb"]
 [ext_resource type="Script" uid="uid://dhd6d8l44t7yn" path="res://scenes/game_manager.gd" id="1_ajshl"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://d4km7624424c" path="res://scenes/health_bar_manager.gd" id="3_yk7ts"]
 [ext_resource type="PackedScene" uid="uid://bcs7ck8bsbe0q" path="res://scenes/instantiable/enemies/enemy_mosquito.tscn" id="4_at5dv"]
 [ext_resource type="PackedScene" uid="uid://bg1owrrruuh0w" path="res://scenes/lily_pad.tscn" id="7_44saj"]
+[ext_resource type="PackedScene" uid="uid://b13rkitbsenhc" path="res://models/box.glb" id="12_ghpyy"]
 [ext_resource type="Material" uid="uid://cq31wu4xny0ql" path="res://materials/water.tres" id="26_kay4s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_75pfo"]
@@ -83,6 +84,9 @@ material = ExtResource("26_kay4s")
 size = Vector2(50, 50)
 subdivide_width = 90
 subdivide_depth = 90
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ghpyy"]
+size = Vector3(2, 2, 2)
 
 [node name="Node3D" type="Node3D"]
 
@@ -219,3 +223,11 @@ current = true
 fov = 44.9
 size = 11.849
 far = 30.64
+
+[node name="Box" type="StaticBody3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.956235, -0.7078745, 0.9705049)
+
+[node name="Boxmesh" parent="Box" instance=ExtResource("12_ghpyy")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box"]
+shape = SubResource("BoxShape3D_ghpyy")

@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://w3oxfr1xotrg" path="res://scripts/tongue_attack_state.gd" id="5_xmha0"]
 [ext_resource type="Script" uid="uid://b2ifomelrlmfr" path="res://scripts/statemachines/player/states/PlayerAirborneState.gd" id="7_v47df"]
 [ext_resource type="Script" uid="uid://dmj61wc554x8h" path="res://scripts/player_death_manager.gd" id="9_3qxr5"]
-[ext_resource type="Script" path="res://scenes/instantiable/player/player_death_state.gd" id="9_gnc5k"]
+[ext_resource type="Script" uid="uid://calbyq6tluyu" path="res://scenes/instantiable/player/player_death_state.gd" id="9_gnc5k"]
 [ext_resource type="Script" uid="uid://1rqaiis71irb" path="res://scripts/health_manager.gd" id="10_c7xul"]
 [ext_resource type="Script" uid="uid://miugg8jpe2ku" path="res://scripts/effect_manager.gd" id="11_7r8gw"]
 [ext_resource type="Script" uid="uid://tp7u7qxjy8l5" path="res://scripts/knockback_manager.gd" id="12_pcexo"]
@@ -118,10 +118,10 @@ body = NodePath("../../..")
 [node name="Airborne" type="Node3D" parent="FrogCharacter/Systems/StateMachine" node_paths=PackedStringArray("grounded_state", "dash_state")]
 script = ExtResource("7_v47df")
 grounded_state = NodePath("../Grounded")
+dash_state = NodePath("../DashState")
 movement_speed = 1.0
 acceleration = 0.2
 air_drag = 10
-dash_state = NodePath("../DashState")
 
 [node name="Death" type="Node3D" parent="FrogCharacter/Systems/StateMachine"]
 script = ExtResource("9_gnc5k")
@@ -229,7 +229,7 @@ texture_filter = 0
 texture = ExtResource("20_8o3c5")
 
 [node name="Sprite3D" type="Sprite3D" parent="FrogCharacter/Visual"]
-transform = Transform3D(5, 0, 0, 0, 3.8302221, 3.2139378, 0, -3.2139378, 3.8302221, -0.0842151, -0.08068371, -8.31124e-09)
+transform = Transform3D(5, 0, 0, 0, 4.890738, 1.0395585, 0, -1.0395585, 4.890738, -0.0842151, 0.0060310364, -8.31124e-09)
 shaded = true
 alpha_cut = 2
 texture_filter = 0
