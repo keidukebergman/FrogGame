@@ -29,7 +29,6 @@ func apply_damage(damage:float):
 	if health <= 0:
 		health = 0
 		depleted_health.emit()
-		
 
 func apply_healing(healing:float):
 	health += healing

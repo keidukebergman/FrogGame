@@ -55,7 +55,7 @@ mesh = SubResource("BoxMesh_6uqi0")
 skeleton = NodePath("../..")
 
 [node name="Sprite3D" type="Sprite3D" parent="Mosquitoknight/Visual"]
-transform = Transform3D(5, 0, 0, 0, 3.8302221, 3.2139378, 0, -3.2139378, 3.8302221, -0.084215164, -0.103452265, 0)
+transform = Transform3D(5, 0, 0, 0, 4.890738, 1.0395585, 0, -1.0395585, 4.890738, -0.084215164, 0.14336914, 0)
 shaded = true
 alpha_cut = 2
 texture_filter = 0
@@ -109,8 +109,9 @@ health_manager = NodePath("../HealthManager")
 hurtbox = NodePath("../HitAndHurt/Hurtbox")
 death_manager = NodePath("../DeathManager")
 
-[node name="DeathManager" type="Node3D" parent="Mosquitoknight/Systems"]
+[node name="DeathManager" type="Node3D" parent="Mosquitoknight/Systems" node_paths=PackedStringArray("root")]
 script = ExtResource("9_o6hy7")
+root = NodePath("../../..")
 
 [node name="HealthManager" type="Node3D" parent="Mosquitoknight/Systems"]
 script = ExtResource("10_340vr")

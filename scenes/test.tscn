@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cp56kp11t4ngg"]
+[gd_scene load_steps=28 format=3 uid="uid://cp56kp11t4ngg"]
 
 [ext_resource type="AudioStream" uid="uid://pmc3kysxqlc6" path="res://sound/sfx/pixabay/lake-wavelet-27909.mp3" id="1_1dqgb"]
 [ext_resource type="Script" uid="uid://dhd6d8l44t7yn" path="res://scenes/game_manager.gd" id="1_ajshl"]
@@ -10,7 +10,11 @@
 [ext_resource type="Script" uid="uid://d4km7624424c" path="res://scenes/health_bar_manager.gd" id="3_yk7ts"]
 [ext_resource type="PackedScene" uid="uid://bcs7ck8bsbe0q" path="res://scenes/instantiable/enemies/enemy_mosquito.tscn" id="4_at5dv"]
 [ext_resource type="PackedScene" uid="uid://bg1owrrruuh0w" path="res://scenes/lily_pad.tscn" id="7_44saj"]
+[ext_resource type="Script" uid="uid://ckg315doo3w8x" path="res://scenes/decor_manager.gd" id="12_ff6ho"]
 [ext_resource type="PackedScene" uid="uid://b13rkitbsenhc" path="res://models/box.glb" id="12_ghpyy"]
+[ext_resource type="Script" uid="uid://bi5fwt04sq1jq" path="res://scripts/Hurtbox_draggable.gd" id="13_44saj"]
+[ext_resource type="Script" uid="uid://1rqaiis71irb" path="res://scripts/health_manager.gd" id="14_7mbro"]
+[ext_resource type="Script" uid="uid://bujy08xidy0g7" path="res://scripts/death_manager.gd" id="16_7yos8"]
 [ext_resource type="Material" uid="uid://cq31wu4xny0ql" path="res://materials/water.tres" id="26_kay4s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_75pfo"]
@@ -86,6 +90,9 @@ subdivide_width = 90
 subdivide_depth = 90
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ghpyy"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7mbro"]
 size = Vector3(2, 2, 2)
 
 [node name="Node3D" type="Node3D"]
@@ -217,17 +224,44 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8398261, 0)
 mesh = SubResource("PlaneMesh_gm488")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.7660445, 0.6427876, 0, -0.6427876, 0.7660445, 0, 9.191, 12.335)
+transform = Transform3D(1, 0, 0, 0, 0.76604444, 0.6427876, 0, -0.6427876, 0.76604444, 0, 9.191, 12.335)
 projection = 1
 current = true
 fov = 44.9
 size = 11.849
 far = 30.64
 
-[node name="Box" type="StaticBody3D" parent="."]
+[node name="Box" type="StaticBody3D" parent="." node_paths=PackedStringArray("health_manager", "death_manager", "hurtbox")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.956235, -0.7078745, 0.9705049)
+script = ExtResource("12_ff6ho")
+health_manager = NodePath("HealthManager")
+death_manager = NodePath("DeathManager")
+hurtbox = NodePath("DraggableHurtbox")
 
 [node name="Boxmesh" parent="Box" instance=ExtResource("12_ghpyy")]
+transform = Transform3D(0.9836722, 0, -0.17996976, 0, 1, 0, 0.17996976, 0, 0.9836722, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Box"]
 shape = SubResource("BoxShape3D_ghpyy")
+
+[node name="DraggableHurtbox" type="Area3D" parent="Box"]
+script = ExtResource("13_44saj")
+is_heavy = true
+metadata/_custom_type_script = "uid://bi5fwt04sq1jq"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box/DraggableHurtbox"]
+shape = SubResource("BoxShape3D_7mbro")
+
+[node name="HealthManager" type="Node3D" parent="Box"]
+script = ExtResource("14_7mbro")
+health = 5.0
+max_health = 5.0
+metadata/_custom_type_script = "uid://1rqaiis71irb"
+
+[node name="DeathManager" type="Node3D" parent="Box" node_paths=PackedStringArray("root")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7.91247, 1.415749, -1.9410098)
+script = ExtResource("16_7yos8")
+root = NodePath("..")
+metadata/_custom_type_script = "uid://bujy08xidy0g7"
+
+[connection signal="took_damage" from="Box/DraggableHurtbox" to="Box/HealthManager" method="_on_draggable_hurtbox_took_damage"]
