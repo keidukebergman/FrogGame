@@ -1,7 +1,7 @@
 extends Node3D
 class_name AggroManager
 
-var notice_distance:float = 1
+var notice_distance:float = 10
 var player:Node3D = null
 var target:Node3D = null
 var target_request_cooldown = 0.3
