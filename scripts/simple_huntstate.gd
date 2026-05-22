@@ -14,9 +14,14 @@ var movement_direction:Vector3
 
 @export var attack_state:State
 
+func _initialize_state(state_machine_node:FiniteStateMachine, root_node:Node):
+	super._initialize_state(state_machine_node, root_node)
+	spawn_position = body.global_position
 
 func _enter_state() -> void:
 	_set_nav_target()
+
+var spawn_position:Vector3;
 
 func _set_nav_target() -> void:
 	while true:
@@ -25,9 +30,9 @@ func _set_nav_target() -> void:
 			nav.target_position = aggro_manager.target.global_position
 		else:
 			await get_tree().create_timer(randf_range(0.3, 9)).timeout;
-			nav.target_position = Vector3(body.global_position.x + randf_range(-15, 15), 
-											body.global_position.y, 
-											body.global_position.z + randf_range(-15, 15));
+			nav.target_position = Vector3(spawn_position.x + randf_range(-3, 3), 
+											spawn_position.y, 
+											spawn_position.z + randf_range(-3, 3));
 
 func _state_update(_delta: float) -> void:
 	if aggro_manager.target != null:
@@ -38,9 +43,13 @@ func _state_update(_delta: float) -> void:
 	else:
 		pass
 
-
+var destination;
+var destination_query_timeout:float = 0;
 func _state_physics_update(delta: float) -> void:
-	var destination = nav.get_next_path_position()
+	destination_query_timeout = move_toward(destination_query_timeout, 0, delta)
+	if destination_query_timeout == 0:
+		destination = nav.get_next_path_position()
+		destination_query_timeout = randf_range(0.01, 0.2)
 	var local_destination = destination - body.global_position
 	var direction = local_destination.normalized()
 	
