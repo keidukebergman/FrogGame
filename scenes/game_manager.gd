@@ -2,6 +2,7 @@ extends Node3D
 
 @export var player_manager:PlayerManager
 @export var enemy_manager:EnemyManager
+@export var player_fx_relay:PlayerFXRelay
 
 @export var ui_manager:UI_Manager
 
@@ -19,6 +20,7 @@ func on_player_information_requested(aggro_manager:AggroManager):
 func _on_player_taken_damage(_damage, current_health):
 	var damaged:bool = true
 	ui_manager._on_player_health_change(damaged, current_health)
+	player_fx_relay.on_player_took_damage(_damage)
 
 func _on_player_healed(_healing, current_health):
 	var damaged:bool = false

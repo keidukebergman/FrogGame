@@ -1,5 +1,5 @@
 extends Node3D
-
+class_name SlowMoManager
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -7,9 +7,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if Input.is_key_pressed(KEY_C):
-		_slow_time(0.2, 0.03)
+		slow_time(0.2, 0.03)
 
-func _slow_time(to_amount:float, recovery_time:float):
+func slow_time(to_amount:float, recovery_time:float):
 	Engine.time_scale = 1 * to_amount;
 	await get_tree().create_timer(recovery_time * Engine.time_scale).timeout
 	while Engine.time_scale < 1:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cp56kp11t4ngg"]
+[gd_scene load_steps=30 format=3 uid="uid://cp56kp11t4ngg"]
 
 [ext_resource type="AudioStream" uid="uid://pmc3kysxqlc6" path="res://sound/sfx/pixabay/lake-wavelet-27909.mp3" id="1_1dqgb"]
 [ext_resource type="Script" uid="uid://dhd6d8l44t7yn" path="res://scenes/game_manager.gd" id="1_ajshl"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bcs7ck8bsbe0q" path="res://scenes/instantiable/enemies/enemy_mosquito.tscn" id="4_at5dv"]
 [ext_resource type="PackedScene" uid="uid://bg1owrrruuh0w" path="res://scenes/lily_pad.tscn" id="7_44saj"]
 [ext_resource type="Script" uid="uid://cilv2vjiqdwvs" path="res://scripts/slow_mo_manager.gd" id="9_5jxlq"]
+[ext_resource type="Script" uid="uid://bbtpwvavwh3dy" path="res://scenes/player_fx_relay.gd" id="9_xrtyr"]
 [ext_resource type="Script" uid="uid://ckg315doo3w8x" path="res://scenes/decor_manager.gd" id="12_ff6ho"]
 [ext_resource type="PackedScene" uid="uid://b13rkitbsenhc" path="res://models/box.glb" id="12_ghpyy"]
 [ext_resource type="Script" uid="uid://bi5fwt04sq1jq" path="res://scripts/Hurtbox_draggable.gd" id="13_44saj"]
@@ -98,10 +99,11 @@ size = Vector3(2, 2, 2)
 
 [node name="Node3D" type="Node3D"]
 
-[node name="GameManager" type="Node3D" parent="." node_paths=PackedStringArray("player_manager", "enemy_manager", "ui_manager")]
+[node name="GameManager" type="Node3D" parent="." node_paths=PackedStringArray("player_manager", "enemy_manager", "player_fx_relay", "ui_manager")]
 script = ExtResource("1_ajshl")
 player_manager = NodePath("PlayerManager")
 enemy_manager = NodePath("EnemyManager")
+player_fx_relay = NodePath("FXManager/PlayerFXRelay")
 ui_manager = NodePath("UI_Manager")
 
 [node name="AudioManager" type="Node3D" parent="GameManager"]
@@ -175,7 +177,13 @@ effect_scene_node = NodePath("Scene/DynamicScene/Effects")
 
 [node name="WaveManager" type="Node3D" parent="GameManager"]
 
-[node name="SlowMoManager" type="Node3D" parent="GameManager"]
+[node name="FXManager" type="Node3D" parent="GameManager"]
+
+[node name="PlayerFXRelay" type="Node3D" parent="GameManager/FXManager" node_paths=PackedStringArray("slow_mo_manager")]
+script = ExtResource("9_xrtyr")
+slow_mo_manager = NodePath("../SlowMoManager")
+
+[node name="SlowMoManager" type="Node3D" parent="GameManager/FXManager"]
 script = ExtResource("9_5jxlq")
 
 [node name="Player" parent="." instance=ExtResource("3_lpvoh")]
