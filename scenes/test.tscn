@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bcs7ck8bsbe0q" path="res://scenes/instantiable/enemies/enemy_mosquito.tscn" id="4_at5dv"]
 [ext_resource type="PackedScene" uid="uid://bg1owrrruuh0w" path="res://scenes/lily_pad.tscn" id="7_44saj"]
 [ext_resource type="Script" uid="uid://cilv2vjiqdwvs" path="res://scripts/slow_mo_manager.gd" id="9_5jxlq"]
-[ext_resource type="Script" path="res://scenes/player_fx_relay.gd" id="9_xrtyr"]
+[ext_resource type="Script" uid="uid://bbtpwvavwh3dy" path="res://scenes/player_fx_relay.gd" id="9_xrtyr"]
 [ext_resource type="Script" uid="uid://cri8txdrn1jhd" path="res://scenes/zoom_manager.gd" id="11_daiq8"]
 [ext_resource type="Script" uid="uid://ckg315doo3w8x" path="res://scenes/decor_manager.gd" id="12_ff6ho"]
 [ext_resource type="PackedScene" uid="uid://b13rkitbsenhc" path="res://models/box.glb" id="12_ghpyy"]
@@ -180,15 +180,17 @@ effect_scene_node = NodePath("Scene/DynamicScene/Effects")
 
 [node name="FXManager" type="Node3D" parent="GameManager"]
 
-[node name="PlayerFXRelay" type="Node3D" parent="GameManager/FXManager" node_paths=PackedStringArray("slow_mo_manager")]
+[node name="PlayerFXRelay" type="Node3D" parent="GameManager/FXManager" node_paths=PackedStringArray("slow_mo_manager", "zoom_manager")]
 script = ExtResource("9_xrtyr")
 slow_mo_manager = NodePath("../SlowMoManager")
+zoom_manager = NodePath("../ZoomInManager")
 
 [node name="SlowMoManager" type="Node3D" parent="GameManager/FXManager"]
 script = ExtResource("9_5jxlq")
 
-[node name="ZoomInManager" type="Node3D" parent="GameManager/FXManager"]
+[node name="ZoomInManager" type="Node3D" parent="GameManager/FXManager" node_paths=PackedStringArray("camera")]
 script = ExtResource("11_daiq8")
+camera = NodePath("../../../Camera3D")
 
 [node name="Player" parent="." instance=ExtResource("3_lpvoh")]
 
