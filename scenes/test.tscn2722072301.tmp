@@ -320,7 +320,7 @@ metadata/_custom_type_script = "uid://1rqaiis71irb"
 [node name="DeathManager" type="Node3D" parent="Box2" node_paths=PackedStringArray("root")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7.91247, 1.415749, -1.9410098)
 script = ExtResource("16_7yos8")
-root = NodePath("..")
+root = NodePath("")
 metadata/_custom_type_script = "uid://bujy08xidy0g7"
 
 [node name="DraggableObjectManager" type="Node3D" parent="Box2"]

@@ -39,13 +39,12 @@ func _tongue_hit_object(body:Node3D) -> void:
 		return
 	tongue_state = TongueState.ATTACHED
 	attached_is_heavy = true
-	tongue_attached_node_offset = body.global_position - tongue_tip_node.global_position
 	if body is DraggableHurtbox:
 		attached_is_heavy = body.is_heavy
 		tongue_attached_node_offset = Vector3.ZERO
 	tongue_attached_node = body
 	if tongue_attached_node != null && tongue_attached_node is DraggableHurtbox && tongue_attached_node.is_heavy == false:
-		tongue_attached_node.start_dragging(self)
+		tongue_attached_node.start_dragging(self, tongue_tip_node, attach_force)
 	elif tongue_attached_node != null:
 		state_manager._change_state(state_machine_state)
 	tongue_hitbox.is_active = false
@@ -102,7 +101,7 @@ func _process(delta: float) -> void:
 				
 		TongueState.ATTACHED:
 			_test_for_retracting()
-			if tongue_attached_node == null:
+			if tongue_attached_node == null || position.distance_to(tongue_tip_node.position) < 1:
 				_start_retracting()
 			tongue_tip_node.global_position = tongue_attached_node.global_position + tongue_attached_node_offset
 

@@ -1,4 +1,5 @@
-extends StaticBody3D
+extends Node3D
+class_name DestructibleDecor
 
 @export var health_manager : HealthManager
 @export var death_manager : DeathManager

@@ -180,12 +180,12 @@ shape = SubResource("BoxShape3D_ajshl")
 [node name="TongueAttackHandler" type="Node3D" parent="FrogCharacter/Systems/SpecialHandler" node_paths=PackedStringArray("mouth_marker", "tongue_hitbox", "tongue_tip_node", "tongue_line_node", "state_manager", "state_machine_state")]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 script = ExtResource("17_hdudl")
-attach_force = 12.0
+attach_force = 15.0
 mouth_marker = NodePath("TongueOrigin")
 tongue_hitbox = NodePath("TonguePoint/Hitbox")
 max_length = 10.0
-extension_speed = 15.0
-retraction_speed = 20.0
+extension_speed = 30.0
+retraction_speed = 30.0
 retraction_acceleration_speed = 1.5
 tongue_tip_node = NodePath("TonguePoint")
 tongue_line_node = NodePath("Sprite3D")
