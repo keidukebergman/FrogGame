@@ -101,7 +101,7 @@ func _process(delta: float) -> void:
 				
 		TongueState.ATTACHED:
 			_test_for_retracting()
-			if tongue_attached_node == null || position.distance_to(tongue_tip_node.position) < 1:
+			if tongue_attached_node == null || global_position.distance_to(tongue_tip_node.global_position) < 1:
 				_start_retracting()
 			tongue_tip_node.global_position = tongue_attached_node.global_position + tongue_attached_node_offset
 
