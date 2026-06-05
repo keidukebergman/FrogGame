@@ -247,7 +247,7 @@ shape = SubResource("CylinderShape3D_g14j6")
 [node name="Water" type="Area3D" parent="StaticSceneObjects"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.1886096, 0)
 collision_layer = 4
-collision_mask = 0
+collision_mask = 52
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticSceneObjects/Water"]
 shape = SubResource("BoxShape3D_gm488")
@@ -299,6 +299,8 @@ metadata/_custom_type_script = "uid://bujy08xidy0g7"
 
 [node name="Box2_Draggable" type="RigidBody3D" parent="." node_paths=PackedStringArray("rig", "thrown_object", "health_manager", "death_manager", "hurtbox")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3984656, -0.42160782, 0.9705049)
+collision_layer = 8
+collision_mask = 11
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 mass = 9999.0

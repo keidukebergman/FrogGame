@@ -13,7 +13,7 @@ func _ready() -> void:
 	hurtbox.area_exited.connect(on_water_exited)
 
 func on_water_entered(body:Area3D):
-	if body.collision_layer == 8:
+	if body.collision_layer == 4:
 		print("ENTERED WATER")
 		var splash:WaterSplashEffect = splash_effect_enter.instantiate()
 		get_tree().root.add_child(splash)
@@ -23,7 +23,7 @@ func on_water_entered(body:Area3D):
 	pass
 
 func on_water_exited(body:Area3D):
-	if body.collision_layer == 8:
+	if body.collision_layer == 4:
 		print("EXITED WATER")
 		exited_water.emit()
 	pass

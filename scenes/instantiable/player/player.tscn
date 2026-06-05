@@ -63,7 +63,7 @@ hurtbox = NodePath("FrogCharacter/Systems/HitAndHurt/Hurtbox/Hurtbox")
 
 [node name="FrogCharacter" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.12482, 0)
-collision_layer = 11
+collision_layer = 0
 collision_mask = 11
 script = ExtResource("1_e5ctq")
 
@@ -168,7 +168,7 @@ shape = SubResource("BoxShape3D_uacia")
 
 [node name="Hurtbox" type="Area3D" parent="FrogCharacter/Systems/HitAndHurt/Hurtbox"]
 collision_layer = 16
-collision_mask = 0
+collision_mask = 4
 script = ExtResource("16_c65wj")
 is_heavy = true
 metadata/_custom_type_script = "uid://bi5fwt04sq1jq"
