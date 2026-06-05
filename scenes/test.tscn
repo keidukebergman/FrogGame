@@ -303,7 +303,7 @@ collision_layer = 8
 collision_mask = 11
 axis_lock_angular_x = true
 axis_lock_angular_z = true
-mass = 9999.0
+mass = 1.2
 script = ExtResource("21_n74k2")
 rig = NodePath(".")
 thrown_object = NodePath("ThrownObject")
@@ -330,9 +330,10 @@ health = 5.0
 max_health = 5.0
 metadata/_custom_type_script = "uid://1rqaiis71irb"
 
-[node name="DeathManager" type="Node3D" parent="Box2_Draggable"]
+[node name="DeathManager" type="Node3D" parent="Box2_Draggable" node_paths=PackedStringArray("root")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 script = ExtResource("16_7yos8")
+root = NodePath("..")
 metadata/_custom_type_script = "uid://bujy08xidy0g7"
 
 [node name="ThrownObject" type="Node3D" parent="Box2_Draggable" node_paths=PackedStringArray("hitbox")]
