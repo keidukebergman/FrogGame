@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cp56kp11t4ngg"]
+[gd_scene load_steps=36 format=3 uid="uid://cp56kp11t4ngg"]
 
 [ext_resource type="AudioStream" uid="uid://pmc3kysxqlc6" path="res://sound/sfx/pixabay/lake-wavelet-27909.mp3" id="1_1dqgb"]
 [ext_resource type="Script" uid="uid://dhd6d8l44t7yn" path="res://scenes/game_manager.gd" id="1_ajshl"]
@@ -20,6 +20,8 @@
 [ext_resource type="Script" uid="uid://1rqaiis71irb" path="res://scripts/health_manager.gd" id="14_7mbro"]
 [ext_resource type="Script" uid="uid://bujy08xidy0g7" path="res://scripts/death_manager.gd" id="16_7yos8"]
 [ext_resource type="Script" uid="uid://33wjf25m4rdb" path="res://scenes/DraggableDestructibleDecor.gd" id="21_n74k2"]
+[ext_resource type="Script" uid="uid://bg1320glc5xhd" path="res://scenes/thrown_object.gd" id="22_si7kk"]
+[ext_resource type="Script" uid="uid://c7g7jvcrqudgm" path="res://scripts/Hitbox.gd" id="23_pn65j"]
 [ext_resource type="Material" uid="uid://cq31wu4xny0ql" path="res://materials/water.tres" id="26_kay4s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_75pfo"]
@@ -99,6 +101,9 @@ size = Vector3(0.5, 1, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7mbro"]
 size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5f8cm"]
+size = Vector3(0.6, 1.2, 0.6)
 
 [node name="Node3D" type="Node3D"]
 
@@ -232,6 +237,8 @@ transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.556708e-08
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 1.78668, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StaticSceneObjects/NavigationRegion3D/Lily_pad"]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticSceneObjects/NavigationRegion3D/Lily_pad/StaticBody3D"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.9695799, 0)
@@ -239,7 +246,7 @@ shape = SubResource("CylinderShape3D_g14j6")
 
 [node name="Water" type="Area3D" parent="StaticSceneObjects"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.1886096, 0)
-collision_layer = 8
+collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticSceneObjects/Water"]
@@ -290,12 +297,14 @@ script = ExtResource("16_7yos8")
 root = NodePath("..")
 metadata/_custom_type_script = "uid://bujy08xidy0g7"
 
-[node name="Box2_Draggable" type="RigidBody3D" parent="." node_paths=PackedStringArray("rig", "health_manager", "death_manager", "hurtbox")]
+[node name="Box2_Draggable" type="RigidBody3D" parent="." node_paths=PackedStringArray("rig", "thrown_object", "health_manager", "death_manager", "hurtbox")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3984656, -0.42160782, 0.9705049)
 axis_lock_angular_x = true
 axis_lock_angular_z = true
+mass = 9999.0
 script = ExtResource("21_n74k2")
 rig = NodePath(".")
+thrown_object = NodePath("ThrownObject")
 health_manager = NodePath("HealthManager")
 death_manager = NodePath("DeathManager")
 hurtbox = NodePath("DraggableHurtbox")
@@ -319,14 +328,22 @@ health = 5.0
 max_health = 5.0
 metadata/_custom_type_script = "uid://1rqaiis71irb"
 
-[node name="DeathManager" type="Node3D" parent="Box2_Draggable" node_paths=PackedStringArray("root")]
+[node name="DeathManager" type="Node3D" parent="Box2_Draggable"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 script = ExtResource("16_7yos8")
-root = NodePath("")
 metadata/_custom_type_script = "uid://bujy08xidy0g7"
 
-[node name="ThrownObject" type="Node3D" parent="Box2_Draggable"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3984656, 0.42160782, -0.9705049)
+[node name="ThrownObject" type="Node3D" parent="Box2_Draggable" node_paths=PackedStringArray("hitbox")]
+script = ExtResource("22_si7kk")
+hitbox = NodePath("Hitbox")
+
+[node name="Hitbox" type="Area3D" parent="Box2_Draggable/ThrownObject" node_paths=PackedStringArray("ignore_colliders")]
+script = ExtResource("23_pn65j")
+ignore_colliders = [NodePath("../../DraggableHurtbox"), NodePath("../..")]
+metadata/_custom_type_script = "uid://c7g7jvcrqudgm"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2_Draggable/ThrownObject/Hitbox"]
+shape = SubResource("BoxShape3D_5f8cm")
 
 [connection signal="took_damage" from="Box/DraggableHurtbox" to="Box/HealthManager" method="_on_draggable_hurtbox_took_damage"]
 [connection signal="took_damage" from="Box2_Draggable/DraggableHurtbox" to="Box2_Draggable/HealthManager" method="_on_draggable_hurtbox_took_damage"]

@@ -63,7 +63,8 @@ hurtbox = NodePath("FrogCharacter/Systems/HitAndHurt/Hurtbox/Hurtbox")
 
 [node name="FrogCharacter" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.12482, 0)
-collision_layer = 4
+collision_layer = 11
+collision_mask = 11
 script = ExtResource("1_e5ctq")
 
 [node name="PhysicsCollider" type="CollisionShape3D" parent="FrogCharacter"]
@@ -156,7 +157,7 @@ splash_effect_enter = ExtResource("14_7yppw")
 
 [node name="hitbox_slash" type="Area3D" parent="FrogCharacter/Systems/HitAndHurt/Hitboxes"]
 collision_layer = 0
-collision_mask = 3
+collision_mask = 41
 script = ExtResource("15_wq28r")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FrogCharacter/Systems/HitAndHurt/Hitboxes/hitbox_slash"]
@@ -166,8 +167,8 @@ shape = SubResource("BoxShape3D_uacia")
 [node name="Hurtbox" type="Node3D" parent="FrogCharacter/Systems/HitAndHurt"]
 
 [node name="Hurtbox" type="Area3D" parent="FrogCharacter/Systems/HitAndHurt/Hurtbox"]
-collision_layer = 4
-collision_mask = 12
+collision_layer = 16
+collision_mask = 0
 script = ExtResource("16_c65wj")
 is_heavy = true
 metadata/_custom_type_script = "uid://bi5fwt04sq1jq"
@@ -205,7 +206,7 @@ texture = ExtResource("19_c3khl")
 
 [node name="Hitbox" type="Area3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler/TonguePoint"]
 collision_layer = 0
-collision_mask = 3
+collision_mask = 41
 script = ExtResource("15_wq28r")
 metadata/_custom_type_script = "uid://c7g7jvcrqudgm"
 
@@ -243,6 +244,7 @@ skeleton = NodePath("../..")
 [node name="GroundPolling" type="Area3D" parent="FrogCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.555548, 0)
 collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FrogCharacter/GroundPolling"]
 shape = SubResource("SphereShape3D_ppyta")

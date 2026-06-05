@@ -3,7 +3,8 @@ class_name Hitbox
 
 var is_active: bool = false
 var hits: Dictionary = {}
-signal hit_entity
+signal hit_entity(node)
+@export var ignore_colliders:Array[Node3D]
 
 func _ready() -> void:
 	self.body_entered.connect(_on_body_entered)
@@ -37,6 +38,9 @@ func _on_area_entered(area: Area3D) -> void:
 		detect_collision(area)
 
 func detect_collision(node: Node3D) -> void:
-	if node not in hits:
+	if node not in hits && node not in ignore_colliders:
+		#print("AAAA", node)
+		#if ignore_colliders.size() > 0:
+			#print("BBBB", ignore_colliders[0])
 		hits[node] = true
 		hit_entity.emit(node)
