@@ -13,13 +13,13 @@
 [ext_resource type="Script" uid="uid://cilv2vjiqdwvs" path="res://scripts/slow_mo_manager.gd" id="9_5jxlq"]
 [ext_resource type="Script" uid="uid://bbtpwvavwh3dy" path="res://scenes/player_fx_relay.gd" id="9_xrtyr"]
 [ext_resource type="Script" uid="uid://cri8txdrn1jhd" path="res://scenes/zoom_manager.gd" id="11_daiq8"]
+[ext_resource type="Script" uid="uid://bjs1qymkrmk25" path="res://scenes/camera_shake_manager.gd" id="12_c6rvn"]
 [ext_resource type="Script" uid="uid://ckg315doo3w8x" path="res://scenes/decor_manager.gd" id="12_ff6ho"]
 [ext_resource type="PackedScene" uid="uid://b13rkitbsenhc" path="res://models/box.glb" id="12_ghpyy"]
 [ext_resource type="Script" uid="uid://bi5fwt04sq1jq" path="res://scripts/Hurtbox_draggable.gd" id="13_44saj"]
 [ext_resource type="Script" uid="uid://1rqaiis71irb" path="res://scripts/health_manager.gd" id="14_7mbro"]
 [ext_resource type="Script" uid="uid://bujy08xidy0g7" path="res://scripts/death_manager.gd" id="16_7yos8"]
-[ext_resource type="Script" uid="uid://33wjf25m4rdb" path="res://scenes/DraggableDestructibleDecor.gd" id="20_c6rvn"]
-[ext_resource type="Script" uid="uid://dm4v2ousul2m6" path="res://scenes/draggable_object_manager.gd" id="21_n74k2"]
+[ext_resource type="Script" uid="uid://33wjf25m4rdb" path="res://scenes/DraggableDestructibleDecor.gd" id="21_n74k2"]
 [ext_resource type="Material" uid="uid://cq31wu4xny0ql" path="res://materials/water.tres" id="26_kay4s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_75pfo"]
@@ -95,7 +95,7 @@ subdivide_width = 90
 subdivide_depth = 90
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ghpyy"]
-size = Vector3(0.5, 0.5, 0.5)
+size = Vector3(0.5, 1, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7mbro"]
 size = Vector3(2, 2, 2)
@@ -182,10 +182,12 @@ effect_scene_node = NodePath("Scene/DynamicScene/Effects")
 
 [node name="FXManager" type="Node3D" parent="GameManager"]
 
-[node name="PlayerFXRelay" type="Node3D" parent="GameManager/FXManager" node_paths=PackedStringArray("slow_mo_manager", "zoom_manager")]
+[node name="PlayerFXRelay" type="Node3D" parent="GameManager/FXManager" node_paths=PackedStringArray("slow_mo_manager", "zoom_manager", "shake_manager")]
 script = ExtResource("9_xrtyr")
+critical_damage_threshold = 20.0
 slow_mo_manager = NodePath("../SlowMoManager")
 zoom_manager = NodePath("../ZoomInManager")
+shake_manager = NodePath("../CameraShakeManager")
 
 [node name="SlowMoManager" type="Node3D" parent="GameManager/FXManager"]
 script = ExtResource("9_5jxlq")
@@ -193,6 +195,10 @@ script = ExtResource("9_5jxlq")
 [node name="ZoomInManager" type="Node3D" parent="GameManager/FXManager" node_paths=PackedStringArray("camera")]
 script = ExtResource("11_daiq8")
 camera = NodePath("../../../Camera3D")
+
+[node name="CameraShakeManager" type="Node3D" parent="GameManager/FXManager" node_paths=PackedStringArray("camera_main")]
+script = ExtResource("12_c6rvn")
+camera_main = NodePath("../../../Camera3D")
 
 [node name="Player" parent="." instance=ExtResource("3_lpvoh")]
 
@@ -284,47 +290,43 @@ script = ExtResource("16_7yos8")
 root = NodePath("..")
 metadata/_custom_type_script = "uid://bujy08xidy0g7"
 
-[node name="Box2" type="RigidBody3D" parent="." node_paths=PackedStringArray("rig", "health_manager", "death_manager", "hurtbox")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3550873, -0.3621851, 0.9705049)
-axis_lock_linear_x = true
-axis_lock_linear_y = true
-axis_lock_linear_z = true
+[node name="Box2_Draggable" type="RigidBody3D" parent="." node_paths=PackedStringArray("rig", "health_manager", "death_manager", "hurtbox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3984656, -0.42160782, 0.9705049)
 axis_lock_angular_x = true
-axis_lock_angular_y = true
 axis_lock_angular_z = true
-script = ExtResource("20_c6rvn")
+script = ExtResource("21_n74k2")
 rig = NodePath(".")
 health_manager = NodePath("HealthManager")
 death_manager = NodePath("DeathManager")
 hurtbox = NodePath("DraggableHurtbox")
 
-[node name="Boxmesh" parent="Box2" instance=ExtResource("12_ghpyy")]
-transform = Transform3D(0.29510164, 0, -0.053990927, 0, 0.3, 0, 0.053990927, 0, 0.29510164, 0, 0, 0)
+[node name="Boxmesh" parent="Box2_Draggable" instance=ExtResource("12_ghpyy")]
+transform = Transform3D(0.29999998, 0, 0, 0, 0.6, 0, 0, 0, 0.29999998, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2_Draggable"]
 shape = SubResource("BoxShape3D_ghpyy")
 
-[node name="DraggableHurtbox" type="Area3D" parent="Box2"]
+[node name="DraggableHurtbox" type="Area3D" parent="Box2_Draggable"]
 script = ExtResource("13_44saj")
 metadata/_custom_type_script = "uid://bi5fwt04sq1jq"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2/DraggableHurtbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2_Draggable/DraggableHurtbox"]
 shape = SubResource("BoxShape3D_7mbro")
 
-[node name="HealthManager" type="Node3D" parent="Box2"]
+[node name="HealthManager" type="Node3D" parent="Box2_Draggable"]
 script = ExtResource("14_7mbro")
 health = 5.0
 max_health = 5.0
 metadata/_custom_type_script = "uid://1rqaiis71irb"
 
-[node name="DeathManager" type="Node3D" parent="Box2" node_paths=PackedStringArray("root")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7.91247, 1.415749, -1.9410098)
+[node name="DeathManager" type="Node3D" parent="Box2_Draggable" node_paths=PackedStringArray("root")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 script = ExtResource("16_7yos8")
-root = NodePath("..")
+root = NodePath("")
 metadata/_custom_type_script = "uid://bujy08xidy0g7"
 
-[node name="DraggableObjectManager" type="Node3D" parent="Box2"]
-script = ExtResource("21_n74k2")
+[node name="ThrownObject" type="Node3D" parent="Box2_Draggable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3984656, 0.42160782, -0.9705049)
 
 [connection signal="took_damage" from="Box/DraggableHurtbox" to="Box/HealthManager" method="_on_draggable_hurtbox_took_damage"]
-[connection signal="took_damage" from="Box2/DraggableHurtbox" to="Box2/HealthManager" method="_on_draggable_hurtbox_took_damage"]
+[connection signal="took_damage" from="Box2_Draggable/DraggableHurtbox" to="Box2_Draggable/HealthManager" method="_on_draggable_hurtbox_took_damage"]

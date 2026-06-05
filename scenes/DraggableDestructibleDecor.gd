@@ -2,10 +2,12 @@ extends DestructibleDecor
 class_name DraggableDestructibleDecor
 
 @export var rig:RigidBody3D
-@export var dragger:Node3D
-@export var force:float
+var dragger:Node3D
+var force:float
 
 var myparent
+
+signal started_being_dragged()
 
 func _ready() -> void:
 	super._ready()
@@ -24,9 +26,9 @@ func _physics_process(_delta: float) -> void:
 func _on_start_dragging(_dragger, _dragpoint, _force) -> void:
 	dragger = _dragger
 	force = _force
-	rig.axis_lock_linear_x = false
+	rig.axis_lock_linear_x = true
 	rig.axis_lock_angular_y = false
-	rig.axis_lock_angular_z = false
+	rig.axis_lock_angular_z = true
 	rig.axis_lock_linear_x = false
 	rig.axis_lock_linear_y = false
 	rig.axis_lock_linear_z = false	
