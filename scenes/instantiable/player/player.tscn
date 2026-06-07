@@ -157,7 +157,7 @@ splash_effect_enter = ExtResource("14_7yppw")
 
 [node name="hitbox_slash" type="Area3D" parent="FrogCharacter/Systems/HitAndHurt/Hitboxes"]
 collision_layer = 0
-collision_mask = 41
+collision_mask = 105
 script = ExtResource("15_wq28r")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FrogCharacter/Systems/HitAndHurt/Hitboxes/hitbox_slash"]

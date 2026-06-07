@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cp56kp11t4ngg"]
+[gd_scene load_steps=38 format=3 uid="uid://cp56kp11t4ngg"]
 
 [ext_resource type="AudioStream" uid="uid://pmc3kysxqlc6" path="res://sound/sfx/pixabay/lake-wavelet-27909.mp3" id="1_1dqgb"]
 [ext_resource type="Script" uid="uid://dhd6d8l44t7yn" path="res://scenes/game_manager.gd" id="1_ajshl"]
@@ -22,6 +22,7 @@
 [ext_resource type="Script" uid="uid://33wjf25m4rdb" path="res://scenes/DraggableDestructibleDecor.gd" id="21_n74k2"]
 [ext_resource type="Script" uid="uid://bg1320glc5xhd" path="res://scenes/thrown_object.gd" id="22_si7kk"]
 [ext_resource type="Script" uid="uid://c7g7jvcrqudgm" path="res://scripts/Hitbox.gd" id="23_pn65j"]
+[ext_resource type="Script" uid="uid://b3gfi7wkn7l3a" path="res://scripts/Hurtbox.gd" id="24_5f8cm"]
 [ext_resource type="Material" uid="uid://cq31wu4xny0ql" path="res://materials/water.tres" id="26_kay4s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_75pfo"]
@@ -103,6 +104,9 @@ size = Vector3(0.5, 1, 0.5)
 size = Vector3(2, 2, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5f8cm"]
+size = Vector3(0.6, 1.2, 0.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kay4s"]
 size = Vector3(0.6, 1.2, 0.6)
 
 [node name="Node3D" type="Node3D"]
@@ -205,6 +209,8 @@ camera = NodePath("../../../Camera3D")
 script = ExtResource("12_c6rvn")
 camera_main = NodePath("../../../Camera3D")
 
+[node name="SceneManager" type="Node3D" parent="."]
+
 [node name="Player" parent="." instance=ExtResource("3_lpvoh")]
 
 [node name="StaticSceneObjects" type="Node3D" parent="."]
@@ -303,7 +309,7 @@ collision_layer = 8
 collision_mask = 11
 axis_lock_angular_x = true
 axis_lock_angular_z = true
-mass = 1.2
+mass = 9.43
 script = ExtResource("21_n74k2")
 rig = NodePath(".")
 thrown_object = NodePath("ThrownObject")
@@ -336,17 +342,35 @@ script = ExtResource("16_7yos8")
 root = NodePath("..")
 metadata/_custom_type_script = "uid://bujy08xidy0g7"
 
-[node name="ThrownObject" type="Node3D" parent="Box2_Draggable" node_paths=PackedStringArray("hitbox")]
+[node name="ThrownObject" type="Node3D" parent="Box2_Draggable" node_paths=PackedStringArray("rig", "hitbox", "regular_hurtbox", "projectile_hitbox", "projectile_hurtbox")]
 script = ExtResource("22_si7kk")
-hitbox = NodePath("Hitbox")
+rig = NodePath("..")
+hitbox = NodePath("ProjectileHitbox")
+regular_hurtbox = NodePath("../DraggableHurtbox")
+projectile_hitbox = NodePath("ProjectileHitbox")
+projectile_hurtbox = NodePath("ProjectileHurtbox")
 
-[node name="Hitbox" type="Area3D" parent="Box2_Draggable/ThrownObject" node_paths=PackedStringArray("ignore_colliders")]
+[node name="ProjectileHitbox" type="Area3D" parent="Box2_Draggable/ThrownObject" node_paths=PackedStringArray("ignore_colliders")]
+collision_layer = 0
+collision_mask = 57
 script = ExtResource("23_pn65j")
 ignore_colliders = [NodePath("../../DraggableHurtbox"), NodePath("../..")]
 metadata/_custom_type_script = "uid://c7g7jvcrqudgm"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2_Draggable/ThrownObject/Hitbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2_Draggable/ThrownObject/ProjectileHitbox"]
 shape = SubResource("BoxShape3D_5f8cm")
+
+[node name="ProjectileHurtbox" type="Area3D" parent="Box2_Draggable/ThrownObject"]
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("24_5f8cm")
+metadata/_custom_type_script = "uid://b3gfi7wkn7l3a"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2_Draggable/ThrownObject/ProjectileHurtbox"]
+shape = SubResource("BoxShape3D_kay4s")
+disabled = true
+
+[node name="Node3D" type="Node3D" parent="Box2_Draggable/ThrownObject"]
 
 [connection signal="took_damage" from="Box/DraggableHurtbox" to="Box/HealthManager" method="_on_draggable_hurtbox_took_damage"]
 [connection signal="took_damage" from="Box2_Draggable/DraggableHurtbox" to="Box2_Draggable/HealthManager" method="_on_draggable_hurtbox_took_damage"]

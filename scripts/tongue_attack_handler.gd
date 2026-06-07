@@ -98,11 +98,11 @@ func _process(delta: float) -> void:
 			else:
 				retraction_acceleration_counter += delta
 				tongue_tip_node.position = tongue_tip_node.position.move_toward(mouth_marker.global_position, delta*(retraction_speed+retraction_acceleration_counter)) 
-				
 		TongueState.ATTACHED:
 			_test_for_retracting()
-			if tongue_attached_node == null || global_position.distance_to(tongue_tip_node.global_position) < 1:
+			if tongue_attached_node == null || not is_instance_valid(tongue_attached_node) || global_position.distance_to(tongue_tip_node.global_position) < 1:
 				_start_retracting()
+				return
 			tongue_tip_node.global_position = tongue_attached_node.global_position + tongue_attached_node_offset
 
 func _test_for_retracting():
@@ -125,7 +125,6 @@ func get_attached_body() -> Node3D:
 
 func tongue_attack_raycast():
 	var inputvector:Vector2 = InputReader._get_attack_offset(self).normalized() * max_length
-	print(inputvector)
 	var target_point:Vector3 = self.global_position + Vector3(-inputvector.x, 0, -inputvector.y)
 	target_point.y = self.global_position.y
 	tongue_state = TongueState.EXTENDING

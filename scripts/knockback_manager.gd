@@ -19,4 +19,3 @@ func on_take_knockback (force:Vector3) -> void:
 	var force_to_add;
 	force_to_add = diff_vector * diff_force;
 	body.add_force(force_to_add)
-	print("knockback applied: ", force_to_add, ":", target_velocity, ":", current_velocity)

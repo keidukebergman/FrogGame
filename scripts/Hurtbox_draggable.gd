@@ -20,8 +20,6 @@ func apply_damage(damage) -> void:
 
 func start_dragging(dragger, drag_point, force) -> void:
 	started_being_dragged.emit(dragger, drag_point, force)
-	print(name, ": being dragged")
 
 func stop_dragging() -> void:
 	stopped_being_dragged.emit()
-	print(name, ": stopped being dragged")

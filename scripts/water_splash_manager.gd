@@ -14,7 +14,6 @@ func _ready() -> void:
 
 func on_water_entered(body:Area3D):
 	if body.collision_layer == 4:
-		print("ENTERED WATER")
 		var splash:WaterSplashEffect = splash_effect_enter.instantiate()
 		get_tree().root.add_child(splash)
 		splash.global_position = self.global_position
@@ -24,6 +23,5 @@ func on_water_entered(body:Area3D):
 
 func on_water_exited(body:Area3D):
 	if body.collision_layer == 4:
-		print("EXITED WATER")
 		exited_water.emit()
 	pass

@@ -23,7 +23,6 @@ func heal_to_max():
 	apply_healing(delta)
 
 func apply_damage(damage:float):
-	print("Took damage")
 	health -= damage
 	applied_damage.emit(damage, health)
 	if health <= 0:

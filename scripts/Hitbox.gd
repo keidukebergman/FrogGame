@@ -39,8 +39,6 @@ func _on_area_entered(area: Area3D) -> void:
 
 func detect_collision(node: Node3D) -> void:
 	if node not in hits && node not in ignore_colliders:
-		#print("AAAA", node)
-		#if ignore_colliders.size() > 0:
-			#print("BBBB", ignore_colliders[0])
 		hits[node] = true
 		hit_entity.emit(node)
+		print(self, " : hit ", node)
