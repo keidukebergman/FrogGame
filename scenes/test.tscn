@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://cp56kp11t4ngg"]
+[gd_scene load_steps=43 format=3 uid="uid://cp56kp11t4ngg"]
 
 [ext_resource type="AudioStream" uid="uid://pmc3kysxqlc6" path="res://sound/sfx/pixabay/lake-wavelet-27909.mp3" id="1_1dqgb"]
 [ext_resource type="Script" uid="uid://dhd6d8l44t7yn" path="res://scripts/game_manager.gd" id="1_ajshl"]
@@ -20,8 +20,10 @@
 [ext_resource type="Script" uid="uid://1rqaiis71irb" path="res://scripts/health_manager.gd" id="14_7mbro"]
 [ext_resource type="Script" uid="uid://bujy08xidy0g7" path="res://scripts/death_manager.gd" id="16_7yos8"]
 [ext_resource type="Script" uid="uid://33wjf25m4rdb" path="res://scripts/DraggableDestructibleDecor.gd" id="21_n74k2"]
+[ext_resource type="Script" uid="uid://eu8pfa82x6aq" path="res://scripts/water_splash_manager.gd" id="22_1dqgb"]
 [ext_resource type="Script" uid="uid://bg1320glc5xhd" path="res://scripts/thrown_object.gd" id="22_si7kk"]
 [ext_resource type="Script" uid="uid://c7g7jvcrqudgm" path="res://scripts/Hitbox.gd" id="23_pn65j"]
+[ext_resource type="PackedScene" uid="uid://coqouaigb7djy" path="res://scenes/instantiable/effects/water_splash_effect.tscn" id="23_y81of"]
 [ext_resource type="Script" uid="uid://miugg8jpe2ku" path="res://scripts/effect_manager.gd" id="25_gm488"]
 [ext_resource type="Script" uid="uid://cionpm6je6331" path="res://scripts/ground_polling.gd" id="26_1dqgb"]
 [ext_resource type="Script" uid="uid://dpt7wx0xe24ny" path="res://scripts/projectile_knockback_manager.gd" id="26_j7bvy"]
@@ -351,6 +353,12 @@ script = ExtResource("16_7yos8")
 root = NodePath("..")
 metadata/_custom_type_script = "uid://bujy08xidy0g7"
 
+[node name="WaterSplashHandler" type="Node3D" parent="Box2_Draggable" node_paths=PackedStringArray("hurtbox")]
+script = ExtResource("22_1dqgb")
+hurtbox = NodePath("../ThrowHandler/ProjectileHurtbox")
+splash_effect_enter = ExtResource("23_y81of")
+metadata/_custom_type_script = "uid://eu8pfa82x6aq"
+
 [node name="ThrowHandler" type="Node3D" parent="Box2_Draggable" node_paths=PackedStringArray("rig", "hitbox", "regular_hurtbox", "projectile_hitbox", "projectile_hurtbox", "health_manager")]
 script = ExtResource("22_si7kk")
 rig = NodePath("..")
@@ -392,7 +400,7 @@ body = NodePath("../../..")
 [node name="GroundPolling" type="Area3D" parent="Box2_Draggable"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.555548, 0)
 collision_layer = 0
-collision_mask = 2
+collision_mask = 6
 script = ExtResource("26_1dqgb")
 metadata/_custom_type_script = "uid://cionpm6je6331"
 
