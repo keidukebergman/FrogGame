@@ -2,6 +2,7 @@ extends Node3D
 class_name DeathManager
 
 @export var root : Node
+@export var death_fx : PackedScene
 
 func die():
 	print(root.name, " died. ")

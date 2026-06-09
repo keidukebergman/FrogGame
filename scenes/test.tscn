@@ -1,30 +1,30 @@
 [gd_scene load_steps=41 format=3 uid="uid://cp56kp11t4ngg"]
 
 [ext_resource type="AudioStream" uid="uid://pmc3kysxqlc6" path="res://sound/sfx/pixabay/lake-wavelet-27909.mp3" id="1_1dqgb"]
-[ext_resource type="Script" uid="uid://dhd6d8l44t7yn" path="res://scenes/game_manager.gd" id="1_ajshl"]
+[ext_resource type="Script" uid="uid://dhd6d8l44t7yn" path="res://scripts/game_manager.gd" id="1_ajshl"]
 [ext_resource type="Script" uid="uid://cpuxx83goq5ye" path="res://scripts/path_manager.gd" id="2_2cnsr"]
-[ext_resource type="Script" uid="uid://b32r0eqcdgkju" path="res://scenes/player_manager.gd" id="2_at5dv"]
-[ext_resource type="Script" uid="uid://14an4j5nwxnn" path="res://scenes/enemy_manager.gd" id="2_jcd4p"]
-[ext_resource type="Script" uid="uid://cdrfstpx35r12" path="res://scenes/ui_manager.gd" id="2_uacia"]
+[ext_resource type="Script" uid="uid://b32r0eqcdgkju" path="res://scripts/player_manager.gd" id="2_at5dv"]
+[ext_resource type="Script" uid="uid://14an4j5nwxnn" path="res://scripts/enemy_manager.gd" id="2_jcd4p"]
+[ext_resource type="Script" uid="uid://cdrfstpx35r12" path="res://scripts/ui_manager.gd" id="2_uacia"]
 [ext_resource type="PackedScene" uid="uid://b427eeltoq12o" path="res://scenes/instantiable/player/player.tscn" id="3_lpvoh"]
-[ext_resource type="Script" uid="uid://d4km7624424c" path="res://scenes/health_bar_manager.gd" id="3_yk7ts"]
+[ext_resource type="Script" uid="uid://d4km7624424c" path="res://scripts/health_bar_manager.gd" id="3_yk7ts"]
 [ext_resource type="PackedScene" uid="uid://bcs7ck8bsbe0q" path="res://scenes/instantiable/enemies/enemy_mosquito.tscn" id="4_at5dv"]
 [ext_resource type="PackedScene" uid="uid://bg1owrrruuh0w" path="res://scenes/lily_pad.tscn" id="7_44saj"]
 [ext_resource type="Script" uid="uid://cilv2vjiqdwvs" path="res://scripts/slow_mo_manager.gd" id="9_5jxlq"]
-[ext_resource type="Script" uid="uid://bbtpwvavwh3dy" path="res://scenes/player_fx_relay.gd" id="9_xrtyr"]
-[ext_resource type="Script" uid="uid://cri8txdrn1jhd" path="res://scenes/zoom_manager.gd" id="11_daiq8"]
-[ext_resource type="Script" uid="uid://bjs1qymkrmk25" path="res://scenes/camera_shake_manager.gd" id="12_c6rvn"]
-[ext_resource type="Script" uid="uid://ckg315doo3w8x" path="res://scenes/decor_manager.gd" id="12_ff6ho"]
+[ext_resource type="Script" uid="uid://bbtpwvavwh3dy" path="res://scripts/player_fx_relay.gd" id="9_xrtyr"]
+[ext_resource type="Script" uid="uid://cri8txdrn1jhd" path="res://scripts/zoom_manager.gd" id="11_daiq8"]
+[ext_resource type="Script" uid="uid://bjs1qymkrmk25" path="res://scripts/camera_shake_manager.gd" id="12_c6rvn"]
+[ext_resource type="Script" uid="uid://ckg315doo3w8x" path="res://scripts/decor_manager.gd" id="12_ff6ho"]
 [ext_resource type="PackedScene" uid="uid://b13rkitbsenhc" path="res://models/box.glb" id="12_ghpyy"]
 [ext_resource type="Script" uid="uid://bi5fwt04sq1jq" path="res://scripts/Hurtbox_draggable.gd" id="13_44saj"]
 [ext_resource type="Script" uid="uid://1rqaiis71irb" path="res://scripts/health_manager.gd" id="14_7mbro"]
 [ext_resource type="Script" uid="uid://bujy08xidy0g7" path="res://scripts/death_manager.gd" id="16_7yos8"]
-[ext_resource type="Script" uid="uid://33wjf25m4rdb" path="res://scenes/DraggableDestructibleDecor.gd" id="21_n74k2"]
-[ext_resource type="Script" uid="uid://bg1320glc5xhd" path="res://scenes/thrown_object.gd" id="22_si7kk"]
+[ext_resource type="Script" uid="uid://33wjf25m4rdb" path="res://scripts/DraggableDestructibleDecor.gd" id="21_n74k2"]
+[ext_resource type="Script" uid="uid://bg1320glc5xhd" path="res://scripts/thrown_object.gd" id="22_si7kk"]
 [ext_resource type="Script" uid="uid://c7g7jvcrqudgm" path="res://scripts/Hitbox.gd" id="23_pn65j"]
 [ext_resource type="Script" uid="uid://miugg8jpe2ku" path="res://scripts/effect_manager.gd" id="25_gm488"]
-[ext_resource type="Script" uid="uid://cionpm6je6331" path="res://scenes/instantiable/player/ground_polling.gd" id="26_1dqgb"]
-[ext_resource type="Script" uid="uid://dpt7wx0xe24ny" path="res://scenes/projectile_knockback_manager.gd" id="26_j7bvy"]
+[ext_resource type="Script" uid="uid://cionpm6je6331" path="res://scripts/ground_polling.gd" id="26_1dqgb"]
+[ext_resource type="Script" uid="uid://dpt7wx0xe24ny" path="res://scripts/projectile_knockback_manager.gd" id="26_j7bvy"]
 [ext_resource type="Material" uid="uid://cq31wu4xny0ql" path="res://materials/water.tres" id="26_kay4s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_75pfo"]
@@ -309,7 +309,7 @@ root = NodePath("..")
 metadata/_custom_type_script = "uid://bujy08xidy0g7"
 
 [node name="Box2_Draggable" type="RigidBody3D" parent="." node_paths=PackedStringArray("rig", "thrown_object", "dragged_hurtbox", "ground_poller", "health_manager", "death_manager", "hurtbox")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3984656, -0.57739514, 0.9705049)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3984656, -0.2416895, 0.9705049)
 collision_layer = 8
 collision_mask = 11
 axis_lock_linear_y = true
@@ -397,6 +397,7 @@ script = ExtResource("26_1dqgb")
 metadata/_custom_type_script = "uid://cionpm6je6331"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Box2_Draggable/GroundPolling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20124453, 0)
 shape = SubResource("SphereShape3D_gm488")
 
 [connection signal="took_damage" from="Box/DraggableHurtbox" to="Box/HealthManager" method="_on_draggable_hurtbox_took_damage"]

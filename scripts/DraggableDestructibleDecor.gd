@@ -12,6 +12,7 @@ var damage_velocity = 1.0
 var myparent
 
 func _ready() -> void:
+	rig.axis_lock_linear_y = true
 	super._ready()
 	myparent = get_parent()
 	hurtbox.started_being_dragged.connect(_on_start_dragging)
@@ -24,13 +25,16 @@ func _physics_process(_delta: float) -> void:
 		var direction = dragger.global_position-global_position
 		direction.y = 0
 		direction = direction.normalized()
-		rig.linear_velocity = direction*force/rig.mass
-	if rig.linear_velocity.length() < damage_velocity:
-		pass
-	if(global_position + rig.linear_velocity != global_position):
-		look_at(global_position + rig.linear_velocity)
+		rig.linear_velocity = direction * force / rig.mass
+	var plane_linear_velocity = rig.linear_velocity
+	plane_linear_velocity.y = 0
+	if plane_linear_velocity.length() > damage_velocity:
+		look_at(global_position + plane_linear_velocity)
 	if affected_by_gravity && !ground_poller.is_grounded:
 		rig.axis_lock_linear_y = false
+	if affected_by_gravity && ground_poller.is_grounded:
+		rig.axis_lock_linear_y = true
+		rig.linear_velocity.y = 0
 
 func _on_start_dragging(_dragger, _dragpoint, _force) -> void:
 	dragger = _dragger
@@ -39,6 +43,7 @@ func _on_start_dragging(_dragger, _dragpoint, _force) -> void:
 	rig.axis_lock_angular_z = true
 	rig.axis_lock_linear_x = false
 	rig.axis_lock_linear_z = false
+	rig.axis_lock_linear_y = true
 	rig.collision_layer = 0
 	thrown_object.on_start_moving()
 

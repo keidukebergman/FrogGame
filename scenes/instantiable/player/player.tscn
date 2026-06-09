@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://w3oxfr1xotrg" path="res://scripts/tongue_attack_state.gd" id="5_xmha0"]
 [ext_resource type="Script" uid="uid://b2ifomelrlmfr" path="res://scripts/statemachines/player/states/PlayerAirborneState.gd" id="7_v47df"]
 [ext_resource type="Script" uid="uid://dmj61wc554x8h" path="res://scripts/player_death_manager.gd" id="9_3qxr5"]
-[ext_resource type="Script" uid="uid://calbyq6tluyu" path="res://scenes/instantiable/player/player_death_state.gd" id="9_gnc5k"]
+[ext_resource type="Script" uid="uid://calbyq6tluyu" path="res://scripts/player_death_state.gd" id="9_gnc5k"]
 [ext_resource type="Script" uid="uid://1rqaiis71irb" path="res://scripts/health_manager.gd" id="10_c7xul"]
 [ext_resource type="Script" uid="uid://miugg8jpe2ku" path="res://scripts/effect_manager.gd" id="11_7r8gw"]
 [ext_resource type="Script" uid="uid://tp7u7qxjy8l5" path="res://scripts/knockback_manager.gd" id="12_pcexo"]
@@ -22,7 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://bf5ar4mkltuns" path="res://icon.svg" id="19_c3khl"]
 [ext_resource type="Texture2D" uid="uid://ditgtgoaurqhl" path="res://sprite/Slash.png" id="20_8o3c5"]
 [ext_resource type="Texture2D" uid="uid://chxbdgiwpr16x" path="res://sprite/Pondtus.png" id="21_ijgvy"]
-[ext_resource type="Script" uid="uid://cionpm6je6331" path="res://scenes/instantiable/player/ground_polling.gd" id="23_7hh1b"]
+[ext_resource type="Script" uid="uid://cionpm6je6331" path="res://scripts/ground_polling.gd" id="23_7hh1b"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ppyta"]
 radius = 0.40527344
