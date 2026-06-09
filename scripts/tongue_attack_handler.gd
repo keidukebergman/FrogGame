@@ -29,7 +29,6 @@ enum TongueState {
 	ATTACHED
 }
 
-signal attached(target:Node3D, offset:Vector3, heavy:bool)
 
 func attached_object_destroyed() -> void:
 	_start_retracting()

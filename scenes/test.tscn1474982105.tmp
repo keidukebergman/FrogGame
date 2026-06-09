@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://cp56kp11t4ngg"]
+[gd_scene load_steps=40 format=3 uid="uid://cp56kp11t4ngg"]
 
 [ext_resource type="AudioStream" uid="uid://pmc3kysxqlc6" path="res://sound/sfx/pixabay/lake-wavelet-27909.mp3" id="1_1dqgb"]
 [ext_resource type="Script" uid="uid://dhd6d8l44t7yn" path="res://scenes/game_manager.gd" id="1_ajshl"]
@@ -23,7 +23,6 @@
 [ext_resource type="Script" uid="uid://bg1320glc5xhd" path="res://scenes/thrown_object.gd" id="22_si7kk"]
 [ext_resource type="Script" uid="uid://c7g7jvcrqudgm" path="res://scripts/Hitbox.gd" id="23_pn65j"]
 [ext_resource type="Script" uid="uid://miugg8jpe2ku" path="res://scripts/effect_manager.gd" id="25_gm488"]
-[ext_resource type="Script" uid="uid://cionpm6je6331" path="res://scenes/instantiable/player/ground_polling.gd" id="26_1dqgb"]
 [ext_resource type="Script" uid="uid://dpt7wx0xe24ny" path="res://scenes/projectile_knockback_manager.gd" id="26_j7bvy"]
 [ext_resource type="Material" uid="uid://cq31wu4xny0ql" path="res://materials/water.tres" id="26_kay4s"]
 
@@ -308,7 +307,7 @@ script = ExtResource("16_7yos8")
 root = NodePath("..")
 metadata/_custom_type_script = "uid://bujy08xidy0g7"
 
-[node name="Box2_Draggable" type="RigidBody3D" parent="." node_paths=PackedStringArray("rig", "thrown_object", "dragged_hurtbox", "ground_poller", "health_manager", "death_manager", "hurtbox")]
+[node name="Box2_Draggable" type="RigidBody3D" parent="." node_paths=PackedStringArray("rig", "thrown_object", "dragged_hurtbox", "health_manager", "death_manager", "hurtbox")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3984656, -0.57739514, 0.9705049)
 collision_layer = 8
 collision_mask = 11
@@ -320,8 +319,6 @@ script = ExtResource("21_n74k2")
 rig = NodePath(".")
 thrown_object = NodePath("ThrowHandler")
 dragged_hurtbox = NodePath("ThrowHandler/ProjectileHurtbox")
-affected_by_gravity = true
-ground_poller = NodePath("GroundPolling")
 health_manager = NodePath("HealthManager")
 death_manager = NodePath("DeathManager")
 hurtbox = NodePath("BoxRegularHurtbox")
@@ -393,8 +390,6 @@ body = NodePath("../../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.555548, 0)
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("26_1dqgb")
-metadata/_custom_type_script = "uid://cionpm6je6331"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Box2_Draggable/GroundPolling"]
 shape = SubResource("SphereShape3D_gm488")

@@ -1,7 +1,6 @@
 extends Node3D
 class_name EffectManager
 
-@export var body:CharacterPhysicsBody3D
 @export var hurtbox:Hurtbox
 
 signal took_knockback(force:Vector3)

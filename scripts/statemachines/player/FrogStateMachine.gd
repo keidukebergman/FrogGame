@@ -44,6 +44,5 @@ func _physics_process(delta):
 	
 	
 func _is_grounded():
-	var overlapping_bodies = ground_collider.get_overlapping_bodies()
-	return overlapping_bodies.size() > 0
+	return ground_collider.is_grounded
  

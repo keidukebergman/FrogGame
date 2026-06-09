@@ -3,7 +3,7 @@ class_name CameraShakeManager
 
 @export var camera_main:Camera3D
 
-func start_shake_effect(bounces: int, bounce_distance: float, direction: Vector3):
+func start_shake_effect(_bounces: int, bounce_distance: float, direction: Vector3):
 	var origin = camera_main.position
 	var tween = create_tween()
 	tween.tween_property(

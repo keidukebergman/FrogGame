@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://b427eeltoq12o"]
+[gd_scene load_steps=32 format=3 uid="uid://b427eeltoq12o"]
 
 [ext_resource type="Script" uid="uid://yfk7mr61a5eo" path="res://scripts/character_physics_body.gd" id="1_e5ctq"]
 [ext_resource type="Script" uid="uid://7bo813l14n7" path="res://scripts/entity_handling/player_entity.gd" id="1_gnc5k"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://bf5ar4mkltuns" path="res://icon.svg" id="19_c3khl"]
 [ext_resource type="Texture2D" uid="uid://ditgtgoaurqhl" path="res://sprite/Slash.png" id="20_8o3c5"]
 [ext_resource type="Texture2D" uid="uid://chxbdgiwpr16x" path="res://sprite/Pondtus.png" id="21_ijgvy"]
+[ext_resource type="Script" uid="uid://cionpm6je6331" path="res://scenes/instantiable/player/ground_polling.gd" id="23_7hh1b"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ppyta"]
 radius = 0.40527344
@@ -35,6 +36,7 @@ point_count = 4
 size = Vector3(0.9463806, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ajshl"]
+size = Vector3(0.6, 1, 0.6)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c6rvn"]
 size = Vector3(0.8670654, 1, 1)
@@ -135,9 +137,8 @@ script = ExtResource("10_c7xul")
 health = 100.0
 max_health = 100.0
 
-[node name="EffectManager" type="Node3D" parent="FrogCharacter/Systems" node_paths=PackedStringArray("body", "hurtbox")]
+[node name="EffectManager" type="Node3D" parent="FrogCharacter/Systems" node_paths=PackedStringArray("hurtbox")]
 script = ExtResource("11_7r8gw")
-body = NodePath("../..")
 hurtbox = NodePath("../HitAndHurt/Hurtbox/Hurtbox")
 metadata/_custom_type_script = "uid://miugg8jpe2ku"
 
@@ -185,8 +186,8 @@ attach_force = 15.0
 mouth_marker = NodePath("TongueOrigin")
 tongue_hitbox = NodePath("TonguePoint/Hitbox")
 max_length = 10.0
-extension_speed = 30.0
-retraction_speed = 30.0
+extension_speed = 50.0
+retraction_speed = 80.0
 retraction_acceleration_speed = 1.5
 tongue_tip_node = NodePath("TonguePoint")
 tongue_line_node = NodePath("Sprite3D")
@@ -245,6 +246,7 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.555548, 0)
 collision_layer = 0
 collision_mask = 2
+script = ExtResource("23_7hh1b")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FrogCharacter/GroundPolling"]
 shape = SubResource("SphereShape3D_ppyta")

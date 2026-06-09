@@ -13,7 +13,7 @@ func _ready() -> void:
 func _start_drag(node) -> void:
 	dragger = node
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if dragger != null:
 		body.velocity = (dragger.global_position - body.global_position).normalized() * dragforce
 
