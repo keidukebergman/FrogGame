@@ -26,10 +26,10 @@ func _enter_state():
 	if aggro_manager.target == null:
 		state_machine._change_state(next_state)
 	attack_direction = (aggro_manager.target.global_position - root.global_position).normalized()
-	await get_tree().create_timer(windup_time).timeout
-	registering = true
 	set_hitbox_rotation()
 	set_slash_indicator_rotation()
+	await get_tree().create_timer(windup_time).timeout
+	registering = true
 	hitbox.start_detecting_hits()
 	attack_visual.visible = true
 	root.add_force(attack_direction*attack_velocity)

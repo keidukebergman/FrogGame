@@ -39,7 +39,7 @@ size = Vector3(0.9463806, 1, 1)
 size = Vector3(0.6, 1, 0.6)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c6rvn"]
-size = Vector3(0.8670654, 1, 1)
+size = Vector3(0.867, 3, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mf4mk"]
 albedo_color = Color(0, 0.509671, 0.324473, 1)
@@ -50,7 +50,7 @@ material = SubResource("StandardMaterial3D_mf4mk")
 [sub_resource type="SphereShape3D" id="SphereShape3D_ppyta"]
 radius = 0.264354
 
-[node name="Player" type="Node" node_paths=PackedStringArray("health_manager", "death_manager", "state_machine", "state_grounded", "state_attack", "state_tongue_attack", "state_airborne", "effect_manager", "water_splash_manager", "hurtbox")]
+[node name="Player" type="Node3D" node_paths=PackedStringArray("health_manager", "death_manager", "state_machine", "state_grounded", "state_attack", "state_tongue_attack", "state_airborne", "effect_manager", "water_splash_manager", "hurtbox")]
 script = ExtResource("1_gnc5k")
 health_manager = NodePath("FrogCharacter/Systems/HealthManager")
 death_manager = NodePath("FrogCharacter/Systems/DeathManager")
@@ -64,9 +64,10 @@ water_splash_manager = NodePath("FrogCharacter/Systems/WaterSplashManager")
 hurtbox = NodePath("FrogCharacter/Systems/HitAndHurt/Hurtbox/Hurtbox")
 
 [node name="FrogCharacter" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.12482, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7776301, 0)
 collision_layer = 0
-collision_mask = 11
+collision_mask = 139
+axis_lock_linear_y = true
 script = ExtResource("1_e5ctq")
 
 [node name="PhysicsCollider" type="CollisionShape3D" parent="FrogCharacter"]
@@ -118,10 +119,11 @@ ground_state = NodePath("../Grounded")
 tongue_attack_manager = NodePath("../../SpecialHandler/TongueAttackHandler")
 body = NodePath("../../..")
 
-[node name="Airborne" type="Node3D" parent="FrogCharacter/Systems/StateMachine" node_paths=PackedStringArray("grounded_state", "dash_state")]
+[node name="Airborne" type="Node3D" parent="FrogCharacter/Systems/StateMachine" node_paths=PackedStringArray("grounded_state", "dash_state", "tongue_attack_handler")]
 script = ExtResource("7_v47df")
 grounded_state = NodePath("../Grounded")
 dash_state = NodePath("../DashState")
+tongue_attack_handler = NodePath("../../SpecialHandler/TongueAttackHandler")
 movement_speed = 1.0
 acceleration = 0.2
 air_drag = 10
@@ -190,14 +192,9 @@ extension_speed = 50.0
 retraction_speed = 80.0
 retraction_acceleration_speed = 1.5
 tongue_tip_node = NodePath("TonguePoint")
-tongue_line_node = NodePath("Sprite3D")
+tongue_line_node = NodePath("TongueOrigin/Sprite3D")
 state_manager = NodePath("../../StateMachine")
 state_machine_state = NodePath("../../StateMachine/TongueAttackHeavy")
-
-[node name="Sprite3D" type="Sprite3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler"]
-transform = Transform3D(4.9999995, 0, 0, 0, 3.8302214, 3.2139373, 0, -3.2139373, 3.8302214, 0, 0, 0)
-texture_filter = 0
-texture = ExtResource("18_knlvm")
 
 [node name="TonguePoint" type="Node3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler"]
 
@@ -212,11 +209,16 @@ script = ExtResource("15_wq28r")
 metadata/_custom_type_script = "uid://c7g7jvcrqudgm"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler/TonguePoint/Hitbox"]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.066467285, 0, 0)
+transform = Transform3D(0.3, 0, 0, 0, 0.2999984, 0, 0, 0, 0.2999984, -0.066467285, 0, 0)
 shape = SubResource("BoxShape3D_c6rvn")
 
 [node name="TongueOrigin" type="Node3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler"]
-transform = Transform3D(1, 0, 0, 0, 0.99999946, 0, 0, 0, 0.99999946, 0, 0.40144205, 0.16814768)
+transform = Transform3D(1, 0, 0, 0, 0.9999994, 0, 0, 0, 0.9999994, 0, 0.49375212, 0.16814767)
+
+[node name="Sprite3D" type="Sprite3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler/TongueOrigin"]
+transform = Transform3D(4.9999995, 0, 0, 0, 3.8302236, 3.213939, 0, -3.213939, 3.8302236, 0, -0.00044202805, -0.16814777)
+texture_filter = 0
+texture = ExtResource("18_knlvm")
 
 [node name="Visual" type="Node3D" parent="FrogCharacter"]
 

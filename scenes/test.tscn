@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cp56kp11t4ngg"]
+[gd_scene load_steps=44 format=3 uid="uid://cp56kp11t4ngg"]
 
 [ext_resource type="AudioStream" uid="uid://pmc3kysxqlc6" path="res://sound/sfx/pixabay/lake-wavelet-27909.mp3" id="1_1dqgb"]
 [ext_resource type="Script" uid="uid://dhd6d8l44t7yn" path="res://scripts/game_manager.gd" id="1_ajshl"]
@@ -85,8 +85,9 @@ volumetric_fog_gi_inject = 0.92
 volumetric_fog_length = 8.0
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_ajshl"]
-vertices = PackedVector3Array(1.6810184, -0.78305817, 7.203495, 3.6810184, -0.78305817, 6.703495, 5.4310184, -0.78305817, 5.453495, 7.1810184, -0.78305817, 2.203495, 7.1810184, -0.78305817, -2.296505, 6.4310184, -0.78305817, -4.046505, 4.9310184, -0.78305817, -5.796505, -7.3189816, -0.78305817, 1.953495, -6.8189816, -0.78305817, 3.453495, -5.0689816, -0.78305817, 5.703495, -2.8189816, -0.78305817, 6.953495, -1.8189816, -0.78305817, -7.296505, -3.8189816, -0.78305817, -6.546505, -6.0689816, -0.78305817, -4.546505, -7.3189816, -0.78305817, -1.796505, 1.9310184, -0.78305817, -7.296505)
-polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 3), PackedInt32Array(8, 7, 9), PackedInt32Array(9, 7, 10), PackedInt32Array(10, 7, 0), PackedInt32Array(13, 12, 11), PackedInt32Array(7, 14, 13), PackedInt32Array(13, 11, 7), PackedInt32Array(7, 11, 6), PackedInt32Array(7, 6, 3), PackedInt32Array(7, 3, 0), PackedInt32Array(11, 15, 6)]
+vertices = PackedVector3Array(7.459941, -1.0830574, -2.017583, 6.459941, -1.0830574, -4.267583, 4.959941, -1.0830574, -6.017583, 2.709941, -1.0830574, -7.267583, -1.7900591, -1.0830574, -7.517583, -0.6338091, -1.1030579, -6.830083, 6.303691, -1.1030579, -2.705083, -7.540059, -1.0830574, 1.7324171, -6.540059, -1.0830574, 4.232417, -5.040059, -1.0830574, 5.982417, -6.540059, -1.0830574, -4.267583, -7.540059, -1.0830574, -1.7675829, -5.254345, -1.1030579, 4.5181313, -5.682916, -1.1030579, 1.5895605, -5.897202, -1.0830574, 0.1252737, -6.1114874, -1.1030579, -1.3390112, -6.3257732, -1.1030579, -2.803297, 1.9599409, -1.0830574, 7.482417, 3.459941, -1.0830574, 6.982417, 6.209941, -1.0830574, 4.732417, -4.290059, -1.0830574, -6.517583, -5.352559, -1.0830574, -5.080083, -4.165059, -1.1030579, -5.892583, -2.977559, -1.1030579, -6.705083, -3.640059, -1.0830574, 6.2824173, -2.240059, -1.1030579, 6.5824175, 0.5599413, -1.1030579, 7.182417, 6.459941, -1.0830574, 3.3824167, 6.709941, -1.1030579, 2.0324173, 5.4604836, -1.1030579, 4.001837, -5.0198536, -1.1030579, -0.5058017, 7.459941, -1.0830574, 1.9824171, -2.040059, -1.0830574, 7.482417)
+polygons = [PackedInt32Array(0, 6, 1), PackedInt32Array(1, 6, 2), PackedInt32Array(2, 6, 3), PackedInt32Array(3, 6, 5), PackedInt32Array(3, 5, 4), PackedInt32Array(9, 8, 12), PackedInt32Array(12, 8, 13), PackedInt32Array(13, 8, 7), PackedInt32Array(13, 7, 14), PackedInt32Array(14, 7, 15), PackedInt32Array(15, 7, 11), PackedInt32Array(15, 11, 16), PackedInt32Array(16, 11, 10), PackedInt32Array(19, 18, 17), PackedInt32Array(4, 23, 20), PackedInt32Array(20, 23, 22), PackedInt32Array(20, 22, 21), PackedInt32Array(20, 21, 10), PackedInt32Array(12, 24, 9), PackedInt32Array(24, 12, 25), PackedInt32Array(25, 30, 26), PackedInt32Array(26, 29, 17), PackedInt32Array(17, 29, 19), PackedInt32Array(19, 29, 27), PackedInt32Array(27, 29, 28), PackedInt32Array(28, 6, 0), PackedInt32Array(6, 30, 5), PackedInt32Array(5, 23, 4), PackedInt32Array(23, 5, 22), PackedInt32Array(22, 30, 21), PackedInt32Array(21, 16, 10), PackedInt32Array(16, 30, 15), PackedInt32Array(15, 30, 14), PackedInt32Array(14, 30, 13), PackedInt32Array(13, 25, 12), PackedInt32Array(30, 29, 26), PackedInt32Array(25, 13, 30), PackedInt32Array(29, 6, 28), PackedInt32Array(30, 22, 5), PackedInt32Array(6, 29, 30), PackedInt32Array(30, 16, 21), PackedInt32Array(19, 27, 31), PackedInt32Array(31, 27, 28), PackedInt32Array(31, 28, 0), PackedInt32Array(9, 24, 32), PackedInt32Array(32, 24, 25), PackedInt32Array(32, 25, 26), PackedInt32Array(32, 26, 17)]
+cell_height = 0.01
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_g14j6"]
 height = 0.564941
@@ -102,10 +103,13 @@ subdivide_width = 90
 subdivide_depth = 90
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ghpyy"]
-size = Vector3(0.5, 1, 0.5)
+size = Vector3(2, 2, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7mbro"]
 size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1dqgb"]
+size = Vector3(0.5, 1.2, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5f8cm"]
 size = Vector3(0.3, 1.2, 0.3)
@@ -221,6 +225,7 @@ camera_main = NodePath("../../../Camera3D")
 [node name="Player" parent="." instance=ExtResource("3_lpvoh")]
 
 [node name="StaticSceneObjects" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1716028, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="StaticSceneObjects"]
 transform = Transform3D(1, 0, 0, 0, 0.55629563, 0.8309845, 0, -0.8309845, 0.55629563, 14, 7, 0)
@@ -270,7 +275,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8398261, 0)
 mesh = SubResource("PlaneMesh_gm488")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.76604444, 0.6427876, 0, -0.6427876, 0.76604444, 0, 9.191, 12.335)
+transform = Transform3D(1, 0, 0, 0, 0.7660445, 0.64278764, 0, -0.64278764, 0.7660445, 0, 10.492676, 12.335)
 projection = 1
 current = true
 fov = 44.9
@@ -278,14 +283,13 @@ size = 11.849
 far = 30.64
 
 [node name="Box" type="StaticBody3D" parent="." node_paths=PackedStringArray("health_manager", "death_manager", "hurtbox")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.956235, -0.7078745, 0.9705049)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.956235, 0.43841708, 0.9705049)
 script = ExtResource("12_ff6ho")
 health_manager = NodePath("HealthManager")
 death_manager = NodePath("DeathManager")
 hurtbox = NodePath("DraggableHurtbox")
 
 [node name="Boxmesh" parent="Box" instance=ExtResource("12_ghpyy")]
-transform = Transform3D(0.9836722, 0, -0.17996976, 0, 1, 0, 0.17996976, 0, 0.9836722, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Box"]
 shape = SubResource("BoxShape3D_ghpyy")
@@ -311,9 +315,9 @@ root = NodePath("..")
 metadata/_custom_type_script = "uid://bujy08xidy0g7"
 
 [node name="Box2_Draggable" type="RigidBody3D" parent="." node_paths=PackedStringArray("rig", "thrown_object", "dragged_hurtbox", "ground_poller", "health_manager", "death_manager", "hurtbox")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3984656, -0.2416895, 0.9705049)
-collision_layer = 8
-collision_mask = 11
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3984656, 0.6376561, 0.9705049)
+collision_layer = 128
+collision_mask = 9
 axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_z = true
@@ -332,7 +336,7 @@ hurtbox = NodePath("BoxRegularHurtbox")
 transform = Transform3D(0.29999998, 0, 0, 0, 0.6, 0, 0, 0, 0.29999998, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Box2_Draggable"]
-shape = SubResource("BoxShape3D_ghpyy")
+shape = SubResource("BoxShape3D_1dqgb")
 
 [node name="BoxRegularHurtbox" type="Area3D" parent="Box2_Draggable"]
 script = ExtResource("13_44saj")
@@ -398,7 +402,7 @@ script = ExtResource("26_j7bvy")
 body = NodePath("../../..")
 
 [node name="GroundPolling" type="Area3D" parent="Box2_Draggable"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.555548, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7560196, 0)
 collision_layer = 0
 collision_mask = 6
 script = ExtResource("26_1dqgb")
@@ -407,6 +411,9 @@ metadata/_custom_type_script = "uid://cionpm6je6331"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Box2_Draggable/GroundPolling"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20124453, 0)
 shape = SubResource("SphereShape3D_gm488")
+
+[node name="Enemy_Mosquito" parent="." instance=ExtResource("4_at5dv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5275226, 0.056895733, 0.29864562)
 
 [connection signal="took_damage" from="Box/DraggableHurtbox" to="Box/HealthManager" method="_on_draggable_hurtbox_took_damage"]
 [connection signal="took_damage" from="Box2_Draggable/BoxRegularHurtbox" to="Box2_Draggable/HealthManager" method="_on_draggable_hurtbox_took_damage"]

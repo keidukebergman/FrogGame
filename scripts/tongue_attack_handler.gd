@@ -2,6 +2,7 @@ extends Node3D
 class_name TongueAttackManager
 
 var usable:bool = true
+var active:bool = true
 var tongue_state:TongueState = TongueState.WAITING
 var attached_is_heavy:bool = false
 var tongue_attached_node:Node3D = null
@@ -29,7 +30,6 @@ enum TongueState {
 	ATTACHED
 }
 
-
 func attached_object_destroyed() -> void:
 	_start_retracting()
 
@@ -49,7 +49,7 @@ func _tongue_hit_object(body:Node3D) -> void:
 	tongue_hitbox.is_active = false
 	tongue_hitbox.stop_detecting_hits()
 	
-	
+
 func _ready() -> void:
 	tongue_hitbox.hit_entity.connect(_tongue_hit_object)
 
@@ -69,17 +69,13 @@ func _process(delta: float) -> void:
 	else:
 		tongue_line_node.visible = false 
 		tongue_line_node.scale.y = 0.001
-	
-	if not usable:
-		_start_retracting()
 		
 	match tongue_state:
 		TongueState.WAITING:
 			tongue_tip_node.visible = false
 			tongue_line_node.visible = false
-			if Input.is_action_just_pressed("tongue_attack"):
+			if Input.is_action_just_pressed("tongue_attack") && usable && active:
 				tongue_attack_raycast()
-				
 		TongueState.EXTENDING:
 			_test_for_retracting()
 			tongue_tip_node.position = tongue_tip_node.position.move_toward(tongue_target_position, delta*extension_speed)
@@ -88,7 +84,6 @@ func _process(delta: float) -> void:
 				tongue_hitbox.start_detecting_hits()
 			if tongue_tip_node.position.distance_to(tongue_target_position) < 0.01:
 				_start_retracting()
-				
 		TongueState.RETRACTING:
 			if tongue_tip_node.position.distance_to(mouth_marker.global_position) < 0.1:
 				tongue_state = TongueState.WAITING
@@ -103,6 +98,11 @@ func _process(delta: float) -> void:
 				_start_retracting()
 				return
 			tongue_tip_node.global_position = tongue_attached_node.global_position + tongue_attached_node_offset
+			tongue_tip_node.global_position.y = mouth_marker.global_position.y
+
+	if !active||!usable:
+		if tongue_state != TongueState.WAITING || tongue_state != TongueState.RETRACTING:
+			_start_retracting()
 
 func _test_for_retracting():
 	if Input.is_action_just_released("tongue_attack"):
@@ -131,3 +131,4 @@ func tongue_attack_raycast():
 	tongue_tip_node.visible = true
 	tongue_line_node.visible = true
 	tongue_target_position = target_point
+	tongue_target_position.y = mouth_marker.global_position.y

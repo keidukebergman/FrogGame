@@ -14,16 +14,19 @@ func _initialize_state(state_machine_node:FiniteStateMachine, root_node:Node):
 	root = root_node
 
 func _enter_state():
+	super._enter_state()
 	attached_node = tongue_attack_manager.tongue_attached_node
 
 func _exit_state():
+	super._exit_state()
 	pass
 
 func _state_update(_delta: float):
 	pass
 
 func end_attachment():
-	state_machine._change_state(ground_state)
+	if is_active:
+		state_machine._change_state(ground_state)
 
 func _state_physics_update(_delta: float):
 	if attached_node != null:

@@ -73,6 +73,7 @@ tongue_attack={
 3d_physics/layer_5="Player Hurtbox"
 3d_physics/layer_6="Enemy Hurtbox"
 3d_physics/layer_7="Projectile"
+3d_physics/layer_8="General Colliders"
 
 [physics]
 

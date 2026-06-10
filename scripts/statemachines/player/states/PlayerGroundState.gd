@@ -20,6 +20,7 @@ func _enter_state():
 	dash_timer = 0
 	is_active = true
 	super._enter_state()
+	root.axis_lock_linear_y = true
 	pass
 
 func _exit_state():
@@ -34,13 +35,14 @@ func _state_update(_delta: float):
 		state_machine._change_state(dash_state)
 	if not state_machine._is_grounded():
 		state_machine._change_state(airborne_state)
+		print("Switched to airborne")
+		return
 	var mouse_vector = InputReader._get_mouse_object_offset(root).normalized()
 	var renderer = state_machine.renderer
 	if mouse_vector.x < 0:
 		renderer.flip_h = false
 	else:
 		renderer.flip_h = true
-
 
 func calculate_new_velocity(target_velocity:Vector3, current_velocity:Vector3, delta:float) -> Vector3:
 	var new_velocity:Vector3 = current_velocity
