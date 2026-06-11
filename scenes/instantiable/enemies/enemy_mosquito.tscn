@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bcs7ck8bsbe0q"]
+[gd_scene load_steps=25 format=3 uid="uid://bcs7ck8bsbe0q"]
 
 [ext_resource type="Script" uid="uid://bt4lgvy6c6sc8" path="res://scripts/entity_handling/enemy_entity.gd" id="1_2c3ns"]
 [ext_resource type="Script" uid="uid://yfk7mr61a5eo" path="res://scripts/character_physics_body.gd" id="1_8x00c"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bf450ln32ku7q" path="res://scripts/simple_huntstate.gd" id="5_jde4i"]
 [ext_resource type="Script" uid="uid://de0gwidsmclmt" path="res://scripts/enemy_attack_state.gd" id="6_ej604"]
 [ext_resource type="Script" uid="uid://b4ye0343qbd4y" path="res://scripts/aggromanager.gd" id="7_gtwn5"]
+[ext_resource type="Script" uid="uid://cjvxfjyo5woxi" path="res://scenes/instantiable/enemies/enemy_fall_state.gd" id="8_n1xq6"]
 [ext_resource type="Script" uid="uid://b03jolxit32hw" path="res://scripts/damage_manager.gd" id="8_qhggb"]
 [ext_resource type="Script" uid="uid://bujy08xidy0g7" path="res://scripts/death_manager.gd" id="9_o6hy7"]
 [ext_resource type="Script" uid="uid://1rqaiis71irb" path="res://scripts/health_manager.gd" id="10_340vr"]
@@ -58,6 +59,8 @@ texture = ExtResource("2_2c3ns")
 
 [node name="Sprite3D" type="Sprite3D" parent="Mosquitoknight/Visual/AttackSprites/Stab"]
 transform = Transform3D(-2.1855695e-07, -5, -2.1855695e-07, 0, -2.1855695e-07, 5, -5, 2.1855695e-07, 9.553428e-15, 0.63882065, 0, 0)
+cast_shadow = 0
+alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("3_feaxh")
 
@@ -92,6 +95,9 @@ attack_velocity = 2.0
 can_take_attack_knockback = true
 attack_knockback_force = 3.0
 knockback_amount = 7.0
+
+[node name="FallState" type="Node3D" parent="Mosquitoknight/Systems/StateManager"]
+script = ExtResource("8_n1xq6")
 
 [node name="Aggromanager" type="Node3D" parent="Mosquitoknight/Systems"]
 script = ExtResource("7_gtwn5")

@@ -48,7 +48,6 @@ func _tongue_hit_object(body:Node3D) -> void:
 		state_manager._change_state(state_machine_state)
 	tongue_hitbox.is_active = false
 	tongue_hitbox.stop_detecting_hits()
-	
 
 func _ready() -> void:
 	tongue_hitbox.hit_entity.connect(_tongue_hit_object)
@@ -101,7 +100,7 @@ func _process(delta: float) -> void:
 			tongue_tip_node.global_position.y = mouth_marker.global_position.y
 
 	if !active||!usable:
-		if tongue_state != TongueState.WAITING || tongue_state != TongueState.RETRACTING:
+		if tongue_state != TongueState.WAITING && tongue_state != TongueState.RETRACTING:
 			_start_retracting()
 
 func _test_for_retracting():

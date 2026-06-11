@@ -412,8 +412,5 @@ metadata/_custom_type_script = "uid://cionpm6je6331"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20124453, 0)
 shape = SubResource("SphereShape3D_gm488")
 
-[node name="Enemy_Mosquito" parent="." instance=ExtResource("4_at5dv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5275226, 0.056895733, 0.29864562)
-
 [connection signal="took_damage" from="Box/DraggableHurtbox" to="Box/HealthManager" method="_on_draggable_hurtbox_took_damage"]
 [connection signal="took_damage" from="Box2_Draggable/BoxRegularHurtbox" to="Box2_Draggable/HealthManager" method="_on_draggable_hurtbox_took_damage"]

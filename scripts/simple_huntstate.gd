@@ -13,6 +13,7 @@ var movement_direction:Vector3
 @export var attack_range:float = 1
 
 @export var attack_state:State
+@export var fall_state:State
 
 func _initialize_state(state_machine_node:FiniteStateMachine, root_node:Node):
 	super._initialize_state(state_machine_node, root_node)
@@ -45,6 +46,7 @@ func _state_update(_delta: float) -> void:
 
 var destination;
 var destination_query_timeout:float = 0;
+
 func _state_physics_update(delta: float) -> void:
 	if ground_poller.is_grounded:
 		body.axis_lock_linear_y = true
