@@ -1,0 +1,163 @@
+[gd_scene load_steps=25 format=3 uid="uid://danhtn6x5yh2h"]
+
+[ext_resource type="Script" uid="uid://bt4lgvy6c6sc8" path="res://scripts/entity_handling/enemy_entity.gd" id="1_0x6lq"]
+[ext_resource type="Script" uid="uid://yfk7mr61a5eo" path="res://scripts/character_physics_body.gd" id="2_ew8qx"]
+[ext_resource type="Texture2D" uid="uid://bojwb2lct667p" path="res://sprite/MosquitoRanger.png" id="3_tao5y"]
+[ext_resource type="Script" uid="uid://i1cinfaxm21s" path="res://scripts/statemachines/enemies/EnemyStateMachine.gd" id="5_1jdny"]
+[ext_resource type="Script" uid="uid://ublyenpwplb6" path="res://scripts/statemachines/enemies/base_ranger/ranger_hunt_state.gd" id="5_qtv6h"]
+[ext_resource type="Script" uid="uid://bsxo1fcive5ck" path="res://scenes/instantiable/enemies/ranger_attack_state.gd" id="6_tao5y"]
+[ext_resource type="PackedScene" uid="uid://cosaprbtt63s3" path="res://scenes/instantiable/projectiles/projectile.tscn" id="7_0x6lq"]
+[ext_resource type="Script" uid="uid://cjvxfjyo5woxi" path="res://scripts/statemachines/enemy_fall_state.gd" id="8_h3iop"]
+[ext_resource type="Script" uid="uid://b4ye0343qbd4y" path="res://scripts/aggromanager.gd" id="9_ji4wv"]
+[ext_resource type="Script" uid="uid://b03jolxit32hw" path="res://scripts/damage_manager.gd" id="10_8eau4"]
+[ext_resource type="Script" uid="uid://bujy08xidy0g7" path="res://scripts/death_manager.gd" id="11_fqenq"]
+[ext_resource type="Script" uid="uid://1rqaiis71irb" path="res://scripts/health_manager.gd" id="12_8my1e"]
+[ext_resource type="Script" uid="uid://eu8pfa82x6aq" path="res://scripts/water_splash_manager.gd" id="13_jnd76"]
+[ext_resource type="PackedScene" uid="uid://coqouaigb7djy" path="res://scenes/instantiable/effects/water_splash_effect.tscn" id="14_toko4"]
+[ext_resource type="Script" uid="uid://miugg8jpe2ku" path="res://scripts/effect_manager.gd" id="15_2axhq"]
+[ext_resource type="Script" uid="uid://tp7u7qxjy8l5" path="res://scripts/knockback_manager.gd" id="16_vfer5"]
+[ext_resource type="Script" uid="uid://bgtk8eoxqk1wt" path="res://scripts/Draggable.gd" id="17_155sk"]
+[ext_resource type="Script" uid="uid://bi5fwt04sq1jq" path="res://scripts/Hurtbox_draggable.gd" id="18_1v42x"]
+[ext_resource type="Script" uid="uid://c7g7jvcrqudgm" path="res://scripts/Hitbox.gd" id="19_o5tnb"]
+[ext_resource type="Script" uid="uid://cionpm6je6331" path="res://scripts/ground_polling.gd" id="20_srgp0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ajshl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gsk6d"]
+size = Vector3(0.44532776, 1, 0.8484483)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ppyta"]
+radius = 0.20410156
+height = 1.3397183
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ppyta"]
+radius = 0.11657667
+
+[node name="Enemy_Ranger" type="Node3D" node_paths=PackedStringArray("aggro_manager")]
+script = ExtResource("1_0x6lq")
+aggro_manager = NodePath("Mosquitoranger/Systems/Aggromanager")
+
+[node name="Mosquitoranger" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+collision_layer = 0
+collision_mask = 139
+script = ExtResource("2_ew8qx")
+mass = 0.4
+
+[node name="Visual" type="Node3D" parent="Mosquitoranger"]
+
+[node name="Sprite3D" type="Sprite3D" parent="Mosquitoranger/Visual"]
+transform = Transform3D(5, 0, 0, 0, 4.890738, 1.0395585, 0, -1.0395585, 4.890738, -0.084215164, 0.14336914, 0)
+shaded = true
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("3_tao5y")
+
+[node name="Systems" type="Node3D" parent="Mosquitoranger"]
+
+[node name="StateManager" type="Node3D" parent="Mosquitoranger/Systems" node_paths=PackedStringArray("current_state", "root")]
+script = ExtResource("5_1jdny")
+current_state = NodePath("RangerHuntState")
+root = NodePath("../..")
+
+[node name="RangerHuntState" type="Node3D" parent="Mosquitoranger/Systems/StateManager" node_paths=PackedStringArray("aggro_manager", "nav", "body", "ground_poller", "attack_state", "fall_state")]
+script = ExtResource("5_qtv6h")
+aggro_manager = NodePath("../../Aggromanager")
+nav = NodePath("../../../NavigationAgent3D")
+body = NodePath("../../..")
+movement_speed = 6.0
+acceleration = 30.0
+deceleration = 30.0
+ground_poller = NodePath("../../../GroundPolling")
+attack_state = NodePath("../RangerAttackState")
+fall_state = NodePath("../FallState")
+
+[node name="RangerAttackState" type="Node3D" parent="Mosquitoranger/Systems/StateManager" node_paths=PackedStringArray("aggro_manager", "next_state")]
+script = ExtResource("6_tao5y")
+aggro_manager = NodePath("../../Aggromanager")
+next_state = NodePath("../RangerHuntState")
+projectile = ExtResource("7_0x6lq")
+
+[node name="FallState" type="Node3D" parent="Mosquitoranger/Systems/StateManager"]
+script = ExtResource("8_h3iop")
+
+[node name="Aggromanager" type="Node3D" parent="Mosquitoranger/Systems"]
+script = ExtResource("9_ji4wv")
+
+[node name="DamageManager" type="Node3D" parent="Mosquitoranger/Systems" node_paths=PackedStringArray("health_manager", "hurtbox", "death_manager")]
+script = ExtResource("10_8eau4")
+health_manager = NodePath("../HealthManager")
+hurtbox = NodePath("../HitAndHurt/Hurtbox")
+death_manager = NodePath("../DeathManager")
+
+[node name="DeathManager" type="Node3D" parent="Mosquitoranger/Systems" node_paths=PackedStringArray("root")]
+script = ExtResource("11_fqenq")
+root = NodePath("../../..")
+
+[node name="HealthManager" type="Node3D" parent="Mosquitoranger/Systems"]
+script = ExtResource("12_8my1e")
+health = 30.0
+max_health = 30.0
+
+[node name="WaterSplashManager" type="Node3D" parent="Mosquitoranger/Systems" node_paths=PackedStringArray("hurtbox")]
+script = ExtResource("13_jnd76")
+hurtbox = NodePath("../HitAndHurt/Hurtbox")
+splash_effect_enter = ExtResource("14_toko4")
+
+[node name="EffectManager" type="Node3D" parent="Mosquitoranger/Systems" node_paths=PackedStringArray("hurtbox")]
+script = ExtResource("15_2axhq")
+hurtbox = NodePath("../HitAndHurt/Hurtbox")
+
+[node name="KnockbackManager" type="Node3D" parent="Mosquitoranger/Systems/EffectManager" node_paths=PackedStringArray("body")]
+script = ExtResource("16_vfer5")
+body = NodePath("../../..")
+
+[node name="DragabilityManager" type="Node3D" parent="Mosquitoranger/Systems" node_paths=PackedStringArray("body", "hurtbox")]
+script = ExtResource("17_155sk")
+body = NodePath("../..")
+hurtbox = NodePath("../HitAndHurt/Hurtbox")
+dragforce = 10
+
+[node name="HitAndHurt" type="Node3D" parent="Mosquitoranger/Systems"]
+
+[node name="Hurtbox" type="Area3D" parent="Mosquitoranger/Systems/HitAndHurt"]
+collision_layer = 32
+collision_mask = 4
+script = ExtResource("18_1v42x")
+is_heavy = true
+metadata/_custom_type_script = "uid://bi5fwt04sq1jq"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mosquitoranger/Systems/HitAndHurt/Hurtbox"]
+shape = SubResource("BoxShape3D_ajshl")
+
+[node name="Hitboxes" type="Node3D" parent="Mosquitoranger/Systems/HitAndHurt"]
+
+[node name="Hitbox_stab" type="Area3D" parent="Mosquitoranger/Systems/HitAndHurt/Hitboxes"]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("19_o5tnb")
+metadata/_custom_type_script = "uid://c7g7jvcrqudgm"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mosquitoranger/Systems/HitAndHurt/Hitboxes/Hitbox_stab"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.863, 0, 0)
+shape = SubResource("BoxShape3D_gsk6d")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mosquitoranger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03362894, 0)
+shape = SubResource("CapsuleShape3D_ppyta")
+
+[node name="GroundPolling" type="Area3D" parent="Mosquitoranger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.555548, 0)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("20_srgp0")
+metadata/_custom_type_script = "uid://cionpm6je6331"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mosquitoranger/GroundPolling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.03632164, 0)
+shape = SubResource("SphereShape3D_ppyta")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Mosquitoranger"]
+avoidance_enabled = true
+
+[connection signal="exited_water" from="Mosquitoranger/Systems/WaterSplashManager" to="Mosquitoranger/Systems/DeathManager" method="_on_water_splash_manager_exited_water"]

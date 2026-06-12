@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cp56kp11t4ngg"]
+[gd_scene load_steps=44 format=3 uid="uid://cp56kp11t4ngg"]
 
 [ext_resource type="AudioStream" uid="uid://pmc3kysxqlc6" path="res://sound/sfx/pixabay/lake-wavelet-27909.mp3" id="1_1dqgb"]
 [ext_resource type="Script" uid="uid://dhd6d8l44t7yn" path="res://scripts/game_manager.gd" id="1_ajshl"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" uid="uid://d4km7624424c" path="res://scripts/health_bar_manager.gd" id="3_yk7ts"]
 [ext_resource type="PackedScene" uid="uid://bcs7ck8bsbe0q" path="res://scenes/instantiable/enemies/enemy_mosquito.tscn" id="4_at5dv"]
 [ext_resource type="PackedScene" uid="uid://bg1owrrruuh0w" path="res://scenes/lily_pad.tscn" id="7_44saj"]
-[ext_resource type="PackedScene" uid="uid://danhtn6x5yh2h" path="res://scenes/instantiable/enemies/enemy_ranger.tscn" id="7_y81of"]
 [ext_resource type="Script" uid="uid://cilv2vjiqdwvs" path="res://scripts/slow_mo_manager.gd" id="9_5jxlq"]
 [ext_resource type="Script" uid="uid://bbtpwvavwh3dy" path="res://scripts/player_fx_relay.gd" id="9_xrtyr"]
 [ext_resource type="Script" uid="uid://cri8txdrn1jhd" path="res://scripts/zoom_manager.gd" id="11_daiq8"]
@@ -183,7 +182,6 @@ show_percentage = false
 [node name="EnemyManager" type="Node3D" parent="GameManager"]
 script = ExtResource("2_jcd4p")
 test_enemy = ExtResource("4_at5dv")
-enemy_roster = Array[PackedScene]([ExtResource("4_at5dv"), ExtResource("7_y81of")])
 
 [node name="PlayerManager" type="Node3D" parent="GameManager" node_paths=PackedStringArray("player")]
 script = ExtResource("2_at5dv")

@@ -5,10 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://cl0vaiy8nesdh" path="res://sprite/MosquitoKnight.png" id="2_2c3ns"]
 [ext_resource type="Texture2D" uid="uid://dysd1pacl610e" path="res://sprite/Stab.png" id="3_feaxh"]
 [ext_resource type="Script" uid="uid://i1cinfaxm21s" path="res://scripts/statemachines/enemies/EnemyStateMachine.gd" id="4_n1xq6"]
-[ext_resource type="Script" uid="uid://bf450ln32ku7q" path="res://scripts/simple_huntstate.gd" id="5_jde4i"]
-[ext_resource type="Script" uid="uid://de0gwidsmclmt" path="res://scripts/enemy_attack_state.gd" id="6_ej604"]
+[ext_resource type="Script" uid="uid://bf450ln32ku7q" path="res://scripts/statemachines/enemies/base_warrior/simple_huntstate.gd" id="5_jde4i"]
+[ext_resource type="Script" uid="uid://de0gwidsmclmt" path="res://scripts/statemachines/enemies/base_warrior/enemy_attack_state.gd" id="6_ej604"]
 [ext_resource type="Script" uid="uid://b4ye0343qbd4y" path="res://scripts/aggromanager.gd" id="7_gtwn5"]
-[ext_resource type="Script" uid="uid://cjvxfjyo5woxi" path="res://scenes/instantiable/enemies/enemy_fall_state.gd" id="8_n1xq6"]
+[ext_resource type="Script" uid="uid://cjvxfjyo5woxi" path="res://scripts/statemachines/enemy_fall_state.gd" id="8_n1xq6"]
 [ext_resource type="Script" uid="uid://b03jolxit32hw" path="res://scripts/damage_manager.gd" id="8_qhggb"]
 [ext_resource type="Script" uid="uid://bujy08xidy0g7" path="res://scripts/death_manager.gd" id="9_o6hy7"]
 [ext_resource type="Script" uid="uid://1rqaiis71irb" path="res://scripts/health_manager.gd" id="10_340vr"]
@@ -24,7 +24,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_ajshl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gsk6d"]
-size = Vector3(0.34866333, 1, 0.67760944)
+size = Vector3(0.44532776, 1, 0.8484483)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ppyta"]
 radius = 0.20410156
@@ -39,7 +39,7 @@ aggro_manager = NodePath("Mosquitoknight/Systems/Aggromanager")
 
 [node name="Mosquitoknight" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
-collision_layer = 128
+collision_layer = 0
 collision_mask = 139
 script = ExtResource("1_8x00c")
 mass = 0.4
@@ -157,7 +157,7 @@ script = ExtResource("17_1o1ck")
 metadata/_custom_type_script = "uid://c7g7jvcrqudgm"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Mosquitoknight/Systems/HitAndHurt/Hitboxes/Hitbox_stab"]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.7773051, 0, 0)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.863, 0, 0)
 shape = SubResource("BoxShape3D_gsk6d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Mosquitoknight"]

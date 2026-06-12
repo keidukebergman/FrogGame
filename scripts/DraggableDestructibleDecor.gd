@@ -1,5 +1,5 @@
 extends DestructibleDecor
-class_name DraggableDestructibleDecor
+class_name DraggableDecor
 
 @export var rig:RigidBody3D
 @export var thrown_object:ThrownObject
