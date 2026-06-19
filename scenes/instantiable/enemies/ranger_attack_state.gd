@@ -50,24 +50,20 @@ func fire_arrow():
 	NodePaths.dynamic_scene_path.add_child(projectile_instance)
 	projectile_instance.global_position = root.global_position
 	var proj_obj = projectile_instance as Node3D
-	proj_obj.rotate_y(solution)
+	proj_obj.global_rotation.y = solution
 
-func _firing_solution(target:CharacterPhysicsBody3D):
-	var qpos = target.global_position - root.global_position
-	var target_position = Vector2(qpos.x, qpos.z)
-	var target_velocity = Vector2(target.velocity.x, target.velocity.z)
-	var t = calculate_time(target_position, target_velocity)
-	if t == NAN:
-		return
-	var dir = calculate_intercept(target_position, target_velocity, t)
-	print(dir.x, ", ", dir.y)
-	var rotation = atan2(dir.x, dir.y)
-	return rotation
+func _firing_solution(target: CharacterBody3D):
+	var target_global_pos:Vector2 = Vector2(target.global_position.x, target.global_position.z)
+	var my_global_pos:Vector2 = Vector2(root.global_position.x, root.global_position.z)
+	var delta_pos = target_global_pos-my_global_pos
+	var time = _calculate_intercept_time(delta_pos)
+	var vel_2d = Vector2(target.velocity.x, target.velocity.y)
+	var angle = _calculate_intercept(delta_pos, vel_2d, time)
+	return angle
 
-func calculate_time(position:Vector2, velocity:Vector2):
-	var distance = position.length() 
-	return distance / projectile_speed
+func _calculate_intercept_time(delta_pos:Vector2):
+	return delta_pos.length()/projectile_speed
 
-func calculate_intercept(position, velocity, t):
-	var dir: Vector2 = (position + velocity * 0).normalized()
-	return dir
+func _calculate_intercept(delta_pos:Vector2, velocity:Vector2, time:float):
+	var final_pos = delta_pos + velocity * time
+	return -atan2(final_pos.y, final_pos.x) + PI/2 
