@@ -58,3 +58,8 @@ func _state_physics_update(_delta: float):
 		yvel += state_machine.g_on_fall * 0.8 * _delta
 	root.velocity.y = yvel
 	root.move_and_slide()
+
+
+func on_water_death() -> void:
+	target_velocity = Vector3.ZERO
+	root.velocity = Vector3.ZERO

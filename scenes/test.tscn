@@ -287,7 +287,7 @@ size = 11.849
 near = 0.01
 far = 50.0
 script = ExtResource("17_gsk6d")
-target = NodePath("../Player")
+target = NodePath("../Box")
 
 [node name="Box" type="StaticBody3D" parent="." node_paths=PackedStringArray("health_manager", "death_manager", "hurtbox")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.956235, 0.43841708, 0.9705049)

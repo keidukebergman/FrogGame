@@ -30,10 +30,11 @@ signal bounced
 
 func _enter_tree():
 	hurtbox.took_damage.connect(health_manager.apply_damage)
-	#health_manager.depleted_health.connect(death_manager.die)
+	health_manager.depleted_health.connect(death_manager.die)
 	health_manager.depleted_health.connect(_on_health_depleted)
+	water_splash_manager.entered_water.connect(state_death.on_water_death)
 	state_death.bounce.connect(_on_bounce)
-	
+
 func _on_bounce():
 	bounced.emit()
 

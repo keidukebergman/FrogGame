@@ -13,14 +13,14 @@ var target_position:Vector3 = Vector3(0, 10.493, 12.335)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	follow_target = true
+	pass
 
 func _process(_delta: float) -> void:
-	#if follow_target && target:
-		#target_position = target.global_position
-		#var pos_xz = Vector3(target_position.x, 0, target_position.z)
-		#target_position = pos_xz + offset
-		#global_position = pos_xz
+	if follow_target && target:
+		target_position = target.global_position
+		var pos_xz = Vector3(target_position.x, 0, target_position.z)
+		target_position = pos_xz + offset
+		global_position = target_position
 	pass
 
 func on_player_death():
