@@ -15,6 +15,9 @@ var movement_direction:Vector3
 @export var attack_state:State
 @export var fall_state:State
 
+@export var ideal_target_distance:float = 5;
+
+
 func _initialize_state(state_machine_node:FiniteStateMachine, root_node:Node):
 	super._initialize_state(state_machine_node, root_node)
 	spawn_position = body.global_position
@@ -28,7 +31,8 @@ func _set_nav_target() -> void:
 	while true:
 		if aggro_manager.target != null:
 			await get_tree().create_timer(randf_range(0.003, 0.01)).timeout;
-			nav.target_position = aggro_manager.target.global_position
+			var dir = root.global_position - aggro_manager.target.global_position;
+			nav.target_position = aggro_manager.target.global_position - ideal_target_distance * dir;
 		else:
 			await get_tree().create_timer(randf_range(0.3, 9)).timeout;
 			nav.target_position = Vector3(spawn_position.x + randf_range(-3, 3), 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cp56kp11t4ngg"]
+[gd_scene load_steps=46 format=3 uid="uid://cp56kp11t4ngg"]
 
 [ext_resource type="AudioStream" uid="uid://pmc3kysxqlc6" path="res://sound/sfx/pixabay/lake-wavelet-27909.mp3" id="1_1dqgb"]
 [ext_resource type="Script" uid="uid://dhd6d8l44t7yn" path="res://scripts/game_manager.gd" id="1_ajshl"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://bi5fwt04sq1jq" path="res://scripts/Hurtbox_draggable.gd" id="13_44saj"]
 [ext_resource type="Script" uid="uid://1rqaiis71irb" path="res://scripts/health_manager.gd" id="14_7mbro"]
 [ext_resource type="Script" uid="uid://bujy08xidy0g7" path="res://scripts/death_manager.gd" id="16_7yos8"]
+[ext_resource type="Script" uid="uid://csq2alr5vtppq" path="res://scenes/game_cam.gd" id="17_gsk6d"]
 [ext_resource type="Script" uid="uid://33wjf25m4rdb" path="res://scripts/DraggableDestructibleDecor.gd" id="21_n74k2"]
 [ext_resource type="Script" uid="uid://eu8pfa82x6aq" path="res://scripts/water_splash_manager.gd" id="22_1dqgb"]
 [ext_resource type="Script" uid="uid://bg1320glc5xhd" path="res://scripts/thrown_object.gd" id="22_si7kk"]
@@ -123,11 +124,12 @@ radius = 0.264354
 
 [node name="Node3D" type="Node3D"]
 
-[node name="GameManager" type="Node3D" parent="." node_paths=PackedStringArray("player_manager", "enemy_manager", "player_fx_relay", "ui_manager")]
+[node name="GameManager" type="Node3D" parent="." node_paths=PackedStringArray("player_manager", "enemy_manager", "player_fx_relay", "main_camera", "ui_manager")]
 script = ExtResource("1_ajshl")
 player_manager = NodePath("PlayerManager")
 enemy_manager = NodePath("EnemyManager")
 player_fx_relay = NodePath("FXManager/PlayerFXRelay")
+main_camera = NodePath("../Camera3D")
 ui_manager = NodePath("UI_Manager")
 
 [node name="AudioManager" type="Node3D" parent="GameManager"]
@@ -276,13 +278,17 @@ shape = SubResource("BoxShape3D_gm488")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8398261, 0)
 mesh = SubResource("PlaneMesh_gm488")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
 transform = Transform3D(1, 0, 0, 0, 0.7660445, 0.64278764, 0, -0.64278764, 0.7660445, 0, 10.492676, 12.335)
 projection = 1
 current = true
 fov = 44.9
 size = 11.849
-far = 30.64
+near = 0.01
+far = 50.0
+script = ExtResource("17_gsk6d")
+target_position = Vector3(0, 0, 0)
+target = NodePath("../Player")
 
 [node name="Box" type="StaticBody3D" parent="." node_paths=PackedStringArray("health_manager", "death_manager", "hurtbox")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.956235, 0.43841708, 0.9705049)

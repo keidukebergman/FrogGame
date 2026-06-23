@@ -76,6 +76,8 @@ fall_state = NodePath("../FallState")
 script = ExtResource("6_tao5y")
 aggro_manager = NodePath("../../Aggromanager")
 next_state = NodePath("../RangerHuntState")
+projectile_speed = 7.0
+shots = 3
 projectile = ExtResource("7_0x6lq")
 
 [node name="FallState" type="Node3D" parent="Mosquitoranger/Systems/StateManager"]

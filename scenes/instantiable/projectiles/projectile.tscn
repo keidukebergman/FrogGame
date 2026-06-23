@@ -1,14 +1,54 @@
-[gd_scene load_steps=3 format=3 uid="uid://cosaprbtt63s3"]
+[gd_scene load_steps=8 format=3 uid="uid://cosaprbtt63s3"]
 
 [ext_resource type="Script" uid="uid://5v1r4acpnc2q" path="res://scenes/projectile.gd" id="1_dd0wg"]
 [ext_resource type="Texture2D" uid="uid://dysd1pacl610e" path="res://sprite/Stab.png" id="2_ohx1v"]
+[ext_resource type="Script" uid="uid://bi5fwt04sq1jq" path="res://scripts/Hurtbox_draggable.gd" id="3_ee10g"]
+[ext_resource type="Script" uid="uid://c7g7jvcrqudgm" path="res://scripts/Hitbox.gd" id="4_yat5h"]
 
-[node name="Projectile" type="RigidBody3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_o57b6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_twair"]
+size = Vector3(0.39562988, 1, 0.5562744)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jks2q"]
+
+[node name="Projectile" type="RigidBody3D" node_paths=PackedStringArray("hitbox", "draggable_hurtbox")]
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.0
 script = ExtResource("1_dd0wg")
-projectile_speed = 10
+projectile_speed = 7
+hitbox = NodePath("Hitbox")
+draggable_hurtbox = NodePath("DraggableHurtbox")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_o57b6")
+disabled = true
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(5, 8.742278e-07, 3.8213712e-14, -7.764703e-22, -2.1855695e-07, 5, 8.742278e-07, -5, -2.1855695e-07, 0, 0, 0)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("2_ohx1v")
+
+[node name="Hitbox" type="Area3D" parent="." node_paths=PackedStringArray("ignore_colliders")]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("4_yat5h")
+ignore_colliders = [NodePath("../DraggableHurtbox/CollisionShape3D")]
+metadata/_custom_type_script = "uid://c7g7jvcrqudgm"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.051086426)
+shape = SubResource("BoxShape3D_twair")
+
+[node name="DraggableHurtbox" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 64
+script = ExtResource("3_ee10g")
+metadata/_custom_type_script = "uid://bi5fwt04sq1jq"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DraggableHurtbox"]
+shape = SubResource("BoxShape3D_jks2q")
+
+[node name="ProjetileDragHandler" type="Node3D" parent="."]

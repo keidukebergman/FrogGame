@@ -19,23 +19,22 @@ func _initialize_state(state_machine_node:FiniteStateMachine, root_node:Node):
 
 func _enter_state():
 	is_active = true
-	if aggro_manager.target == null:
-		state_machine._change_state(next_state)
-		return
-	attack_direction = (aggro_manager.target.global_position - root.global_position).normalized()
-	await get_tree().create_timer(windup_time).timeout
-	if aggro_manager.target == null:
-		state_machine._change_state(next_state)
-		return
-	fire_arrow()
-	await get_tree().create_timer(attack_time).timeout
-	
+	for n in shots:
+		if aggro_manager.target == null:
+			state_machine._change_state(next_state)
+			return
+		attack_direction = (aggro_manager.target.global_position - root.global_position).normalized()
+		await get_tree().create_timer(windup_time).timeout
+		if aggro_manager.target == null:
+			state_machine._change_state(next_state)
+			return
+		fire_arrow()
+		await get_tree().create_timer(attack_time).timeout
+
 	state_machine._change_state(next_state)
 
 func _exit_state():
 	is_active = false
-
-
 
 func _state_update(_delta: float):
 	pass

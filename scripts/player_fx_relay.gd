@@ -7,11 +7,20 @@ class_name PlayerFXRelay
 @export var zoom_manager:ZoomInManager
 @export var shake_manager:CameraShakeManager
 
+
 func on_player_took_damage(damage:float) -> void:
 	if(damage > critical_damage_threshold):
+		slow_mo_manager.slow_time(0.1, 0.01)
+		zoom_manager.start_zoom_effect(randf_range(0.96, 0.98), 900, 10)
+		shake_manager.start_shake_effect(1, 0.8, Vector3(randf_range(-0.1, 0.1), 0.001, randf_range(-0.1, 0.1)).normalized())
 		return
 	if(damage > significant_damage_threshold):
 		slow_mo_manager.slow_time(0.1, 0.001)
 		zoom_manager.start_zoom_effect(randf_range(0.98, 0.99), 900, 10)
 		shake_manager.start_shake_effect(1, 0.8, Vector3(randf_range(-0.1, 0.1), 0.001, randf_range(-0.1, 0.1)).normalized())
 		return
+
+func on_player_death_bounce() -> void:
+	slow_mo_manager.slow_time(0.05, 0.1)
+	zoom_manager.start_zoom_effect(randf_range(0.8, 0.83), 900, 5)
+	shake_manager.start_shake_effect(1, 0.8, Vector3(randf_range(-0.1, 0.1), 0.001, randf_range(-0.1, 0.1)).normalized())
