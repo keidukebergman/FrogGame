@@ -15,6 +15,9 @@ func _ready() -> void:
 	phm.depleted_health.connect(_on_player_death)
 	enemy_manager.requested_player_information.connect(on_player_information_requested)
 	player_manager.get_player().bounced.connect(on_player_bounced)
+	await get_tree().create_timer(0.01).timeout
+	main_camera.target = player_manager.get_player().get_main_object()
+	print(main_camera.target.name)
 
 func on_player_information_requested(aggro_manager:AggroManager):
 	var player_node = player_manager.get_player_information()
@@ -26,7 +29,7 @@ func _on_player_taken_damage(_damage, current_health):
 	player_fx_relay.on_player_took_damage(_damage)
 
 func _on_player_death():
-#	main_camera.on_player_death()
+	main_camera.on_player_death()
 	pass
 
 func on_player_bounced():

@@ -287,7 +287,6 @@ size = 11.849
 near = 0.01
 far = 50.0
 script = ExtResource("17_gsk6d")
-target_position = Vector3(0, 0, 0)
 target = NodePath("../Player")
 
 [node name="Box" type="StaticBody3D" parent="." node_paths=PackedStringArray("health_manager", "death_manager", "hurtbox")]

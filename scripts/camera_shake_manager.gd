@@ -4,6 +4,7 @@ class_name CameraShakeManager
 @export var camera_main:Camera3D
 
 func start_shake_effect(_bounces: int, bounce_distance: float, direction: Vector3):
+	var offset = camera_main.offset
 	var origin = camera_main.target_position
 	var tween = create_tween()
 	tween.tween_property(
@@ -14,5 +15,5 @@ func start_shake_effect(_bounces: int, bounce_distance: float, direction: Vector
 	)
 	await tween.finished
 	var return_tween = create_tween()
-	return_tween.tween_property(camera_main, "position", origin, 0.05)
+	return_tween.tween_property(camera_main, "position", origin + offset, 0.05)
 	await return_tween.finished
