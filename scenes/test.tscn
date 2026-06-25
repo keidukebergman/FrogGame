@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://cp56kp11t4ngg"]
+[gd_scene format=3 uid="uid://cp56kp11t4ngg"]
 
 [ext_resource type="AudioStream" uid="uid://pmc3kysxqlc6" path="res://sound/sfx/pixabay/lake-wavelet-27909.mp3" id="1_1dqgb"]
 [ext_resource type="Script" uid="uid://dhd6d8l44t7yn" path="res://scripts/game_manager.gd" id="1_ajshl"]
@@ -122,9 +122,9 @@ size = Vector3(0.9, 1.2, 0.9)
 [sub_resource type="SphereShape3D" id="SphereShape3D_gm488"]
 radius = 0.264354
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" unique_id=51480205]
 
-[node name="GameManager" type="Node3D" parent="." node_paths=PackedStringArray("player_manager", "enemy_manager", "player_fx_relay", "main_camera", "ui_manager")]
+[node name="GameManager" type="Node3D" parent="." unique_id=1128817988 node_paths=PackedStringArray("player_manager", "enemy_manager", "player_fx_relay", "main_camera", "ui_manager")]
 script = ExtResource("1_ajshl")
 player_manager = NodePath("PlayerManager")
 enemy_manager = NodePath("EnemyManager")
@@ -132,29 +132,29 @@ player_fx_relay = NodePath("FXManager/PlayerFXRelay")
 main_camera = NodePath("../Camera3D")
 ui_manager = NodePath("UI_Manager")
 
-[node name="AudioManager" type="Node3D" parent="GameManager"]
+[node name="AudioManager" type="Node3D" parent="GameManager" unique_id=449209007]
 
-[node name="AudioListener3D" type="AudioListener3D" parent="GameManager/AudioManager"]
+[node name="AudioListener3D" type="AudioListener3D" parent="GameManager/AudioManager" unique_id=1865352520]
 current = true
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer" parent="GameManager/AudioManager"]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer" parent="GameManager/AudioManager" unique_id=573225957]
 stream = ExtResource("1_1dqgb")
 volume_db = -11.378
 autoplay = true
 mix_target = 2
 parameters/looping = true
 
-[node name="UI_Manager" type="Node3D" parent="GameManager" node_paths=PackedStringArray("health_bar_manager")]
+[node name="UI_Manager" type="Node3D" parent="GameManager" unique_id=511825093 node_paths=PackedStringArray("health_bar_manager")]
 script = ExtResource("2_uacia")
 health_bar_manager = NodePath("Control/Health_Bar_Manager")
 
-[node name="Control" type="Control" parent="GameManager/UI_Manager"]
+[node name="Control" type="Control" parent="GameManager/UI_Manager" unique_id=2059912981]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Health_Bar_Manager" type="Control" parent="GameManager/UI_Manager/Control" node_paths=PackedStringArray("damage_bar", "health_bar")]
+[node name="Health_Bar_Manager" type="Control" parent="GameManager/UI_Manager/Control" unique_id=1523366899 node_paths=PackedStringArray("damage_bar", "health_bar")]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -164,7 +164,7 @@ damage_interpolation_speed = 90.0
 damage_bar = NodePath("DamageBar")
 health_bar = NodePath("DamageBar/HealthBar")
 
-[node name="DamageBar" type="ProgressBar" parent="GameManager/UI_Manager/Control/Health_Bar_Manager"]
+[node name="DamageBar" type="ProgressBar" parent="GameManager/UI_Manager/Control/Health_Bar_Manager" unique_id=1117341479]
 layout_mode = 0
 offset_right = 332.0
 offset_bottom = 27.0
@@ -173,7 +173,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_gv2t6")
 value = 50.0
 show_percentage = false
 
-[node name="HealthBar" type="ProgressBar" parent="GameManager/UI_Manager/Control/Health_Bar_Manager/DamageBar"]
+[node name="HealthBar" type="ProgressBar" parent="GameManager/UI_Manager/Control/Health_Bar_Manager/DamageBar" unique_id=460492011]
 layout_mode = 0
 offset_right = 332.0
 offset_bottom = 27.0
@@ -182,56 +182,56 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_5civd")
 value = 45.0
 show_percentage = false
 
-[node name="EnemyManager" type="Node3D" parent="GameManager"]
+[node name="EnemyManager" type="Node3D" parent="GameManager" unique_id=1134223819]
 script = ExtResource("2_jcd4p")
 test_enemy = ExtResource("4_at5dv")
 enemy_roster = Array[PackedScene]([ExtResource("4_at5dv"), ExtResource("7_y81of")])
 
-[node name="PlayerManager" type="Node3D" parent="GameManager" node_paths=PackedStringArray("player")]
+[node name="PlayerManager" type="Node3D" parent="GameManager" unique_id=250945436 node_paths=PackedStringArray("player")]
 script = ExtResource("2_at5dv")
 player = NodePath("../../Player")
 
-[node name="PathManager" type="Node3D" parent="GameManager" node_paths=PackedStringArray("dynamic_scene_node", "effect_scene_node")]
+[node name="PathManager" type="Node3D" parent="GameManager" unique_id=1987292539 node_paths=PackedStringArray("dynamic_scene_node", "effect_scene_node")]
 script = ExtResource("2_2cnsr")
 dynamic_scene_node = NodePath("Scene/DynamicScene")
 effect_scene_node = NodePath("Scene/DynamicScene/Effects")
 
-[node name="Scene" type="Node3D" parent="GameManager/PathManager"]
+[node name="Scene" type="Node3D" parent="GameManager/PathManager" unique_id=286498942]
 
-[node name="DynamicScene" type="Node3D" parent="GameManager/PathManager/Scene"]
+[node name="DynamicScene" type="Node3D" parent="GameManager/PathManager/Scene" unique_id=344460503]
 
-[node name="Effects" type="Node3D" parent="GameManager/PathManager/Scene/DynamicScene"]
+[node name="Effects" type="Node3D" parent="GameManager/PathManager/Scene/DynamicScene" unique_id=767152365]
 
-[node name="WaveManager" type="Node3D" parent="GameManager"]
+[node name="WaveManager" type="Node3D" parent="GameManager" unique_id=1613022923]
 
-[node name="FXManager" type="Node3D" parent="GameManager"]
+[node name="FXManager" type="Node3D" parent="GameManager" unique_id=181574473]
 
-[node name="PlayerFXRelay" type="Node3D" parent="GameManager/FXManager" node_paths=PackedStringArray("slow_mo_manager", "zoom_manager", "shake_manager")]
+[node name="PlayerFXRelay" type="Node3D" parent="GameManager/FXManager" unique_id=2112308128 node_paths=PackedStringArray("slow_mo_manager", "zoom_manager", "shake_manager")]
 script = ExtResource("9_xrtyr")
 critical_damage_threshold = 20.0
 slow_mo_manager = NodePath("../SlowMoManager")
 zoom_manager = NodePath("../ZoomInManager")
 shake_manager = NodePath("../CameraShakeManager")
 
-[node name="SlowMoManager" type="Node3D" parent="GameManager/FXManager"]
+[node name="SlowMoManager" type="Node3D" parent="GameManager/FXManager" unique_id=1029274242]
 script = ExtResource("9_5jxlq")
 
-[node name="ZoomInManager" type="Node3D" parent="GameManager/FXManager" node_paths=PackedStringArray("camera")]
+[node name="ZoomInManager" type="Node3D" parent="GameManager/FXManager" unique_id=958262432 node_paths=PackedStringArray("camera")]
 script = ExtResource("11_daiq8")
 camera = NodePath("../../../Camera3D")
 
-[node name="CameraShakeManager" type="Node3D" parent="GameManager/FXManager" node_paths=PackedStringArray("camera_main")]
+[node name="CameraShakeManager" type="Node3D" parent="GameManager/FXManager" unique_id=1753808967 node_paths=PackedStringArray("camera_main")]
 script = ExtResource("12_c6rvn")
 camera_main = NodePath("../../../Camera3D")
 
-[node name="SceneManager" type="Node3D" parent="."]
+[node name="SceneManager" type="Node3D" parent="." unique_id=1274583019]
 
-[node name="Player" parent="." instance=ExtResource("3_lpvoh")]
+[node name="Player" parent="." unique_id=1903480244 instance=ExtResource("3_lpvoh")]
 
-[node name="StaticSceneObjects" type="Node3D" parent="."]
+[node name="StaticSceneObjects" type="Node3D" parent="." unique_id=920620900]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1716028, 0)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="StaticSceneObjects"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="StaticSceneObjects" unique_id=183470064]
 transform = Transform3D(1, 0, 0, 0, 0.55629563, 0.8309845, 0, -0.8309845, 0.55629563, 14, 7, 0)
 light_angular_distance = 16.05
 shadow_enabled = true
@@ -246,39 +246,39 @@ directional_shadow_blend_splits = true
 directional_shadow_max_distance = 267.5
 directional_shadow_pancake_size = 0.0
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="StaticSceneObjects"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="StaticSceneObjects" unique_id=977780729]
 environment = SubResource("Environment_g14j6")
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="StaticSceneObjects"]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="StaticSceneObjects" unique_id=1776965494]
 navigation_mesh = SubResource("NavigationMesh_ajshl")
 
-[node name="Lily_pad" type="Node3D" parent="StaticSceneObjects/NavigationRegion3D"]
+[node name="Lily_pad" type="Node3D" parent="StaticSceneObjects/NavigationRegion3D" unique_id=1417291392]
 transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.556708e-08, -0.0105181, -4.28093, 0.0119583)
 
-[node name="lily_pad2" parent="StaticSceneObjects/NavigationRegion3D/Lily_pad" instance=ExtResource("7_44saj")]
+[node name="lily_pad2" parent="StaticSceneObjects/NavigationRegion3D/Lily_pad" unique_id=2035286069 instance=ExtResource("7_44saj")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 1.78668, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="StaticSceneObjects/NavigationRegion3D/Lily_pad"]
+[node name="StaticBody3D" type="StaticBody3D" parent="StaticSceneObjects/NavigationRegion3D/Lily_pad" unique_id=902149120]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticSceneObjects/NavigationRegion3D/Lily_pad/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticSceneObjects/NavigationRegion3D/Lily_pad/StaticBody3D" unique_id=944324190]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.9695799, 0)
 shape = SubResource("CylinderShape3D_g14j6")
 
-[node name="Water" type="Area3D" parent="StaticSceneObjects"]
+[node name="Water" type="Area3D" parent="StaticSceneObjects" unique_id=1779046472]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.1886096, 0)
 collision_layer = 4
 collision_mask = 52
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticSceneObjects/Water"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticSceneObjects/Water" unique_id=1182025572]
 shape = SubResource("BoxShape3D_gm488")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticSceneObjects/Water"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticSceneObjects/Water" unique_id=1501212477]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8398261, 0)
 mesh = SubResource("PlaneMesh_gm488")
 
-[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=170201764 node_paths=PackedStringArray("target")]
 transform = Transform3D(1, 0, 0, 0, 0.7660445, 0.64278764, 0, -0.64278764, 0.7660445, 0, 10.492676, 12.335)
 projection = 1
 current = true
@@ -289,40 +289,40 @@ far = 50.0
 script = ExtResource("17_gsk6d")
 target = NodePath("../Box")
 
-[node name="Box" type="StaticBody3D" parent="." node_paths=PackedStringArray("health_manager", "death_manager", "hurtbox")]
+[node name="Box" type="StaticBody3D" parent="." unique_id=1286937846 node_paths=PackedStringArray("health_manager", "death_manager", "hurtbox")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.956235, 0.43841708, 0.9705049)
 script = ExtResource("12_ff6ho")
 health_manager = NodePath("HealthManager")
 death_manager = NodePath("DeathManager")
 hurtbox = NodePath("DraggableHurtbox")
 
-[node name="Boxmesh" parent="Box" instance=ExtResource("12_ghpyy")]
+[node name="Boxmesh" parent="Box" unique_id=1133665781 instance=ExtResource("12_ghpyy")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Box"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box" unique_id=1575386326]
 shape = SubResource("BoxShape3D_ghpyy")
 
-[node name="DraggableHurtbox" type="Area3D" parent="Box"]
+[node name="DraggableHurtbox" type="Area3D" parent="Box" unique_id=103171338]
 script = ExtResource("13_44saj")
 is_heavy = true
 metadata/_custom_type_script = "uid://bi5fwt04sq1jq"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Box/DraggableHurtbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box/DraggableHurtbox" unique_id=1131178635]
 transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, 0, 0)
 shape = SubResource("BoxShape3D_7mbro")
 
-[node name="HealthManager" type="Node3D" parent="Box"]
+[node name="HealthManager" type="Node3D" parent="Box" unique_id=179317906]
 script = ExtResource("14_7mbro")
 health = 5.0
 max_health = 5.0
 metadata/_custom_type_script = "uid://1rqaiis71irb"
 
-[node name="DeathManager" type="Node3D" parent="Box" node_paths=PackedStringArray("root")]
+[node name="DeathManager" type="Node3D" parent="Box" unique_id=315710246 node_paths=PackedStringArray("root")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7.91247, 1.415749, -1.9410098)
 script = ExtResource("16_7yos8")
 root = NodePath("..")
 metadata/_custom_type_script = "uid://bujy08xidy0g7"
 
-[node name="Box2_Draggable" type="RigidBody3D" parent="." node_paths=PackedStringArray("rig", "thrown_object", "dragged_hurtbox", "ground_poller", "health_manager", "death_manager", "hurtbox")]
+[node name="Box2_Draggable" type="RigidBody3D" parent="." unique_id=1958815988 node_paths=PackedStringArray("rig", "thrown_object", "dragged_hurtbox", "ground_poller", "health_manager", "death_manager", "hurtbox")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3984656, 0.6376561, 0.9705049)
 collision_layer = 128
 collision_mask = 9
@@ -340,38 +340,38 @@ health_manager = NodePath("HealthManager")
 death_manager = NodePath("DeathManager")
 hurtbox = NodePath("BoxRegularHurtbox")
 
-[node name="Boxmesh" parent="Box2_Draggable" instance=ExtResource("12_ghpyy")]
+[node name="Boxmesh" parent="Box2_Draggable" unique_id=423375105 instance=ExtResource("12_ghpyy")]
 transform = Transform3D(0.29999998, 0, 0, 0, 0.6, 0, 0, 0, 0.29999998, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2_Draggable"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2_Draggable" unique_id=1159450762]
 shape = SubResource("BoxShape3D_1dqgb")
 
-[node name="BoxRegularHurtbox" type="Area3D" parent="Box2_Draggable"]
+[node name="BoxRegularHurtbox" type="Area3D" parent="Box2_Draggable" unique_id=512906833]
 script = ExtResource("13_44saj")
 metadata/_custom_type_script = "uid://bi5fwt04sq1jq"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2_Draggable/BoxRegularHurtbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2_Draggable/BoxRegularHurtbox" unique_id=1857051535]
 shape = SubResource("BoxShape3D_7mbro")
 
-[node name="HealthManager" type="Node3D" parent="Box2_Draggable"]
+[node name="HealthManager" type="Node3D" parent="Box2_Draggable" unique_id=287647156]
 script = ExtResource("14_7mbro")
 health = 5.0
 max_health = 5.0
 metadata/_custom_type_script = "uid://1rqaiis71irb"
 
-[node name="DeathManager" type="Node3D" parent="Box2_Draggable" node_paths=PackedStringArray("root")]
+[node name="DeathManager" type="Node3D" parent="Box2_Draggable" unique_id=6101070 node_paths=PackedStringArray("root")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 script = ExtResource("16_7yos8")
 root = NodePath("..")
 metadata/_custom_type_script = "uid://bujy08xidy0g7"
 
-[node name="WaterSplashHandler" type="Node3D" parent="Box2_Draggable" node_paths=PackedStringArray("hurtbox")]
+[node name="WaterSplashHandler" type="Node3D" parent="Box2_Draggable" unique_id=737850953 node_paths=PackedStringArray("hurtbox")]
 script = ExtResource("22_1dqgb")
 hurtbox = NodePath("../ThrowHandler/ProjectileHurtbox")
 splash_effect_enter = ExtResource("23_y81of")
 metadata/_custom_type_script = "uid://eu8pfa82x6aq"
 
-[node name="ThrowHandler" type="Node3D" parent="Box2_Draggable" node_paths=PackedStringArray("rig", "hitbox", "regular_hurtbox", "projectile_hitbox", "projectile_hurtbox", "health_manager")]
+[node name="ThrowHandler" type="Node3D" parent="Box2_Draggable" unique_id=764873308 node_paths=PackedStringArray("rig", "hitbox", "regular_hurtbox", "projectile_hitbox", "projectile_hurtbox", "health_manager")]
 script = ExtResource("22_si7kk")
 rig = NodePath("..")
 hitbox = NodePath("ProjectileHitbox")
@@ -380,43 +380,43 @@ projectile_hitbox = NodePath("ProjectileHitbox")
 projectile_hurtbox = NodePath("ProjectileHurtbox")
 health_manager = NodePath("../HealthManager")
 
-[node name="ProjectileHitbox" type="Area3D" parent="Box2_Draggable/ThrowHandler" node_paths=PackedStringArray("ignore_colliders")]
+[node name="ProjectileHitbox" type="Area3D" parent="Box2_Draggable/ThrowHandler" unique_id=1086396520 node_paths=PackedStringArray("ignore_colliders")]
 collision_layer = 0
 collision_mask = 57
 script = ExtResource("23_pn65j")
 ignore_colliders = [NodePath("../../BoxRegularHurtbox"), NodePath("../..")]
 metadata/_custom_type_script = "uid://c7g7jvcrqudgm"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2_Draggable/ThrowHandler/ProjectileHitbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2_Draggable/ThrowHandler/ProjectileHitbox" unique_id=1828066230]
 physics_interpolation_mode = 1
 shape = SubResource("BoxShape3D_5f8cm")
 
-[node name="ProjectileHurtbox" type="Area3D" parent="Box2_Draggable/ThrowHandler"]
+[node name="ProjectileHurtbox" type="Area3D" parent="Box2_Draggable/ThrowHandler" unique_id=1980355419]
 collision_layer = 65
 collision_mask = 0
 script = ExtResource("13_44saj")
 metadata/_custom_type_script = "uid://bi5fwt04sq1jq"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2_Draggable/ThrowHandler/ProjectileHurtbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2_Draggable/ThrowHandler/ProjectileHurtbox" unique_id=1296470283]
 shape = SubResource("BoxShape3D_kay4s")
 
-[node name="EffectManager" type="Node3D" parent="Box2_Draggable/ThrowHandler" node_paths=PackedStringArray("hurtbox")]
+[node name="EffectManager" type="Node3D" parent="Box2_Draggable/ThrowHandler" unique_id=576154638 node_paths=PackedStringArray("hurtbox")]
 script = ExtResource("25_gm488")
 hurtbox = NodePath("../ProjectileHurtbox")
 metadata/_custom_type_script = "uid://miugg8jpe2ku"
 
-[node name="ProjectileKnockbackManager" type="Node3D" parent="Box2_Draggable/ThrowHandler/EffectManager" node_paths=PackedStringArray("body")]
+[node name="ProjectileKnockbackManager" type="Node3D" parent="Box2_Draggable/ThrowHandler/EffectManager" unique_id=667728022 node_paths=PackedStringArray("body")]
 script = ExtResource("26_j7bvy")
 body = NodePath("../../..")
 
-[node name="GroundPolling" type="Area3D" parent="Box2_Draggable"]
+[node name="GroundPolling" type="Area3D" parent="Box2_Draggable" unique_id=1642683064]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7560196, 0)
 collision_layer = 0
 collision_mask = 6
 script = ExtResource("26_1dqgb")
 metadata/_custom_type_script = "uid://cionpm6je6331"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2_Draggable/GroundPolling"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2_Draggable/GroundPolling" unique_id=1998413863]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20124453, 0)
 shape = SubResource("SphereShape3D_gm488")
 

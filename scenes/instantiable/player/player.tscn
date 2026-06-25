@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://b427eeltoq12o"]
+[gd_scene format=3 uid="uid://b427eeltoq12o"]
 
 [ext_resource type="Script" uid="uid://yfk7mr61a5eo" path="res://scripts/character_physics_body.gd" id="1_e5ctq"]
 [ext_resource type="Script" uid="uid://7bo813l14n7" path="res://scripts/entity_handling/player_entity.gd" id="1_gnc5k"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://b27hyhwdgjwjk" path="res://scripts/statemachines/player/states/PlayerGroundAttackState.gd" id="4_isv8f"]
 [ext_resource type="Script" uid="uid://b6ef3ieheg63b" path="res://scripts/statemachines/player/states/PlayerDashState.gd" id="5_gnc5k"]
 [ext_resource type="Script" uid="uid://w3oxfr1xotrg" path="res://scripts/tongue_attack_state.gd" id="5_xmha0"]
+[ext_resource type="Script" uid="uid://bc1n5f7xdhbsb" path="res://scripts/data/player_attack.gd" id="7_isv8f"]
 [ext_resource type="Script" uid="uid://b2ifomelrlmfr" path="res://scripts/statemachines/player/states/PlayerAirborneState.gd" id="7_v47df"]
 [ext_resource type="Script" uid="uid://dmj61wc554x8h" path="res://scripts/player_death_manager.gd" id="9_3qxr5"]
 [ext_resource type="Script" uid="uid://calbyq6tluyu" path="res://scripts/player_death_state.gd" id="9_gnc5k"]
@@ -28,7 +29,7 @@
 radius = 0.40527344
 height = 1.3397183
 
-[sub_resource type="Curve" id="Curve_at5dv"]
+[sub_resource type="Curve" id="Curve_isv8f"]
 _data = [Vector2(0, 0.33786076), 0.0, 0.0, 0, 0, Vector2(0.08399999, 0.9558573), 0.0, 0.0, 0, 0, Vector2(0.268, 0.22750425), -0.9737341, -0.9737341, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
@@ -50,13 +51,13 @@ material = SubResource("StandardMaterial3D_mf4mk")
 [sub_resource type="SphereShape3D" id="SphereShape3D_ppyta"]
 radius = 0.264354
 
-[node name="Player" type="Node3D" node_paths=PackedStringArray("health_manager", "death_manager", "state_machine", "state_grounded", "state_attack", "state_tongue_attack", "state_airborne", "state_death", "effect_manager", "water_splash_manager", "hurtbox")]
+[node name="Player" type="Node3D" unique_id=412181745 node_paths=PackedStringArray("health_manager", "death_manager", "state_machine", "state_grounded", "state_attack", "state_tongue_attack", "state_airborne", "state_death", "effect_manager", "water_splash_manager", "hurtbox")]
 script = ExtResource("1_gnc5k")
 health_manager = NodePath("FrogCharacter/Systems/HealthManager")
 death_manager = NodePath("FrogCharacter/Systems/DeathManager")
 state_machine = NodePath("FrogCharacter/Systems/StateMachine")
 state_grounded = NodePath("FrogCharacter/Systems/StateMachine/Grounded")
-state_attack = NodePath("FrogCharacter/Systems/StateMachine/GroundAttack")
+state_attack = NodePath("FrogCharacter/Systems/StateMachine/GroundLightAttack")
 state_tongue_attack = NodePath("FrogCharacter/Systems/StateMachine/TongueAttackHeavy")
 state_airborne = NodePath("FrogCharacter/Systems/StateMachine/Airborne")
 state_death = NodePath("FrogCharacter/Systems/StateMachine/Death")
@@ -64,20 +65,20 @@ effect_manager = NodePath("FrogCharacter/Systems/EffectManager")
 water_splash_manager = NodePath("FrogCharacter/Systems/WaterSplashManager")
 hurtbox = NodePath("FrogCharacter/Systems/HitAndHurt/Hurtbox/Hurtbox")
 
-[node name="FrogCharacter" type="CharacterBody3D" parent="."]
+[node name="FrogCharacter" type="CharacterBody3D" parent="." unique_id=1028968564]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7776301, 0)
 collision_layer = 0
 collision_mask = 139
 axis_lock_linear_y = true
 script = ExtResource("1_e5ctq")
 
-[node name="PhysicsCollider" type="CollisionShape3D" parent="FrogCharacter"]
+[node name="PhysicsCollider" type="CollisionShape3D" parent="FrogCharacter" unique_id=264217678]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03362894, 0)
 shape = SubResource("CapsuleShape3D_ppyta")
 
-[node name="Systems" type="Node3D" parent="FrogCharacter"]
+[node name="Systems" type="Node3D" parent="FrogCharacter" unique_id=1408947632]
 
-[node name="StateMachine" type="Node3D" parent="FrogCharacter/Systems" node_paths=PackedStringArray("ground_collider", "renderer", "current_state", "root")]
+[node name="StateMachine" type="Node3D" parent="FrogCharacter/Systems" unique_id=836068986 node_paths=PackedStringArray("ground_collider", "renderer", "current_state", "root")]
 script = ExtResource("2_gnc5k")
 ground_collider = NodePath("../../GroundPolling")
 g_on_rise = -36.0
@@ -86,41 +87,109 @@ renderer = NodePath("../../Visual/Sprite3D")
 current_state = NodePath("Grounded")
 root = NodePath("../..")
 
-[node name="Grounded" type="Node3D" parent="FrogCharacter/Systems/StateMachine" node_paths=PackedStringArray("dash_state", "airborne_state", "ground_attack_state")]
+[node name="Grounded" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=32024872 node_paths=PackedStringArray("dash_state", "airborne_state", "ground_attack_state")]
 script = ExtResource("3_7hh1b")
 acceleration = 25.0
 deceleration = 25.0
 idle_velocity_dampening = 23.0
 dash_state = NodePath("../DashState")
 airborne_state = NodePath("../Airborne")
-ground_attack_state = NodePath("../GroundAttack")
+ground_attack_state = NodePath("../GroundLightAttack")
 
-[node name="DashState" type="Node3D" parent="FrogCharacter/Systems/StateMachine" node_paths=PackedStringArray("airborne_state", "grounded_state")]
+[node name="DashState" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1986417408 node_paths=PackedStringArray("airborne_state", "grounded_state")]
 script = ExtResource("5_gnc5k")
 airborne_state = NodePath("../Airborne")
 grounded_state = NodePath("../Grounded")
 
-[node name="GroundAttack" type="Node3D" parent="FrogCharacter/Systems/StateMachine" node_paths=PackedStringArray("slash_hitbox", "slash_fx", "airborne_state", "ground_state", "effect_manager")]
+[node name="GroundLightAttack" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1317969824 node_paths=PackedStringArray("attacks", "airborne_state", "ground_state", "effect_manager")]
 script = ExtResource("4_isv8f")
-slice_movement_force = 9.0
-attack_time = 0.3
-attack_windup_time = 0.1
-slice_movement_curve = SubResource("Curve_at5dv")
-slash_hitbox = NodePath("../../HitAndHurt/Hitboxes/hitbox_slash")
-slash_fx = NodePath("../../../Visual/Slash-fx")
+attacks = [NodePath("Combo1_1"), NodePath("Combo1_2"), NodePath("Combo1_3")]
 airborne_state = NodePath("../Airborne")
 ground_state = NodePath("../Grounded")
 effect_manager = NodePath("../../EffectManager")
-attack_deceleration = 30.0
 
-[node name="TongueAttackHeavy" type="Node3D" parent="FrogCharacter/Systems/StateMachine" node_paths=PackedStringArray("airborne_state", "ground_state", "tongue_attack_manager", "body")]
+[node name="Combo1_1" type="Node" parent="FrogCharacter/Systems/StateMachine/GroundLightAttack" unique_id=1853835556 node_paths=PackedStringArray("slash_hitbox", "slash_fx")]
+script = ExtResource("7_isv8f")
+slice_movement_force = 9.0
+slice_movement_curve = SubResource("Curve_isv8f")
+attack_deceleration = 30.0
+attack_time = 0.3
+attack_windup_time = 0.1
+slash_hitbox = NodePath("../../../HitAndHurt/Hitboxes/slash_1")
+slash_fx = NodePath("../../../../Visual/slash_1/Node3D")
+metadata/_custom_type_script = "uid://bc1n5f7xdhbsb"
+
+[node name="Combo1_2" type="Node" parent="FrogCharacter/Systems/StateMachine/GroundLightAttack" unique_id=1920325079 node_paths=PackedStringArray("slash_hitbox", "slash_fx")]
+script = ExtResource("7_isv8f")
+slice_movement_force = 9.0
+slice_movement_curve = SubResource("Curve_isv8f")
+attack_deceleration = 30.0
+attack_time = 0.3
+attack_windup_time = 0.1
+slash_hitbox = NodePath("../../../HitAndHurt/Hitboxes/slash_2")
+slash_fx = NodePath("../../../../Visual/slash_2/Node3D")
+metadata/_custom_type_script = "uid://bc1n5f7xdhbsb"
+
+[node name="Combo1_3" type="Node" parent="FrogCharacter/Systems/StateMachine/GroundLightAttack" unique_id=1217492405 node_paths=PackedStringArray("slash_hitbox", "slash_fx")]
+script = ExtResource("7_isv8f")
+damage = 20.0
+slice_movement_force = 9.0
+slice_movement_curve = SubResource("Curve_isv8f")
+attack_deceleration = 30.0
+attack_time = 0.3
+attack_windup_time = 0.1
+slash_hitbox = NodePath("../../../HitAndHurt/Hitboxes/slash_3")
+slash_fx = NodePath("../../../../Visual/slash_3/Node3D")
+metadata/_custom_type_script = "uid://bc1n5f7xdhbsb"
+
+[node name="GroundHeavyAttack" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1168832199 node_paths=PackedStringArray("attacks", "airborne_state", "ground_state", "effect_manager")]
+script = ExtResource("4_isv8f")
+attacks = [NodePath("Combo1_1"), NodePath("Combo1_2"), NodePath("Combo1_3")]
+airborne_state = NodePath("../Airborne")
+ground_state = NodePath("../Grounded")
+effect_manager = NodePath("../../EffectManager")
+
+[node name="Combo1_1" type="Node" parent="FrogCharacter/Systems/StateMachine/GroundHeavyAttack" unique_id=439255596 node_paths=PackedStringArray("slash_hitbox", "slash_fx")]
+script = ExtResource("7_isv8f")
+slice_movement_force = 9.0
+slice_movement_curve = SubResource("Curve_isv8f")
+attack_deceleration = 30.0
+attack_time = 0.3
+attack_windup_time = 0.1
+slash_hitbox = NodePath("../../../HitAndHurt/Hitboxes/slash_1")
+slash_fx = NodePath("../../../../Visual/slash_1/Node3D")
+metadata/_custom_type_script = "uid://bc1n5f7xdhbsb"
+
+[node name="Combo1_2" type="Node" parent="FrogCharacter/Systems/StateMachine/GroundHeavyAttack" unique_id=231938226 node_paths=PackedStringArray("slash_hitbox", "slash_fx")]
+script = ExtResource("7_isv8f")
+slice_movement_force = 9.0
+slice_movement_curve = SubResource("Curve_isv8f")
+attack_deceleration = 30.0
+attack_time = 0.3
+attack_windup_time = 0.1
+slash_hitbox = NodePath("../../../HitAndHurt/Hitboxes/slash_2")
+slash_fx = NodePath("../../../../Visual/slash_2/Node3D")
+metadata/_custom_type_script = "uid://bc1n5f7xdhbsb"
+
+[node name="Combo1_3" type="Node" parent="FrogCharacter/Systems/StateMachine/GroundHeavyAttack" unique_id=1826698254 node_paths=PackedStringArray("slash_hitbox", "slash_fx")]
+script = ExtResource("7_isv8f")
+slice_movement_force = 9.0
+slice_movement_curve = SubResource("Curve_isv8f")
+attack_deceleration = 30.0
+attack_time = 0.3
+attack_windup_time = 0.1
+slash_hitbox = NodePath("../../../HitAndHurt/Hitboxes/slash_3")
+slash_fx = NodePath("../../../../Visual/slash_3/Node3D")
+metadata/_custom_type_script = "uid://bc1n5f7xdhbsb"
+
+[node name="TongueAttackHeavy" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=2145379954 node_paths=PackedStringArray("airborne_state", "ground_state", "tongue_attack_manager", "body")]
 script = ExtResource("5_xmha0")
 airborne_state = NodePath("../Airborne")
 ground_state = NodePath("../Grounded")
 tongue_attack_manager = NodePath("../../SpecialHandler/TongueAttackHandler")
 body = NodePath("../../..")
 
-[node name="Airborne" type="Node3D" parent="FrogCharacter/Systems/StateMachine" node_paths=PackedStringArray("grounded_state", "dash_state", "tongue_attack_handler")]
+[node name="Airborne" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1162677647 node_paths=PackedStringArray("grounded_state", "dash_state", "tongue_attack_handler")]
 script = ExtResource("7_v47df")
 grounded_state = NodePath("../Grounded")
 dash_state = NodePath("../DashState")
@@ -129,65 +198,83 @@ movement_speed = 1.0
 acceleration = 0.2
 air_drag = 10
 
-[node name="Death" type="Node3D" parent="FrogCharacter/Systems/StateMachine" node_paths=PackedStringArray("visual_manager", "hurtbox")]
+[node name="Death" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=571698945 node_paths=PackedStringArray("visual_manager", "hurtbox")]
 script = ExtResource("9_gnc5k")
 upward_velocity = 8.0
 backward_velocity = 10.0
 visual_manager = NodePath("../../../Visual/Sprite3D")
 hurtbox = NodePath("../../HitAndHurt/Hurtbox/Hurtbox")
 
-[node name="DeathManager" type="Node3D" parent="FrogCharacter/Systems"]
+[node name="DeathManager" type="Node3D" parent="FrogCharacter/Systems" unique_id=211864361]
 script = ExtResource("9_3qxr5")
 
-[node name="HealthManager" type="Node3D" parent="FrogCharacter/Systems"]
+[node name="HealthManager" type="Node3D" parent="FrogCharacter/Systems" unique_id=1600092240]
 script = ExtResource("10_c7xul")
 health = 100.0
 max_health = 100.0
 
-[node name="EffectManager" type="Node3D" parent="FrogCharacter/Systems" node_paths=PackedStringArray("hurtbox")]
+[node name="EffectManager" type="Node3D" parent="FrogCharacter/Systems" unique_id=1280573445 node_paths=PackedStringArray("hurtbox")]
 script = ExtResource("11_7r8gw")
 hurtbox = NodePath("../HitAndHurt/Hurtbox/Hurtbox")
 metadata/_custom_type_script = "uid://miugg8jpe2ku"
 
-[node name="KnockbackHandler" type="Node3D" parent="FrogCharacter/Systems/EffectManager" node_paths=PackedStringArray("body")]
+[node name="KnockbackHandler" type="Node3D" parent="FrogCharacter/Systems/EffectManager" unique_id=549707198 node_paths=PackedStringArray("body")]
 script = ExtResource("12_pcexo")
 body = NodePath("../../..")
 metadata/_custom_type_script = "uid://tp7u7qxjy8l5"
 
-[node name="WaterSplashManager" type="Node3D" parent="FrogCharacter/Systems" node_paths=PackedStringArray("hurtbox")]
+[node name="WaterSplashManager" type="Node3D" parent="FrogCharacter/Systems" unique_id=338726269 node_paths=PackedStringArray("hurtbox")]
 script = ExtResource("13_2sfd1")
 hurtbox = NodePath("../HitAndHurt/Hurtbox/Hurtbox")
 splash_effect_enter = ExtResource("14_7yppw")
 
-[node name="HitAndHurt" type="Node3D" parent="FrogCharacter/Systems"]
+[node name="HitAndHurt" type="Node3D" parent="FrogCharacter/Systems" unique_id=1578692052]
 
-[node name="Hitboxes" type="Node3D" parent="FrogCharacter/Systems/HitAndHurt"]
+[node name="Hitboxes" type="Node3D" parent="FrogCharacter/Systems/HitAndHurt" unique_id=1146708476]
 
-[node name="hitbox_slash" type="Area3D" parent="FrogCharacter/Systems/HitAndHurt/Hitboxes"]
+[node name="slash_1" type="Area3D" parent="FrogCharacter/Systems/HitAndHurt/Hitboxes" unique_id=1134048376]
 collision_layer = 0
 collision_mask = 105
 script = ExtResource("15_wq28r")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="FrogCharacter/Systems/HitAndHurt/Hitboxes/hitbox_slash"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FrogCharacter/Systems/HitAndHurt/Hitboxes/slash_1" unique_id=421570624]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46287537, 0, 0)
 shape = SubResource("BoxShape3D_uacia")
 
-[node name="Hurtbox" type="Node3D" parent="FrogCharacter/Systems/HitAndHurt"]
+[node name="slash_2" type="Area3D" parent="FrogCharacter/Systems/HitAndHurt/Hitboxes" unique_id=2006084339]
+collision_layer = 0
+collision_mask = 105
+script = ExtResource("15_wq28r")
 
-[node name="Hurtbox" type="Area3D" parent="FrogCharacter/Systems/HitAndHurt/Hurtbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FrogCharacter/Systems/HitAndHurt/Hitboxes/slash_2" unique_id=221670821]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46287537, 0, 0)
+shape = SubResource("BoxShape3D_uacia")
+
+[node name="slash_3" type="Area3D" parent="FrogCharacter/Systems/HitAndHurt/Hitboxes" unique_id=1040192488]
+collision_layer = 0
+collision_mask = 105
+script = ExtResource("15_wq28r")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FrogCharacter/Systems/HitAndHurt/Hitboxes/slash_3" unique_id=560144788]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46287537, 0, 0)
+shape = SubResource("BoxShape3D_uacia")
+
+[node name="Hurtbox" type="Node3D" parent="FrogCharacter/Systems/HitAndHurt" unique_id=596741429]
+
+[node name="Hurtbox" type="Area3D" parent="FrogCharacter/Systems/HitAndHurt/Hurtbox" unique_id=1998260755]
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("16_c65wj")
 is_heavy = true
 metadata/_custom_type_script = "uid://bi5fwt04sq1jq"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="FrogCharacter/Systems/HitAndHurt/Hurtbox/Hurtbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FrogCharacter/Systems/HitAndHurt/Hurtbox/Hurtbox" unique_id=1820371027]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08886719, 0)
 shape = SubResource("BoxShape3D_ajshl")
 
-[node name="SpecialHandler" type="Node3D" parent="FrogCharacter/Systems"]
+[node name="SpecialHandler" type="Node3D" parent="FrogCharacter/Systems" unique_id=1323442406]
 
-[node name="TongueAttackHandler" type="Node3D" parent="FrogCharacter/Systems/SpecialHandler" node_paths=PackedStringArray("mouth_marker", "tongue_hitbox", "tongue_tip_node", "tongue_line_node", "state_manager", "state_machine_state")]
+[node name="TongueAttackHandler" type="Node3D" parent="FrogCharacter/Systems/SpecialHandler" unique_id=1781741061 node_paths=PackedStringArray("mouth_marker", "tongue_hitbox", "tongue_tip_node", "tongue_line_node", "state_manager", "state_machine_state")]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 script = ExtResource("17_hdudl")
 attach_force = 15.0
@@ -202,66 +289,92 @@ tongue_line_node = NodePath("TongueOrigin/Sprite3D")
 state_manager = NodePath("../../StateMachine")
 state_machine_state = NodePath("../../StateMachine/TongueAttackHeavy")
 
-[node name="TonguePoint" type="Node3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler"]
+[node name="TonguePoint" type="Node3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler" unique_id=1087418601]
 
-[node name="Sprite3D" type="Sprite3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler/TonguePoint"]
+[node name="Sprite3D" type="Sprite3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler/TonguePoint" unique_id=1972501464]
 transform = Transform3D(0.2, 0, 0, 0, 0.15320887, 0.1285575, 0, -0.1285575, 0.15320887, 0, 0, 0)
 alpha_cut = 2
 texture = ExtResource("19_c3khl")
 
-[node name="Hitbox" type="Area3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler/TonguePoint"]
+[node name="Hitbox" type="Area3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler/TonguePoint" unique_id=2076111957]
 collision_layer = 0
 collision_mask = 41
 script = ExtResource("15_wq28r")
 metadata/_custom_type_script = "uid://c7g7jvcrqudgm"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler/TonguePoint/Hitbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler/TonguePoint/Hitbox" unique_id=1735871244]
 transform = Transform3D(0.3, 0, 0, 0, 0.2999984, 0, 0, 0, 0.2999984, -0.066467285, 0, 0)
 shape = SubResource("BoxShape3D_c6rvn")
 
-[node name="TongueOrigin" type="Node3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler"]
+[node name="TongueOrigin" type="Node3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler" unique_id=1555274743]
 transform = Transform3D(1, 0, 0, 0, 0.9999994, 0, 0, 0, 0.9999994, 0, 0.49375212, 0.16814767)
 
-[node name="Sprite3D" type="Sprite3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler/TongueOrigin"]
+[node name="Sprite3D" type="Sprite3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler/TongueOrigin" unique_id=1829002750]
 transform = Transform3D(4.9999995, 0, 0, 0, 3.8302236, 3.213939, 0, -3.213939, 3.8302236, 0, -0.00044202805, -0.16814777)
 layers = 2
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("18_knlvm")
 
-[node name="Visual" type="Node3D" parent="FrogCharacter"]
+[node name="Visual" type="Node3D" parent="FrogCharacter" unique_id=719730847]
 
-[node name="Slash-fx" type="Node3D" parent="FrogCharacter/Visual"]
+[node name="slash_1" type="Node3D" parent="FrogCharacter/Visual" unique_id=488621942]
 
-[node name="Node3D" type="Node3D" parent="FrogCharacter/Visual/Slash-fx"]
+[node name="Node3D" type="Node3D" parent="FrogCharacter/Visual/slash_1" unique_id=974339383]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 0, 0, 0)
 
-[node name="Sprite3D" type="Sprite3D" parent="FrogCharacter/Visual/Slash-fx/Node3D"]
+[node name="Sprite3D" type="Sprite3D" parent="FrogCharacter/Visual/slash_1/Node3D" unique_id=601824553]
 transform = Transform3D(-2.1855695e-07, -5.0000005, 2.1855696e-07, 1.9106854e-14, 2.1855696e-07, 5.0000005, -5, 2.1855696e-07, 9.553428e-15, 0.57455003, -0.002635479, 0)
 cast_shadow = 0
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("20_8o3c5")
 
-[node name="Sprite3D" type="Sprite3D" parent="FrogCharacter/Visual"]
+[node name="slash_2" type="Node3D" parent="FrogCharacter/Visual" unique_id=946135580]
+
+[node name="Node3D" type="Node3D" parent="FrogCharacter/Visual/slash_2" unique_id=698818605]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 0, 0, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="FrogCharacter/Visual/slash_2/Node3D" unique_id=1547998236]
+transform = Transform3D(-2.1855695e-07, -5.0000005, 2.1855696e-07, 1.9106854e-14, 2.1855696e-07, 5.0000005, -5, 2.1855696e-07, 9.553428e-15, 0.57455003, -0.002635479, 0)
+cast_shadow = 0
+modulate = Color(4.235506e-06, 0.6405625, 0.85088956, 1)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("20_8o3c5")
+
+[node name="slash_3" type="Node3D" parent="FrogCharacter/Visual" unique_id=1564553253]
+
+[node name="Node3D" type="Node3D" parent="FrogCharacter/Visual/slash_3" unique_id=113894026]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 0, 0, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="FrogCharacter/Visual/slash_3/Node3D" unique_id=2028909697]
+transform = Transform3D(-2.1855695e-07, -5.0000005, 2.1855696e-07, 1.9106854e-14, 2.1855696e-07, 5.0000005, -5, 2.1855696e-07, 9.553428e-15, 0.57455003, -0.002635479, 0)
+cast_shadow = 0
+modulate = Color(0.46897024, 0.58979595, 0, 1)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("20_8o3c5")
+
+[node name="Sprite3D" type="Sprite3D" parent="FrogCharacter/Visual" unique_id=2092100773]
 transform = Transform3D(5, 0, 0, 0, 4.890738, 1.0395585, 0, -1.0395585, 4.890738, -0.0842151, 0.0060310364, -8.31124e-09)
 shaded = true
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("21_ijgvy")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="FrogCharacter/Visual"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FrogCharacter/Visual" unique_id=698354499]
 visible = false
 mesh = SubResource("BoxMesh_6uqi0")
 skeleton = NodePath("../..")
 
-[node name="GroundPolling" type="Area3D" parent="FrogCharacter"]
+[node name="GroundPolling" type="Area3D" parent="FrogCharacter" unique_id=1820996339]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.555548, 0)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("23_7hh1b")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="FrogCharacter/GroundPolling"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FrogCharacter/GroundPolling" unique_id=484112767]
 shape = SubResource("SphereShape3D_ppyta")
 
 [connection signal="exited_water" from="FrogCharacter/Systems/WaterSplashManager" to="FrogCharacter/Systems/DeathManager" method="_on_water_splash_manager_exited_water"]
