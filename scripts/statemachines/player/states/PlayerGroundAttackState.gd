@@ -21,7 +21,6 @@ var attack_direction:Vector3
 
 @export var can_take_attack_knockback_override = true
 
-
 func _initialize_state(state_machine_node:FiniteStateMachine, root_node:Node):
 	state_machine = state_machine_node
 	root = root_node
@@ -35,12 +34,14 @@ func _enter_state():
 	var attack_direction_2D = InputReader._get_attack_direction(root)
 	attack_direction.x = -attack_direction_2D.x
 	attack_direction.z = -attack_direction_2D.y
+	set_hitbox_rotation()
+	set_slash_rotation()
 	attack_timer = 0
 	wind_up = false
 	attack_windup_timer = 0
 	current_attack.can_take_attack_knockback = true
 	super._enter_state()
-	
+
 func _start_attack():
 	root.add_force(attack_direction * current_attack.slice_movement_force)
 	start_registering_hits()
@@ -60,7 +61,6 @@ func _exit_state():
 	if attack_index == attacks.size():
 		attack_index = 0
 	combo_timer = combo_time
-	
 
 func _state_update(_delta: float):
 	root.move_and_slide()
@@ -105,12 +105,7 @@ func set_slash_rotation():
 	current_attack.slash_fx.rotation = Vector3(current_attack.slash_fx.rotation.x, angle, current_attack.slash_fx.rotation.z)
 
 func start_registering_hits ():
-	set_hitbox_rotation()
-	set_slash_rotation()
 	current_attack.slash_hitbox.start_detecting_hits();
 
 func stop_registering_hits ():
 	current_attack.slash_hitbox.stop_detecting_hits();
-
-func _state_physics_update(_delta: float):
-	pass

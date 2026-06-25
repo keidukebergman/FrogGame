@@ -10,6 +10,7 @@ var dash_timer = 0;
 @export var dash_state:PlayerDashState
 @export var airborne_state:PlayerAirborneState
 @export var ground_attack_state:PlayerGroundAttackState
+@export var heavy_ground_attack_state:PlayerGroundAttackState
 @export var sprite:Sprite3D
 
 func _initialize_state(state_machine_node:FiniteStateMachine, root_node:Node):
@@ -31,6 +32,8 @@ func _exit_state():
 func _state_update(_delta: float): 
 	if Input.is_action_just_pressed("attack"):
 		state_machine._change_state(ground_attack_state)
+	if Input.is_action_just_pressed("heavy_attack"):
+		state_machine._change_state(heavy_ground_attack_state)
 	if Input.is_action_just_pressed("dash"):
 		state_machine._change_state(dash_state)
 	if not state_machine._is_grounded():

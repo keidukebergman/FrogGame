@@ -259,6 +259,15 @@ script = ExtResource("15_wq28r")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46287537, 0, 0)
 shape = SubResource("BoxShape3D_uacia")
 
+[node name="slash_H_1" type="Area3D" parent="FrogCharacter/Systems/HitAndHurt/Hitboxes" unique_id=556115646]
+collision_layer = 0
+collision_mask = 105
+script = ExtResource("15_wq28r")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FrogCharacter/Systems/HitAndHurt/Hitboxes/slash_H_1" unique_id=640639909]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46287537, 0, 0)
+shape = SubResource("BoxShape3D_uacia")
+
 [node name="Hurtbox" type="Node3D" parent="FrogCharacter/Systems/HitAndHurt" unique_id=596741429]
 
 [node name="Hurtbox" type="Area3D" parent="FrogCharacter/Systems/HitAndHurt/Hurtbox" unique_id=1998260755]
@@ -352,6 +361,19 @@ transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 0, 0
 transform = Transform3D(-2.1855695e-07, -5.0000005, 2.1855696e-07, 1.9106854e-14, 2.1855696e-07, 5.0000005, -5, 2.1855696e-07, 9.553428e-15, 0.57455003, -0.002635479, 0)
 cast_shadow = 0
 modulate = Color(0.46897024, 0.58979595, 0, 1)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("20_8o3c5")
+
+[node name="slash_H_1" type="Node3D" parent="FrogCharacter/Visual" unique_id=1438906287]
+
+[node name="Node3D" type="Node3D" parent="FrogCharacter/Visual/slash_H_1" unique_id=2104912513]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 0, 0, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="FrogCharacter/Visual/slash_H_1/Node3D" unique_id=1135273636]
+transform = Transform3D(-2.1855695e-07, -5.0000005, 2.1855696e-07, 1.9106854e-14, 2.1855696e-07, 5.0000005, -5, 2.1855696e-07, 9.553428e-15, 0.57455003, -0.002635479, 0)
+cast_shadow = 0
+modulate = Color(0.19267547, 0.043981947, 0.12622708, 1)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("20_8o3c5")
