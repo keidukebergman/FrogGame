@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://b27hyhwdgjwjk" path="res://scripts/statemachines/player/states/PlayerGroundAttackState.gd" id="4_isv8f"]
 [ext_resource type="Script" uid="uid://b6ef3ieheg63b" path="res://scripts/statemachines/player/states/PlayerDashState.gd" id="5_gnc5k"]
 [ext_resource type="Script" uid="uid://w3oxfr1xotrg" path="res://scripts/tongue_attack_state.gd" id="5_xmha0"]
+[ext_resource type="Script" uid="uid://brcp2t5kqjg5c" path="res://scenes/instantiable/player/player_chargeup_state.gd" id="6_xmha0"]
 [ext_resource type="Script" uid="uid://bc1n5f7xdhbsb" path="res://scripts/data/player_attack.gd" id="7_isv8f"]
 [ext_resource type="Script" uid="uid://b2ifomelrlmfr" path="res://scripts/statemachines/player/states/PlayerAirborneState.gd" id="7_v47df"]
 [ext_resource type="Script" uid="uid://dmj61wc554x8h" path="res://scripts/player_death_manager.gd" id="9_3qxr5"]
@@ -96,10 +97,12 @@ dash_state = NodePath("../DashState")
 airborne_state = NodePath("../Airborne")
 ground_attack_state = NodePath("../GroundLightAttack")
 
-[node name="DashState" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1986417408 node_paths=PackedStringArray("airborne_state", "grounded_state")]
+[node name="DashState" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1986417408 node_paths=PackedStringArray("grounded_state")]
 script = ExtResource("5_gnc5k")
-airborne_state = NodePath("../Airborne")
 grounded_state = NodePath("../Grounded")
+
+[node name="HeavyAttackState" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1169239707]
+script = ExtResource("6_xmha0")
 
 [node name="GroundLightAttack" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1317969824 node_paths=PackedStringArray("attacks", "airborne_state", "ground_state", "effect_manager")]
 script = ExtResource("4_isv8f")
@@ -372,6 +375,7 @@ transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 0, 0
 
 [node name="Sprite3D" type="Sprite3D" parent="FrogCharacter/Visual/slash_H_1/Node3D" unique_id=1135273636]
 transform = Transform3D(-2.1855695e-07, -5.0000005, 2.1855696e-07, 1.9106854e-14, 2.1855696e-07, 5.0000005, -5, 2.1855696e-07, 9.553428e-15, 0.57455003, -0.002635479, 0)
+visible = false
 cast_shadow = 0
 modulate = Color(0.19267547, 0.043981947, 0.12622708, 1)
 alpha_cut = 2

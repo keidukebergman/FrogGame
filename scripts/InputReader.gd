@@ -4,9 +4,9 @@ var movement_vector:Vector2
 var joystick:bool = false
 signal on_press_button
 
+
 func _process(_delta:float) -> void:
 	movement_vector = Input.get_vector("right", "left", "up", "down")
-	
 
 func _get_attack_direction(object):
 	if joystick:

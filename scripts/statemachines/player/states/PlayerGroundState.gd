@@ -29,11 +29,21 @@ func _exit_state():
 	super._exit_state()
 	pass
 
+var is_tracking_attack = false
+var attack_time_tracker = 0
+@export var heavy_attack_threshold = 0.1
+
 func _state_update(_delta: float): 
 	if Input.is_action_just_pressed("attack"):
-		state_machine._change_state(ground_attack_state)
-	if Input.is_action_just_pressed("heavy_attack"):
-		state_machine._change_state(heavy_ground_attack_state)
+		is_tracking_attack = true
+	if is_tracking_attack:
+		attack_time_tracker += _delta
+		if(attack_time_tracker > heavy_attack_threshold):
+			state_machine._change_state(heavy_ground_attack_state)
+	else:
+		attack_time_tracker = move_toward(attack_time_tracker, 0, _delta)
+	if Input.is_action_just_released("attack"):
+		is_tracking_attack = false
 	if Input.is_action_just_pressed("dash"):
 		state_machine._change_state(dash_state)
 	if not state_machine._is_grounded():
