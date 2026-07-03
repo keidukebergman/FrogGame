@@ -13,13 +13,9 @@ func _ready() -> void:
 	hitbox.start_detecting_hits()
 	if hitbox:
 		hitbox.hit_entity.connect(_on_hit_target)
+	
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	_set_velocity();
-
-
-func _set_velocity():
+func initialize_shot():
 	var basis = get_global_transform().basis
 	var forward = basis.z
 	linear_velocity = forward * projectile_speed

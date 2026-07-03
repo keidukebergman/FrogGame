@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://danhtn6x5yh2h"]
+[gd_scene format=3 uid="uid://danhtn6x5yh2h"]
 
 [ext_resource type="Script" uid="uid://bt4lgvy6c6sc8" path="res://scripts/entity_handling/enemy_entity.gd" id="1_0x6lq"]
 [ext_resource type="Script" uid="uid://yfk7mr61a5eo" path="res://scripts/character_physics_body.gd" id="2_ew8qx"]
@@ -33,34 +33,34 @@ height = 1.3397183
 [sub_resource type="SphereShape3D" id="SphereShape3D_ppyta"]
 radius = 0.11657667
 
-[node name="Enemy_Ranger" type="Node3D" node_paths=PackedStringArray("aggro_manager")]
+[node name="Enemy_Ranger" type="Node3D" unique_id=1853074636 node_paths=PackedStringArray("aggro_manager")]
 script = ExtResource("1_0x6lq")
 aggro_manager = NodePath("Mosquitoranger/Systems/Aggromanager")
 
-[node name="Mosquitoranger" type="CharacterBody3D" parent="."]
+[node name="Mosquitoranger" type="CharacterBody3D" parent="." unique_id=880021798]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 collision_layer = 0
 collision_mask = 139
 script = ExtResource("2_ew8qx")
 mass = 0.4
 
-[node name="Visual" type="Node3D" parent="Mosquitoranger"]
+[node name="Visual" type="Node3D" parent="Mosquitoranger" unique_id=1976951987]
 
-[node name="Sprite3D" type="Sprite3D" parent="Mosquitoranger/Visual"]
+[node name="Sprite3D" type="Sprite3D" parent="Mosquitoranger/Visual" unique_id=1270478669]
 transform = Transform3D(5, 0, 0, 0, 4.890738, 1.0395585, 0, -1.0395585, 4.890738, -0.084215164, 0.14336914, 0)
 shaded = true
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("3_tao5y")
 
-[node name="Systems" type="Node3D" parent="Mosquitoranger"]
+[node name="Systems" type="Node3D" parent="Mosquitoranger" unique_id=1205201443]
 
-[node name="StateManager" type="Node3D" parent="Mosquitoranger/Systems" node_paths=PackedStringArray("current_state", "root")]
+[node name="StateManager" type="Node3D" parent="Mosquitoranger/Systems" unique_id=957040991 node_paths=PackedStringArray("current_state", "root")]
 script = ExtResource("5_1jdny")
 current_state = NodePath("RangerHuntState")
 root = NodePath("../..")
 
-[node name="RangerHuntState" type="Node3D" parent="Mosquitoranger/Systems/StateManager" node_paths=PackedStringArray("aggro_manager", "nav", "body", "ground_poller", "attack_state", "fall_state")]
+[node name="RangerHuntState" type="Node3D" parent="Mosquitoranger/Systems/StateManager" unique_id=1316184007 node_paths=PackedStringArray("aggro_manager", "nav", "body", "ground_poller", "attack_state", "fall_state")]
 script = ExtResource("5_qtv6h")
 aggro_manager = NodePath("../../Aggromanager")
 nav = NodePath("../../../NavigationAgent3D")
@@ -72,7 +72,7 @@ ground_poller = NodePath("../../../GroundPolling")
 attack_state = NodePath("../RangerAttackState")
 fall_state = NodePath("../FallState")
 
-[node name="RangerAttackState" type="Node3D" parent="Mosquitoranger/Systems/StateManager" node_paths=PackedStringArray("aggro_manager", "next_state")]
+[node name="RangerAttackState" type="Node3D" parent="Mosquitoranger/Systems/StateManager" unique_id=1049232979 node_paths=PackedStringArray("aggro_manager", "next_state")]
 script = ExtResource("6_tao5y")
 aggro_manager = NodePath("../../Aggromanager")
 next_state = NodePath("../RangerHuntState")
@@ -80,86 +80,86 @@ projectile_speed = 7.0
 shots = 3
 projectile = ExtResource("7_0x6lq")
 
-[node name="FallState" type="Node3D" parent="Mosquitoranger/Systems/StateManager"]
+[node name="FallState" type="Node3D" parent="Mosquitoranger/Systems/StateManager" unique_id=1249741245]
 script = ExtResource("8_h3iop")
 
-[node name="Aggromanager" type="Node3D" parent="Mosquitoranger/Systems"]
+[node name="Aggromanager" type="Node3D" parent="Mosquitoranger/Systems" unique_id=1291779488]
 script = ExtResource("9_ji4wv")
 
-[node name="DamageManager" type="Node3D" parent="Mosquitoranger/Systems" node_paths=PackedStringArray("health_manager", "hurtbox", "death_manager")]
+[node name="DamageManager" type="Node3D" parent="Mosquitoranger/Systems" unique_id=852562435 node_paths=PackedStringArray("health_manager", "hurtbox", "death_manager")]
 script = ExtResource("10_8eau4")
 health_manager = NodePath("../HealthManager")
 hurtbox = NodePath("../HitAndHurt/Hurtbox")
 death_manager = NodePath("../DeathManager")
 
-[node name="DeathManager" type="Node3D" parent="Mosquitoranger/Systems" node_paths=PackedStringArray("root")]
+[node name="DeathManager" type="Node3D" parent="Mosquitoranger/Systems" unique_id=976454092 node_paths=PackedStringArray("root")]
 script = ExtResource("11_fqenq")
 root = NodePath("../../..")
 
-[node name="HealthManager" type="Node3D" parent="Mosquitoranger/Systems"]
+[node name="HealthManager" type="Node3D" parent="Mosquitoranger/Systems" unique_id=775340933]
 script = ExtResource("12_8my1e")
 health = 30.0
 max_health = 30.0
 
-[node name="WaterSplashManager" type="Node3D" parent="Mosquitoranger/Systems" node_paths=PackedStringArray("hurtbox")]
+[node name="WaterSplashManager" type="Node3D" parent="Mosquitoranger/Systems" unique_id=734768082 node_paths=PackedStringArray("hurtbox")]
 script = ExtResource("13_jnd76")
 hurtbox = NodePath("../HitAndHurt/Hurtbox")
 splash_effect_enter = ExtResource("14_toko4")
 
-[node name="EffectManager" type="Node3D" parent="Mosquitoranger/Systems" node_paths=PackedStringArray("hurtbox")]
+[node name="EffectManager" type="Node3D" parent="Mosquitoranger/Systems" unique_id=1402560216 node_paths=PackedStringArray("hurtbox")]
 script = ExtResource("15_2axhq")
 hurtbox = NodePath("../HitAndHurt/Hurtbox")
 
-[node name="KnockbackManager" type="Node3D" parent="Mosquitoranger/Systems/EffectManager" node_paths=PackedStringArray("body")]
+[node name="KnockbackManager" type="Node3D" parent="Mosquitoranger/Systems/EffectManager" unique_id=786983232 node_paths=PackedStringArray("body")]
 script = ExtResource("16_vfer5")
 body = NodePath("../../..")
 
-[node name="DragabilityManager" type="Node3D" parent="Mosquitoranger/Systems" node_paths=PackedStringArray("body", "hurtbox")]
+[node name="DragabilityManager" type="Node3D" parent="Mosquitoranger/Systems" unique_id=470543655 node_paths=PackedStringArray("body", "hurtbox")]
 script = ExtResource("17_155sk")
 body = NodePath("../..")
 hurtbox = NodePath("../HitAndHurt/Hurtbox")
 dragforce = 10
 
-[node name="HitAndHurt" type="Node3D" parent="Mosquitoranger/Systems"]
+[node name="HitAndHurt" type="Node3D" parent="Mosquitoranger/Systems" unique_id=639918796]
 
-[node name="Hurtbox" type="Area3D" parent="Mosquitoranger/Systems/HitAndHurt"]
+[node name="Hurtbox" type="Area3D" parent="Mosquitoranger/Systems/HitAndHurt" unique_id=1514028342]
 collision_layer = 32
 collision_mask = 4
 script = ExtResource("18_1v42x")
 is_heavy = true
 metadata/_custom_type_script = "uid://bi5fwt04sq1jq"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Mosquitoranger/Systems/HitAndHurt/Hurtbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mosquitoranger/Systems/HitAndHurt/Hurtbox" unique_id=358115446]
 shape = SubResource("BoxShape3D_ajshl")
 
-[node name="Hitboxes" type="Node3D" parent="Mosquitoranger/Systems/HitAndHurt"]
+[node name="Hitboxes" type="Node3D" parent="Mosquitoranger/Systems/HitAndHurt" unique_id=983629520]
 
-[node name="Hitbox_stab" type="Area3D" parent="Mosquitoranger/Systems/HitAndHurt/Hitboxes"]
+[node name="Hitbox_stab" type="Area3D" parent="Mosquitoranger/Systems/HitAndHurt/Hitboxes" unique_id=1870576108]
 collision_layer = 0
 collision_mask = 16
 script = ExtResource("19_o5tnb")
 metadata/_custom_type_script = "uid://c7g7jvcrqudgm"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Mosquitoranger/Systems/HitAndHurt/Hitboxes/Hitbox_stab"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mosquitoranger/Systems/HitAndHurt/Hitboxes/Hitbox_stab" unique_id=2138808791]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.863, 0, 0)
 shape = SubResource("BoxShape3D_gsk6d")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Mosquitoranger"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mosquitoranger" unique_id=1192509746]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03362894, 0)
 shape = SubResource("CapsuleShape3D_ppyta")
 
-[node name="GroundPolling" type="Area3D" parent="Mosquitoranger"]
+[node name="GroundPolling" type="Area3D" parent="Mosquitoranger" unique_id=1788814468]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.555548, 0)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("20_srgp0")
 metadata/_custom_type_script = "uid://cionpm6je6331"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Mosquitoranger/GroundPolling"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mosquitoranger/GroundPolling" unique_id=1358114274]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.03632164, 0)
 shape = SubResource("SphereShape3D_ppyta")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Mosquitoranger"]
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Mosquitoranger" unique_id=273321959]
 avoidance_enabled = true
 
 [connection signal="exited_water" from="Mosquitoranger/Systems/WaterSplashManager" to="Mosquitoranger/Systems/DeathManager" method="_on_water_splash_manager_exited_water"]

@@ -28,6 +28,8 @@ func _state_update(_delta: float):
 			state_machine._change_state(attack_state)
 		else:
 			state_machine._change_state(grounded_state)
-
+	if(Input.is_action_just_pressed("dash")):
+		state_machine._change_state(dash_state)
+	
 func _state_physics_update(_delta: float):
 	pass

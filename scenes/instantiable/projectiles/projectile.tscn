@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://dysd1pacl610e" path="res://sprite/Stab.png" id="2_ohx1v"]
 [ext_resource type="Script" uid="uid://bi5fwt04sq1jq" path="res://scripts/Hurtbox_draggable.gd" id="3_ee10g"]
 [ext_resource type="Script" uid="uid://c7g7jvcrqudgm" path="res://scripts/Hitbox.gd" id="4_yat5h"]
+[ext_resource type="Script" uid="uid://miugg8jpe2ku" path="res://scripts/effect_manager.gd" id="5_o57b6"]
+[ext_resource type="Script" uid="uid://dpt7wx0xe24ny" path="res://scripts/projectile_knockback_manager.gd" id="6_jks2q"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o57b6"]
 
@@ -18,7 +20,7 @@ collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource("1_dd0wg")
 projectile_speed = 7
-projectile_damage = 0
+projectile_damage = 10
 hitbox = NodePath("Hitbox")
 draggable_hurtbox = NodePath("DraggableHurtbox")
 
@@ -44,7 +46,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.051086426)
 shape = SubResource("BoxShape3D_twair")
 
 [node name="DraggableHurtbox" type="Area3D" parent="." unique_id=1918415273]
-collision_layer = 0
+collision_layer = 64
 collision_mask = 64
 script = ExtResource("3_ee10g")
 metadata/_custom_type_script = "uid://bi5fwt04sq1jq"
@@ -52,4 +54,14 @@ metadata/_custom_type_script = "uid://bi5fwt04sq1jq"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DraggableHurtbox" unique_id=977889970]
 shape = SubResource("BoxShape3D_jks2q")
 
-[node name="ProjetileDragHandler" type="Node3D" parent="." unique_id=1821492836]
+[node name="ProjectileDragHandler" type="Node3D" parent="." unique_id=1821492836]
+
+[node name="EffectManager" type="Node3D" parent="." unique_id=1369743868 node_paths=PackedStringArray("hurtbox")]
+script = ExtResource("5_o57b6")
+hurtbox = NodePath("../DraggableHurtbox")
+metadata/_custom_type_script = "uid://miugg8jpe2ku"
+
+[node name="ProjectileKnockbackManager" type="Node3D" parent="EffectManager" unique_id=544790699 node_paths=PackedStringArray("body")]
+script = ExtResource("6_jks2q")
+body = NodePath("../..")
+metadata/_custom_type_script = "uid://dpt7wx0xe24ny"
