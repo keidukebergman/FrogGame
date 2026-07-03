@@ -31,7 +31,7 @@ radius = 0.40527344
 height = 1.3397183
 
 [sub_resource type="Curve" id="Curve_isv8f"]
-_data = [Vector2(0, 0.33786076), 0.0, 0.0, 0, 0, Vector2(0.08399999, 0.9558573), 0.0, 0.0, 0, 0, Vector2(0.268, 0.22750425), -0.9737341, -0.9737341, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.33786076), 0.0, 0.0, 0, 0, Vector2(0.024570018, 0.99545455), 0.0, 0.0, 0, 0, Vector2(0.46437344, 0.25909096), -0.9840424, -0.9840424, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uacia"]
@@ -88,7 +88,7 @@ renderer = NodePath("../../Visual/Sprite3D")
 current_state = NodePath("Grounded")
 root = NodePath("../..")
 
-[node name="Grounded" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=32024872 node_paths=PackedStringArray("dash_state", "airborne_state", "ground_attack_state")]
+[node name="Grounded" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=32024872 node_paths=PackedStringArray("dash_state", "airborne_state", "ground_attack_state", "heavy_attack_charge_state")]
 script = ExtResource("3_7hh1b")
 acceleration = 25.0
 deceleration = 25.0
@@ -96,13 +96,17 @@ idle_velocity_dampening = 23.0
 dash_state = NodePath("../DashState")
 airborne_state = NodePath("../Airborne")
 ground_attack_state = NodePath("../GroundLightAttack")
+heavy_attack_charge_state = NodePath("../HeavyAttackChargeState")
 
 [node name="DashState" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1986417408 node_paths=PackedStringArray("grounded_state")]
 script = ExtResource("5_gnc5k")
 grounded_state = NodePath("../Grounded")
 
-[node name="HeavyAttackState" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1169239707]
+[node name="HeavyAttackChargeState" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1169239707 node_paths=PackedStringArray("airborne_state", "grounded_state", "attack_state")]
 script = ExtResource("6_xmha0")
+airborne_state = NodePath("../Airborne")
+grounded_state = NodePath("../Grounded")
+attack_state = NodePath("../GroundHeavyAttack")
 
 [node name="GroundLightAttack" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1317969824 node_paths=PackedStringArray("attacks", "airborne_state", "ground_state", "effect_manager")]
 script = ExtResource("4_isv8f")
@@ -147,42 +151,22 @@ metadata/_custom_type_script = "uid://bc1n5f7xdhbsb"
 
 [node name="GroundHeavyAttack" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1168832199 node_paths=PackedStringArray("attacks", "airborne_state", "ground_state", "effect_manager")]
 script = ExtResource("4_isv8f")
-attacks = [NodePath("Combo1_1"), NodePath("Combo1_2"), NodePath("Combo1_3")]
+attacks = [NodePath("Combo1_1")]
 airborne_state = NodePath("../Airborne")
 ground_state = NodePath("../Grounded")
 effect_manager = NodePath("../../EffectManager")
 
 [node name="Combo1_1" type="Node" parent="FrogCharacter/Systems/StateMachine/GroundHeavyAttack" unique_id=439255596 node_paths=PackedStringArray("slash_hitbox", "slash_fx")]
 script = ExtResource("7_isv8f")
-slice_movement_force = 9.0
+damage = 30.0
+knockback_amount = 8.0
+slice_movement_force = 10.0
 slice_movement_curve = SubResource("Curve_isv8f")
 attack_deceleration = 30.0
 attack_time = 0.3
 attack_windup_time = 0.1
-slash_hitbox = NodePath("../../../HitAndHurt/Hitboxes/slash_1")
-slash_fx = NodePath("../../../../Visual/slash_1/Node3D")
-metadata/_custom_type_script = "uid://bc1n5f7xdhbsb"
-
-[node name="Combo1_2" type="Node" parent="FrogCharacter/Systems/StateMachine/GroundHeavyAttack" unique_id=231938226 node_paths=PackedStringArray("slash_hitbox", "slash_fx")]
-script = ExtResource("7_isv8f")
-slice_movement_force = 9.0
-slice_movement_curve = SubResource("Curve_isv8f")
-attack_deceleration = 30.0
-attack_time = 0.3
-attack_windup_time = 0.1
-slash_hitbox = NodePath("../../../HitAndHurt/Hitboxes/slash_2")
-slash_fx = NodePath("../../../../Visual/slash_2/Node3D")
-metadata/_custom_type_script = "uid://bc1n5f7xdhbsb"
-
-[node name="Combo1_3" type="Node" parent="FrogCharacter/Systems/StateMachine/GroundHeavyAttack" unique_id=1826698254 node_paths=PackedStringArray("slash_hitbox", "slash_fx")]
-script = ExtResource("7_isv8f")
-slice_movement_force = 9.0
-slice_movement_curve = SubResource("Curve_isv8f")
-attack_deceleration = 30.0
-attack_time = 0.3
-attack_windup_time = 0.1
-slash_hitbox = NodePath("../../../HitAndHurt/Hitboxes/slash_3")
-slash_fx = NodePath("../../../../Visual/slash_3/Node3D")
+slash_hitbox = NodePath("../../../HitAndHurt/Hitboxes/slash_H_1")
+slash_fx = NodePath("../../../../Visual/slash_H_1/Node3D")
 metadata/_custom_type_script = "uid://bc1n5f7xdhbsb"
 
 [node name="TongueAttackHeavy" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=2145379954 node_paths=PackedStringArray("airborne_state", "ground_state", "tongue_attack_manager", "body")]
@@ -375,9 +359,8 @@ transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 0, 0
 
 [node name="Sprite3D" type="Sprite3D" parent="FrogCharacter/Visual/slash_H_1/Node3D" unique_id=1135273636]
 transform = Transform3D(-2.1855695e-07, -5.0000005, 2.1855696e-07, 1.9106854e-14, 2.1855696e-07, 5.0000005, -5, 2.1855696e-07, 9.553428e-15, 0.57455003, -0.002635479, 0)
-visible = false
 cast_shadow = 0
-modulate = Color(0.19267547, 0.043981947, 0.12622708, 1)
+modulate = Color(0.4906661, 0.74608916, 0.8014995, 1)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("20_8o3c5")

@@ -29,6 +29,7 @@ func _ready():
 	_change_state(current_state)
 
 func _change_state(new_state: State):
+	print("swapping state ", current_state, " to ", new_state)
 	if new_state == current_state:
 		push_warning("Attempting to set state to current state.")
 	if current_state is State:

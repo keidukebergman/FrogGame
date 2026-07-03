@@ -10,7 +10,7 @@ var dash_timer = 0;
 @export var dash_state:PlayerDashState
 @export var airborne_state:PlayerAirborneState
 @export var ground_attack_state:PlayerGroundAttackState
-@export var heavy_ground_attack_state:PlayerGroundAttackState
+@export var heavy_attack_charge_state:PlayerChargeState
 @export var sprite:Sprite3D
 
 func _initialize_state(state_machine_node:FiniteStateMachine, root_node:Node):
@@ -27,6 +27,8 @@ func _enter_state():
 func _exit_state():
 	is_active = false
 	super._exit_state()
+	is_tracking_attack = false
+	attack_time_tracker = 0
 	pass
 
 var is_tracking_attack = false
@@ -35,11 +37,12 @@ var attack_time_tracker = 0
 
 func _state_update(_delta: float): 
 	if Input.is_action_just_pressed("attack"):
+		state_machine._change_state(ground_attack_state)
 		is_tracking_attack = true
 	if is_tracking_attack:
 		attack_time_tracker += _delta
 		if(attack_time_tracker > heavy_attack_threshold):
-			state_machine._change_state(heavy_ground_attack_state)
+			state_machine._change_state(heavy_attack_charge_state)
 	else:
 		attack_time_tracker = move_toward(attack_time_tracker, 0, _delta)
 	if Input.is_action_just_released("attack"):
