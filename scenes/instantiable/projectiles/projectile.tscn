@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://c7g7jvcrqudgm" path="res://scripts/Hitbox.gd" id="4_yat5h"]
 [ext_resource type="Script" uid="uid://miugg8jpe2ku" path="res://scripts/effect_manager.gd" id="5_o57b6"]
 [ext_resource type="Script" uid="uid://dpt7wx0xe24ny" path="res://scripts/projectile_knockback_manager.gd" id="6_jks2q"]
+[ext_resource type="Script" uid="uid://dun1nlujb08y7" path="res://scenes/instantiable/projectiles/projectile_collision_mask_inverter.gd" id="7_jks2q"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o57b6"]
 
@@ -65,3 +66,7 @@ metadata/_custom_type_script = "uid://miugg8jpe2ku"
 script = ExtResource("6_jks2q")
 body = NodePath("../..")
 metadata/_custom_type_script = "uid://dpt7wx0xe24ny"
+
+[node name="ProjectileCollisionMaskInverter" type="Node3D" parent="EffectManager" unique_id=53866775 node_paths=PackedStringArray("hitbox")]
+script = ExtResource("7_jks2q")
+hitbox = NodePath("../../Hitbox")
