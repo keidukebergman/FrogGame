@@ -6,10 +6,13 @@ class_name PlayerGroundAttackState
 var current_attack:PlayerAttack
 @export var attack_index = 0
 @export var combo_time = 0.8
+@export var attack_cancel_time = 0.9
 
 var combo_timer = 0
 var attack_timer = 0
 var attack_windup_timer = 0
+var attack_winddown_timer = 0
+var attack_cancel_timer = 0
 var wind_up = false
 
 var attack_direction:Vector3
@@ -39,6 +42,8 @@ func _enter_state():
 	attack_timer = 0
 	wind_up = false
 	attack_windup_timer = 0
+	attack_cancel_timer = 0
+	attack_winddown_timer = 0
 	current_attack.can_take_attack_knockback = true
 	super._enter_state()
 
@@ -65,16 +70,27 @@ func _exit_state():
 func _state_update(_delta: float):
 	root.move_and_slide()
 	attack_windup_timer += _delta
+	attack_cancel_timer += _delta
+	
 	if current_attack.can_take_attack_knockback:
 		root.velocity = root.velocity.move_toward(Vector3.ZERO, _delta * current_attack.attack_deceleration)
 	else:
 		root.velocity = root.velocity.move_toward(Vector3.ZERO, _delta * current_attack.bounce_deceleration)
+	
 	if attack_windup_timer < current_attack.attack_windup_time:
 		return
+		
 	if not wind_up:
 		wind_up = true
 		_start_attack()
 	attack_timer += _delta
+	
+	if attack_cancel_timer >= current_attack.cancel_time:
+		if InputReader.attack_input.is_active():
+			InputReader.attack_input.resolve()
+			state_machine._change_state(self)
+			return
+			
 	if attack_timer >= current_attack.attack_time:
 		attack_timer = 0
 		if state_machine._is_grounded():
@@ -90,9 +106,13 @@ func hit_object(object):
 			root.set_only_force(current_attack.attack_knockback_force * -attack_direction)
 
 func apply_damage(hurtbox:Hurtbox):
-	hurtbox.apply_damage(current_attack.damage);
+	var data = AttackData.new()
+	data.attacker = root
+	data.attacking_hitbox = current_attack.slash_hitbox
+	data.damage = current_attack.damage
 	var knockback_direction = Vector3(attack_direction.x, 0, attack_direction.z)
-	hurtbox.apply_effects({"knockback" : current_attack.knockback_amount * knockback_direction});
+	data.effects = {"knockback" : current_attack.knockback_amount * knockback_direction}
+	hurtbox.apply_attack(data)
 
 func set_hitbox_rotation():
 	var dir:Vector2 = Vector2(attack_direction.z, attack_direction.x)

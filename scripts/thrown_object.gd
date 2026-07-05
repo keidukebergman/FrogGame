@@ -24,7 +24,10 @@ func calculate_damage() -> float:
 func on_hitbox_hit_object(node) -> void:
 	var hurtbox = node as Hurtbox
 	if hurtbox:
-		hurtbox.apply_damage(calculate_damage())
+		var attack_data = AttackData.new()
+		attack_data.damage = 100
+		attack_data.attacker = null
+		hurtbox.apply_attack(attack_data)
 	health_manager.set_health(0)
 
 func _process(_delta: float) -> void:

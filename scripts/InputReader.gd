@@ -2,11 +2,43 @@ extends Node
 
 var movement_vector:Vector2
 var joystick:bool = false
+var input_queue_time = 0.2
+
+var attack_input = ButtonInput.new()
+var dash_input = ButtonInput.new()
+
+
+class ButtonInput:
+	var button_string = "attack"
+	var is_still_pressed = false
+	var press_timer = 0
+	
+	func resolve ():
+		is_still_pressed = false
+		press_timer = 0
+
+	func is_active ():
+		return press_timer > 0
+
+	func queue_update(input_queue_time, _delta):
+		if Input.is_action_just_pressed("attack"):
+			press_timer = input_queue_time
+			is_still_pressed = true
+			print("Updated attack timer")
+		if Input.is_action_just_released("attack"):
+			is_still_pressed = false
+		if !is_still_pressed && press_timer > 0:
+			press_timer -= _delta
+
 signal on_press_button
 
+func _ready() -> void:
+	attack_input.button_string = "attack"
+	dash_input.button_string = "dash"
 
 func _process(_delta:float) -> void:
 	movement_vector = Input.get_vector("right", "left", "up", "down")
+	attack_input.queue_update(input_queue_time, _delta)
 
 func _get_attack_direction(object):
 	if joystick:

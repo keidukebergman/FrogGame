@@ -16,6 +16,9 @@ class_name PlayerAttack
 @export_group("Timing")
 @export var attack_time:float = 0.5
 @export var attack_windup_time:float = 0.2
+@export var attack_winddown_time:float = 0.1
+@export var can_cancel = true
+@export var cancel_time = 0.9
 
 @export_group("References")
 @export var slash_hitbox:Hitbox

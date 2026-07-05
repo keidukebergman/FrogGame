@@ -6,6 +6,7 @@ class_name HealthManager
 @export var restore_health_on_ready:bool = true
 
 signal applied_damage (damage:float, remaining_health:float)
+signal applied_attack (damage:float, attacker:Node3D, remaining_health:float)
 signal applied_healing (healing:float, remaining_health:float)
 signal depleted_health
 signal maxed_health

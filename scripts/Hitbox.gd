@@ -31,16 +31,13 @@ func detect_hit() -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	if is_active:
-		print("hit body ", body, ", ", body.get_parent_node_3d())
 		detect_collision(body)
 
 func _on_area_entered(area: Area3D) -> void:
 	if is_active:
-		print("hit area ", area, ", ", area.get_parent_node_3d())
 		detect_collision(area)
 
 func detect_collision(node: Node3D) -> void:
 	if node not in hits && node not in ignore_colliders:
 		hits[node] = true
 		hit_entity.emit(node)
-		print(self, " : hit ", node)

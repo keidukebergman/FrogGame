@@ -58,6 +58,9 @@ func _process(delta: float) -> void:
 	var dir = target_pos - start_pos
 	var dist = dir.length()
 	
+	if Input.is_action_just_released("tongue_attack"):
+		_start_retracting()
+	
 #TODO: Put this in separate function
 	if dist > 0.01: 
 		tongue_line_node.visible = true 

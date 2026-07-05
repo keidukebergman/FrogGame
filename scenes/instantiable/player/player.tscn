@@ -72,6 +72,7 @@ collision_layer = 0
 collision_mask = 139
 axis_lock_linear_y = true
 script = ExtResource("1_e5ctq")
+metadata/Player = true
 
 [node name="PhysicsCollider" type="CollisionShape3D" parent="FrogCharacter" unique_id=264217678]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03362894, 0)

@@ -34,7 +34,8 @@ var attack_time_tracker = 0
 @export var heavy_attack_threshold = 0.1
 
 func _state_update(_delta: float): 
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_pressed("attack")||InputReader.attack_input.is_active():
+		InputReader.attack_input.resolve()
 		state_machine._change_state(ground_attack_state)
 	if Input.is_action_pressed("attack"):
 		is_tracking_attack = true

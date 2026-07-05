@@ -15,8 +15,8 @@ func _ready() -> void:
 func verify_hit() -> bool:
 	return super.verify_hit()
 	
-func apply_damage(damage) -> void:
-	super.apply_damage(damage)
+func _apply_damage(damage) -> void:
+	super._apply_damage(damage)
 
 func start_dragging(dragger, drag_point, force) -> void:
 	started_being_dragged.emit(dragger, drag_point, force)

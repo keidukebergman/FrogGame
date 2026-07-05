@@ -50,9 +50,14 @@ func hit_object(object):
 			root.set_only_force(attack_knockback_force * -attack_direction)
 
 func apply_damage(hurtbox:Hurtbox):
-	hurtbox.apply_damage(10);
+	var attack_data = AttackData.new()
+	attack_data.attacker = root
+	attack_data.damage = 10
+	attack_data.attacking_hitbox = hitbox
+	attack_data.receiving_hurtbox = hurtbox
 	var knockback_direction = Vector3(attack_direction.x, 0, attack_direction.z)
-	hurtbox.apply_effects({"knockback" : knockback_amount * knockback_direction});
+	attack_data.effects = {"knockback" : knockback_amount * knockback_direction};
+	hurtbox.apply_attack(attack_data)
 
 func _state_update(_delta: float):
 	if registering:

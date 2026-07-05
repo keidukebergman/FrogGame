@@ -50,7 +50,7 @@ func fire_arrow():
 	projectile_instance.global_position = root.global_position
 	var proj_obj = projectile_instance as Node3D
 	proj_obj.global_rotation.y = solution
-	(proj_obj as Projectile).initialize_shot() 
+	(proj_obj as Projectile).initialize_shot(root) 
 
 func _firing_solution(target: CharacterBody3D):
 	var target_global_pos:Vector2 = Vector2(target.global_position.x, target.global_position.z)
