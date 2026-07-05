@@ -58,7 +58,7 @@ func _process(delta: float) -> void:
 	var dir = target_pos - start_pos
 	var dist = dir.length()
 	
-	if Input.is_action_just_released("tongue_attack"):
+	if Input.is_action_just_released("tongue_attack") && tongue_state != TongueState.WAITING:
 		_start_retracting()
 	
 #TODO: Put this in separate function
