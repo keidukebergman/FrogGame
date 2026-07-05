@@ -392,7 +392,7 @@ physics_interpolation_mode = 1
 shape = SubResource("BoxShape3D_5f8cm")
 
 [node name="ProjectileHurtbox" type="Area3D" parent="Box2_Draggable/ThrowHandler" unique_id=1980355419]
-collision_layer = 65
+collision_layer = 64
 collision_mask = 0
 script = ExtResource("13_44saj")
 metadata/_custom_type_script = "uid://bi5fwt04sq1jq"

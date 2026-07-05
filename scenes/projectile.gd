@@ -37,7 +37,7 @@ func _on_hit_target(hit_object:Node3D):
 	if hurtbox == null:
 		return;
 	var attack_data = AttackData.new()
-	attack_data.attacker = origin
+	attack_data.attacker = origin if origin else null
 	attack_data.damage = projectile_damage
 	attack_data.receiving_hurtbox = hurtbox
 	attack_data.attacking_hitbox = hitbox

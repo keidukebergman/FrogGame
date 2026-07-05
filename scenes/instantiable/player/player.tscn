@@ -98,7 +98,7 @@ dash_state = NodePath("../DashState")
 airborne_state = NodePath("../Airborne")
 ground_attack_state = NodePath("../GroundLightAttack")
 heavy_attack_charge_state = NodePath("../HeavyAttackChargeState")
-heavy_attack_threshold = 0.3
+heavy_attack_threshold = 0.05
 
 [node name="Airborne" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1162677647 node_paths=PackedStringArray("grounded_state", "dash_state", "tongue_attack_handler")]
 script = ExtResource("7_v47df")
@@ -167,6 +167,7 @@ script = ExtResource("6_xmha0")
 airborne_state = NodePath("../Airborne")
 grounded_state = NodePath("../Grounded")
 attack_state = NodePath("../GroundHeavyAttack")
+chargeup_time = 0.1
 dash_state = NodePath("../DashState")
 
 [node name="GroundHeavyAttack" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1168832199 node_paths=PackedStringArray("attacks", "airborne_state", "ground_state", "effect_manager")]
