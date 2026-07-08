@@ -23,6 +23,13 @@ var attack_direction:Vector3
 @export var effect_manager:EffectManager
 
 @export var can_take_attack_knockback_override = true
+var attack_state:AttackState
+
+enum AttackState {
+	Windup,
+	Attack,
+	Winddown
+}
 
 func _initialize_state(state_machine_node:FiniteStateMachine, root_node:Node):
 	state_machine = state_machine_node
@@ -41,16 +48,18 @@ func _enter_state():
 	set_slash_rotation()
 	attack_timer = 0
 	wind_up = false
-	attack_windup_timer = 0
-	attack_cancel_timer = 0
-	attack_winddown_timer = 0
 	current_attack.can_take_attack_knockback = true
+	attack_state = AttackState.Windup
 	super._enter_state()
 
 func _start_attack():
 	root.add_force(attack_direction * current_attack.slice_movement_force)
 	start_registering_hits()
 	current_attack.slash_fx.visible = true;
+
+func _stop_attack():
+	stop_registering_hits()
+	current_attack.slash_fx.visible = false;
 
 func _process(_delta: float) -> void:
 	if combo_timer > 0 && attack_index != 0 && is_active == false:
@@ -59,8 +68,7 @@ func _process(_delta: float) -> void:
 			attack_index = 0
 
 func _exit_state():
-	stop_registering_hits()
-	current_attack.slash_fx.visible = false;
+	_stop_attack()
 	super._exit_state()
 	attack_index += 1
 	if attack_index == attacks.size():
@@ -69,34 +77,33 @@ func _exit_state():
 
 func _state_update(_delta: float):
 	root.move_and_slide()
-	attack_windup_timer += _delta
-	attack_cancel_timer += _delta
-	
+	attack_timer += _delta
+
 	if current_attack.can_take_attack_knockback:
 		root.velocity = root.velocity.move_toward(Vector3.ZERO, _delta * current_attack.attack_deceleration)
 	else:
 		root.velocity = root.velocity.move_toward(Vector3.ZERO, _delta * current_attack.bounce_deceleration)
-	
-	if attack_windup_timer < current_attack.attack_windup_time:
-		return
-		
-	if not wind_up:
-		wind_up = true
-		_start_attack()
-	attack_timer += _delta
-	
-	if attack_cancel_timer >= current_attack.cancel_time:
+
+	match attack_state:
+		AttackState.Windup:
+			if attack_timer > current_attack.attack_windup_time:
+				attack_state = AttackState.Attack
+				_start_attack()
+		AttackState.Attack:
+			if attack_timer > current_attack.attack_time + current_attack.attack_windup_time:
+				attack_state = AttackState.Winddown
+				_stop_attack()
+		AttackState.Winddown:
+			if attack_timer > current_attack.attack_winddown_time + current_attack.attack_time + current_attack.attack_windup_time:
+				if state_machine._is_grounded():
+					state_machine._change_state(ground_state)
+				else:
+					state_machine._change_state(airborne_state)
+
+	if attack_timer >= current_attack.cancel_time * (current_attack.attack_winddown_time + current_attack.attack_time + current_attack.attack_windup_time):
 		if InputReader.attack_input.is_active():
-			InputReader.attack_input.resolve()
-			state_machine._change_state(self)
-			return
-			
-	if attack_timer >= current_attack.attack_time:
-		attack_timer = 0
-		if state_machine._is_grounded():
 			state_machine._change_state(ground_state)
-		else:
-			state_machine._change_state(airborne_state)
+
 
 func hit_object(object):
 	var hurtbox = object
