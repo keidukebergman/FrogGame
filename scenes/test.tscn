@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b427eeltoq12o" path="res://scenes/instantiable/player/player.tscn" id="3_lpvoh"]
 [ext_resource type="Script" uid="uid://d4km7624424c" path="res://scripts/health_bar_manager.gd" id="3_yk7ts"]
 [ext_resource type="PackedScene" uid="uid://bcs7ck8bsbe0q" path="res://scenes/instantiable/enemies/enemy_mosquito.tscn" id="4_at5dv"]
+[ext_resource type="Script" uid="uid://bhbkxm5uoeqf3" path="res://scenes/stamina_marker_manager.gd" id="5_2cnsr"]
 [ext_resource type="PackedScene" uid="uid://bg1owrrruuh0w" path="res://scenes/lily_pad.tscn" id="7_44saj"]
 [ext_resource type="PackedScene" uid="uid://danhtn6x5yh2h" path="res://scenes/instantiable/enemies/enemy_ranger.tscn" id="7_y81of"]
 [ext_resource type="Script" uid="uid://cilv2vjiqdwvs" path="res://scripts/slow_mo_manager.gd" id="9_5jxlq"]
@@ -144,9 +145,10 @@ autoplay = true
 mix_target = 2
 parameters/looping = true
 
-[node name="UI_Manager" type="Node3D" parent="GameManager" unique_id=511825093 node_paths=PackedStringArray("health_bar_manager")]
+[node name="UI_Manager" type="Node3D" parent="GameManager" unique_id=511825093 node_paths=PackedStringArray("health_bar_manager", "stamina_marker_manager")]
 script = ExtResource("2_uacia")
 health_bar_manager = NodePath("Control/Health_Bar_Manager")
+stamina_marker_manager = NodePath("Control/Stamina_Marker_Manager")
 
 [node name="Control" type="Control" parent="GameManager/UI_Manager" unique_id=2059912981]
 layout_mode = 3
@@ -181,6 +183,52 @@ theme_override_styles/background = SubResource("StyleBoxEmpty_1xwo4")
 theme_override_styles/fill = SubResource("StyleBoxFlat_5civd")
 value = 45.0
 show_percentage = false
+
+[node name="Stamina_Marker_Manager" type="Control" parent="GameManager/UI_Manager/Control" unique_id=661005466 node_paths=PackedStringArray("node_list")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+offset_right = -40.0
+offset_bottom = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset_ratio = Vector2(1, 1)
+script = ExtResource("5_2cnsr")
+node_list = [NodePath("ColorRect"), NodePath("ColorRect2"), NodePath("ColorRect3")]
+inactive_color = Color(0.62967473, 0.62967473, 0.6296747, 1)
+active_color = Color(1, 1, 1, 1)
+
+[node name="ColorRect" type="ColorRect" parent="GameManager/UI_Manager/Control/Stamina_Marker_Manager" unique_id=1437032683]
+layout_mode = 0
+offset_left = 10.106602
+offset_top = 38.1066
+offset_right = 25.106602
+offset_bottom = 53.1066
+rotation = 0.7853982
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="ColorRect2" type="ColorRect" parent="GameManager/UI_Manager/Control/Stamina_Marker_Manager" unique_id=858935520]
+layout_mode = 0
+offset_left = 48.1066
+offset_top = 38.1066
+offset_right = 63.1066
+offset_bottom = 53.1066
+rotation = 0.7853982
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="ColorRect3" type="ColorRect" parent="GameManager/UI_Manager/Control/Stamina_Marker_Manager" unique_id=513208345]
+layout_mode = 0
+offset_left = 86.106606
+offset_top = 38.1066
+offset_right = 101.106606
+offset_bottom = 53.1066
+rotation = 0.7853982
+pivot_offset_ratio = Vector2(0.5, 0.5)
 
 [node name="EnemyManager" type="Node3D" parent="GameManager" unique_id=1134223819]
 script = ExtResource("2_jcd4p")

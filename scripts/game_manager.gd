@@ -17,6 +17,7 @@ func _ready() -> void:
 	player_manager.get_player().bounced.connect(on_player_bounced)
 	await get_tree().create_timer(0.01).timeout
 	main_camera.target = player_manager.get_player().get_main_object()
+	ui_manager.stamina_manager = player_manager.get_player().stamina_manager
 
 func on_player_information_requested(aggro_manager:AggroManager):
 	var player_node = player_manager.get_player_information()
