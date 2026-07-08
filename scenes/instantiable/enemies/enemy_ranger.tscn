@@ -39,7 +39,6 @@ aggro_manager = NodePath("Mosquitoranger/Systems/Aggromanager")
 
 [node name="Mosquitoranger" type="CharacterBody3D" parent="." unique_id=880021798]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
-collision_layer = 0
 collision_mask = 139
 script = ExtResource("2_ew8qx")
 mass = 0.4
@@ -65,19 +64,21 @@ script = ExtResource("5_qtv6h")
 aggro_manager = NodePath("../../Aggromanager")
 nav = NodePath("../../../NavigationAgent3D")
 body = NodePath("../../..")
-movement_speed = 6.0
+movement_speed = 4.0
 acceleration = 30.0
 deceleration = 30.0
 ground_poller = NodePath("../../../GroundPolling")
 attack_state = NodePath("../RangerAttackState")
 fall_state = NodePath("../FallState")
+distance_tolerance = 1.0
 
 [node name="RangerAttackState" type="Node3D" parent="Mosquitoranger/Systems/StateManager" unique_id=1049232979 node_paths=PackedStringArray("aggro_manager", "next_state")]
 script = ExtResource("6_tao5y")
 aggro_manager = NodePath("../../Aggromanager")
+attack_time = 1.2
 next_state = NodePath("../RangerHuntState")
 projectile_speed = 7.0
-shots = 3
+shots = 1
 projectile = ExtResource("7_0x6lq")
 
 [node name="FallState" type="Node3D" parent="Mosquitoranger/Systems/StateManager" unique_id=1249741245]

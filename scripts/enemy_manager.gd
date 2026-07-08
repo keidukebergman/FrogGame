@@ -22,7 +22,7 @@ func on_requested_player_information(aggro_manager:AggroManager):
 
 func spawn_enemy(enemy:PackedScene, spawn_position:Vector3) -> Node:
 	var enemy_instance = enemy.instantiate()
+	enemy_instance.global_position = spawn_position
 	NodePaths.dynamic_scene_path.add_child(enemy_instance)
 	var enemy_entity:EnemyEntity = enemy_instance as EnemyEntity
-	enemy_entity.global_position = spawn_position
 	return enemy_instance

@@ -4,6 +4,7 @@ class_name RangerAttackState
 @export var aggro_manager:AggroManager
 @export var windup_time:float = 0.6
 @export var attack_time:float = 0.3
+
 @export var next_state:State
 var attack_direction:Vector3
 @export var can_take_attack_knockback:bool
@@ -40,7 +41,10 @@ func _state_update(_delta: float):
 	pass
 
 func _state_physics_update(_delta: float):
+	var yvel = root.velocity.y
+	yvel -= 9.82 * _delta
 	root.velocity = root.velocity.move_toward(Vector3.ZERO, _delta * attack_deceleration)
+	root.velocity.y = yvel
 	root.move_and_slide()
 
 func fire_arrow():

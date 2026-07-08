@@ -1,11 +1,13 @@
 extends State
 class_name PlayerDashState
 
+@export var stamina_manager:StaminaManager
 @export var airborne_state:PlayerAirborneState
 @export var grounded_state:PlayerGroundState
 @export var dash_duration: float = 0.2
 @export var dash_invulnerability: float = 0.2
 @export var dash_velocity_attenuation = 30
+@export var stamina_cost:int = 1
 var dash_timer:float = 0
 var dash_invul_timer: float = 0
 @export var dash_velocity = 8
@@ -15,6 +17,10 @@ func _initialize_state(state_machine_node:FiniteStateMachine, root_node:Node):
 	root = root_node
 
 func _enter_state():
+	var success = stamina_manager.use_stamina(stamina_cost)
+	if not success:
+		state_machine._change_state(grounded_state)
+		return
 	is_active = true
 	dash_timer = 0
 	dash_invul_timer = 0

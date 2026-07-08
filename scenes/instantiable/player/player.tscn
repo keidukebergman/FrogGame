@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://ditgtgoaurqhl" path="res://sprite/Slash.png" id="20_8o3c5"]
 [ext_resource type="Texture2D" uid="uid://chxbdgiwpr16x" path="res://sprite/Pondtus.png" id="21_ijgvy"]
 [ext_resource type="Script" uid="uid://cionpm6je6331" path="res://scripts/ground_polling.gd" id="23_7hh1b"]
+[ext_resource type="Script" uid="uid://b8otkaxytoq5s" path="res://scenes/instantiable/player/stamina_manager.gd" id="23_qsdt6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ppyta"]
 radius = 0.40527344
@@ -40,8 +41,9 @@ size = Vector3(0.9463806, 1, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ajshl"]
 size = Vector3(0.6, 1.1777344, 0.6)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_c6rvn"]
-size = Vector3(0.867, 3, 1)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n1xq6"]
+radius = 0.821
+height = 4.174
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mf4mk"]
 albedo_color = Color(0, 0.509671, 0.324473, 1)
@@ -91,6 +93,7 @@ root = NodePath("../..")
 
 [node name="Grounded" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=32024872 node_paths=PackedStringArray("dash_state", "airborne_state", "ground_attack_state", "heavy_attack_charge_state")]
 script = ExtResource("3_7hh1b")
+movement_speed = 4.0
 acceleration = 25.0
 deceleration = 90.0
 idle_velocity_dampening = 23.0
@@ -116,8 +119,9 @@ backward_velocity = 10.0
 visual_manager = NodePath("../../../Visual/Sprite3D")
 hurtbox = NodePath("../../HitAndHurt/Hurtbox/Hurtbox")
 
-[node name="DashState" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1986417408 node_paths=PackedStringArray("grounded_state")]
+[node name="DashState" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1986417408 node_paths=PackedStringArray("stamina_manager", "grounded_state")]
 script = ExtResource("5_gnc5k")
+stamina_manager = NodePath("../../StaminaManager")
 grounded_state = NodePath("../Grounded")
 
 [node name="GroundLightAttack" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1317969824 node_paths=PackedStringArray("attacks", "airborne_state", "ground_state", "effect_manager")]
@@ -134,7 +138,7 @@ slice_movement_force = 8.0
 slice_movement_curve = SubResource("Curve_isv8f")
 attack_deceleration = 30.0
 attack_time = 0.2
-attack_windup_time = 0.05
+attack_windup_time = 0.25
 attack_winddown_time = 0.0
 slash_hitbox = NodePath("../../../HitAndHurt/Hitboxes/slash_1")
 slash_fx = NodePath("../../../../Visual/slash_1/Node3D")
@@ -146,7 +150,7 @@ slice_movement_force = 8.0
 slice_movement_curve = SubResource("Curve_isv8f")
 attack_deceleration = 30.0
 attack_time = 0.2
-attack_windup_time = 0.05
+attack_windup_time = 0.25
 attack_winddown_time = 0.0
 slash_hitbox = NodePath("../../../HitAndHurt/Hitboxes/slash_2")
 slash_fx = NodePath("../../../../Visual/slash_2/Node3D")
@@ -155,11 +159,12 @@ metadata/_custom_type_script = "uid://bc1n5f7xdhbsb"
 [node name="Combo1_3" type="Node" parent="FrogCharacter/Systems/StateMachine/GroundLightAttack" unique_id=1217492405 node_paths=PackedStringArray("slash_hitbox", "slash_fx")]
 script = ExtResource("7_isv8f")
 damage = 20.0
-slice_movement_force = 8.0
+knockback_amount = 6.0
+slice_movement_force = 12.0
 slice_movement_curve = SubResource("Curve_isv8f")
 attack_deceleration = 30.0
 attack_time = 0.2
-attack_windup_time = 0.05
+attack_windup_time = 0.25
 attack_winddown_time = 0.2
 cancel_time = 1.0
 slash_hitbox = NodePath("../../../HitAndHurt/Hitboxes/slash_3")
@@ -308,8 +313,9 @@ script = ExtResource("15_wq28r")
 metadata/_custom_type_script = "uid://c7g7jvcrqudgm"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler/TonguePoint/Hitbox" unique_id=1735871244]
-transform = Transform3D(0.3, 0, 0, 0, 0.2999984, 0, 0, 0, 0.2999984, -0.066467285, 0, 0)
-shape = SubResource("BoxShape3D_c6rvn")
+transform = Transform3D(0.3, 0, 0, 0, 0.2999976, 0, 0, 0, 0.2999976, -0.066467285, 0, 0)
+shape = SubResource("CapsuleShape3D_n1xq6")
+debug_color = Color(0.9947278, 0, 0.15292868, 1)
 
 [node name="TongueOrigin" type="Node3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler" unique_id=1555274743]
 transform = Transform3D(1, 0, 0, 0, 0.9999994, 0, 0, 0, 0.9999994, 0, 0.49375212, 0.16814767)
@@ -320,6 +326,10 @@ layers = 2
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("18_knlvm")
+
+[node name="StaminaManager" type="Node3D" parent="FrogCharacter/Systems" unique_id=1792750864]
+script = ExtResource("23_qsdt6")
+max_stamina = 3
 
 [node name="Visual" type="Node3D" parent="FrogCharacter" unique_id=719730847]
 

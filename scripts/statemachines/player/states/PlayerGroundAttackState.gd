@@ -83,7 +83,6 @@ func _state_update(_delta: float):
 		root.velocity = root.velocity.move_toward(Vector3.ZERO, _delta * current_attack.attack_deceleration)
 	else:
 		root.velocity = root.velocity.move_toward(Vector3.ZERO, _delta * current_attack.bounce_deceleration)
-
 	match attack_state:
 		AttackState.Windup:
 			if attack_timer > current_attack.attack_windup_time:
