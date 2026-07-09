@@ -31,6 +31,10 @@
 radius = 0.40527344
 height = 1.3397183
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n1xq6"]
+radius = 0.821
+height = 4.174
+
 [sub_resource type="Curve" id="Curve_isv8f"]
 _data = [Vector2(0, 0.33786076), 0.0, 0.0, 0, 0, Vector2(1e-05, 0.3820225), 0.0, 0.0, 0, 0, Vector2(2e-05, 0.92134833), 0.0, 0.0, 0, 0, Vector2(0.045081973, 0.033707857), -0.06853931, -0.06853931, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 5
@@ -40,10 +44,6 @@ size = Vector3(0.9463806, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ajshl"]
 size = Vector3(0.6, 1.1777344, 0.6)
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n1xq6"]
-radius = 0.821
-height = 4.174
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mf4mk"]
 albedo_color = Color(0, 0.509671, 0.324473, 1)
@@ -56,10 +56,10 @@ radius = 0.264354
 
 [node name="Player" type="Node3D" unique_id=412181745 node_paths=PackedStringArray("health_manager", "death_manager", "state_machine", "stamina_manager", "state_grounded", "state_attack", "state_tongue_attack", "state_airborne", "state_death", "effect_manager", "water_splash_manager", "hurtbox")]
 script = ExtResource("1_gnc5k")
-health_manager = NodePath("FrogCharacter/Systems/HealthManager")
+health_manager = NodePath("FrogCharacter/Systems/Resources/HealthManager")
 death_manager = NodePath("FrogCharacter/Systems/DeathManager")
 state_machine = NodePath("FrogCharacter/Systems/StateMachine")
-stamina_manager = NodePath("FrogCharacter/Systems/StaminaManager")
+stamina_manager = NodePath("FrogCharacter/Systems/Resources/StaminaManager")
 state_grounded = NodePath("FrogCharacter/Systems/StateMachine/Grounded")
 state_attack = NodePath("FrogCharacter/Systems/StateMachine/GroundLightAttack")
 state_tongue_attack = NodePath("FrogCharacter/Systems/StateMachine/TongueAttackHeavy")
@@ -82,6 +82,62 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03362894, 0)
 shape = SubResource("CapsuleShape3D_ppyta")
 
 [node name="Systems" type="Node3D" parent="FrogCharacter" unique_id=1408947632]
+
+[node name="Resources" type="Node3D" parent="FrogCharacter/Systems" unique_id=857678145]
+
+[node name="HealthManager" type="Node3D" parent="FrogCharacter/Systems/Resources" unique_id=1600092240]
+script = ExtResource("10_c7xul")
+health = 100.0
+max_health = 100.0
+
+[node name="StaminaManager" type="Node3D" parent="FrogCharacter/Systems/Resources" unique_id=1792750864]
+script = ExtResource("23_qsdt6")
+max_stamina = 3
+
+[node name="Actions" type="Node3D" parent="FrogCharacter/Systems" unique_id=1323442406]
+
+[node name="TongueAttackHandler" type="Node3D" parent="FrogCharacter/Systems/Actions" unique_id=1781741061 node_paths=PackedStringArray("mouth_marker", "tongue_hitbox", "tongue_tip_node", "tongue_line_node", "state_manager", "state_machine_state")]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+script = ExtResource("17_hdudl")
+attach_force = 15.0
+mouth_marker = NodePath("TongueOrigin")
+tongue_hitbox = NodePath("TonguePoint/Hitbox")
+max_length = 10.0
+extension_speed = 50.0
+retraction_speed = 80.0
+retraction_acceleration_speed = 1.5
+tongue_tip_node = NodePath("TonguePoint")
+tongue_line_node = NodePath("TongueOrigin/Sprite3D")
+state_manager = NodePath("../../StateMachine")
+state_machine_state = NodePath("../../StateMachine/TongueAttackHeavy")
+
+[node name="TonguePoint" type="Node3D" parent="FrogCharacter/Systems/Actions/TongueAttackHandler" unique_id=1087418601]
+
+[node name="Sprite3D" type="Sprite3D" parent="FrogCharacter/Systems/Actions/TongueAttackHandler/TonguePoint" unique_id=1972501464]
+transform = Transform3D(0.2, 0, 0, 0, 0.15320887, 0.1285575, 0, -0.1285575, 0.15320887, 0, 0, 0)
+alpha_cut = 2
+texture = ExtResource("19_c3khl")
+
+[node name="Hitbox" type="Area3D" parent="FrogCharacter/Systems/Actions/TongueAttackHandler/TonguePoint" unique_id=2076111957]
+collision_layer = 0
+collision_mask = 41
+script = ExtResource("15_wq28r")
+metadata/_custom_type_script = "uid://c7g7jvcrqudgm"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FrogCharacter/Systems/Actions/TongueAttackHandler/TonguePoint/Hitbox" unique_id=1735871244]
+transform = Transform3D(0.3, 0, 0, 0, 0.2999976, 0, 0, 0, 0.2999976, -0.066467285, 0, 0)
+shape = SubResource("CapsuleShape3D_n1xq6")
+debug_color = Color(0.9947278, 0, 0.15292868, 1)
+
+[node name="TongueOrigin" type="Node3D" parent="FrogCharacter/Systems/Actions/TongueAttackHandler" unique_id=1555274743]
+transform = Transform3D(1, 0, 0, 0, 0.9999994, 0, 0, 0, 0.9999994, 0, 0.49375212, 0.16814767)
+
+[node name="Sprite3D" type="Sprite3D" parent="FrogCharacter/Systems/Actions/TongueAttackHandler/TongueOrigin" unique_id=1829002750]
+transform = Transform3D(4.9999995, 0, 0, 0, 3.8302236, 3.213939, 0, -3.213939, 3.8302236, 0, -0.00044202805, -0.16814777)
+layers = 2
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("18_knlvm")
 
 [node name="StateMachine" type="Node3D" parent="FrogCharacter/Systems" unique_id=836068986 node_paths=PackedStringArray("ground_collider", "renderer", "current_state", "root")]
 script = ExtResource("2_gnc5k")
@@ -108,7 +164,7 @@ heavy_attack_threshold = 0.05
 script = ExtResource("7_v47df")
 grounded_state = NodePath("../Grounded")
 dash_state = NodePath("../DashState")
-tongue_attack_handler = NodePath("../../SpecialHandler/TongueAttackHandler")
+tongue_attack_handler = NodePath("../../Actions/TongueAttackHandler")
 movement_speed = 1.0
 acceleration = 0.2
 air_drag = 10
@@ -122,7 +178,7 @@ hurtbox = NodePath("../../HitAndHurt/Hurtbox/Hurtbox")
 
 [node name="DashState" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1986417408 node_paths=PackedStringArray("stamina_manager", "grounded_state")]
 script = ExtResource("5_gnc5k")
-stamina_manager = NodePath("../../StaminaManager")
+stamina_manager = NodePath("../../Resources/StaminaManager")
 grounded_state = NodePath("../Grounded")
 
 [node name="GroundLightAttack" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1317969824 node_paths=PackedStringArray("attacks", "airborne_state", "ground_state", "effect_manager")]
@@ -135,7 +191,7 @@ effect_manager = NodePath("../../EffectManager")
 
 [node name="Combo1_1" type="Node" parent="FrogCharacter/Systems/StateMachine/GroundLightAttack" unique_id=1853835556 node_paths=PackedStringArray("slash_hitbox", "slash_fx")]
 script = ExtResource("7_isv8f")
-slice_movement_force = 8.0
+slice_movement_force = 6.0
 slice_movement_curve = SubResource("Curve_isv8f")
 attack_deceleration = 30.0
 attack_time = 0.2
@@ -147,7 +203,7 @@ metadata/_custom_type_script = "uid://bc1n5f7xdhbsb"
 
 [node name="Combo1_2" type="Node" parent="FrogCharacter/Systems/StateMachine/GroundLightAttack" unique_id=1920325079 node_paths=PackedStringArray("slash_hitbox", "slash_fx")]
 script = ExtResource("7_isv8f")
-slice_movement_force = 8.0
+slice_movement_force = 6.0
 slice_movement_curve = SubResource("Curve_isv8f")
 attack_deceleration = 30.0
 attack_time = 0.2
@@ -161,7 +217,7 @@ metadata/_custom_type_script = "uid://bc1n5f7xdhbsb"
 script = ExtResource("7_isv8f")
 damage = 20.0
 knockback_amount = 6.0
-slice_movement_force = 12.0
+slice_movement_force = 8.0
 slice_movement_curve = SubResource("Curve_isv8f")
 attack_deceleration = 30.0
 attack_time = 0.2
@@ -204,16 +260,11 @@ metadata/_custom_type_script = "uid://bc1n5f7xdhbsb"
 script = ExtResource("5_xmha0")
 airborne_state = NodePath("../Airborne")
 ground_state = NodePath("../Grounded")
-tongue_attack_manager = NodePath("../../SpecialHandler/TongueAttackHandler")
+tongue_attack_manager = NodePath("../../Actions/TongueAttackHandler")
 body = NodePath("../../..")
 
 [node name="DeathManager" type="Node3D" parent="FrogCharacter/Systems" unique_id=211864361]
 script = ExtResource("9_3qxr5")
-
-[node name="HealthManager" type="Node3D" parent="FrogCharacter/Systems" unique_id=1600092240]
-script = ExtResource("10_c7xul")
-health = 100.0
-max_health = 100.0
 
 [node name="EffectManager" type="Node3D" parent="FrogCharacter/Systems" unique_id=1280573445 node_paths=PackedStringArray("hurtbox")]
 script = ExtResource("11_7r8gw")
@@ -224,6 +275,8 @@ metadata/_custom_type_script = "uid://miugg8jpe2ku"
 script = ExtResource("12_pcexo")
 body = NodePath("../../..")
 metadata/_custom_type_script = "uid://tp7u7qxjy8l5"
+
+[node name="StunHandler" type="Node3D" parent="FrogCharacter/Systems/EffectManager" unique_id=1103862358]
 
 [node name="WaterSplashManager" type="Node3D" parent="FrogCharacter/Systems" unique_id=338726269 node_paths=PackedStringArray("hurtbox")]
 script = ExtResource("13_2sfd1")
@@ -282,55 +335,6 @@ metadata/_custom_type_script = "uid://bi5fwt04sq1jq"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FrogCharacter/Systems/HitAndHurt/Hurtbox/Hurtbox" unique_id=1820371027]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08886719, 0)
 shape = SubResource("BoxShape3D_ajshl")
-
-[node name="SpecialHandler" type="Node3D" parent="FrogCharacter/Systems" unique_id=1323442406]
-
-[node name="TongueAttackHandler" type="Node3D" parent="FrogCharacter/Systems/SpecialHandler" unique_id=1781741061 node_paths=PackedStringArray("mouth_marker", "tongue_hitbox", "tongue_tip_node", "tongue_line_node", "state_manager", "state_machine_state")]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
-script = ExtResource("17_hdudl")
-attach_force = 15.0
-mouth_marker = NodePath("TongueOrigin")
-tongue_hitbox = NodePath("TonguePoint/Hitbox")
-max_length = 10.0
-extension_speed = 50.0
-retraction_speed = 80.0
-retraction_acceleration_speed = 1.5
-tongue_tip_node = NodePath("TonguePoint")
-tongue_line_node = NodePath("TongueOrigin/Sprite3D")
-state_manager = NodePath("../../StateMachine")
-state_machine_state = NodePath("../../StateMachine/TongueAttackHeavy")
-
-[node name="TonguePoint" type="Node3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler" unique_id=1087418601]
-
-[node name="Sprite3D" type="Sprite3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler/TonguePoint" unique_id=1972501464]
-transform = Transform3D(0.2, 0, 0, 0, 0.15320887, 0.1285575, 0, -0.1285575, 0.15320887, 0, 0, 0)
-alpha_cut = 2
-texture = ExtResource("19_c3khl")
-
-[node name="Hitbox" type="Area3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler/TonguePoint" unique_id=2076111957]
-collision_layer = 0
-collision_mask = 41
-script = ExtResource("15_wq28r")
-metadata/_custom_type_script = "uid://c7g7jvcrqudgm"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler/TonguePoint/Hitbox" unique_id=1735871244]
-transform = Transform3D(0.3, 0, 0, 0, 0.2999976, 0, 0, 0, 0.2999976, -0.066467285, 0, 0)
-shape = SubResource("CapsuleShape3D_n1xq6")
-debug_color = Color(0.9947278, 0, 0.15292868, 1)
-
-[node name="TongueOrigin" type="Node3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler" unique_id=1555274743]
-transform = Transform3D(1, 0, 0, 0, 0.9999994, 0, 0, 0, 0.9999994, 0, 0.49375212, 0.16814767)
-
-[node name="Sprite3D" type="Sprite3D" parent="FrogCharacter/Systems/SpecialHandler/TongueAttackHandler/TongueOrigin" unique_id=1829002750]
-transform = Transform3D(4.9999995, 0, 0, 0, 3.8302236, 3.213939, 0, -3.213939, 3.8302236, 0, -0.00044202805, -0.16814777)
-layers = 2
-alpha_cut = 2
-texture_filter = 0
-texture = ExtResource("18_knlvm")
-
-[node name="StaminaManager" type="Node3D" parent="FrogCharacter/Systems" unique_id=1792750864]
-script = ExtResource("23_qsdt6")
-max_stamina = 3
 
 [node name="Visual" type="Node3D" parent="FrogCharacter" unique_id=719730847]
 

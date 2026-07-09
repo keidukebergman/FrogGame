@@ -81,9 +81,10 @@ deceleration = 30.0
 ground_poller = NodePath("../../../GroundPolling")
 attack_state = NodePath("../MosquitoAttackState")
 
-[node name="MosquitoAttackState" type="Node3D" parent="Mosquitoknight/Systems/StateManager" unique_id=614694876 node_paths=PackedStringArray("aggro_manager", "hitbox", "attack_visual", "next_state")]
+[node name="MosquitoAttackState" type="Node3D" parent="Mosquitoknight/Systems/StateManager" unique_id=614694876 node_paths=PackedStringArray("aggro_manager", "nav", "hitbox", "attack_visual", "next_state")]
 script = ExtResource("6_ej604")
 aggro_manager = NodePath("../../Aggromanager")
+nav = NodePath("../../../NavigationAgent3D")
 hitbox = NodePath("../../HitAndHurt/Hitboxes/Hitbox_stab")
 attack_visual = NodePath("../../../Visual/AttackSprites/Stab")
 windup_time = 0.2

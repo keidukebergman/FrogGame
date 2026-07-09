@@ -1,7 +1,7 @@
 extends State
 class_name MosquitoAttackState
-
 @export var aggro_manager:AggroManager
+@export var nav:NavigationAgent3D
 @export var hitbox:Hitbox
 @export var attack_visual:Node3D
 @export var windup_time:float = 0.6
@@ -16,6 +16,8 @@ var attack_direction:Vector3
 @export var attack_knockback_force:float
 @export var knockback_amount:float
 
+var _entry_id:int = 0
+
 func _initialize_state(state_machine_node:FiniteStateMachine, root_node:Node):
 	super._initialize_state(state_machine_node, root_node)
 	hitbox.hit_entity.connect(hit_object)
@@ -23,17 +25,29 @@ func _initialize_state(state_machine_node:FiniteStateMachine, root_node:Node):
 
 func _enter_state():
 	is_active = true
+	_entry_id += 1
+	var my_id = _entry_id
 	if aggro_manager.target == null:
 		state_machine._change_state(next_state)
+		return
+ 	
 	attack_direction = (aggro_manager.target.global_position - root.global_position).normalized()
 	set_hitbox_rotation()
 	set_slash_indicator_rotation()
+
 	await get_tree().create_timer(windup_time).timeout
+	if not is_active or my_id != _entry_id:
+		return 
+
 	registering = true
 	hitbox.start_detecting_hits()
 	attack_visual.visible = true
-	root.add_force(attack_direction*attack_velocity)
+	root.add_force(attack_direction * attack_velocity)
+
 	await get_tree().create_timer(attack_time).timeout
+	if not is_active or my_id != _entry_id:
+		return
+
 	hitbox.stop_detecting_hits()
 	attack_visual.visible = false
 	state_machine._change_state(next_state)
@@ -41,6 +55,8 @@ func _enter_state():
 func _exit_state():
 	registering = false
 	is_active = false
+	hitbox.stop_detecting_hits()
+	attack_visual.visible = false
 
 func hit_object(object):
 	var hurtbox = object
@@ -56,19 +72,16 @@ func apply_damage(hurtbox:Hurtbox):
 	attack_data.attacking_hitbox = hitbox
 	attack_data.receiving_hurtbox = hurtbox
 	var knockback_direction = Vector3(attack_direction.x, 0, attack_direction.z)
-	attack_data.effects = {"knockback" : knockback_amount * knockback_direction};
+	attack_data.effects = {"knockback" : knockback_amount * knockback_direction}
 	hurtbox.apply_attack(attack_data)
 
 func _state_update(_delta: float):
-	if registering:
-		pass
-	else:
-		pass
+	pass
 
-func _state_physics_update(_delta: float):
-	root.velocity = root.velocity.move_toward(Vector3.ZERO, _delta*attack_deceleration)
+func _state_physics_update(delta: float):
+	root.velocity = root.velocity.move_toward(Vector3.ZERO, delta * attack_deceleration)
 	root.move_and_slide()
-	
+
 func set_hitbox_rotation():
 	var dir:Vector2 = Vector2(attack_direction.z, attack_direction.x)
 	var angle = -atan2(dir.x, dir.y)

@@ -22,9 +22,17 @@ var movement_direction:Vector3
 func _initialize_state(state_machine_node:FiniteStateMachine, root_node:Node):
 	super._initialize_state(state_machine_node, root_node)
 	spawn_position = body.global_position
+	nav.avoidance_enabled = true
+	nav.radius = 0.3
+	nav.max_speed = movement_speed
+	nav.velocity_computed.connect(_on_velocity_computed)
 
 func _enter_state() -> void:
+	super._enter_state()
 	_set_nav_target()
+
+func _exit_state() -> void:
+	super._exit_state()
 
 var spawn_position:Vector3;
 
@@ -54,7 +62,7 @@ func _state_update(_delta: float) -> void:
 
 var destination;
 var destination_query_timeout:float = 0;
-
+var nav_velocity: Vector3 = Vector3.ZERO
 func _state_physics_update(delta: float) -> void:
 	if ground_poller.is_grounded:
 		body.axis_lock_linear_y = true
@@ -73,11 +81,15 @@ func _state_physics_update(delta: float) -> void:
 	var direction_dot = body.velocity.dot(direction)
 	var acceleration_parameter = acceleration if direction_dot > 0 else deceleration 
 	
-	var yvel = body.velocity.y
-	yvel -= 9.82 * delta
-	body.velocity = body.velocity.move_toward(movement_direction * movement_speed,\
-		delta * acceleration_parameter)
-	body.velocity.y = yvel
+	nav.set_velocity(direction * movement_speed)
 	
-	nav.velocity = Vector3(body.velocity.x, 0, body.velocity.z)
+	var yvel = body.velocity.y
+	yvel -= 9.82 * get_physics_process_delta_time()
+	body.velocity = body.velocity.move_toward(nav_velocity, delta * acceleration_parameter)
+	body.velocity.y = yvel
 	body.move_and_slide()
+
+
+func _on_velocity_computed(safe_velocity: Vector3) -> void:
+	if is_active:
+		nav_velocity = safe_velocity
