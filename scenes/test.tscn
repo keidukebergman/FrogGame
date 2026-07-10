@@ -473,7 +473,7 @@ metadata/_custom_type_script = "uid://cionpm6je6331"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20124453, 0)
 shape = SubResource("SphereShape3D_gm488")
 
-[node name="Box_Talkable" type="RigidBody3D" parent="." unique_id=1472776337 node_paths=PackedStringArray("rig", "thrown_object", "dragged_hurtbox", "ground_poller", "health_manager", "death_manager", "hurtbox")]
+[node name="Box_Talkable" type="RigidBody3D" parent="." unique_id=1472776337]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.499021, 0.6376561, -2.6717072)
 collision_layer = 128
 collision_mask = 9
@@ -481,15 +481,6 @@ axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 mass = 2.0
-script = ExtResource("21_n74k2")
-rig = NodePath(".")
-thrown_object = NodePath("")
-dragged_hurtbox = NodePath("")
-affected_by_gravity = true
-ground_poller = NodePath("")
-health_manager = NodePath("")
-death_manager = NodePath("")
-hurtbox = NodePath("")
 
 [node name="Boxmesh" parent="Box_Talkable" unique_id=1686494206 instance=ExtResource("12_ghpyy")]
 transform = Transform3D(0.29999998, 0, 0, 0, 0.6, 0, 0, 0, 0.29999998, 0, 0, 0)

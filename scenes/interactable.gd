@@ -9,3 +9,6 @@ enum InteractableType{
 	Dialogue,
 	Interface
 }
+
+func on_interaction():
+	pass
