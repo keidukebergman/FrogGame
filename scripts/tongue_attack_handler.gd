@@ -8,6 +8,7 @@ var attached_is_heavy:bool = false
 var tongue_attached_node:Node3D = null
 var tongue_attached_node_offset:Vector3
 var tongue_target_position:Vector3
+
 @export var attach_force:float = 10
 @export var mouth_marker:Node3D
 @export var tongue_hitbox:Hitbox

@@ -6,16 +6,15 @@ class_name PlayerAirborneState
 @export var tongue_attack_handler:TongueAttackManager
 @export var movement_speed:float = 4
 @export var acceleration:float = 2
-@export var duration_before_fall:float = 0.5
+@export var duration_before_fall:float = 1
 var fall_timer = 0
-@export var air_drag = 5
+@export var air_drag = 8
 
 func _initialize_state(state_machine_node:FiniteStateMachine, root_node:Node):
 	state_machine = state_machine_node
 	root = root_node
 
 func _enter_state():
-	print("entered airborne")
 	fall_timer = 0
 	root.axis_lock_angular_z =true
 	super._enter_state()

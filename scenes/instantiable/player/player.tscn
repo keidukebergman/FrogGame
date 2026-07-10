@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://bi5fwt04sq1jq" path="res://scripts/Hurtbox_draggable.gd" id="16_c65wj"]
 [ext_resource type="Script" uid="uid://c4mpe0vm2olow" path="res://scripts/tongue_attack_handler.gd" id="17_hdudl"]
 [ext_resource type="Texture2D" uid="uid://ys2vv7uhhv5b" path="res://sprite/tongue.png" id="18_knlvm"]
+[ext_resource type="Script" uid="uid://bjei6ecclrv4i" path="res://scenes/instantiable/player/player_dialogue_state.gd" id="18_v47df"]
 [ext_resource type="Texture2D" uid="uid://bf5ar4mkltuns" path="res://icon.svg" id="19_c3khl"]
 [ext_resource type="Texture2D" uid="uid://ditgtgoaurqhl" path="res://sprite/Slash.png" id="20_8o3c5"]
 [ext_resource type="Texture2D" uid="uid://chxbdgiwpr16x" path="res://sprite/Pondtus.png" id="21_ijgvy"]
@@ -138,6 +139,10 @@ layers = 2
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("18_knlvm")
+
+[node name="InteractionHandler" type="Node3D" parent="FrogCharacter/Systems/Actions" unique_id=315130862]
+
+[node name="DialogueHandler" type="Node3D" parent="FrogCharacter/Systems/Actions" unique_id=1802175840]
 
 [node name="StateMachine" type="Node3D" parent="FrogCharacter/Systems" unique_id=836068986 node_paths=PackedStringArray("ground_collider", "renderer", "current_state", "root")]
 script = ExtResource("2_gnc5k")
@@ -262,6 +267,9 @@ airborne_state = NodePath("../Airborne")
 ground_state = NodePath("../Grounded")
 tongue_attack_manager = NodePath("../../Actions/TongueAttackHandler")
 body = NodePath("../../..")
+
+[node name="DialogueState" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1303653249]
+script = ExtResource("18_v47df")
 
 [node name="DeathManager" type="Node3D" parent="FrogCharacter/Systems" unique_id=211864361]
 script = ExtResource("9_3qxr5")
