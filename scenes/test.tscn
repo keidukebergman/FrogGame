@@ -31,6 +31,8 @@
 [ext_resource type="Script" uid="uid://cionpm6je6331" path="res://scripts/ground_polling.gd" id="26_1dqgb"]
 [ext_resource type="Script" uid="uid://dpt7wx0xe24ny" path="res://scripts/projectile_knockback_manager.gd" id="26_j7bvy"]
 [ext_resource type="Material" uid="uid://cq31wu4xny0ql" path="res://materials/water.tres" id="26_kay4s"]
+[ext_resource type="Script" uid="uid://coh76euxlnng5" path="res://scenes/interactable_talker.gd" id="32_75pfo"]
+[ext_resource type="Script" uid="uid://dtxqgavwcfrd" path="res://scenes/interaction_area.gd" id="33_gv2t6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_75pfo"]
 content_margin_left = 2.0
@@ -122,6 +124,9 @@ size = Vector3(0.9, 1.2, 0.9)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gm488"]
 radius = 0.264354
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_x05w2"]
+radius = 1.004956
 
 [node name="Node3D" type="Node3D" unique_id=51480205]
 
@@ -467,6 +472,39 @@ metadata/_custom_type_script = "uid://cionpm6je6331"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Box2_Draggable/GroundPolling" unique_id=1998413863]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20124453, 0)
 shape = SubResource("SphereShape3D_gm488")
+
+[node name="Box_Talkable" type="RigidBody3D" parent="." unique_id=1472776337 node_paths=PackedStringArray("rig", "thrown_object", "dragged_hurtbox", "ground_poller", "health_manager", "death_manager", "hurtbox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.499021, 0.6376561, -2.6717072)
+collision_layer = 128
+collision_mask = 9
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+mass = 2.0
+script = ExtResource("21_n74k2")
+rig = NodePath(".")
+thrown_object = NodePath("")
+dragged_hurtbox = NodePath("")
+affected_by_gravity = true
+ground_poller = NodePath("")
+health_manager = NodePath("")
+death_manager = NodePath("")
+hurtbox = NodePath("")
+
+[node name="Boxmesh" parent="Box_Talkable" unique_id=1686494206 instance=ExtResource("12_ghpyy")]
+transform = Transform3D(0.29999998, 0, 0, 0, 0.6, 0, 0, 0, 0.29999998, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box_Talkable" unique_id=2085240690]
+shape = SubResource("BoxShape3D_1dqgb")
+
+[node name="InteractableTalker" type="Node3D" parent="Box_Talkable" unique_id=1278315697]
+script = ExtResource("32_75pfo")
+
+[node name="InteractionArea" type="Area3D" parent="Box_Talkable/InteractableTalker" unique_id=416084472]
+script = ExtResource("33_gv2t6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box_Talkable/InteractableTalker/InteractionArea" unique_id=1272177334]
+shape = SubResource("SphereShape3D_x05w2")
 
 [connection signal="took_damage" from="Box/DraggableHurtbox" to="Box/HealthManager" method="_on_draggable_hurtbox_took_damage"]
 [connection signal="took_damage" from="Box2_Draggable/BoxRegularHurtbox" to="Box2_Draggable/HealthManager" method="_on_draggable_hurtbox_took_damage"]

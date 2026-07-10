@@ -19,7 +19,7 @@ func _initialize_state(state_machine_node:FiniteStateMachine, root_node:Node):
 	super._initialize_state(state_machine_node, root_node)
 	spawn_position = body.global_position
 	nav.avoidance_enabled = true
-	nav.radius = 0.4
+	nav.radius = 0.2
 	nav.max_speed = movement_speed
 	nav.velocity_computed.connect(_on_velocity_computed)
 	_set_nav_target()
