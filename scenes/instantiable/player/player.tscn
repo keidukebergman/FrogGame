@@ -11,7 +11,9 @@
 [ext_resource type="Script" uid="uid://bc1n5f7xdhbsb" path="res://scripts/data/player_attack.gd" id="7_isv8f"]
 [ext_resource type="Script" uid="uid://b2ifomelrlmfr" path="res://scripts/statemachines/player/states/PlayerAirborneState.gd" id="7_v47df"]
 [ext_resource type="Script" uid="uid://dmj61wc554x8h" path="res://scripts/player_death_manager.gd" id="9_3qxr5"]
+[ext_resource type="Script" uid="uid://dn2bdkmvgmwqs" path="res://scenes/instantiable/player/interaction_handler.gd" id="9_c7xul"]
 [ext_resource type="Script" uid="uid://calbyq6tluyu" path="res://scripts/player_death_state.gd" id="9_gnc5k"]
+[ext_resource type="Script" uid="uid://dtxqgavwcfrd" path="res://scenes/interaction_area.gd" id="9_qtvl0"]
 [ext_resource type="Script" uid="uid://1rqaiis71irb" path="res://scripts/health_manager.gd" id="10_c7xul"]
 [ext_resource type="Script" uid="uid://miugg8jpe2ku" path="res://scripts/effect_manager.gd" id="11_7r8gw"]
 [ext_resource type="Script" uid="uid://tp7u7qxjy8l5" path="res://scripts/knockback_manager.gd" id="12_pcexo"]
@@ -27,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://chxbdgiwpr16x" path="res://sprite/Pondtus.png" id="21_ijgvy"]
 [ext_resource type="Script" uid="uid://cionpm6je6331" path="res://scripts/ground_polling.gd" id="23_7hh1b"]
 [ext_resource type="Script" uid="uid://b8otkaxytoq5s" path="res://scenes/instantiable/player/stamina_manager.gd" id="23_qsdt6"]
+[ext_resource type="Script" uid="uid://b38lxd2rtvvve" path="res://scenes/instantiable/player/interaction_icon.gd" id="29_c7xul"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ppyta"]
 radius = 0.40527344
@@ -35,6 +38,9 @@ height = 1.3397183
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n1xq6"]
 radius = 0.821
 height = 4.174
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_x05w2"]
+radius = 0.8544802
 
 [sub_resource type="Curve" id="Curve_isv8f"]
 _data = [Vector2(0, 0.33786076), 0.0, 0.0, 0, 0, Vector2(1e-05, 0.3820225), 0.0, 0.0, 0, 0, Vector2(2e-05, 0.92134833), 0.0, 0.0, 0, 0, Vector2(0.045081973, 0.033707857), -0.06853931, -0.06853931, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -51,6 +57,10 @@ albedo_color = Color(0, 0.509671, 0.324473, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_6uqi0"]
 material = SubResource("StandardMaterial3D_mf4mk")
+
+[sub_resource type="Curve" id="Curve_c7xul"]
+_data = [Vector2(0, 0), 0.0, 0.15503041, 0, 0, Vector2(0.06413302, 0.18721461), 6.358626, 6.358626, 0, 0, Vector2(0.3752969, 1), 0.0, 0.0, 0, 0, Vector2(0.43942988, 0.94063926), 0.0, 0.0, 0, 0, Vector2(0.52256525, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 6
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ppyta"]
 radius = 0.264354
@@ -141,6 +151,17 @@ texture_filter = 0
 texture = ExtResource("18_knlvm")
 
 [node name="InteractionHandler" type="Node3D" parent="FrogCharacter/Systems/Actions" unique_id=315130862]
+script = ExtResource("9_c7xul")
+
+[node name="InteractionArea" type="Area3D" parent="FrogCharacter/Systems/Actions/InteractionHandler" unique_id=1016734998]
+collision_layer = 0
+collision_mask = 1024
+script = ExtResource("9_qtvl0")
+metadata/_custom_type_script = "uid://dtxqgavwcfrd"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FrogCharacter/Systems/Actions/InteractionHandler/InteractionArea" unique_id=504851642]
+shape = SubResource("SphereShape3D_x05w2")
+debug_color = Color(1, 0.90000004, 0, 1)
 
 [node name="DialogueHandler" type="Node3D" parent="FrogCharacter/Systems/Actions" unique_id=1802175840]
 
@@ -189,7 +210,7 @@ grounded_state = NodePath("../Grounded")
 [node name="GroundLightAttack" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1317969824 node_paths=PackedStringArray("attacks", "airborne_state", "ground_state", "effect_manager")]
 script = ExtResource("4_isv8f")
 attacks = [NodePath("Combo1_1"), NodePath("Combo1_2"), NodePath("Combo1_3")]
-combo_time = 0.3
+combo_time = 0.19
 airborne_state = NodePath("../Airborne")
 ground_state = NodePath("../Grounded")
 effect_manager = NodePath("../../EffectManager")
@@ -408,6 +429,13 @@ texture = ExtResource("21_ijgvy")
 visible = false
 mesh = SubResource("BoxMesh_6uqi0")
 skeleton = NodePath("../..")
+
+[node name="InteractionIcon" type="Sprite3D" parent="FrogCharacter/Visual" unique_id=1409164629 node_paths=PackedStringArray("handler")]
+transform = Transform3D(0.4, 0, 0, 0, 0.3064178, 0.25711504, 0, -0.25711504, 0.3064178, 0, 0.9328445, 0)
+texture = ExtResource("19_c3khl")
+script = ExtResource("29_c7xul")
+handler = NodePath("../../Systems/Actions/InteractionHandler")
+icon_animation_curve = SubResource("Curve_c7xul")
 
 [node name="GroundPolling" type="Area3D" parent="FrogCharacter" unique_id=1820996339]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.555548, 0)
