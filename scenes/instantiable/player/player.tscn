@@ -29,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://chxbdgiwpr16x" path="res://sprite/Pondtus.png" id="21_ijgvy"]
 [ext_resource type="Script" uid="uid://cionpm6je6331" path="res://scripts/ground_polling.gd" id="23_7hh1b"]
 [ext_resource type="Script" uid="uid://b8otkaxytoq5s" path="res://scenes/instantiable/player/stamina_manager.gd" id="23_qsdt6"]
+[ext_resource type="Texture2D" uid="uid://ducnlfo8dkqus" path="res://sprite/Interaction.png" id="29_7r8gw"]
 [ext_resource type="Script" uid="uid://b38lxd2rtvvve" path="res://scenes/instantiable/player/interaction_icon.gd" id="29_c7xul"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ppyta"]
@@ -431,8 +432,8 @@ mesh = SubResource("BoxMesh_6uqi0")
 skeleton = NodePath("../..")
 
 [node name="InteractionIcon" type="Sprite3D" parent="FrogCharacter/Visual" unique_id=1409164629 node_paths=PackedStringArray("handler")]
-transform = Transform3D(0.4, 0, 0, 0, 0.3064178, 0.25711504, 0, -0.25711504, 0.3064178, 0, 0.9328445, 0)
-texture = ExtResource("19_c3khl")
+transform = Transform3D(1.2, 0, 0, 0, 0.91925335, 0.77134514, 0, -0.77134514, 0.91925335, 0, 0.9328445, 0)
+texture = ExtResource("29_7r8gw")
 script = ExtResource("29_c7xul")
 handler = NodePath("../../Systems/Actions/InteractionHandler")
 icon_animation_curve = SubResource("Curve_c7xul")
