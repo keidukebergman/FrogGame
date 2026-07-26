@@ -74,6 +74,12 @@ corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 corner_detail = 6
 
+[sub_resource type="LabelSettings" id="LabelSettings_6gfwt"]
+font_size = 32
+
+[sub_resource type="Theme" id="Theme_x05w2"]
+default_font_size = 30
+
 [sub_resource type="Environment" id="Environment_g14j6"]
 ambient_light_color = Color(0.30311, 0.608761, 0.511145, 1)
 glow_enabled = true
@@ -252,7 +258,7 @@ grow_vertical = 0
 pivot_offset_ratio = Vector2(0, 1)
 
 [node name="TextBox" type="TextureRect" parent="GameManager/UI_Manager/Dialogue" unique_id=1095761892]
-modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -268,16 +274,44 @@ grow_vertical = 0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("6_1xwo4")
 
-[node name="Label" type="Label" parent="GameManager/UI_Manager/Dialogue" unique_id=2067170510]
+[node name="Label" type="Label" parent="GameManager/UI_Manager/Dialogue/TextBox" unique_id=2067170510]
 custom_minimum_size = Vector2(690, 140)
 layout_mode = 0
-offset_left = -328.0
-offset_top = -138.0
-offset_right = 362.0
-offset_bottom = 2.0
+offset_left = 61.0
+offset_top = 36.0
+offset_right = 751.0
+offset_bottom = 176.0
 text = "Sample text sample text sample text Sample text sample text sample text Sample text sample text sample text Sample text sample text sample text Sample text sample text sample text Sample text sample text sample text Sample text sample text sample text Sample text sample text sample text 
 "
+label_settings = SubResource("LabelSettings_6gfwt")
 autowrap_mode = 2
+text_overrun_behavior = 2
+
+[node name="OptionContainer" type="VBoxContainer" parent="GameManager/UI_Manager/Dialogue" unique_id=1111420935]
+layout_mode = 0
+offset_left = -263.0
+offset_top = -464.0
+offset_right = 277.0
+offset_bottom = -190.0
+alignment = 2
+
+[node name="OptionButton" type="Button" parent="GameManager/UI_Manager/Dialogue/OptionContainer" unique_id=51244420]
+layout_mode = 2
+theme = SubResource("Theme_x05w2")
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_disabled_color = Color(1, 1, 1, 0.4)
+text = "Sample text Sample text Sample text"
 
 [node name="EnemyManager" type="Node3D" parent="GameManager" unique_id=1134223819]
 script = ExtResource("2_jcd4p")
@@ -321,8 +355,11 @@ camera = NodePath("../../../Camera3D")
 script = ExtResource("12_c6rvn")
 camera_main = NodePath("../../../Camera3D")
 
-[node name="DialogueManager" type="Node3D" parent="GameManager" unique_id=224490534]
+[node name="DialogueManager" type="Node3D" parent="GameManager" unique_id=224490534 node_paths=PackedStringArray("dialogue_box", "dialogue_text", "dialogue_button")]
 script = ExtResource("15_gv2t6")
+dialogue_box = NodePath("../UI_Manager/Dialogue/TextBox")
+dialogue_text = NodePath("../UI_Manager/Dialogue/TextBox/Label")
+dialogue_button = NodePath("../UI_Manager/Dialogue/OptionContainer/OptionButton")
 
 [node name="SceneManager" type="Node3D" parent="." unique_id=1274583019]
 
@@ -537,6 +574,7 @@ shape = SubResource("BoxShape3D_1dqgb")
 
 [node name="InteractableTalker" type="Node3D" parent="Box_Talkable" unique_id=1278315697]
 script = ExtResource("32_75pfo")
+loreObject = "res://story/loreline/_test/boxDialogue.lor"
 
 [node name="InteractionArea" type="Area3D" parent="Box_Talkable/InteractableTalker" unique_id=416084472]
 collision_layer = 1024

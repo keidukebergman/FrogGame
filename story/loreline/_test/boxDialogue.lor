@@ -1,0 +1,14 @@
+import "../characters"
+
+beat TestBeat
+  A suspicious looking box
+  Somehow it seems to be [INTERACTABLE]
+  player: I uhm... I seem to be able to talk to you.
+  test: Surely you jest. You see, I am but a humble box
+  choice
+    That makes sense
+      player: Ok, I see. Sorry box, I will trouble you no more.
+    We are already talking
+      player: We uh... we are talking right now?
+      test: No, those are the hallucinations of a tired man
+  It seems the developer ran out of ideas at this point

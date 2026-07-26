@@ -22,8 +22,8 @@ func _ready() -> void:
 		draggable_hurtbox.received_attack.connect(deflection_manager.on_take_attack)
 	draggable_hurtbox.received_attack.connect(_on_deflection)
 
-func initialize_shot(origin:Node3D):
-	self.origin = origin
+func initialize_shot(ori:Node3D):
+	self.origin = ori
 	var basis = get_global_transform().basis
 	var forward = basis.z
 	linear_velocity = forward * projectile_speed

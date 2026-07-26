@@ -1,9 +1,4 @@
-character player
-  name: "Frogicus"
-
-character test
-  name: "test"
-
+import "../characters"
 
 beat TestBeat
   Wind is happening

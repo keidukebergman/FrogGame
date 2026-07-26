@@ -1,0 +1,5 @@
+character player
+  name: "Frogicus"
+
+character test
+  name: "box"
