@@ -584,31 +584,5 @@ script = ExtResource("33_gv2t6")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Box_Talkable/InteractableTalker/InteractionArea" unique_id=1272177334]
 shape = SubResource("SphereShape3D_x05w2")
 
-[node name="Box_Talkable2" type="RigidBody3D" parent="." unique_id=1123492044]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1193213, 0.6376561, -2.2012482)
-collision_layer = 128
-collision_mask = 9
-axis_lock_linear_y = true
-axis_lock_angular_x = true
-axis_lock_angular_z = true
-mass = 2.0
-
-[node name="Boxmesh" parent="Box_Talkable2" unique_id=1744244430 instance=ExtResource("12_ghpyy")]
-transform = Transform3D(0.29999998, 0, 0, 0, 0.6, 0, 0, 0, 0.29999998, 0, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Box_Talkable2" unique_id=1181342659]
-shape = SubResource("BoxShape3D_1dqgb")
-
-[node name="InteractableTalker" type="Node3D" parent="Box_Talkable2" unique_id=1556951318]
-script = ExtResource("32_75pfo")
-
-[node name="InteractionArea" type="Area3D" parent="Box_Talkable2/InteractableTalker" unique_id=712452388]
-collision_layer = 1024
-collision_mask = 1024
-script = ExtResource("33_gv2t6")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Box_Talkable2/InteractableTalker/InteractionArea" unique_id=1080811692]
-shape = SubResource("SphereShape3D_x05w2")
-
 [connection signal="took_damage" from="Box/DraggableHurtbox" to="Box/HealthManager" method="_on_draggable_hurtbox_took_damage"]
 [connection signal="took_damage" from="Box2_Draggable/BoxRegularHurtbox" to="Box2_Draggable/HealthManager" method="_on_draggable_hurtbox_took_damage"]

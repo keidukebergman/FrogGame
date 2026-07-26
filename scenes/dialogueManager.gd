@@ -5,6 +5,7 @@ static var instance: DialogueManager #Is this cursed? Maybe not a singleton
 var loreline: Loreline = Loreline.shared()
 var buttons:Array[Button] = []
 var button_connections: Array[Callable] = []
+var in_dialogue:bool = false
 
 @export var dialogue_box:Control
 @export var dialogue_text:Label
@@ -23,6 +24,9 @@ func _ready() -> void:
 	dialogue_button.visible = false
 
 func initiate_dialogue(path:String) -> void:
+	if in_dialogue: return
+	print("Tried to iniate dialogue at ", path)
+	in_dialogue = true
 	var script = await loreline.parse(path)
 	if script == null:
 		push_error("Failed to parse .lor file")
@@ -98,3 +102,4 @@ func _on_finished(_interp: LorelineInterpreter) -> void:
 	print("--- The End ---")
 	dialogue_box.visible = false
 	dialogue_text.visible = false
+	in_dialogue = false
