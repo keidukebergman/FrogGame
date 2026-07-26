@@ -4,9 +4,11 @@ class_name DialogueManager
 static var instance: DialogueManager #Is this cursed? Maybe not a singleton
 var loreline: Loreline = Loreline.shared()
 
+@export var dialogue_box:Control
+@export var dialogue_text:Label
+
 signal began_dialogue
 signal finished_dialogue
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

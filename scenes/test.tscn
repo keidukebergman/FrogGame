@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://d4km7624424c" path="res://scripts/health_bar_manager.gd" id="3_yk7ts"]
 [ext_resource type="PackedScene" uid="uid://bcs7ck8bsbe0q" path="res://scenes/instantiable/enemies/enemy_mosquito.tscn" id="4_at5dv"]
 [ext_resource type="Script" uid="uid://bhbkxm5uoeqf3" path="res://scenes/stamina_marker_manager.gd" id="5_2cnsr"]
+[ext_resource type="Texture2D" uid="uid://bf5ar4mkltuns" path="res://icon.svg" id="6_1xwo4"]
 [ext_resource type="PackedScene" uid="uid://bg1owrrruuh0w" path="res://scenes/lily_pad.tscn" id="7_44saj"]
 [ext_resource type="PackedScene" uid="uid://danhtn6x5yh2h" path="res://scenes/instantiable/enemies/enemy_ranger.tscn" id="7_y81of"]
 [ext_resource type="Script" uid="uid://cilv2vjiqdwvs" path="res://scripts/slow_mo_manager.gd" id="9_5jxlq"]
@@ -153,16 +154,16 @@ parameters/looping = true
 
 [node name="UI_Manager" type="Node3D" parent="GameManager" unique_id=511825093 node_paths=PackedStringArray("health_bar_manager", "stamina_marker_manager")]
 script = ExtResource("2_uacia")
-health_bar_manager = NodePath("Control/Health_Bar_Manager")
-stamina_marker_manager = NodePath("Control/Stamina_Marker_Manager")
+health_bar_manager = NodePath("Health and Stamina/Health_Bar_Manager")
+stamina_marker_manager = NodePath("Health and Stamina/Stamina_Marker_Manager")
 
-[node name="Control" type="Control" parent="GameManager/UI_Manager" unique_id=2059912981]
+[node name="Health and Stamina" type="Control" parent="GameManager/UI_Manager" unique_id=2059912981]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Health_Bar_Manager" type="Control" parent="GameManager/UI_Manager/Control" unique_id=1523366899 node_paths=PackedStringArray("damage_bar", "health_bar")]
+[node name="Health_Bar_Manager" type="Control" parent="GameManager/UI_Manager/Health and Stamina" unique_id=1523366899 node_paths=PackedStringArray("damage_bar", "health_bar")]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -172,7 +173,7 @@ damage_interpolation_speed = 90.0
 damage_bar = NodePath("DamageBar")
 health_bar = NodePath("DamageBar/HealthBar")
 
-[node name="DamageBar" type="ProgressBar" parent="GameManager/UI_Manager/Control/Health_Bar_Manager" unique_id=1117341479]
+[node name="DamageBar" type="ProgressBar" parent="GameManager/UI_Manager/Health and Stamina/Health_Bar_Manager" unique_id=1117341479]
 layout_mode = 0
 offset_right = 332.0
 offset_bottom = 27.0
@@ -181,7 +182,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_gv2t6")
 value = 50.0
 show_percentage = false
 
-[node name="HealthBar" type="ProgressBar" parent="GameManager/UI_Manager/Control/Health_Bar_Manager/DamageBar" unique_id=460492011]
+[node name="HealthBar" type="ProgressBar" parent="GameManager/UI_Manager/Health and Stamina/Health_Bar_Manager/DamageBar" unique_id=460492011]
 layout_mode = 0
 offset_right = 332.0
 offset_bottom = 27.0
@@ -190,7 +191,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_5civd")
 value = 45.0
 show_percentage = false
 
-[node name="Stamina_Marker_Manager" type="Control" parent="GameManager/UI_Manager/Control" unique_id=661005466 node_paths=PackedStringArray("node_list")]
+[node name="Stamina_Marker_Manager" type="Control" parent="GameManager/UI_Manager/Health and Stamina" unique_id=661005466 node_paths=PackedStringArray("node_list")]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -209,7 +210,7 @@ node_list = [NodePath("ColorRect"), NodePath("ColorRect2"), NodePath("ColorRect3
 inactive_color = Color(0.62967473, 0.62967473, 0.6296747, 1)
 active_color = Color(1, 1, 1, 1)
 
-[node name="ColorRect" type="ColorRect" parent="GameManager/UI_Manager/Control/Stamina_Marker_Manager" unique_id=1437032683]
+[node name="ColorRect" type="ColorRect" parent="GameManager/UI_Manager/Health and Stamina/Stamina_Marker_Manager" unique_id=1437032683]
 layout_mode = 0
 offset_left = 10.106602
 offset_top = 38.1066
@@ -218,7 +219,7 @@ offset_bottom = 53.1066
 rotation = 0.7853982
 pivot_offset_ratio = Vector2(0.5, 0.5)
 
-[node name="ColorRect2" type="ColorRect" parent="GameManager/UI_Manager/Control/Stamina_Marker_Manager" unique_id=858935520]
+[node name="ColorRect2" type="ColorRect" parent="GameManager/UI_Manager/Health and Stamina/Stamina_Marker_Manager" unique_id=858935520]
 layout_mode = 0
 offset_left = 48.1066
 offset_top = 38.1066
@@ -227,7 +228,7 @@ offset_bottom = 53.1066
 rotation = 0.7853982
 pivot_offset_ratio = Vector2(0.5, 0.5)
 
-[node name="ColorRect3" type="ColorRect" parent="GameManager/UI_Manager/Control/Stamina_Marker_Manager" unique_id=513208345]
+[node name="ColorRect3" type="ColorRect" parent="GameManager/UI_Manager/Health and Stamina/Stamina_Marker_Manager" unique_id=513208345]
 layout_mode = 0
 offset_left = 86.106606
 offset_top = 38.1066
@@ -235,6 +236,48 @@ offset_right = 101.106606
 offset_bottom = 53.1066
 rotation = 0.7853982
 pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="Dialogue" type="Control" parent="GameManager/UI_Manager" unique_id=1936904151]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0, 1)
+
+[node name="TextBox" type="TextureRect" parent="GameManager/UI_Manager/Dialogue" unique_id=1095761892]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -409.0
+offset_top = -214.0
+offset_right = 391.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("6_1xwo4")
+
+[node name="Label" type="Label" parent="GameManager/UI_Manager/Dialogue" unique_id=2067170510]
+custom_minimum_size = Vector2(690, 140)
+layout_mode = 0
+offset_left = -328.0
+offset_top = -138.0
+offset_right = 362.0
+offset_bottom = 2.0
+text = "Sample text sample text sample text Sample text sample text sample text Sample text sample text sample text Sample text sample text sample text Sample text sample text sample text Sample text sample text sample text Sample text sample text sample text Sample text sample text sample text 
+"
+autowrap_mode = 2
 
 [node name="EnemyManager" type="Node3D" parent="GameManager" unique_id=1134223819]
 script = ExtResource("2_jcd4p")
