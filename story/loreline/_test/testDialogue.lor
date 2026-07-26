@@ -1,0 +1,20 @@
+character player
+  name: "Frogicus"
+
+character test
+  name: "test"
+
+
+beat TestBeat
+  Wind is happening
+  player: Woah, it sure do be blow
+  test: Surely it isnt blow?
+  choice
+    Are you fucking dumb
+      player: Were you thrown three times as a kid but only caught once?
+      test: Uncalled for
+    Ok, maybe
+      player: I find your proposition slightly preposterous but I am inclined to agree
+      test: Ok cool
+  They part as friends.
+

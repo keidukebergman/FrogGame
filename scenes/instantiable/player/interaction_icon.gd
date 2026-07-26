@@ -13,8 +13,6 @@ func _ready() -> void:
 	if handler:
 		handler.found_interactable.connect(on_interactable_appeared)
 		handler.lost_interactables.connect(on_interactable_disappeared)
-	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -28,7 +26,6 @@ func on_interactable_appeared():
 	scale = Vector3.ZERO
 	timer = 0
 	has_interactable = true
-	
 
 func on_interactable_disappeared():
 	scale = Vector3.ZERO

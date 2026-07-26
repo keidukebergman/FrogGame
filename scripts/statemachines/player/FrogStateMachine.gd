@@ -12,6 +12,9 @@ var g_attack_counter = 0;
 var g_attack_timer = 0;
 @export var attack_combo_reset_time:float = 0.5;
 
+@export var override_state:PlayerOverrideState
+var escape_state:State
+
 func _ready():
 	states.resize(get_child_count())
 	var actual_size = 0
@@ -46,3 +49,13 @@ func _physics_process(delta):
 func _is_grounded():
 	return ground_collider.is_grounded
  
+func enter_override_state():
+	if current_state == override_state:
+		return
+	escape_state = current_state
+	_change_state(override_state)
+
+func escape_override_state():
+	if current_state != override_state:
+		return
+	_change_state(escape_state)

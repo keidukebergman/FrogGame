@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://dtxqgavwcfrd" path="res://scenes/interaction_area.gd" id="9_qtvl0"]
 [ext_resource type="Script" uid="uid://1rqaiis71irb" path="res://scripts/health_manager.gd" id="10_c7xul"]
 [ext_resource type="Script" uid="uid://miugg8jpe2ku" path="res://scripts/effect_manager.gd" id="11_7r8gw"]
+[ext_resource type="Script" uid="uid://bq5udahng6jd2" path="res://scenes/instantiable/player/PlayerOverrideState.gd" id="12_2sfd1"]
 [ext_resource type="Script" uid="uid://tp7u7qxjy8l5" path="res://scripts/knockback_manager.gd" id="12_pcexo"]
 [ext_resource type="Script" uid="uid://eu8pfa82x6aq" path="res://scripts/water_splash_manager.gd" id="13_2sfd1"]
 [ext_resource type="PackedScene" uid="uid://coqouaigb7djy" path="res://scenes/instantiable/effects/water_splash_effect.tscn" id="14_7yppw"]
@@ -174,6 +175,9 @@ g_on_fall = -58.0
 renderer = NodePath("../../Visual/Sprite3D")
 current_state = NodePath("Grounded")
 root = NodePath("../..")
+
+[node name="Override" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=2131428512]
+script = ExtResource("12_2sfd1")
 
 [node name="Grounded" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=32024872 node_paths=PackedStringArray("dash_state", "airborne_state", "ground_attack_state", "heavy_attack_charge_state")]
 script = ExtResource("3_7hh1b")
