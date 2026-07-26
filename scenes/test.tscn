@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://b13rkitbsenhc" path="res://models/box.glb" id="12_ghpyy"]
 [ext_resource type="Script" uid="uid://bi5fwt04sq1jq" path="res://scripts/Hurtbox_draggable.gd" id="13_44saj"]
 [ext_resource type="Script" uid="uid://1rqaiis71irb" path="res://scripts/health_manager.gd" id="14_7mbro"]
+[ext_resource type="Script" uid="uid://drpcspnamiljs" path="res://scenes/dialogueManager.gd" id="15_gv2t6"]
 [ext_resource type="Script" uid="uid://bujy08xidy0g7" path="res://scripts/death_manager.gd" id="16_7yos8"]
 [ext_resource type="Script" uid="uid://csq2alr5vtppq" path="res://scenes/game_cam.gd" id="17_gsk6d"]
 [ext_resource type="Script" uid="uid://33wjf25m4rdb" path="res://scripts/DraggableDestructibleDecor.gd" id="21_n74k2"]
@@ -276,6 +277,9 @@ camera = NodePath("../../../Camera3D")
 [node name="CameraShakeManager" type="Node3D" parent="GameManager/FXManager" unique_id=1753808967 node_paths=PackedStringArray("camera_main")]
 script = ExtResource("12_c6rvn")
 camera_main = NodePath("../../../Camera3D")
+
+[node name="DialogueManager" type="Node3D" parent="GameManager" unique_id=224490534]
+script = ExtResource("15_gv2t6")
 
 [node name="SceneManager" type="Node3D" parent="." unique_id=1274583019]
 
