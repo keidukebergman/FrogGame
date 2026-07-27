@@ -10,7 +10,6 @@ class_name Projectile
 @export var is_parriable = true;
 var origin
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if not is_parriable:

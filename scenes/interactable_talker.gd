@@ -2,6 +2,7 @@ extends InteractableObject
 class_name InteractableTalker
 
 @export var loreObject: String
+@export var beat:String
 @onready var interaction_area = $InteractionArea
 
 func _ready() -> void:
@@ -11,4 +12,4 @@ func _ready() -> void:
 
 func on_interaction():
 	super.on_interaction()
-	DialogueManager.instance.initiate_dialogue(loreObject)
+	DialogueManager.instance.initiate_dialogue(loreObject, beat)

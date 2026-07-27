@@ -11,4 +11,5 @@ beat TestBeat
     We are already talking
       player: We uh... we are talking right now?
       test: No, those are the hallucinations of a tired man
+  animation_event(5)
   It seems the developer ran out of ideas at this point

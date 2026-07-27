@@ -15,15 +15,19 @@ var current_text = ""
 
 signal began_dialogue
 signal finished_dialogue
+signal began_animation_event
+signal ended_animation_event
 
+var options:LorelineOptions 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	instance = self
-	dialogue_box.visible = false
-	dialogue_text.visible = false
 	dialogue_button.visible = false
+	set_ui_visibility(false)
+	options = LorelineOptions.new()
+	options.set_async_function("animation_event", _on_animation_event)
 
-func initiate_dialogue(path:String) -> void:
+func initiate_dialogue(path:String, beat:String) -> void:
 	if in_dialogue: return
 	print("Tried to iniate dialogue at ", path)
 	in_dialogue = true
@@ -31,9 +35,8 @@ func initiate_dialogue(path:String) -> void:
 	if script == null:
 		push_error("Failed to parse .lor file")
 		return
-	loreline.play(script, _on_dialogue, _on_choice, _on_finished)
-	dialogue_box.visible = true
-	dialogue_text.visible = true
+	loreline.play(script, _on_dialogue, _on_choice, _on_finished, "", options)
+	set_ui_visibility(true)
 
 func _handle_file(path: String, provide: Callable) -> void:
 	if FileAccess.file_exists(path):
@@ -98,8 +101,22 @@ func _choice_callback(index) -> void:
 	button_connections = []
 	dialogue_button.visible = false
 
+func _on_animation_event(interp: LorelineInterpreter, _args: Array, resolve: Callable) -> void:
+	var time = _args[0]
+	set_ui_visibility(false)
+	print("TIMER IS CREATE!")
+	await get_tree().create_timer(time).timeout
+	print("TIME IS DONE!")
+	set_ui_visibility(true)
+	resolve.call()
+
 func _on_finished(_interp: LorelineInterpreter) -> void:
 	print("--- The End ---")
-	dialogue_box.visible = false
-	dialogue_text.visible = false
-	in_dialogue = false
+	set_ui_visibility(false)
+
+func set_ui_visibility(value:bool) -> void:
+	dialogue_box.visible = value
+	dialogue_text.visible = value
+	in_dialogue = value
+	if value == false:
+		dialogue_text.text = ""
