@@ -167,12 +167,13 @@ debug_color = Color(1, 0.90000004, 0, 1)
 
 [node name="DialogueHandler" type="Node3D" parent="FrogCharacter/Systems/Actions" unique_id=1802175840]
 
-[node name="StateMachine" type="Node3D" parent="FrogCharacter/Systems" unique_id=836068986 node_paths=PackedStringArray("ground_collider", "renderer", "current_state", "root")]
+[node name="StateMachine" type="Node3D" parent="FrogCharacter/Systems" unique_id=836068986 node_paths=PackedStringArray("ground_collider", "renderer", "override_state", "current_state", "root")]
 script = ExtResource("2_gnc5k")
 ground_collider = NodePath("../../GroundPolling")
 g_on_rise = -36.0
 g_on_fall = -58.0
 renderer = NodePath("../../Visual/Sprite3D")
+override_state = NodePath("Override")
 current_state = NodePath("Grounded")
 root = NodePath("../..")
 

@@ -31,3 +31,11 @@ func get_player_information() -> Node3D:
 
 func on_player_take_damage(damage:float) -> void:
 	player_took_damage.emit(damage)
+	
+func on_dialogue_start():
+	player.state_machine.enter_override_state()
+	pass
+
+func on_dialogue_end():
+	player.state_machine.escape_override_state()
+	pass

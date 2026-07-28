@@ -4,6 +4,7 @@ extends Node3D
 @export var enemy_manager:EnemyManager
 @export var player_fx_relay:PlayerFXRelay
 @export var main_camera:MainCamera
+@export var dialogue_manager:DialogueManager
 
 @export var ui_manager:UI_Manager
 
@@ -13,9 +14,14 @@ func _ready() -> void:
 	phm.applied_damage.connect(_on_player_taken_damage)
 	phm.applied_healing.connect(_on_player_healed)
 	phm.depleted_health.connect(_on_player_death)
+	
 	enemy_manager.requested_player_information.connect(on_player_information_requested)
 	player_manager.get_player().bounced.connect(on_player_bounced)
-	await get_tree().create_timer(0.01).timeout
+	
+	dialogue_manager.began_dialogue.connect(player_manager.on_dialogue_start)
+	dialogue_manager.finished_dialogue.connect(player_manager.on_dialogue_end)
+	
+	await get_tree().create_timer(0.0001).timeout #Make sure this is loaded first. TODO: Better system
 	main_camera.target = player_manager.get_player().get_main_object()
 	ui_manager.stamina_manager = player_manager.get_player().stamina_manager
 

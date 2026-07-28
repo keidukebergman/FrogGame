@@ -138,12 +138,13 @@ radius = 1.004956
 
 [node name="Node3D" type="Node3D" unique_id=51480205]
 
-[node name="GameManager" type="Node3D" parent="." unique_id=1128817988 node_paths=PackedStringArray("player_manager", "enemy_manager", "player_fx_relay", "main_camera", "ui_manager")]
+[node name="GameManager" type="Node3D" parent="." unique_id=1128817988 node_paths=PackedStringArray("player_manager", "enemy_manager", "player_fx_relay", "main_camera", "dialogue_manager", "ui_manager")]
 script = ExtResource("1_ajshl")
 player_manager = NodePath("PlayerManager")
 enemy_manager = NodePath("EnemyManager")
 player_fx_relay = NodePath("FXManager/PlayerFXRelay")
 main_camera = NodePath("../Camera3D")
+dialogue_manager = NodePath("DialogueManager")
 ui_manager = NodePath("UI_Manager")
 
 [node name="AudioManager" type="Node3D" parent="GameManager" unique_id=449209007]
@@ -574,7 +575,8 @@ shape = SubResource("BoxShape3D_1dqgb")
 
 [node name="InteractableTalker" type="Node3D" parent="Box_Talkable" unique_id=1278315697]
 script = ExtResource("32_75pfo")
-loreObject = "res://story/loreline/_test/boxDialogue.lor"
+loreObject = "res://story/loreline/descriptions/objectDescriptions.lor"
+beat = "box"
 
 [node name="InteractionArea" type="Area3D" parent="Box_Talkable/InteractableTalker" unique_id=416084472]
 collision_layer = 1024

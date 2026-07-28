@@ -12,11 +12,15 @@ var in_dialogue:bool = false
 @export var dialogue_button:Button
 
 var current_text = ""
+var counting_up_text:bool = false
+var current_text_timer:float = 0
+signal next_character
 
 signal began_dialogue
 signal finished_dialogue
 signal began_animation_event
 signal ended_animation_event
+
 
 var options:LorelineOptions 
 # Called when the node enters the scene tree for the first time.
@@ -37,6 +41,7 @@ func initiate_dialogue(path:String, beat:String) -> void:
 		return
 	loreline.play(script, _on_dialogue, _on_choice, _on_finished, "", options)
 	set_ui_visibility(true)
+	began_dialogue.emit()
 
 func _handle_file(path: String, provide: Callable) -> void:
 	if FileAccess.file_exists(path):
@@ -57,7 +62,7 @@ func _on_dialogue(interp: LorelineInterpreter, character: String, text: String, 
 	for letter in text:
 		dialogue_text.text = output_text
 		output_text += letter    
-		await get_tree().create_timer(0.05).timeout
+		await next_character
 	dialogue_text.text = output_text
 	await get_tree().create_timer(0.9).timeout
 	advance.call()
@@ -83,8 +88,6 @@ func _on_choice(_interp: LorelineInterpreter, options: Array, select: Callable) 
 			var bound_callable := _choice_callback.bind(i)
 			button_connections.append(bound_callable)
 			button.button_down.connect(bound_callable)
-
-			print("  [" + str(enabled_indices.size()) + "] " + options[i]["text"])
 	current_select = select
 
 func _choice_callback(index) -> void:
@@ -112,6 +115,7 @@ func _on_animation_event(interp: LorelineInterpreter, _args: Array, resolve: Cal
 
 func _on_finished(_interp: LorelineInterpreter) -> void:
 	print("--- The End ---")
+	finished_dialogue.emit()
 	set_ui_visibility(false)
 
 func set_ui_visibility(value:bool) -> void:
