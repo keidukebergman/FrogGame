@@ -1,6 +1,7 @@
 extends Node3D
 class_name InteractionHandler
 
+var is_active = true
 @onready var interaction_area = $InteractionArea
 @export var interaction_icon: Node3D
 
@@ -14,12 +15,16 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if !is_active:
+		interaction_icon.visible = false
+		return
 	var interactables:Array[InteractionArea] = get_interactables()
 	if interaction_icon: interaction_icon.visible = interactables.size() > 0;
+	if current_target_interaction_area != null:
+		interaction_icon.global_position = current_target_interaction_area.get_interactive_icon_position()
 	if interactables.size() > 0:
 		if current_target_interaction_area != interactables[0]:
 			current_target_interaction_area = interactables[0]
-			print(current_target_interaction_area)
 			found_interactable.emit()
 		if Input.is_action_just_pressed("interact"):
 			interactables[0].on_interaction()

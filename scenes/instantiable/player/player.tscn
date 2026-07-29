@@ -152,8 +152,9 @@ alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("18_knlvm")
 
-[node name="InteractionHandler" type="Node3D" parent="FrogCharacter/Systems/Actions" unique_id=315130862]
+[node name="InteractionHandler" type="Node3D" parent="FrogCharacter/Systems/Actions" unique_id=315130862 node_paths=PackedStringArray("interaction_icon")]
 script = ExtResource("9_c7xul")
+interaction_icon = NodePath("../../../Visual/InteractionIcon")
 
 [node name="InteractionArea" type="Area3D" parent="FrogCharacter/Systems/Actions/InteractionHandler" unique_id=1016734998]
 collision_layer = 0
@@ -177,8 +178,9 @@ override_state = NodePath("Override")
 current_state = NodePath("Grounded")
 root = NodePath("../..")
 
-[node name="Override" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=2131428512]
+[node name="Override" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=2131428512 node_paths=PackedStringArray("interaction_handler")]
 script = ExtResource("12_2sfd1")
+interaction_handler = NodePath("../../Actions/InteractionHandler")
 
 [node name="Grounded" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=32024872 node_paths=PackedStringArray("dash_state", "airborne_state", "ground_attack_state", "heavy_attack_charge_state")]
 script = ExtResource("3_7hh1b")
