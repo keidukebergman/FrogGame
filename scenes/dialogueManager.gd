@@ -40,9 +40,9 @@ func _ready() -> void:
 
 func _process(delta:float) -> void:
 	var timer_coefficient = 1
-	
+
 	if (Input.is_action_pressed("advance dialogue")):
-		timer_coefficient = 0.01
+		timer_coefficient = 0.1
 	
 	if counting_up_text:
 		current_text_timer += delta
@@ -55,6 +55,9 @@ func _process(delta:float) -> void:
 		if current_transition_timer > 0.4 * timer_coefficient:
 			current_transition_timer = 0
 			next_transition.emit()
+
+	if (Input.is_action_just_pressed("advance dialogue")):
+		advance_dialogue_clicked.emit()
 
 
 func initiate_dialogue(path:String, beat:String) -> void:
@@ -95,7 +98,7 @@ func _on_dialogue(interp: LorelineInterpreter, character: String, text: String, 
 		await next_character
 	counting_up_text = false
 	dialogue_text.text = output_text
-	await get_tree().create_timer(0.9).timeout
+	await advance_dialogue_clicked
 	advance.call()
 
 var current_select = null
