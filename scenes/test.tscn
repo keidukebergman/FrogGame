@@ -276,9 +276,8 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("6_1xwo4")
 
 [node name="Label" type="Label" parent="GameManager/UI_Manager/Dialogue/TextBox" unique_id=2067170510]
-custom_minimum_size = Vector2(690, 140)
 layout_mode = 0
-offset_left = 61.0
+offset_left = 196.0
 offset_top = 36.0
 offset_right = 751.0
 offset_bottom = 176.0
@@ -287,6 +286,14 @@ text = "Sample text sample text sample text Sample text sample text sample text 
 label_settings = SubResource("LabelSettings_6gfwt")
 autowrap_mode = 2
 text_overrun_behavior = 2
+
+[node name="TextureRect" type="TextureRect" parent="GameManager/UI_Manager/Dialogue/TextBox" unique_id=1107853129]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 23.0
+offset_right = 173.0
+offset_bottom = 169.0
+texture = ExtResource("6_1xwo4")
 
 [node name="OptionContainer" type="VBoxContainer" parent="GameManager/UI_Manager/Dialogue" unique_id=1111420935]
 layout_mode = 0

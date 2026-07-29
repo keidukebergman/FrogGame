@@ -16,10 +16,17 @@ var counting_up_text:bool = false
 var current_text_timer:float = 0
 signal next_character
 
+var counting_up_transition:bool = false
+var current_transition_timer:float = 0
+signal next_transition
+
+signal advance_dialogue_clicked
+
 signal began_dialogue
 signal finished_dialogue
 signal began_animation_event
 signal ended_animation_event
+
 
 
 var options:LorelineOptions 
@@ -30,6 +37,25 @@ func _ready() -> void:
 	set_ui_visibility(false)
 	options = LorelineOptions.new()
 	options.set_async_function("animation_event", _on_animation_event)
+
+func _process(delta:float) -> void:
+	var timer_coefficient = 1
+	
+	if (Input.is_action_pressed("advance dialogue")):
+		timer_coefficient = 0.01
+	
+	if counting_up_text:
+		current_text_timer += delta
+		if current_text_timer > 0.05 * timer_coefficient:
+			current_text_timer = 0
+			next_character.emit()
+
+	if counting_up_transition:
+		current_transition_timer += delta
+		if current_transition_timer > 0.4 * timer_coefficient:
+			current_transition_timer = 0
+			next_transition.emit()
+
 
 func initiate_dialogue(path:String, beat:String) -> void:
 	if in_dialogue: return
@@ -42,6 +68,7 @@ func initiate_dialogue(path:String, beat:String) -> void:
 	loreline.play(script, _on_dialogue, _on_choice, _on_finished, "", options)
 	set_ui_visibility(true)
 	began_dialogue.emit()
+	print("Dialogue Initiated")
 
 func _handle_file(path: String, provide: Callable) -> void:
 	if FileAccess.file_exists(path):
@@ -58,11 +85,15 @@ func _on_dialogue(interp: LorelineInterpreter, character: String, text: String, 
 			character = display_name
 			output_text = character + ": "
 	dialogue_text.text = output_text
-	await get_tree().create_timer(0.4).timeout
+	counting_up_transition = true
+	await next_transition
+	counting_up_transition = false
+	counting_up_text = true
 	for letter in text:
 		dialogue_text.text = output_text
 		output_text += letter    
 		await next_character
+	counting_up_text = false
 	dialogue_text.text = output_text
 	await get_tree().create_timer(0.9).timeout
 	advance.call()
