@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bt4lgvy6c6sc8" path="res://scripts/entity_handling/enemy_entity.gd" id="1_2c3ns"]
 [ext_resource type="Script" uid="uid://yfk7mr61a5eo" path="res://scripts/character_physics_body.gd" id="1_8x00c"]
-[ext_resource type="Texture2D" uid="uid://cl0vaiy8nesdh" path="res://sprite/MosquitoKnight.png" id="2_2c3ns"]
-[ext_resource type="Texture2D" uid="uid://dysd1pacl610e" path="res://sprite/Stab.png" id="3_feaxh"]
+[ext_resource type="Texture2D" uid="uid://cl0vaiy8nesdh" path="res://sprites/MosquitoKnight.png" id="2_2c3ns"]
+[ext_resource type="Texture2D" uid="uid://dysd1pacl610e" path="res://sprites/Stab.png" id="3_feaxh"]
 [ext_resource type="Script" uid="uid://i1cinfaxm21s" path="res://scripts/statemachines/enemies/EnemyStateMachine.gd" id="4_n1xq6"]
 [ext_resource type="Script" uid="uid://bf450ln32ku7q" path="res://scripts/statemachines/enemies/base_warrior/simple_huntstate.gd" id="5_jde4i"]
 [ext_resource type="Script" uid="uid://de0gwidsmclmt" path="res://scripts/statemachines/enemies/base_warrior/enemy_attack_state.gd" id="6_ej604"]

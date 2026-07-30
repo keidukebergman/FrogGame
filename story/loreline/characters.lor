@@ -1,5 +1,6 @@
 character player
   name: "Frogicus"
+  portrait_dir: "player"
 
 character test
   name: "box"

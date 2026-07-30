@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cosaprbtt63s3"]
 
 [ext_resource type="Script" uid="uid://5v1r4acpnc2q" path="res://scenes/projectile.gd" id="1_dd0wg"]
-[ext_resource type="Texture2D" uid="uid://dysd1pacl610e" path="res://sprite/Stab.png" id="2_ohx1v"]
+[ext_resource type="Texture2D" uid="uid://dysd1pacl610e" path="res://sprites/Stab.png" id="2_ohx1v"]
 [ext_resource type="Script" uid="uid://bi5fwt04sq1jq" path="res://scripts/Hurtbox_draggable.gd" id="3_ee10g"]
 [ext_resource type="Script" uid="uid://c7g7jvcrqudgm" path="res://scripts/Hitbox.gd" id="4_yat5h"]
 [ext_resource type="Script" uid="uid://miugg8jpe2ku" path="res://scripts/effect_manager.gd" id="5_o57b6"]

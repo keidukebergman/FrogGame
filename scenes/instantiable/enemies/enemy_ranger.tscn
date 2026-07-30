@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bt4lgvy6c6sc8" path="res://scripts/entity_handling/enemy_entity.gd" id="1_0x6lq"]
 [ext_resource type="Script" uid="uid://yfk7mr61a5eo" path="res://scripts/character_physics_body.gd" id="2_ew8qx"]
-[ext_resource type="Texture2D" uid="uid://bojwb2lct667p" path="res://sprite/MosquitoRanger.png" id="3_tao5y"]
+[ext_resource type="Texture2D" uid="uid://bojwb2lct667p" path="res://sprites/MosquitoRanger.png" id="3_tao5y"]
 [ext_resource type="Script" uid="uid://i1cinfaxm21s" path="res://scripts/statemachines/enemies/EnemyStateMachine.gd" id="5_1jdny"]
 [ext_resource type="Script" uid="uid://ublyenpwplb6" path="res://scripts/statemachines/enemies/base_ranger/ranger_hunt_state.gd" id="5_qtv6h"]
 [ext_resource type="Script" uid="uid://bsxo1fcive5ck" path="res://scenes/instantiable/enemies/ranger_attack_state.gd" id="6_tao5y"]

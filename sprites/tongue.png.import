@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7x5wtxdtqfra"
-path.s3tc="res://.godot/imported/Waterfx.png-60d60e3c7ef3f713695cb6cf6161c1f5.s3tc.ctex"
+uid="uid://ys2vv7uhhv5b"
+path.s3tc="res://.godot/imported/tongue.png-3d34c93ea6b781b4f720f2e93cac3092.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://sprite/Waterfx.png"
-dest_files=["res://.godot/imported/Waterfx.png-60d60e3c7ef3f713695cb6cf6161c1f5.s3tc.ctex"]
+source_file="res://sprites/tongue.png"
+dest_files=["res://.godot/imported/tongue.png-3d34c93ea6b781b4f720f2e93cac3092.s3tc.ctex"]
 
 [params]
 

@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dysd1pacl610e"
-path.s3tc="res://.godot/imported/Stab.png-ab4611cf017c2cc16b5badcbe15569ba.s3tc.ctex"
+uid="uid://bojwb2lct667p"
+path="res://.godot/imported/MosquitoRanger.png-2c3096905db4e18383bde085fc21a103.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite/Stab.png"
-dest_files=["res://.godot/imported/Stab.png-ab4611cf017c2cc16b5badcbe15569ba.s3tc.ctex"]
+source_file="res://sprites/MosquitoRanger.png"
+dest_files=["res://.godot/imported/MosquitoRanger.png-2c3096905db4e18383bde085fc21a103.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

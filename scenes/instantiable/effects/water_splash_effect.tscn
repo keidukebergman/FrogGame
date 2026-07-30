@@ -1,7 +1,7 @@
-[gd_scene load_steps=40 format=3 uid="uid://coqouaigb7djy"]
+[gd_scene format=3 uid="uid://coqouaigb7djy"]
 
 [ext_resource type="Script" uid="uid://6j14w70ot0ci" path="res://scripts/water_splash_effect.gd" id="1_mda85"]
-[ext_resource type="Texture2D" uid="uid://7x5wtxdtqfra" path="res://sprite/Waterfx.png" id="2_6jy88"]
+[ext_resource type="Texture2D" uid="uid://7x5wtxdtqfra" path="res://sprites/Waterfx.png" id="2_6jy88"]
 [ext_resource type="AudioStream" uid="uid://dd5wq6dxi3fjw" path="res://sound/sfx/11_labs/eod5lygievj-water-splash-sfx-1.mp3" id="2_cesas"]
 
 [sub_resource type="Curve" id="Curve_oll84"]

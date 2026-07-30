@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ditgtgoaurqhl"
-path.s3tc="res://.godot/imported/Slash.png-487562a93c4959c9d66513957e41afc9.s3tc.ctex"
+uid="uid://chxbdgiwpr16x"
+path="res://.godot/imported/Pondtus.png-e28d58e6534dac90ae1b6c660731905d.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite/Slash.png"
-dest_files=["res://.godot/imported/Slash.png-487562a93c4959c9d66513957e41afc9.s3tc.ctex"]
+source_file="res://sprites/Pondtus.png"
+dest_files=["res://.godot/imported/Pondtus.png-e28d58e6534dac90ae1b6c660731905d.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

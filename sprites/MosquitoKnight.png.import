@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ducnlfo8dkqus"
-path.s3tc="res://.godot/imported/Interaction.png-a9e7a2d504a248cd9f1a9f8c117e1e1f.s3tc.ctex"
+uid="uid://cl0vaiy8nesdh"
+path.s3tc="res://.godot/imported/MosquitoKnight.png-51841d3650e03cb655889f1484398351.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://sprite/Interaction.png"
-dest_files=["res://.godot/imported/Interaction.png-a9e7a2d504a248cd9f1a9f8c117e1e1f.s3tc.ctex"]
+source_file="res://sprites/MosquitoKnight.png"
+dest_files=["res://.godot/imported/MosquitoKnight.png-51841d3650e03cb655889f1484398351.s3tc.ctex"]
 
 [params]
 
