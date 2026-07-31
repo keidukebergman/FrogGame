@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="FrogGame"
-run/main_scene="uid://cp56kp11t4ngg"
+run/main_scene="uid://h2jekcutdc6x"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 

@@ -1,29 +1,43 @@
 extends Node3D
 
+@export var game_state_machine = null
+
 @export var player_manager:PlayerManager
 @export var enemy_manager:EnemyManager
 @export var player_fx_relay:PlayerFXRelay
 @export var main_camera:MainCamera
 @export var dialogue_manager:DialogueManager
-
 @export var ui_manager:UI_Manager
+@export var scene_manager:SceneManager
+@export var default_level:PackedScene
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	enemy_manager.requested_player_information.connect(on_player_information_requested)
+	dialogue_manager.began_dialogue.connect(player_manager.on_dialogue_start)
+	dialogue_manager.finished_dialogue.connect(player_manager.on_dialogue_end)
+	scene_manager.switch_level(default_level)
+	
+	if player_manager.get_player() == null:
+		_initialize_player(Vector3(0, 0.778, 0))
+
+func _start_cinematic_level():
+	if player_manager.get_player() != null:
+		pass
+
+func _end_cinematic_level():
+	if player_manager.get_player() != null:
+		pass
+
+func _initialize_player(player_spawn_position:Vector3) -> void:
+	player_manager.spawn_player(player_spawn_position)
+	player_manager.get_player().bounced.connect(on_player_bounced)
 	var phm = player_manager.player.health_manager
 	phm.applied_damage.connect(_on_player_taken_damage)
 	phm.applied_healing.connect(_on_player_healed)
 	phm.depleted_health.connect(_on_player_death)
-	
-	enemy_manager.requested_player_information.connect(on_player_information_requested)
-	player_manager.get_player().bounced.connect(on_player_bounced)
-	
-	dialogue_manager.began_dialogue.connect(player_manager.on_dialogue_start)
-	dialogue_manager.finished_dialogue.connect(player_manager.on_dialogue_end)
-	
-	await get_tree().create_timer(0.0001).timeout #Make sure this is loaded first. TODO: Better system
 	main_camera.target = player_manager.get_player().get_main_object()
 	ui_manager.stamina_manager = player_manager.get_player().stamina_manager
+	ui_manager.health_bar_manager._reset(100)
 
 func on_player_information_requested(aggro_manager:AggroManager):
 	var player_node = player_manager.get_player_information()
@@ -44,7 +58,3 @@ func on_player_bounced():
 func _on_player_healed(_healing, current_health):
 	var damaged:bool = false
 	ui_manager._on_player_health_change(damaged, current_health)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass

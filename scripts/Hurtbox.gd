@@ -7,6 +7,7 @@ signal received_attack(data:AttackData)
 signal received_effects
 
 func _ready() -> void:
+	is_active = true
 	pass
 	
 func verify_hit() -> bool:
@@ -16,6 +17,8 @@ func _apply_damage(damage) -> void:
 	took_damage.emit(damage);
 
 func apply_attack(attack_data:AttackData) -> void:
+	if !is_active:
+		return
 	_apply_damage(attack_data.damage)
 	_apply_effects(attack_data.effects)
 	received_attack.emit(attack_data)

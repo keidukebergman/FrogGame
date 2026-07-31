@@ -1,0 +1,310 @@
+[gd_scene format=3 uid="uid://h2jekcutdc6x"]
+
+[ext_resource type="Script" uid="uid://dhd6d8l44t7yn" path="res://scripts/game_manager.gd" id="1_cjvif"]
+[ext_resource type="PackedScene" uid="uid://cp56kp11t4ngg" path="res://scenes/test.tscn" id="2_4vth2"]
+[ext_resource type="Script" uid="uid://csq2alr5vtppq" path="res://scripts/game_cam.gd" id="2_pc0jn"]
+[ext_resource type="AudioStream" uid="uid://pmc3kysxqlc6" path="res://sound/sfx/pixabay/lake-wavelet-27909.mp3" id="2_ry0e6"]
+[ext_resource type="Script" uid="uid://cdrfstpx35r12" path="res://scripts/ui_manager.gd" id="3_pc0jn"]
+[ext_resource type="Script" uid="uid://d4km7624424c" path="res://scripts/health_bar_manager.gd" id="4_c7a3q"]
+[ext_resource type="Script" uid="uid://bhbkxm5uoeqf3" path="res://scripts/stamina_marker_manager.gd" id="5_4vth2"]
+[ext_resource type="Texture2D" uid="uid://bf5ar4mkltuns" path="res://icon.svg" id="6_yxe1x"]
+[ext_resource type="Script" uid="uid://14an4j5nwxnn" path="res://scripts/enemy_manager.gd" id="7_jrl6a"]
+[ext_resource type="PackedScene" uid="uid://bcs7ck8bsbe0q" path="res://scenes/instantiable/enemies/enemy_mosquito.tscn" id="8_wcunu"]
+[ext_resource type="PackedScene" uid="uid://danhtn6x5yh2h" path="res://scenes/instantiable/enemies/enemy_ranger.tscn" id="9_2j6ol"]
+[ext_resource type="Script" uid="uid://b32r0eqcdgkju" path="res://scripts/player_manager.gd" id="10_8ldib"]
+[ext_resource type="Script" uid="uid://cpuxx83goq5ye" path="res://scripts/path_manager.gd" id="11_kvitc"]
+[ext_resource type="Script" uid="uid://bbtpwvavwh3dy" path="res://scripts/player_fx_relay.gd" id="12_hqtnj"]
+[ext_resource type="PackedScene" uid="uid://b427eeltoq12o" path="res://scenes/instantiable/player/player.tscn" id="12_pc0jn"]
+[ext_resource type="Script" uid="uid://cilv2vjiqdwvs" path="res://scripts/slow_mo_manager.gd" id="13_dlmsr"]
+[ext_resource type="Script" uid="uid://cri8txdrn1jhd" path="res://scripts/zoom_manager.gd" id="14_uiwhc"]
+[ext_resource type="Script" uid="uid://bjs1qymkrmk25" path="res://scripts/camera_shake_manager.gd" id="15_8rwna"]
+[ext_resource type="Script" uid="uid://drpcspnamiljs" path="res://scripts/dialogueManager.gd" id="16_rscnb"]
+[ext_resource type="Script" uid="uid://dsynjmcu6pt7s" path="res://scripts/scene_manager.gd" id="19_c7a3q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_75pfo"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.09921973, 0.09921973, 0.09921973, 0.60784316)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gv2t6"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.9999731, 0.72762823, 0.6849262, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1xwo4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5civd"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 1, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[sub_resource type="LabelSettings" id="LabelSettings_6gfwt"]
+font_size = 32
+
+[sub_resource type="Theme" id="Theme_x05w2"]
+default_font_size = 30
+
+[node name="GameManager" type="Node3D" unique_id=2133842653 node_paths=PackedStringArray("player_manager", "enemy_manager", "player_fx_relay", "main_camera", "dialogue_manager", "ui_manager", "scene_manager")]
+script = ExtResource("1_cjvif")
+player_manager = NodePath("PlayerManager")
+enemy_manager = NodePath("EnemyManager")
+player_fx_relay = NodePath("ScreenFXManager/PlayerFXRelay")
+main_camera = NodePath("Camera3D")
+dialogue_manager = NodePath("DialogueManager")
+ui_manager = NodePath("UI_Manager")
+scene_manager = NodePath("SceneManager")
+default_level = ExtResource("2_4vth2")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1950562238]
+transform = Transform3D(1, 0, 0, 0, 0.7660445, 0.64278764, 0, -0.64278764, 0.7660445, 0, 10.492676, 12.335)
+projection = 1
+current = true
+fov = 44.9
+size = 11.849
+near = 0.01
+far = 50.0
+script = ExtResource("2_pc0jn")
+
+[node name="AudioManager" type="Node3D" parent="." unique_id=990088645]
+
+[node name="AudioListener3D" type="AudioListener3D" parent="AudioManager" unique_id=390659806]
+current = true
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer" parent="AudioManager" unique_id=964059319]
+stream = ExtResource("2_ry0e6")
+volume_db = -11.378
+autoplay = true
+mix_target = 2
+parameters/looping = true
+
+[node name="UI_Manager" type="Node3D" parent="." unique_id=1592519619 node_paths=PackedStringArray("health_bar_manager", "stamina_marker_manager")]
+script = ExtResource("3_pc0jn")
+health_bar_manager = NodePath("Health and Stamina/Health_Bar_Manager")
+stamina_marker_manager = NodePath("Health and Stamina/Stamina_Marker_Manager")
+
+[node name="Health and Stamina" type="Control" parent="UI_Manager" unique_id=32804182]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Health_Bar_Manager" type="Control" parent="UI_Manager/Health and Stamina" unique_id=1387133433 node_paths=PackedStringArray("damage_bar", "health_bar")]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_c7a3q")
+health_interpolation_speed = 90.0
+damage_interpolation_speed = 90.0
+damage_bar = NodePath("DamageBar")
+health_bar = NodePath("DamageBar/HealthBar")
+
+[node name="DamageBar" type="ProgressBar" parent="UI_Manager/Health and Stamina/Health_Bar_Manager" unique_id=212163401]
+layout_mode = 0
+offset_right = 332.0
+offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxFlat_75pfo")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gv2t6")
+value = 50.0
+show_percentage = false
+
+[node name="HealthBar" type="ProgressBar" parent="UI_Manager/Health and Stamina/Health_Bar_Manager/DamageBar" unique_id=1952736569]
+layout_mode = 0
+offset_right = 332.0
+offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_1xwo4")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5civd")
+value = 45.0
+show_percentage = false
+
+[node name="Stamina_Marker_Manager" type="Control" parent="UI_Manager/Health and Stamina" unique_id=1690535351 node_paths=PackedStringArray("node_list")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+offset_right = -40.0
+offset_bottom = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset_ratio = Vector2(1, 1)
+script = ExtResource("5_4vth2")
+node_list = [NodePath("ColorRect"), NodePath("ColorRect2"), NodePath("ColorRect3")]
+inactive_color = Color(0.62967473, 0.62967473, 0.6296747, 1)
+active_color = Color(1, 1, 1, 1)
+
+[node name="ColorRect" type="ColorRect" parent="UI_Manager/Health and Stamina/Stamina_Marker_Manager" unique_id=478427776]
+layout_mode = 0
+offset_left = 10.106602
+offset_top = 38.1066
+offset_right = 25.106602
+offset_bottom = 53.1066
+rotation = 0.7853982
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="ColorRect2" type="ColorRect" parent="UI_Manager/Health and Stamina/Stamina_Marker_Manager" unique_id=1460259844]
+layout_mode = 0
+offset_left = 48.1066
+offset_top = 38.1066
+offset_right = 63.1066
+offset_bottom = 53.1066
+rotation = 0.7853982
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="ColorRect3" type="ColorRect" parent="UI_Manager/Health and Stamina/Stamina_Marker_Manager" unique_id=1918012366]
+layout_mode = 0
+offset_left = 86.106606
+offset_top = 38.1066
+offset_right = 101.106606
+offset_bottom = 53.1066
+rotation = 0.7853982
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="Dialogue" type="Control" parent="UI_Manager" unique_id=1398283736]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0, 1)
+
+[node name="TextBox" type="TextureRect" parent="UI_Manager/Dialogue" unique_id=1829065608]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -409.0
+offset_top = -214.0
+offset_right = 391.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("6_yxe1x")
+
+[node name="Label" type="Label" parent="UI_Manager/Dialogue/TextBox" unique_id=1950885355]
+layout_mode = 0
+offset_left = 196.0
+offset_top = 36.0
+offset_right = 751.0
+offset_bottom = 176.0
+text = "Sample text sample text sample text Sample text sample text sample text Sample text sample text sample text Sample text sample text sample text Sample text sample text sample text Sample text sample text sample text Sample text sample text sample text Sample text sample text sample text 
+"
+label_settings = SubResource("LabelSettings_6gfwt")
+autowrap_mode = 2
+text_overrun_behavior = 2
+
+[node name="TextureRect" type="TextureRect" parent="UI_Manager/Dialogue/TextBox" unique_id=773471372]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 23.0
+offset_right = 173.0
+offset_bottom = 169.0
+texture = ExtResource("6_yxe1x")
+
+[node name="OptionContainer" type="VBoxContainer" parent="UI_Manager/Dialogue" unique_id=1234780541]
+layout_mode = 0
+offset_left = -263.0
+offset_top = -464.0
+offset_right = 277.0
+offset_bottom = -190.0
+alignment = 2
+
+[node name="OptionButton" type="Button" parent="UI_Manager/Dialogue/OptionContainer" unique_id=734077332]
+layout_mode = 2
+theme = SubResource("Theme_x05w2")
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_disabled_color = Color(1, 1, 1, 0.4)
+text = "Sample text Sample text Sample text"
+
+[node name="EnemyManager" type="Node3D" parent="." unique_id=2090523660]
+script = ExtResource("7_jrl6a")
+test_enemy = ExtResource("8_wcunu")
+enemy_roster = Array[PackedScene]([ExtResource("8_wcunu"), ExtResource("9_2j6ol")])
+
+[node name="PlayerManager" type="Node3D" parent="." unique_id=711376720]
+script = ExtResource("10_8ldib")
+player_prefab = ExtResource("12_pc0jn")
+
+[node name="PathManager" type="Node3D" parent="." unique_id=480428704 node_paths=PackedStringArray("dynamic_scene_node", "effect_scene_node")]
+script = ExtResource("11_kvitc")
+dynamic_scene_node = NodePath("Scene/DynamicScene")
+effect_scene_node = NodePath("Scene/DynamicScene/Effects")
+
+[node name="Scene" type="Node3D" parent="PathManager" unique_id=2097412397]
+
+[node name="DynamicScene" type="Node3D" parent="PathManager/Scene" unique_id=909637214]
+
+[node name="Effects" type="Node3D" parent="PathManager/Scene/DynamicScene" unique_id=41946392]
+
+[node name="ScreenFXManager" type="Node3D" parent="." unique_id=1336514435]
+
+[node name="PlayerFXRelay" type="Node3D" parent="ScreenFXManager" unique_id=900052690 node_paths=PackedStringArray("slow_mo_manager", "zoom_manager", "shake_manager")]
+script = ExtResource("12_hqtnj")
+critical_damage_threshold = 20.0
+slow_mo_manager = NodePath("../SlowMoManager")
+zoom_manager = NodePath("../ZoomInManager")
+shake_manager = NodePath("../CameraShakeManager")
+
+[node name="SlowMoManager" type="Node3D" parent="ScreenFXManager" unique_id=1190641465]
+script = ExtResource("13_dlmsr")
+
+[node name="ZoomInManager" type="Node3D" parent="ScreenFXManager" unique_id=849675436 node_paths=PackedStringArray("camera")]
+script = ExtResource("14_uiwhc")
+camera = NodePath("../../Camera3D")
+
+[node name="CameraShakeManager" type="Node3D" parent="ScreenFXManager" unique_id=774197631 node_paths=PackedStringArray("camera_main")]
+script = ExtResource("15_8rwna")
+camera_main = NodePath("../../Camera3D")
+
+[node name="DialogueManager" type="Node3D" parent="." unique_id=584207305 node_paths=PackedStringArray("dialogue_box", "dialogue_text", "dialogue_button")]
+script = ExtResource("16_rscnb")
+dialogue_box = NodePath("../UI_Manager/Dialogue/TextBox")
+dialogue_text = NodePath("../UI_Manager/Dialogue/TextBox/Label")
+dialogue_button = NodePath("../UI_Manager/Dialogue/OptionContainer/OptionButton")
+
+[node name="SceneManager" type="Node3D" parent="." unique_id=592799134]
+script = ExtResource("19_c7a3q")

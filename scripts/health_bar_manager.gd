@@ -19,6 +19,11 @@ var damage_display:float
 func _ready() -> void:
 	pass # Replace with function body.
 
+func _reset(value:float = 0) -> void:
+	health_actual = value
+	health_display = value
+	health_bar.value = value
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	health_display = move_toward(health_display, health_actual, health_interpolation_speed*delta)

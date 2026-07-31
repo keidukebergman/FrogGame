@@ -21,6 +21,7 @@ func spawn_player(spawn_position:Vector3) -> Node:
 	var player_entity:PlayerEntity = player_instance as PlayerEntity
 	player_entity.get_main_object().global_position = spawn_position
 	player_entity.health_manager.applied_damage.connect(on_player_take_damage)
+	player = player_instance
 	return player_entity
 
 func get_player_information() -> Node3D:
@@ -29,7 +30,7 @@ func get_player_information() -> Node3D:
 	else:
 		return null
 
-func on_player_take_damage(damage:float) -> void:
+func on_player_take_damage(damage:float, _health:float) -> void:
 	player_took_damage.emit(damage)
 	
 func on_dialogue_start():
