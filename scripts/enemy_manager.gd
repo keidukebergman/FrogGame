@@ -9,7 +9,7 @@ signal requested_player_information(aggro_manager:AggroManager)
 
 func _ready() -> void:
 	await get_tree().create_timer(1).timeout
-	for n in 0:
+	for n in 4:
 		await get_tree().create_timer(randf_range(0, 0.01)).timeout
 		var spawn_vec:Vector3 = Vector3(randf_range(-3, 3), 0, randf_range(-3, 3))
 		var enemy = spawn_enemy(enemy_roster[randi_range(0, enemy_roster.size() - 1)], spawn_vec) as EnemyEntity

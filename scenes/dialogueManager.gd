@@ -30,13 +30,12 @@ signal ended_animation_event
 
 var advance_action_pressed_time = 0
 var options:LorelineOptions 
+var callable_dict:Dictionary[String, Callable] = {}
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	instance = self
 	dialogue_button.visible = false
 	set_ui_visibility(false)
-	options = LorelineOptions.new()
-	options.set_async_function("animation_event", _on_animation_event)
 
 func _process(delta:float) -> void:
 	var timer_coefficient = 1
@@ -66,7 +65,7 @@ func _process(delta:float) -> void:
 		advance_action_pressed_time = 0
 
 
-func initiate_dialogue(path:String, beat:String) -> void:
+func initiate_dialogue(path:String, beat:String, callables:Dictionary[String, Callable] = {}) -> void:
 	if in_dialogue: return
 	print("Tried to iniate dialogue at ", path)
 	in_dialogue = true
@@ -74,6 +73,10 @@ func initiate_dialogue(path:String, beat:String) -> void:
 	if script == null:
 		push_error("Failed to parse .lor file")
 		return
+	options = LorelineOptions.new()
+	options.set_async_function("animation_event", _on_animation_event)
+	callable_dict = callables
+	
 	loreline.play(script, _on_dialogue, _on_choice, _on_finished, "", options)
 	set_ui_visibility(true)
 	began_dialogue.emit()
@@ -151,6 +154,13 @@ func _on_animation_event(interp: LorelineInterpreter, _args: Array, resolve: Cal
 	await get_tree().create_timer(time).timeout
 	print("TIME IS DONE!")
 	set_ui_visibility(true)
+	resolve.call()
+
+func _on_custom_function(interp: LorelineInterpreter, _args: Array, resolve: Callable) -> void:
+	var function_name = _args[0]
+	var arguments = _args.slice(1);
+	if callable_dict[function_name]:
+		callable_dict[function_name].call(arguments)
 	resolve.call()
 
 func _on_finished(_interp: LorelineInterpreter) -> void:
