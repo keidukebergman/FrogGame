@@ -75,6 +75,7 @@ func initiate_dialogue(path:String, beat:String, callables:Dictionary[String, Ca
 		return
 	options = LorelineOptions.new()
 	options.set_async_function("animation_event", _on_animation_event)
+	options.set_async_function("custom_function", _on_custom_function)
 	callable_dict = callables
 	
 	loreline.play(script, _on_dialogue, _on_choice, _on_finished, "", options)
@@ -159,7 +160,7 @@ func _on_animation_event(interp: LorelineInterpreter, _args: Array, resolve: Cal
 func _on_custom_function(interp: LorelineInterpreter, _args: Array, resolve: Callable) -> void:
 	var function_name = _args[0]
 	var arguments = _args.slice(1);
-	if callable_dict[function_name]:
+	if callable_dict.has(function_name):
 		callable_dict[function_name].call(arguments)
 	resolve.call()
 

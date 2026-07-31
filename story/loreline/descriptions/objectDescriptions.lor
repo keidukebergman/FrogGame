@@ -1,5 +1,16 @@
 import "../characters"
 
-beat box
+beat find_box
   A box. Seems sturdy.
-  player: Who knows what hides inside.
+  choice
+    Destroy the box
+      custom_function("damage_box", 9999)
+      You have increased demand for boxes while simultaneously decreasing supply.
+
+      This is going to have economic ramifications.
+
+      Box makers are making big bank.
+
+      Box buyers are in shambles.
+    Do not the box
+      Ok cool
