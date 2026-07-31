@@ -28,7 +28,7 @@ signal began_animation_event
 signal ended_animation_event
 
 
-
+var advance_action_pressed_time = 0
 var options:LorelineOptions 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -42,7 +42,10 @@ func _process(delta:float) -> void:
 	var timer_coefficient = 1
 
 	if (Input.is_action_pressed("advance dialogue")):
-		timer_coefficient = 0.1
+		advance_action_pressed_time += delta
+		if advance_action_pressed_time >= 0.1:
+			timer_coefficient = 0.1
+			advance_dialogue_clicked.emit()
 	
 	if counting_up_text:
 		current_text_timer += delta
@@ -58,6 +61,9 @@ func _process(delta:float) -> void:
 
 	if (Input.is_action_just_pressed("advance dialogue")):
 		advance_dialogue_clicked.emit()
+		
+	if Input.is_action_just_released("advance dialogue"):
+		advance_action_pressed_time = 0
 
 
 func initiate_dialogue(path:String, beat:String) -> void:
@@ -98,7 +104,7 @@ func _on_dialogue(interp: LorelineInterpreter, character: String, text: String, 
 		await next_character
 	counting_up_text = false
 	dialogue_text.text = output_text
-	await advance_dialogue_clicked
+	await advance_dialogue_clicked 
 	advance.call()
 
 var current_select = null
