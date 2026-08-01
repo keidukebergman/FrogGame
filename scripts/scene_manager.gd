@@ -6,19 +6,14 @@ signal requested_level_switch
 signal started_loading_level
 signal finished_loading_level
 
-enum LevelType {
-	Cinematic,
-	Playable
-}
-
 func request_level_switch(level:PackedScene):
 	requested_level_switch.emit(level)
 
-func switch_level(level:PackedScene) -> LevelType:
+func switch_level(level:PackedScene) -> Level.LevelType:
 	started_loading_level.emit()
 	if current_level:
 		current_level.queue_free()
 	current_level = level.instantiate()
 	add_child(current_level)
 	finished_loading_level.emit()
-	return LevelType.Playable
+	return (current_level as Level).

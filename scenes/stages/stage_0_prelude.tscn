@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dlddde4tlwgqu"]
 
+[ext_resource type="Script" uid="uid://cqg3c1lf0akgj" path="res://scenes/stages/level.gd" id="1_xgmxc"]
 [ext_resource type="Material" uid="uid://cq31wu4xny0ql" path="res://materials/water.tres" id="2_32l4o"]
 [ext_resource type="PackedScene" uid="uid://b13rkitbsenhc" path="res://models/box.glb" id="4_pyg5a"]
 
@@ -38,8 +39,7 @@ subdivide_width = 90
 subdivide_depth = 90
 
 [node name="Node3D" type="Node3D" unique_id=51480205]
-
-[node name="SceneManager" type="Node3D" parent="." unique_id=1274583019]
+script = ExtResource("1_xgmxc")
 
 [node name="StaticSceneObjects" type="Node3D" parent="." unique_id=920620900]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1716028, 0)
@@ -66,7 +66,7 @@ environment = SubResource("Environment_g14j6")
 navigation_mesh = SubResource("NavigationMesh_ajshl")
 
 [node name="Box" type="StaticBody3D" parent="StaticSceneObjects/NavigationRegion3D" unique_id=1286937846]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1.67, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1.7, 0)
 collision_layer = 2
 collision_mask = 2
 
