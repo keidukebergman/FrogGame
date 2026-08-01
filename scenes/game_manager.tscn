@@ -20,7 +20,7 @@
 [ext_resource type="Script" uid="uid://bjs1qymkrmk25" path="res://scripts/camera_shake_manager.gd" id="15_8rwna"]
 [ext_resource type="Script" uid="uid://drpcspnamiljs" path="res://scripts/dialogueManager.gd" id="16_rscnb"]
 [ext_resource type="Script" uid="uid://dsynjmcu6pt7s" path="res://scripts/scene_manager.gd" id="19_c7a3q"]
-[ext_resource type="Script" uid="uid://fv00ihhop1g1" path="res://scenes/data_manager.gd" id="21_yxe1x"]
+[ext_resource type="Script" uid="uid://fv00ihhop1g1" path="res://scripts/data_manager.gd" id="21_yxe1x"]
 [ext_resource type="Script" uid="uid://b3qttek67520w" path="res://scripts/data_resources/save_data.gd" id="22_jrl6a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_75pfo"]

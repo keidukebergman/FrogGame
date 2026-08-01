@@ -16,4 +16,4 @@ func switch_level(level:PackedScene) -> Level.LevelType:
 	current_level = level.instantiate()
 	add_child(current_level)
 	finished_loading_level.emit()
-	return (current_level as Level).
+	return (current_level as Level).level_type
