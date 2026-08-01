@@ -24,9 +24,8 @@ signal advance_dialogue_clicked
 
 signal began_dialogue
 signal finished_dialogue
-signal began_animation_event
-signal ended_animation_event
-
+signal began_timer_event
+signal ended_timer_event
 
 var advance_action_pressed_time = 0
 var options:LorelineOptions 
@@ -74,7 +73,7 @@ func initiate_dialogue(path:String, beat:String, callables:Dictionary[String, Ca
 		push_error("Failed to parse .lor file")
 		return
 	options = LorelineOptions.new()
-	options.set_async_function("animation_event", _on_animation_event)
+	options.set_async_function("timeout", _on_timeout)
 	options.set_async_function("custom_function", _on_custom_function)
 	callable_dict = callables
 	
@@ -148,13 +147,13 @@ func _choice_callback(index) -> void:
 	button_connections = []
 	dialogue_button.visible = false
 
-func _on_animation_event(interp: LorelineInterpreter, _args: Array, resolve: Callable) -> void:
+func _on_timeout(interp: LorelineInterpreter, _args: Array, resolve: Callable) -> void:
 	var time = _args[0]
+	began_timer_event.emit()
 	set_ui_visibility(false)
-	print("TIMER IS CREATE!")
 	await get_tree().create_timer(time).timeout
-	print("TIME IS DONE!")
 	set_ui_visibility(true)
+	ended_timer_event.emit()
 	resolve.call()
 
 func _on_custom_function(interp: LorelineInterpreter, _args: Array, resolve: Callable) -> void:
@@ -162,6 +161,8 @@ func _on_custom_function(interp: LorelineInterpreter, _args: Array, resolve: Cal
 	var arguments = _args.slice(1);
 	if callable_dict.has(function_name):
 		callable_dict[function_name].call(arguments)
+	else:
+		printerr("DialogueManager: Custom function dict entry undefined.")
 	resolve.call()
 
 func _on_finished(_interp: LorelineInterpreter) -> void:

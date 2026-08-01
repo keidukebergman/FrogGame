@@ -20,6 +20,8 @@
 [ext_resource type="Script" uid="uid://bjs1qymkrmk25" path="res://scripts/camera_shake_manager.gd" id="15_8rwna"]
 [ext_resource type="Script" uid="uid://drpcspnamiljs" path="res://scripts/dialogueManager.gd" id="16_rscnb"]
 [ext_resource type="Script" uid="uid://dsynjmcu6pt7s" path="res://scripts/scene_manager.gd" id="19_c7a3q"]
+[ext_resource type="Script" uid="uid://fv00ihhop1g1" path="res://scenes/data_manager.gd" id="21_yxe1x"]
+[ext_resource type="Script" uid="uid://b3qttek67520w" path="res://scripts/data_resources/save_data.gd" id="22_jrl6a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_75pfo"]
 content_margin_left = 2.0
@@ -64,6 +66,10 @@ font_size = 32
 
 [sub_resource type="Theme" id="Theme_x05w2"]
 default_font_size = 30
+
+[sub_resource type="Resource" id="Resource_5jxlq"]
+script = ExtResource("22_jrl6a")
+metadata/_custom_type_script = "uid://b3qttek67520w"
 
 [node name="GameManager" type="Node3D" unique_id=2133842653 node_paths=PackedStringArray("player_manager", "enemy_manager", "player_fx_relay", "main_camera", "dialogue_manager", "ui_manager", "scene_manager")]
 script = ExtResource("1_cjvif")
@@ -308,3 +314,7 @@ dialogue_button = NodePath("../UI_Manager/Dialogue/OptionContainer/OptionButton"
 
 [node name="SceneManager" type="Node3D" parent="." unique_id=592799134]
 script = ExtResource("19_c7a3q")
+
+[node name="DataManager" type="Node3D" parent="." unique_id=507151478]
+script = ExtResource("21_yxe1x")
+save = SubResource("Resource_5jxlq")
