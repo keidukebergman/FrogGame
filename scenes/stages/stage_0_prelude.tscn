@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://dlddde4tlwgqu"]
+
+[ext_resource type="Material" uid="uid://cq31wu4xny0ql" path="res://materials/water.tres" id="2_32l4o"]
+[ext_resource type="PackedScene" uid="uid://b13rkitbsenhc" path="res://models/box.glb" id="4_pyg5a"]
+
+[sub_resource type="Environment" id="Environment_g14j6"]
+ambient_light_color = Color(0.30311, 0.608761, 0.511145, 1)
+glow_enabled = true
+glow_intensity = 2.3
+glow_hdr_threshold = 0.48
+glow_hdr_scale = 1.15
+fog_light_energy = 2.0
+fog_sun_scatter = 0.09
+fog_density = 0.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0157
+volumetric_fog_albedo = Color(0.505316, 0.907296, 0.968455, 1)
+volumetric_fog_emission = Color(0.194426, 0.825317, 0.832815, 1)
+volumetric_fog_emission_energy = 0.0
+volumetric_fog_gi_inject = 0.92
+volumetric_fog_length = 8.0
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_ajshl"]
+vertices = PackedVector3Array(-4.9560003, -1.1500001, -48.529, -4.9560003, -1.1500001, 50.471, -2.9560003, -1.1500001, 50.471, -2.9560003, -1.1500001, -48.529, -4.9560003, -1.1500001, -42.141903, -4.9560003, -1.21, -38.948357, -4.9560003, -1.21, 37.696808, -4.9560003, -1.1500001, 40.89035)
+polygons = [PackedInt32Array(0, 3, 4), PackedInt32Array(4, 3, 5), PackedInt32Array(5, 3, 6), PackedInt32Array(6, 3, 7), PackedInt32Array(7, 3, 1), PackedInt32Array(1, 3, 2)]
+cell_height = 0.01
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ghpyy"]
+size = Vector3(6, 2, 200)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gm488"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gm488"]
+material = ExtResource("2_32l4o")
+size = Vector2(50, 50)
+subdivide_width = 90
+subdivide_depth = 90
+
+[node name="Node3D" type="Node3D" unique_id=51480205]
+
+[node name="SceneManager" type="Node3D" parent="." unique_id=1274583019]
+
+[node name="StaticSceneObjects" type="Node3D" parent="." unique_id=920620900]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1716028, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="StaticSceneObjects" unique_id=183470064]
+transform = Transform3D(1, 0, 0, 0, 0.55629563, 0.8309845, 0, -0.8309845, 0.55629563, 14, 7, 0)
+light_angular_distance = 16.05
+shadow_enabled = true
+shadow_bias = 2.145
+shadow_normal_bias = 10.0
+shadow_transmittance_bias = -1.162
+shadow_opacity = 0.66
+shadow_blur = 0.076
+directional_shadow_split_1 = 0.395
+directional_shadow_split_2 = 0.389
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 267.5
+directional_shadow_pancake_size = 0.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="StaticSceneObjects" unique_id=977780729]
+environment = SubResource("Environment_g14j6")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="StaticSceneObjects" unique_id=1776965494]
+navigation_mesh = SubResource("NavigationMesh_ajshl")
+
+[node name="Box" type="StaticBody3D" parent="StaticSceneObjects/NavigationRegion3D" unique_id=1286937846]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1.67, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="Boxmesh" parent="StaticSceneObjects/NavigationRegion3D/Box" unique_id=1133665781 instance=ExtResource("4_pyg5a")]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticSceneObjects/NavigationRegion3D/Box" unique_id=1575386326]
+shape = SubResource("BoxShape3D_ghpyy")
+
+[node name="Water" type="Area3D" parent="StaticSceneObjects" unique_id=1779046472]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.1886096, 0)
+collision_layer = 4
+collision_mask = 52
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticSceneObjects/Water" unique_id=1182025572]
+shape = SubResource("BoxShape3D_gm488")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticSceneObjects/Water" unique_id=1501212477]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8398261, 0)
+mesh = SubResource("PlaneMesh_gm488")

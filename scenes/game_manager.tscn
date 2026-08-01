@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://h2jekcutdc6x"]
 
 [ext_resource type="Script" uid="uid://dhd6d8l44t7yn" path="res://scripts/game_manager.gd" id="1_cjvif"]
-[ext_resource type="PackedScene" uid="uid://cp56kp11t4ngg" path="res://scenes/test.tscn" id="2_4vth2"]
+[ext_resource type="PackedScene" uid="uid://dlddde4tlwgqu" path="res://scenes/stages/stage_0_prelude.tscn" id="2_jrl6a"]
 [ext_resource type="Script" uid="uid://csq2alr5vtppq" path="res://scripts/game_cam.gd" id="2_pc0jn"]
 [ext_resource type="AudioStream" uid="uid://pmc3kysxqlc6" path="res://sound/sfx/pixabay/lake-wavelet-27909.mp3" id="2_ry0e6"]
 [ext_resource type="Script" uid="uid://cdrfstpx35r12" path="res://scripts/ui_manager.gd" id="3_pc0jn"]
@@ -71,7 +71,7 @@ default_font_size = 30
 script = ExtResource("22_jrl6a")
 metadata/_custom_type_script = "uid://b3qttek67520w"
 
-[node name="GameManager" type="Node3D" unique_id=2133842653 node_paths=PackedStringArray("player_manager", "enemy_manager", "player_fx_relay", "main_camera", "dialogue_manager", "ui_manager", "scene_manager")]
+[node name="GameManager" type="Node3D" unique_id=2133842653 node_paths=PackedStringArray("player_manager", "enemy_manager", "player_fx_relay", "main_camera", "dialogue_manager", "ui_manager", "scene_manager", "data_manager")]
 script = ExtResource("1_cjvif")
 player_manager = NodePath("PlayerManager")
 enemy_manager = NodePath("EnemyManager")
@@ -80,7 +80,8 @@ main_camera = NodePath("Camera3D")
 dialogue_manager = NodePath("DialogueManager")
 ui_manager = NodePath("UI_Manager")
 scene_manager = NodePath("SceneManager")
-default_level = ExtResource("2_4vth2")
+data_manager = NodePath("DataManager")
+default_level = ExtResource("2_jrl6a")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1950562238]
 transform = Transform3D(1, 0, 0, 0, 0.7660445, 0.64278764, 0, -0.64278764, 0.7660445, 0, 10.492676, 12.335)
@@ -312,9 +313,11 @@ dialogue_box = NodePath("../UI_Manager/Dialogue/TextBox")
 dialogue_text = NodePath("../UI_Manager/Dialogue/TextBox/Label")
 dialogue_button = NodePath("../UI_Manager/Dialogue/OptionContainer/OptionButton")
 
-[node name="SceneManager" type="Node3D" parent="." unique_id=592799134]
-script = ExtResource("19_c7a3q")
-
 [node name="DataManager" type="Node3D" parent="." unique_id=507151478]
 script = ExtResource("21_yxe1x")
 save = SubResource("Resource_5jxlq")
+
+[node name="SceneManager" type="Node3D" parent="." unique_id=592799134]
+script = ExtResource("19_c7a3q")
+
+[node name="LevelManager" type="Node3D" parent="." unique_id=1816740330]

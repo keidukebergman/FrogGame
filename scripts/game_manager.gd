@@ -9,14 +9,18 @@ extends Node3D
 @export var dialogue_manager:DialogueManager
 @export var ui_manager:UI_Manager
 @export var scene_manager:SceneManager
+@export var data_manager:DataManager
 @export var default_level:PackedScene
 
 func _ready() -> void:
+	data_manager.load_data()
 	enemy_manager.requested_player_information.connect(on_player_information_requested)
 	dialogue_manager.began_dialogue.connect(player_manager.on_dialogue_start)
 	dialogue_manager.finished_dialogue.connect(player_manager.on_dialogue_end)
+	play_game()
+
+func play_game():
 	scene_manager.switch_level(default_level)
-	
 	if player_manager.get_player() == null:
 		_initialize_player(Vector3(0, 0.778, 0))
 
