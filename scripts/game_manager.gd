@@ -20,7 +20,7 @@ func _ready() -> void:
 	play_game()
 
 func play_game():
-	scene_manager.switch_level(default_level)
+	scene_manager.async_switch_level("res://scenes/stages/stage_0_prelude.tscn")
 	if player_manager.get_player() == null:
 		_initialize_player(Vector3(0, 0.778, 0))
 

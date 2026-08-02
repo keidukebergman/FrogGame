@@ -1,6 +1,7 @@
 class_name Level extends Node3D
 
 enum LevelType {
+	None,
 	Cinematic,
 	Playable
 }
