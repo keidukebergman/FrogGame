@@ -74,6 +74,9 @@ subdivide_depth = 90
 
 [node name="Node3D" type="Node3D" unique_id=51480205]
 script = ExtResource("1_xgmxc")
+camera_default_position = Vector2(0, 12.335)
+camera_minimum_position = Vector2(-5, 9.335)
+camera_maximum_position = Vector2(5, 15.335)
 
 [node name="StaticSceneObjects" type="Node3D" parent="." unique_id=920620900]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1716028, 0)

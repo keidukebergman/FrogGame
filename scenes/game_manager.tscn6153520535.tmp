@@ -92,6 +92,11 @@ size = 11.849
 near = 0.01
 far = 50.0
 script = ExtResource("2_pc0jn")
+offset = null
+smoothing = null
+min_coords = null
+max_coords = null
+follow_target = null
 
 [node name="AudioManager" type="Node3D" parent="." unique_id=990088645]
 

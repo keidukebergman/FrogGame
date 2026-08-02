@@ -3,12 +3,13 @@ class_name MainCamera
 
 @export var offset:Vector3 = Vector3(0, 10.493, 12.335)
 var target_position:Vector3 = Vector3(0, 10.493, 12.335)
+var height = 10.493
 @export var smoothing: float = 10
 
 @export var min_coords:Vector2
 @export var max_coords:Vector2 
 
-@export var follow_target: bool = false
+@export var follow_target: bool = true
 @export var target: Node3D
 
 # Called when the node enters the scene tree for the first time.
@@ -20,6 +21,10 @@ func _process(_delta: float) -> void:
 		target_position = target.global_position
 		var pos_xz = Vector3(target_position.x, 0, target_position.z)
 		target_position = pos_xz + offset
+		if target_position.x < min_coords.x: target_position.x = min_coords.x
+		if target_position.z < min_coords.y: target_position.z = min_coords.y
+		if target_position.x > max_coords.x: target_position.x = max_coords.x
+		if target_position.z > max_coords.y: target_position.z = max_coords.y
 		global_position = target_position
 	pass
 

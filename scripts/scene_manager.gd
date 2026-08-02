@@ -1,7 +1,6 @@
 class_name SceneManager extends Node
 
 var current_level:Node
-@export var level_dictionary : Dictionary[String, PackedScene]
 
 signal requested_level_switch
 signal started_loading_level
