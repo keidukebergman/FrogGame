@@ -1,8 +1,9 @@
-[gd_scene format=4 uid="uid://dlddde4tlwgqu"]
+[gd_scene format=4 uid="uid://c56vkfkmniac"]
 
-[ext_resource type="Script" uid="uid://cqg3c1lf0akgj" path="res://scripts/level.gd" id="1_xgmxc"]
-[ext_resource type="Material" uid="uid://cq31wu4xny0ql" path="res://materials/water.tres" id="2_32l4o"]
-[ext_resource type="PackedScene" uid="uid://wnv3ws5ud8k3" path="res://scenes/instantiable/functionality/gate.tscn" id="3_xgmxc"]
+[ext_resource type="Script" uid="uid://cqg3c1lf0akgj" path="res://scripts/level.gd" id="1_xaln8"]
+[ext_resource type="Material" uid="uid://cq31wu4xny0ql" path="res://materials/water.tres" id="2_371w6"]
+[ext_resource type="PackedScene" uid="uid://bg1owrrruuh0w" path="res://scenes/lily_pad.tscn" id="2_mua5r"]
+[ext_resource type="PackedScene" uid="uid://wnv3ws5ud8k3" path="res://scenes/instantiable/functionality/gate.tscn" id="3_mua5r"]
 
 [sub_resource type="Environment" id="Environment_g14j6"]
 ambient_light_color = Color(0.30311, 0.608761, 0.511145, 1)
@@ -64,20 +65,24 @@ shadow_mesh = SubResource("ArrayMesh_xgmxc")
 [sub_resource type="BoxShape3D" id="BoxShape3D_x05w2"]
 size = Vector3(4.6, 4.922778, 9.3)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_gm488"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_g14j6"]
+height = 0.564941
+radius = 10.706055
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_371w6"]
 size = Vector3(50, 1, 50)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_gm488"]
-material = ExtResource("2_32l4o")
+[sub_resource type="PlaneMesh" id="PlaneMesh_mua5r"]
+material = ExtResource("2_371w6")
 size = Vector2(50, 50)
 subdivide_width = 90
 subdivide_depth = 90
 
 [node name="Node3D" type="Node3D" unique_id=51480205 node_paths=PackedStringArray("gates")]
-script = ExtResource("1_xgmxc")
+script = ExtResource("1_xaln8")
 camera_default_position = Vector2(0, 12.335)
-camera_minimum_position = Vector2(-5, 9.335)
-camera_maximum_position = Vector2(5, 15.335)
+camera_minimum_position = Vector2(-5, -13.175)
+camera_maximum_position = Vector2(5, 32.305)
 gates = [NodePath("Gates/Gate"), NodePath("Gates/Gate1")]
 
 [node name="DynamicSceneObjects" type="Node3D" parent="." unique_id=603780765]
@@ -118,21 +123,6 @@ mesh = SubResource("ArrayMesh_gew2n")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticSceneObjects/NavigationRegion3D/Bridge2" unique_id=596898842]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3841858e-07, -0.4386108, 0.049999952)
-shape = SubResource("BoxShape3D_x05w2")
-debug_color = Color(18.892157, 3.0878935, 10.726625, 0.41960785)
-
-[node name="Bridge5" type="StaticBody3D" parent="StaticSceneObjects/NavigationRegion3D" unique_id=1550566430]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.2481813, -9.407349)
-collision_layer = 2
-collision_mask = 2
-
-[node name="Cube" type="MeshInstance3D" parent="StaticSceneObjects/NavigationRegion3D/Bridge5" unique_id=290028686]
-transform = Transform3D(-1.3113416e-07, 0, 3, 0, 3, 0, -3, 0, -1.3113416e-07, 0, -0.9708861, 0)
-mesh = SubResource("ArrayMesh_gew2n")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticSceneObjects/NavigationRegion3D/Bridge5" unique_id=1613356411]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3841858e-07, -0.4386108, 0.049999952)
 shape = SubResource("BoxShape3D_x05w2")
 debug_color = Color(18.892157, 3.0878935, 10.726625, 0.41960785)
@@ -187,11 +177,6 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 6.98
 collision_layer = 2
 collision_mask = 2
 
-[node name="Cube" type="MeshInstance3D" parent="StaticSceneObjects/NavigationRegion3D/Bridge3" unique_id=1605562886]
-transform = Transform3D(-1.3113416e-07, 0, 3, 0, 3, 0, -3, 0, -1.3113416e-07, 0, -0.9708861, 0)
-mesh = SubResource("ArrayMesh_gew2n")
-skeleton = NodePath("")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticSceneObjects/NavigationRegion3D/Bridge3" unique_id=1780927114]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3841858e-07, -0.4386108, 0.049999952)
 shape = SubResource("BoxShape3D_x05w2")
@@ -202,36 +187,46 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -6.9
 collision_layer = 2
 collision_mask = 2
 
-[node name="Cube" type="MeshInstance3D" parent="StaticSceneObjects/NavigationRegion3D/Bridge4" unique_id=1212442998]
-transform = Transform3D(-1.3113416e-07, 0, 3, 0, 3, 0, -3, 0, -1.3113416e-07, 0, -0.9708861, 0)
-mesh = SubResource("ArrayMesh_gew2n")
-skeleton = NodePath("")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticSceneObjects/NavigationRegion3D/Bridge4" unique_id=2072318564]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3841858e-07, -0.4386108, 0.049999952)
 shape = SubResource("BoxShape3D_x05w2")
 debug_color = Color(18.892157, 3.0878935, 10.726625, 0.41960785)
 
-[node name="Water" type="Area3D" parent="StaticSceneObjects" unique_id=1779046472]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.5117908, 0)
+[node name="Lily_pad" type="Node3D" parent="StaticSceneObjects/NavigationRegion3D" unique_id=602695399]
+transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.556708e-08, -0.0105181, -4.28093, 0.0119583)
+
+[node name="lily_pad2" parent="StaticSceneObjects/NavigationRegion3D/Lily_pad" unique_id=714936648 instance=ExtResource("2_mua5r")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 1.78668, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="StaticSceneObjects/NavigationRegion3D/Lily_pad" unique_id=1920972279]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticSceneObjects/NavigationRegion3D/Lily_pad/StaticBody3D" unique_id=1319646094]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.9695799, 0)
+shape = SubResource("CylinderShape3D_g14j6")
+
+[node name="Water" type="Area3D" parent="StaticSceneObjects" unique_id=1952304457]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.336362, 0)
 collision_layer = 4
 collision_mask = 52
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticSceneObjects/Water" unique_id=1182025572]
-shape = SubResource("BoxShape3D_gm488")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticSceneObjects/Water" unique_id=1597746398]
+shape = SubResource("BoxShape3D_371w6")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticSceneObjects/Water" unique_id=1501212477]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticSceneObjects/Water" unique_id=1234332722]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8398261, 0)
-mesh = SubResource("PlaneMesh_gm488")
+mesh = SubResource("PlaneMesh_mua5r")
 
 [node name="Gates" type="Node3D" parent="." unique_id=1850133055]
 
-[node name="Gate" parent="Gates" unique_id=44699894 instance=ExtResource("3_xgmxc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47229004, 3.995575)
+[node name="Gate" parent="Gates" unique_id=44699894 instance=ExtResource("3_mua5r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47229004, 19.066246)
 next_gate_index = 1
+next_level_string = "stage_1_prelude"
 spawn_position_offset = Vector3(0, 0, -2)
 
-[node name="Gate1" parent="Gates" unique_id=1706654895 instance=ExtResource("3_xgmxc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47229004, -5.370163)
-next_level_string = "stage_1_prelude"
+[node name="Gate1" parent="Gates" unique_id=1706654895 instance=ExtResource("3_mua5r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47229004, -21.002415)
+next_level_string = "stage_2_prelude"
 spawn_position_offset = Vector3(0, 0, 2)

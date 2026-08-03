@@ -5,6 +5,14 @@ class_name Gate
 @export var next_gate_index:int = 0 
 @export var next_level_string:String = "stage_0_prelude"
 @export var spawn_position_offset: Vector3
+@export var gate_direction:GateDirection = GateDirection.UP
+
+enum GateDirection {
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
+}
 
 signal player_collided_with_gate(String, int)
 var has_been_activated = false

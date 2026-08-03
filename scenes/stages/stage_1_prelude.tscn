@@ -1,8 +1,8 @@
-[gd_scene format=4 uid="uid://dlddde4tlwgqu"]
+[gd_scene format=4 uid="uid://b42g8iig07gxo"]
 
-[ext_resource type="Script" uid="uid://cqg3c1lf0akgj" path="res://scripts/level.gd" id="1_xgmxc"]
-[ext_resource type="Material" uid="uid://cq31wu4xny0ql" path="res://materials/water.tres" id="2_32l4o"]
-[ext_resource type="PackedScene" uid="uid://wnv3ws5ud8k3" path="res://scenes/instantiable/functionality/gate.tscn" id="3_xgmxc"]
+[ext_resource type="Script" uid="uid://cqg3c1lf0akgj" path="res://scripts/level.gd" id="1_0ryvl"]
+[ext_resource type="Material" uid="uid://cq31wu4xny0ql" path="res://materials/water.tres" id="2_4qdmf"]
+[ext_resource type="PackedScene" uid="uid://wnv3ws5ud8k3" path="res://scenes/instantiable/functionality/gate.tscn" id="3_sytbh"]
 
 [sub_resource type="Environment" id="Environment_g14j6"]
 ambient_light_color = Color(0.30311, 0.608761, 0.511145, 1)
@@ -68,16 +68,16 @@ size = Vector3(4.6, 4.922778, 9.3)
 size = Vector3(50, 1, 50)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_gm488"]
-material = ExtResource("2_32l4o")
+material = ExtResource("2_4qdmf")
 size = Vector2(50, 50)
 subdivide_width = 90
 subdivide_depth = 90
 
 [node name="Node3D" type="Node3D" unique_id=51480205 node_paths=PackedStringArray("gates")]
-script = ExtResource("1_xgmxc")
+script = ExtResource("1_0ryvl")
 camera_default_position = Vector2(0, 12.335)
-camera_minimum_position = Vector2(-5, 9.335)
-camera_maximum_position = Vector2(5, 15.335)
+camera_minimum_position = Vector2(-5, -13.175)
+camera_maximum_position = Vector2(5, 32.305)
 gates = [NodePath("Gates/Gate"), NodePath("Gates/Gate1")]
 
 [node name="DynamicSceneObjects" type="Node3D" parent="." unique_id=603780765]
@@ -187,11 +187,6 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 6.98
 collision_layer = 2
 collision_mask = 2
 
-[node name="Cube" type="MeshInstance3D" parent="StaticSceneObjects/NavigationRegion3D/Bridge3" unique_id=1605562886]
-transform = Transform3D(-1.3113416e-07, 0, 3, 0, 3, 0, -3, 0, -1.3113416e-07, 0, -0.9708861, 0)
-mesh = SubResource("ArrayMesh_gew2n")
-skeleton = NodePath("")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticSceneObjects/NavigationRegion3D/Bridge3" unique_id=1780927114]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3841858e-07, -0.4386108, 0.049999952)
 shape = SubResource("BoxShape3D_x05w2")
@@ -201,11 +196,6 @@ debug_color = Color(18.892157, 3.0878935, 10.726625, 0.41960785)
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -6.981, -3.2479997, -2.3760986)
 collision_layer = 2
 collision_mask = 2
-
-[node name="Cube" type="MeshInstance3D" parent="StaticSceneObjects/NavigationRegion3D/Bridge4" unique_id=1212442998]
-transform = Transform3D(-1.3113416e-07, 0, 3, 0, 3, 0, -3, 0, -1.3113416e-07, 0, -0.9708861, 0)
-mesh = SubResource("ArrayMesh_gew2n")
-skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticSceneObjects/NavigationRegion3D/Bridge4" unique_id=2072318564]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3841858e-07, -0.4386108, 0.049999952)
@@ -226,12 +216,12 @@ mesh = SubResource("PlaneMesh_gm488")
 
 [node name="Gates" type="Node3D" parent="." unique_id=1850133055]
 
-[node name="Gate" parent="Gates" unique_id=44699894 instance=ExtResource("3_xgmxc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47229004, 3.995575)
+[node name="Gate" parent="Gates" unique_id=44699894 instance=ExtResource("3_sytbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47229004, 20.279411)
 next_gate_index = 1
 spawn_position_offset = Vector3(0, 0, -2)
 
-[node name="Gate1" parent="Gates" unique_id=1706654895 instance=ExtResource("3_xgmxc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47229004, -5.370163)
-next_level_string = "stage_1_prelude"
+[node name="Gate1" parent="Gates" unique_id=1706654895 instance=ExtResource("3_sytbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47229004, -21.073448)
+next_level_string = "stage_2_prelude"
 spawn_position_offset = Vector3(0, 0, 2)

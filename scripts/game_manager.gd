@@ -21,21 +21,22 @@ func _ready() -> void:
 	play_game()
 
 func on_level_switch_request(level, gate):
-	await scene_manager.async_switch_level(level)
+	var leveltype = await scene_manager.async_switch_level(level)
+	if leveltype == Level.LevelType.None:
+		push_error("ERROR: No level loaded")
+		return
 	var lvl:Level = scene_manager.current_level
 	var spawn_position = lvl.get_gate_spawn_position(gate)
 	spawn_position.y = 0.778
 	player_manager.get_player().main_object.global_position = spawn_position
-	
+	main_camera.min_coords = scene_manager.current_level.camera_minimum_position
+	main_camera.max_coords = scene_manager.current_level.camera_maximum_position
 
 func play_game():
 	var scenepath = "res://scenes/stages/" + data_manager.get_save_parameter("location") +".tscn"
-	await scene_manager.async_switch_level(scenepath)
-	main_camera.min_coords = scene_manager.current_level.camera_minimum_position
-	main_camera.max_coords = scene_manager.current_level.camera_maximum_position	
+	on_level_switch_request(scenepath, 0)
 	if player_manager.get_player() == null:
 		_initialize_player(Vector3(0, 0.778, 0))
-	
 
 func _start_cinematic_level():
 	if player_manager.get_player() != null:

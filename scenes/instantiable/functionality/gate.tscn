@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://wnv3ws5ud8k3"]
 
-[ext_resource type="Script" uid="uid://bc7r1fnvpxr5s" path="res://scenes/stages/gate.gd" id="1_b4d24"]
+[ext_resource type="Script" uid="uid://bc7r1fnvpxr5s" path="res://scripts/gate.gd" id="1_b4d24"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mtnme"]
 

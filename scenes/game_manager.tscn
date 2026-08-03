@@ -20,7 +20,9 @@
 [ext_resource type="Script" uid="uid://drpcspnamiljs" path="res://scripts/dialogueManager.gd" id="16_rscnb"]
 [ext_resource type="Script" uid="uid://dsynjmcu6pt7s" path="res://scripts/scene_manager.gd" id="19_c7a3q"]
 [ext_resource type="Script" uid="uid://fv00ihhop1g1" path="res://scripts/data_manager.gd" id="21_yxe1x"]
+[ext_resource type="Script" uid="uid://crvygmt8gsm5y" path="res://scenes/scene_transition_manager.gd" id="22_2j6ol"]
 [ext_resource type="Script" uid="uid://b3qttek67520w" path="res://scripts/data_resources/save_data.gd" id="22_jrl6a"]
+[ext_resource type="Shader" uid="uid://c64n80r2l1bxj" path="res://scenes/fullscreen_load_shader.gdshader" id="22_wcunu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_75pfo"]
 content_margin_left = 2.0
@@ -70,6 +72,14 @@ default_font_size = 30
 script = ExtResource("22_jrl6a")
 metadata/_custom_type_script = "uid://b3qttek67520w"
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yxe1x"]
+shader = ExtResource("22_wcunu")
+shader_parameter/grid_scale = 20.0
+shader_parameter/left_right = false
+shader_parameter/position = -1.015
+shader_parameter/width = 0.5
+shader_parameter/aspect = 1.7777
+
 [node name="GameManager" type="Node3D" unique_id=2133842653 node_paths=PackedStringArray("player_manager", "enemy_manager", "player_fx_relay", "main_camera", "dialogue_manager", "ui_manager", "scene_manager", "data_manager")]
 script = ExtResource("1_cjvif")
 player_manager = NodePath("PlayerManager")
@@ -107,16 +117,19 @@ parameters/looping = true
 
 [node name="UI_Manager" type="Node3D" parent="." unique_id=1592519619 node_paths=PackedStringArray("health_bar_manager", "stamina_marker_manager")]
 script = ExtResource("3_pc0jn")
-health_bar_manager = NodePath("Health and Stamina/Health_Bar_Manager")
-stamina_marker_manager = NodePath("Health and Stamina/Stamina_Marker_Manager")
+health_bar_manager = NodePath("CanvasLayer/Health and Stamina/Health_Bar_Manager")
+stamina_marker_manager = NodePath("CanvasLayer/Health and Stamina/Stamina_Marker_Manager")
 
-[node name="Health and Stamina" type="Control" parent="UI_Manager" unique_id=32804182]
+[node name="CanvasLayer" type="CanvasLayer" parent="UI_Manager" unique_id=2112669322]
+layer = 0
+
+[node name="Health and Stamina" type="Control" parent="UI_Manager/CanvasLayer" unique_id=32804182]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Health_Bar_Manager" type="Control" parent="UI_Manager/Health and Stamina" unique_id=1387133433 node_paths=PackedStringArray("damage_bar", "health_bar")]
+[node name="Health_Bar_Manager" type="Control" parent="UI_Manager/CanvasLayer/Health and Stamina" unique_id=1387133433 node_paths=PackedStringArray("damage_bar", "health_bar")]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -126,7 +139,7 @@ damage_interpolation_speed = 90.0
 damage_bar = NodePath("DamageBar")
 health_bar = NodePath("DamageBar/HealthBar")
 
-[node name="DamageBar" type="ProgressBar" parent="UI_Manager/Health and Stamina/Health_Bar_Manager" unique_id=212163401]
+[node name="DamageBar" type="ProgressBar" parent="UI_Manager/CanvasLayer/Health and Stamina/Health_Bar_Manager" unique_id=212163401]
 layout_mode = 0
 offset_right = 332.0
 offset_bottom = 27.0
@@ -135,7 +148,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_gv2t6")
 value = 50.0
 show_percentage = false
 
-[node name="HealthBar" type="ProgressBar" parent="UI_Manager/Health and Stamina/Health_Bar_Manager/DamageBar" unique_id=1952736569]
+[node name="HealthBar" type="ProgressBar" parent="UI_Manager/CanvasLayer/Health and Stamina/Health_Bar_Manager/DamageBar" unique_id=1952736569]
 layout_mode = 0
 offset_right = 332.0
 offset_bottom = 27.0
@@ -144,7 +157,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_5civd")
 value = 45.0
 show_percentage = false
 
-[node name="Stamina_Marker_Manager" type="Control" parent="UI_Manager/Health and Stamina" unique_id=1690535351 node_paths=PackedStringArray("node_list")]
+[node name="Stamina_Marker_Manager" type="Control" parent="UI_Manager/CanvasLayer/Health and Stamina" unique_id=1690535351 node_paths=PackedStringArray("node_list")]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -163,7 +176,7 @@ node_list = [NodePath("ColorRect"), NodePath("ColorRect2"), NodePath("ColorRect3
 inactive_color = Color(0.62967473, 0.62967473, 0.6296747, 1)
 active_color = Color(1, 1, 1, 1)
 
-[node name="ColorRect" type="ColorRect" parent="UI_Manager/Health and Stamina/Stamina_Marker_Manager" unique_id=478427776]
+[node name="ColorRect" type="ColorRect" parent="UI_Manager/CanvasLayer/Health and Stamina/Stamina_Marker_Manager" unique_id=478427776]
 layout_mode = 0
 offset_left = 10.106602
 offset_top = 38.1066
@@ -172,7 +185,7 @@ offset_bottom = 53.1066
 rotation = 0.7853982
 pivot_offset_ratio = Vector2(0.5, 0.5)
 
-[node name="ColorRect2" type="ColorRect" parent="UI_Manager/Health and Stamina/Stamina_Marker_Manager" unique_id=1460259844]
+[node name="ColorRect2" type="ColorRect" parent="UI_Manager/CanvasLayer/Health and Stamina/Stamina_Marker_Manager" unique_id=1460259844]
 layout_mode = 0
 offset_left = 48.1066
 offset_top = 38.1066
@@ -181,7 +194,7 @@ offset_bottom = 53.1066
 rotation = 0.7853982
 pivot_offset_ratio = Vector2(0.5, 0.5)
 
-[node name="ColorRect3" type="ColorRect" parent="UI_Manager/Health and Stamina/Stamina_Marker_Manager" unique_id=1918012366]
+[node name="ColorRect3" type="ColorRect" parent="UI_Manager/CanvasLayer/Health and Stamina/Stamina_Marker_Manager" unique_id=1918012366]
 layout_mode = 0
 offset_left = 86.106606
 offset_top = 38.1066
@@ -190,7 +203,7 @@ offset_bottom = 53.1066
 rotation = 0.7853982
 pivot_offset_ratio = Vector2(0.5, 0.5)
 
-[node name="Dialogue" type="Control" parent="UI_Manager" unique_id=1398283736]
+[node name="Dialogue" type="Control" parent="UI_Manager/CanvasLayer" unique_id=1398283736]
 layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
@@ -204,7 +217,7 @@ grow_horizontal = 2
 grow_vertical = 0
 pivot_offset_ratio = Vector2(0, 1)
 
-[node name="TextBox" type="TextureRect" parent="UI_Manager/Dialogue" unique_id=1829065608]
+[node name="TextBox" type="TextureRect" parent="UI_Manager/CanvasLayer/Dialogue" unique_id=1829065608]
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 1
 anchors_preset = 7
@@ -221,7 +234,7 @@ grow_vertical = 0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("6_yxe1x")
 
-[node name="Label" type="Label" parent="UI_Manager/Dialogue/TextBox" unique_id=1950885355]
+[node name="Label" type="Label" parent="UI_Manager/CanvasLayer/Dialogue/TextBox" unique_id=1950885355]
 layout_mode = 0
 offset_left = 196.0
 offset_top = 36.0
@@ -233,7 +246,7 @@ label_settings = SubResource("LabelSettings_6gfwt")
 autowrap_mode = 2
 text_overrun_behavior = 2
 
-[node name="TextureRect" type="TextureRect" parent="UI_Manager/Dialogue/TextBox" unique_id=773471372]
+[node name="TextureRect" type="TextureRect" parent="UI_Manager/CanvasLayer/Dialogue/TextBox" unique_id=773471372]
 layout_mode = 0
 offset_left = 27.0
 offset_top = 23.0
@@ -241,7 +254,7 @@ offset_right = 173.0
 offset_bottom = 169.0
 texture = ExtResource("6_yxe1x")
 
-[node name="OptionContainer" type="VBoxContainer" parent="UI_Manager/Dialogue" unique_id=1234780541]
+[node name="OptionContainer" type="VBoxContainer" parent="UI_Manager/CanvasLayer/Dialogue" unique_id=1234780541]
 layout_mode = 0
 offset_left = -263.0
 offset_top = -464.0
@@ -249,7 +262,7 @@ offset_right = 277.0
 offset_bottom = -190.0
 alignment = 2
 
-[node name="OptionButton" type="Button" parent="UI_Manager/Dialogue/OptionContainer" unique_id=734077332]
+[node name="OptionButton" type="Button" parent="UI_Manager/CanvasLayer/Dialogue/OptionContainer" unique_id=734077332]
 layout_mode = 2
 theme = SubResource("Theme_x05w2")
 theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
@@ -309,9 +322,9 @@ camera_main = NodePath("../../Camera3D")
 
 [node name="DialogueManager" type="Node3D" parent="." unique_id=584207305 node_paths=PackedStringArray("dialogue_box", "dialogue_text", "dialogue_button")]
 script = ExtResource("16_rscnb")
-dialogue_box = NodePath("../UI_Manager/Dialogue/TextBox")
-dialogue_text = NodePath("../UI_Manager/Dialogue/TextBox/Label")
-dialogue_button = NodePath("../UI_Manager/Dialogue/OptionContainer/OptionButton")
+dialogue_box = NodePath("../UI_Manager/CanvasLayer/Dialogue/TextBox")
+dialogue_text = NodePath("../UI_Manager/CanvasLayer/Dialogue/TextBox/Label")
+dialogue_button = NodePath("../UI_Manager/CanvasLayer/Dialogue/OptionContainer/OptionButton")
 
 [node name="DataManager" type="Node3D" parent="." unique_id=507151478]
 script = ExtResource("21_yxe1x")
@@ -319,5 +332,20 @@ save = SubResource("Resource_5jxlq")
 
 [node name="SceneManager" type="Node3D" parent="." unique_id=592799134]
 script = ExtResource("19_c7a3q")
+
+[node name="SceneTransitionManager" type="Node" parent="SceneManager" unique_id=416468726 node_paths=PackedStringArray("color_rect")]
+script = ExtResource("22_2j6ol")
+color_rect = NodePath("CanvasLayer/ColorRect")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="SceneManager/SceneTransitionManager" unique_id=1000406452]
+layer = 999
+
+[node name="ColorRect" type="ColorRect" parent="SceneManager/SceneTransitionManager/CanvasLayer" unique_id=1675569148]
+material = SubResource("ShaderMaterial_yxe1x")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="LevelManager" type="Node3D" parent="." unique_id=1816740330]
