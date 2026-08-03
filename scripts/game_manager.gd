@@ -17,7 +17,16 @@ func _ready() -> void:
 	enemy_manager.requested_player_information.connect(on_player_information_requested)
 	dialogue_manager.began_dialogue.connect(player_manager.on_dialogue_start)
 	dialogue_manager.finished_dialogue.connect(player_manager.on_dialogue_end)
+	scene_manager.requested_level_switch.connect(on_level_switch_request)
 	play_game()
+
+func on_level_switch_request(level, gate):
+	await scene_manager.async_switch_level(level)
+	var lvl:Level = scene_manager.current_level
+	var spawn_position = lvl.get_gate_spawn_position(gate)
+	spawn_position.y = 0.778
+	player_manager.get_player().main_object.global_position = spawn_position
+	
 
 func play_game():
 	var scenepath = "res://scenes/stages/" + data_manager.get_save_parameter("location") +".tscn"
@@ -26,6 +35,7 @@ func play_game():
 	main_camera.max_coords = scene_manager.current_level.camera_maximum_position	
 	if player_manager.get_player() == null:
 		_initialize_player(Vector3(0, 0.778, 0))
+	
 
 func _start_cinematic_level():
 	if player_manager.get_player() != null:
@@ -65,3 +75,6 @@ func on_player_bounced():
 func _on_player_healed(_healing, current_health):
 	var damaged:bool = false
 	ui_manager._on_player_health_change(damaged, current_health)
+
+func _on_request_level_switch():
+	pass

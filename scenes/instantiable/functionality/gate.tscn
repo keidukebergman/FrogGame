@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://wnv3ws5ud8k3"]
+
+[ext_resource type="Script" uid="uid://bc7r1fnvpxr5s" path="res://scenes/stages/gate.gd" id="1_b4d24"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mtnme"]
+
+[node name="Gate" type="Node3D" unique_id=44699894 node_paths=PackedStringArray("area")]
+script = ExtResource("1_b4d24")
+area = NodePath("Area3D")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1090847147]
+
+[node name="Area3D" type="Area3D" parent="." unique_id=913796288]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1112792661]
+shape = SubResource("BoxShape3D_mtnme")
+debug_color = Color(5.422614, 18.892157, 0, 1)

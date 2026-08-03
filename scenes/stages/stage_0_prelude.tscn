@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cqg3c1lf0akgj" path="res://scripts/level.gd" id="1_xgmxc"]
 [ext_resource type="Material" uid="uid://cq31wu4xny0ql" path="res://materials/water.tres" id="2_32l4o"]
+[ext_resource type="PackedScene" uid="uid://wnv3ws5ud8k3" path="res://scenes/instantiable/functionality/gate.tscn" id="3_xgmxc"]
 
 [sub_resource type="Environment" id="Environment_g14j6"]
 ambient_light_color = Color(0.30311, 0.608761, 0.511145, 1)
@@ -72,11 +73,15 @@ size = Vector2(50, 50)
 subdivide_width = 90
 subdivide_depth = 90
 
-[node name="Node3D" type="Node3D" unique_id=51480205]
+[node name="Node3D" type="Node3D" unique_id=51480205 node_paths=PackedStringArray("gates")]
 script = ExtResource("1_xgmxc")
 camera_default_position = Vector2(0, 12.335)
 camera_minimum_position = Vector2(-5, 9.335)
 camera_maximum_position = Vector2(5, 15.335)
+gates = [NodePath("Gates/Gate"), NodePath("Gates/Gate1")]
+
+[node name="DynamicSceneObjects" type="Node3D" parent="." unique_id=603780765]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1716028, 0)
 
 [node name="StaticSceneObjects" type="Node3D" parent="." unique_id=920620900]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1716028, 0)
@@ -218,3 +223,14 @@ shape = SubResource("BoxShape3D_gm488")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticSceneObjects/Water" unique_id=1501212477]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8398261, 0)
 mesh = SubResource("PlaneMesh_gm488")
+
+[node name="Gates" type="Node3D" parent="." unique_id=1850133055]
+
+[node name="Gate" parent="Gates" unique_id=44699894 instance=ExtResource("3_xgmxc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47229004, 3.995575)
+next_gate_index = 1
+spawn_position_offset = Vector3(0, 0, -2)
+
+[node name="Gate1" parent="Gates" unique_id=1706654895 instance=ExtResource("3_xgmxc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47229004, -5.370163)
+spawn_position_offset = Vector3(0, 0, 2)

@@ -1,22 +1,14 @@
 class_name SceneManager extends Node
 
-var current_level:Node
+var current_level:Level
 
 signal requested_level_switch
 signal started_loading_level
 signal finished_loading_level
 
-func request_level_switch(level:PackedScene):
-	requested_level_switch.emit(level)
-
-func switch_level(level:PackedScene) -> Level.LevelType:
-	started_loading_level.emit()
-	if current_level:
-		current_level.queue_free()
-	current_level = level.instantiate()
-	add_child(current_level)
-	finished_loading_level.emit()
-	return (current_level as Level).level_type
+func request_level_switch(level:String, gate:int):
+	print("Request added")
+	requested_level_switch.emit(level, gate)
 
 func async_switch_level(level_path:String) -> Level.LevelType:
 	started_loading_level.emit()
@@ -41,9 +33,12 @@ func async_switch_level(level_path:String) -> Level.LevelType:
 		return Level.LevelType.None
 		
 	if current_level:
+		if current_level: current_level.request_level_switch.disconnect(request_level_switch)
 		current_level.queue_free()
 		await get_tree().process_frame
 	current_level = level_scene.instantiate()
+	if current_level: current_level.request_level_switch.connect(request_level_switch)
 	add_child(current_level)
+	current_level.initiate_level()
 	finished_loading_level.emit()
 	return (current_level as Level).level_type

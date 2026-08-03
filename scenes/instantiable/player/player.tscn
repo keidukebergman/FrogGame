@@ -446,7 +446,7 @@ handler = NodePath("../../Systems/Actions/InteractionHandler")
 icon_animation_curve = SubResource("Curve_c7xul")
 
 [node name="GroundPolling" type="Area3D" parent="FrogCharacter" unique_id=1820996339]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.555548, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6038675, 0)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("23_7hh1b")
