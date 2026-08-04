@@ -77,7 +77,7 @@ shader = ExtResource("22_wcunu")
 shader_parameter/grid_scale = 25.842001132495
 shader_parameter/left_right = false
 shader_parameter/position = 0.385
-shader_parameter/width = 0.5
+shader_parameter/width = 0.39
 shader_parameter/aspect_ratio = 1.77777
 shader_parameter/offset = 0.9
 

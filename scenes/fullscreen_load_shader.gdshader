@@ -15,13 +15,12 @@ void fragment() {
 	COLOR = vec4(0,0,0,0);
 	float best_delta = 9999999.0;
 	float delta = 0.0;
-	for(int x = -1; x <= 1; x++){
-		for(int y = -1; y <= 1; y++){
+	for(int x = -2; x <= 2; x++){
+		for(int y = -2; y <= 2; y++){
 			float xf = float(x);
 			float yf = float(y);
-			vec2 centerpoint = vec2(0.5, 0.5) + cell_id + vec2(grid_scale*xf, grid_scale*yf);
-			if (distance(grid_uv, centerpoint) < width)
-			{
+			vec2 centerpoint = vec2(0.1, 0.1) + cell_id + vec2(xf, yf);
+			if (distance(grid_uv, centerpoint) < width){
 				delta = 1.0;
 			} 
 		}
