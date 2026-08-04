@@ -74,11 +74,12 @@ metadata/_custom_type_script = "uid://b3qttek67520w"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yxe1x"]
 shader = ExtResource("22_wcunu")
-shader_parameter/grid_scale = 20.0
+shader_parameter/grid_scale = 25.842001132495
 shader_parameter/left_right = false
-shader_parameter/position = -1.015
+shader_parameter/position = 0.385
 shader_parameter/width = 0.5
-shader_parameter/aspect = 1.7777
+shader_parameter/aspect_ratio = 1.77777
+shader_parameter/offset = 0.9
 
 [node name="GameManager" type="Node3D" unique_id=2133842653 node_paths=PackedStringArray("player_manager", "enemy_manager", "player_fx_relay", "main_camera", "dialogue_manager", "ui_manager", "scene_manager", "data_manager")]
 script = ExtResource("1_cjvif")
