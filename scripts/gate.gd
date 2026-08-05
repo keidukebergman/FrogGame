@@ -8,10 +8,10 @@ class_name Gate
 @export var gate_direction:GateDirection = GateDirection.UP
 
 enum GateDirection {
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT
+	UP = 3,
+	DOWN = 0,
+	LEFT = 1,
+	RIGHT = 2
 }
 
 signal player_collided_with_gate(String, int)
@@ -21,7 +21,7 @@ func _process(delta: float) -> void:
 	var result: Array[InteractionArea] = []
 	if area.get_overlapping_areas().size() > 0 or area.get_overlapping_bodies().size() > 0:
 		if has_been_activated: return
-		player_collided_with_gate.emit("res://scenes/stages/" + next_level_string+".tscn", next_gate_index)
+		player_collided_with_gate.emit("res://scenes/stages/" + next_level_string+".tscn", next_gate_index, gate_direction)
 		has_been_activated = true
 		print(name, " activated, sending player to gate ", next_level_string, ", ", next_gate_index)
 

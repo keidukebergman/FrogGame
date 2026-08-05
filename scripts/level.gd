@@ -14,15 +14,15 @@ enum LevelType {
 
 @export var gates: Array[Gate]
 
-signal request_level_switch (String, int)
+signal request_level_switch 
 
 func initiate_level ():
 	print("Level initiating")
 	for gate in gates:
 		gate.player_collided_with_gate.connect(on_gate_activated)
 
-func on_gate_activated(level, gate):
-	request_level_switch.emit(level, gate)
+func on_gate_activated(level, gate, direction):
+	request_level_switch.emit(level, gate, direction)
 
 func get_gate_spawn_position(index:int):
 	return gates[index].get_spawn_position()

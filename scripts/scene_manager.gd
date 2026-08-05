@@ -1,14 +1,15 @@
 class_name SceneManager extends Node
 
 var current_level:Level
+@export var transition_manager:SceneTransition
 
 signal requested_level_switch
 signal started_loading_level
 signal finished_loading_level
 
-func request_level_switch(level:String, gate:int):
+func request_level_switch(level:String, gate:int, direction:int):
 	print("Request added")
-	requested_level_switch.emit(level, gate)
+	requested_level_switch.emit(level, gate, direction)
 
 func async_switch_level(level_path:String) -> Level.LevelType:
 	started_loading_level.emit()

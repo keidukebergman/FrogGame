@@ -235,3 +235,4 @@ spawn_position_offset = Vector3(0, 0, -2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47229004, -5.370163)
 next_level_string = "stage_1_prelude"
 spawn_position_offset = Vector3(0, 0, 2)
+gate_direction = 0

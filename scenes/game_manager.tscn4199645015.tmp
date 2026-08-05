@@ -85,7 +85,7 @@ shader_parameter/offset = 0.786000037335
 shader_parameter/falloff_distance = 24.00000114
 shader_parameter/lotus_texture = ExtResource("24_2j6ol")
 
-[node name="GameManager" type="Node3D" unique_id=2133842653 node_paths=PackedStringArray("player_manager", "enemy_manager", "player_fx_relay", "main_camera", "dialogue_manager", "ui_manager", "scene_manager", "data_manager", "transition_manager")]
+[node name="GameManager" type="Node3D" unique_id=2133842653 node_paths=PackedStringArray("player_manager", "enemy_manager", "player_fx_relay", "main_camera", "dialogue_manager", "ui_manager", "scene_manager", "data_manager")]
 script = ExtResource("1_cjvif")
 player_manager = NodePath("PlayerManager")
 enemy_manager = NodePath("EnemyManager")
@@ -95,7 +95,6 @@ dialogue_manager = NodePath("DialogueManager")
 ui_manager = NodePath("UI_Manager")
 scene_manager = NodePath("SceneManager")
 data_manager = NodePath("DataManager")
-transition_manager = NodePath("SceneManager/SceneTransitionManager")
 
 [node name="CameraManager" type="Node" parent="." unique_id=1162612247]
 
@@ -336,9 +335,8 @@ dialogue_button = NodePath("../UI_Manager/CanvasLayer/Dialogue/OptionContainer/O
 script = ExtResource("21_yxe1x")
 save = SubResource("Resource_5jxlq")
 
-[node name="SceneManager" type="Node3D" parent="." unique_id=592799134 node_paths=PackedStringArray("transition_manager")]
+[node name="SceneManager" type="Node3D" parent="." unique_id=592799134]
 script = ExtResource("19_c7a3q")
-transition_manager = NodePath("SceneTransitionManager")
 
 [node name="SceneTransitionManager" type="Node" parent="SceneManager" unique_id=416468726 node_paths=PackedStringArray("color_rect")]
 script = ExtResource("22_2j6ol")

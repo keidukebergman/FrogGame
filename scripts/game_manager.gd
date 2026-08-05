@@ -10,6 +10,7 @@ extends Node3D
 @export var ui_manager:UI_Manager
 @export var scene_manager:SceneManager
 @export var data_manager:DataManager
+@export var transition_manager:SceneTransition
 
 
 func _ready() -> void:
@@ -20,7 +21,9 @@ func _ready() -> void:
 	scene_manager.requested_level_switch.connect(on_level_switch_request)
 	play_game()
 
-func on_level_switch_request(level, gate):
+func on_level_switch_request(level, gate, direction):
+	transition_manager.request_screen_wipe(direction, 0)
+	await transition_manager.finished_transition
 	var leveltype = await scene_manager.async_switch_level(level)
 	if leveltype == Level.LevelType.None:
 		push_error("ERROR: No level loaded")
@@ -31,10 +34,12 @@ func on_level_switch_request(level, gate):
 	player_manager.get_player().main_object.global_position = spawn_position
 	main_camera.min_coords = scene_manager.current_level.camera_minimum_position
 	main_camera.max_coords = scene_manager.current_level.camera_maximum_position
+	transition_manager.request_screen_wipe(direction, 1)
+	await transition_manager.finished_transition
 
 func play_game():
 	var scenepath = "res://scenes/stages/" + data_manager.get_save_parameter("location") +".tscn"
-	on_level_switch_request(scenepath, 0)
+	on_level_switch_request(scenepath, 0, 0)
 	if player_manager.get_player() == null:
 		_initialize_player(Vector3(0, 0.778, 0))
 
