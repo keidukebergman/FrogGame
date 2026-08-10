@@ -78,7 +78,7 @@ script = ExtResource("1_0ryvl")
 camera_default_position = Vector2(0, 12.335)
 camera_minimum_position = Vector2(-5, -13.175)
 camera_maximum_position = Vector2(5, 32.305)
-gates = [NodePath("Gates/Gate"), NodePath("Gates/Gate1")]
+gates = [NodePath(""), NodePath("Gates/Gate1")]
 
 [node name="DynamicSceneObjects" type="Node3D" parent="." unique_id=603780765]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1716028, 0)
@@ -215,11 +215,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8398261, 0)
 mesh = SubResource("PlaneMesh_gm488")
 
 [node name="Gates" type="Node3D" parent="." unique_id=1850133055]
-
-[node name="Gate" parent="Gates" unique_id=44699894 instance=ExtResource("3_sytbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47229004, 20.279411)
-next_gate_index = 1
-spawn_position_offset = Vector3(0, 0, -2)
 
 [node name="Gate1" parent="Gates" unique_id=1706654895 instance=ExtResource("3_sytbh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47229004, -21.073448)

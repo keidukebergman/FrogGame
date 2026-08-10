@@ -82,8 +82,9 @@ shader_parameter/max_side = 8.0
 shader_parameter/dense_area_width = 14.0270006662825
 shader_parameter/aspect_ratio = 1.77777
 shader_parameter/offset = 0.786000037335
-shader_parameter/falloff_distance = 24.00000114
+shader_parameter/falloff_distance = 18.000000855
 shader_parameter/lotus_texture = ExtResource("24_2j6ol")
+shader_parameter/is_active = true
 
 [node name="GameManager" type="Node3D" unique_id=2133842653 node_paths=PackedStringArray("player_manager", "enemy_manager", "player_fx_relay", "main_camera", "dialogue_manager", "ui_manager", "scene_manager", "data_manager", "transition_manager")]
 script = ExtResource("1_cjvif")

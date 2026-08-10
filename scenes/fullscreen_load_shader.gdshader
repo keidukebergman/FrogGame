@@ -10,6 +10,7 @@ uniform float aspect_ratio = 1.77777;
 uniform float offset : hint_range(0.0, 1.0) = 0.9;
 uniform float falloff_distance : hint_range(0.0, 36.0) = 0.9;
 uniform sampler2D lotus_texture: source_color, filter_nearest, repeat_enable;
+uniform bool is_active = false;
 
 vec2 hash_offset(vec2 inputvec, float dist) {
 	inputvec = vec2(dot(inputvec, vec2(127.1, 311.7)), dot(inputvec, vec2(269.5, 183.3)));
@@ -53,6 +54,7 @@ float calculate_side(float dist, float max_rad, vec2 input_vec)
 	float delta = dist / falloff_distance;
 	float one_min = 1.0 - delta;
 	delta = min(1.0, 1.0 - delta / 1.0);
+	delta = pow(delta, 1.5)/(pow(delta, 1.5) + pow(1.0-delta, 1.5));
 	return hash_side(input_vec) * max_rad * delta;
 }
 
@@ -62,35 +64,36 @@ void fragment() {
 	vec2 cell_id = floor(grid_uv);
 	float current_hash_prio = 0.0;
 	vec4 current_color = vec4(0,0,0,0);
-	
-	for(int x = -4; x <= 4; x++){
-		for(int y = -4; y <= 4; y++){
-			float xf = float(x);
-			float yf = float(y);
-			vec2 delta_cell_id = cell_id + vec2(xf, yf);
-			float dist = calculate_distance(position, left_right, delta_cell_id);
-			vec2 rnd_offset = hash_offset(delta_cell_id, dist) * offset;
-			vec2 centerpoint = rnd_offset + delta_cell_id;
-			vec2 local_position = grid_uv - centerpoint; 
-			float side = calculate_side(dist, max_side, delta_cell_id);
-			float rotation = hash_rotation(delta_cell_id);
-			float prio = hash_side(delta_cell_id);
-			if (prio > current_hash_prio){
-				float s = sin(-rotation);
-				float c = cos(-rotation);
-				mat2 rot = mat2(vec2(c, s), vec2(-s, c));
-				vec2 rotated = rot * local_position;
-				float half_side = side * 0.5;
-				if (abs(rotated.x) < half_side && abs(rotated.y) < half_side) {
-					vec2 tex_uv = rotated / side + 0.5;
-					vec4 color = texture(lotus_texture, tex_uv);
-					if (color.a != 0.0)
-					{
-						current_color = color;
-						current_hash_prio = prio;	
+	if (is_active) {
+		for(int x = -4; x <= 4; x++){
+			for(int y = -4; y <= 4; y++){
+				float xf = float(x);
+				float yf = float(y);
+				vec2 delta_cell_id = cell_id + vec2(xf, yf);
+				float dist = calculate_distance(position, left_right, delta_cell_id);
+				vec2 rnd_offset = hash_offset(delta_cell_id, dist) * offset;
+				vec2 centerpoint = rnd_offset + delta_cell_id;
+				vec2 local_position = grid_uv - centerpoint; 
+				float side = calculate_side(dist, max_side, delta_cell_id);
+				float rotation = hash_rotation(delta_cell_id);
+				float prio = hash_side(delta_cell_id);
+				if (prio > current_hash_prio){
+					float s = sin(-rotation);
+					float c = cos(-rotation);
+					mat2 rot = mat2(vec2(c, s), vec2(-s, c));
+					vec2 rotated = rot * local_position;
+					float half_side = side * 0.5;
+					if (abs(rotated.x) < half_side && abs(rotated.y) < half_side) {
+						vec2 tex_uv = rotated / side + 0.5;
+						vec4 color = texture(lotus_texture, tex_uv);
+						if (color.a != 0.0)
+						{
+							current_color = color;
+							current_hash_prio = prio;	
+						}
 					}
-				}
-			} 
+				} 
+			}
 		}
 	}
 	COLOR = current_color;

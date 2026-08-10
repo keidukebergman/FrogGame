@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://cqg3c1lf0akgj" path="res://scripts/level.gd" id="1_xgmxc"]
 [ext_resource type="Material" uid="uid://cq31wu4xny0ql" path="res://materials/water.tres" id="2_32l4o"]
 [ext_resource type="PackedScene" uid="uid://wnv3ws5ud8k3" path="res://scenes/instantiable/functionality/gate.tscn" id="3_xgmxc"]
+[ext_resource type="Script" uid="uid://coh76euxlnng5" path="res://scripts/interactable_talker.gd" id="4_gew2n"]
+[ext_resource type="Script" uid="uid://cde3q50jv7ha1" path="res://scenes/stages/collision_trigger.gd" id="5_hgnoe"]
 
 [sub_resource type="Environment" id="Environment_g14j6"]
 ambient_light_color = Color(0.30311, 0.608761, 0.511145, 1)
@@ -73,12 +75,14 @@ size = Vector2(50, 50)
 subdivide_width = 90
 subdivide_depth = 90
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_mtnme"]
+
 [node name="Node3D" type="Node3D" unique_id=51480205 node_paths=PackedStringArray("gates")]
 script = ExtResource("1_xgmxc")
 camera_default_position = Vector2(0, 12.335)
 camera_minimum_position = Vector2(-5, 9.335)
 camera_maximum_position = Vector2(5, 15.335)
-gates = [NodePath("Gates/Gate"), NodePath("Gates/Gate1")]
+gates = [NodePath(""), NodePath("Gates/Gate1")]
 
 [node name="DynamicSceneObjects" type="Node3D" parent="." unique_id=603780765]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1716028, 0)
@@ -226,13 +230,24 @@ mesh = SubResource("PlaneMesh_gm488")
 
 [node name="Gates" type="Node3D" parent="." unique_id=1850133055]
 
-[node name="Gate" parent="Gates" unique_id=44699894 instance=ExtResource("3_xgmxc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47229004, 3.995575)
-next_gate_index = 1
-spawn_position_offset = Vector3(0, 0, -2)
-
 [node name="Gate1" parent="Gates" unique_id=1706654895 instance=ExtResource("3_xgmxc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47229004, -5.370163)
 next_level_string = "stage_1_prelude"
 spawn_position_offset = Vector3(0, 0, 2)
 gate_direction = 0
+
+[node name="DialogueBoxes" type="Node3D" parent="." unique_id=1720612014]
+
+[node name="DialogueBox" type="Node3D" parent="DialogueBoxes" unique_id=1914449407]
+script = ExtResource("4_gew2n")
+loreObject = "res://story/loreline/story/introduction/villagers.lor"
+beat = "soldier_callout_1"
+
+[node name="InteractionArea" type="Area3D" parent="DialogueBoxes/DialogueBox" unique_id=1951037107]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("5_hgnoe")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DialogueBoxes/DialogueBox/InteractionArea" unique_id=488464587]
+shape = SubResource("BoxShape3D_mtnme")
+debug_color = Color(18.353, 13.418, 0, 1)
