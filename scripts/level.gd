@@ -16,6 +16,8 @@ enum LevelType {
 
 @export var gates: Array[Gate]
 
+@export var wave_manager:WaveManager
+
 signal request_level_switch 
 
 func initiate_level ():

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="EnemyWaveData" format=3 uid="uid://0c6gr65wxgq6"]
+
+[ext_resource type="Script" uid="uid://b06lb7neu3dq" path="res://scripts/data_resources/enemy_spawn.gd" id="1_557lo"]
+[ext_resource type="Script" uid="uid://hjnbdhy8tfhb" path="res://scripts/data_resources/enemy_probability_entry.gd" id="2_3k5bg"]
+[ext_resource type="Script" uid="uid://bavm28yms7sqe" path="res://scripts/data_resources/enemy_wave_data.gd" id="2_557lo"]
+[ext_resource type="Script" uid="uid://da57ciggi3n7i" path="res://scripts/data_resources/enemy_stage_probabilities.gd" id="2_mod62"]
+
+[sub_resource type="Resource" id="Resource_ps328"]
+script = ExtResource("2_3k5bg")
+metadata/_custom_type_script = "uid://hjnbdhy8tfhb"
+
+[sub_resource type="Resource" id="Resource_mua5r"]
+script = ExtResource("2_mod62")
+roster = Array[ExtResource("2_3k5bg")]([SubResource("Resource_ps328"), null, null])
+metadata/_custom_type_script = "uid://da57ciggi3n7i"
+
+[resource]
+script = ExtResource("2_557lo")
+enemy_spawn_sequence = Array[ExtResource("1_557lo")]([null])
+probability_roster = SubResource("Resource_mua5r")
+metadata/_custom_type_script = "uid://bavm28yms7sqe"

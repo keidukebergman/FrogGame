@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="EnemyStageSpawnProbabilities" format=3 uid="uid://ccgg5scljfj12"]
+
+[ext_resource type="Script" uid="uid://hjnbdhy8tfhb" path="res://scripts/data_resources/enemy_probability_entry.gd" id="1_6cmdh"]
+[ext_resource type="Script" uid="uid://da57ciggi3n7i" path="res://scripts/data_resources/enemy_stage_probabilities.gd" id="2_rsaw6"]
+
+[resource]
+script = ExtResource("2_rsaw6")
+metadata/_custom_type_script = "uid://da57ciggi3n7i"

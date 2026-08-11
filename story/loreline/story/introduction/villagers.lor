@@ -10,11 +10,10 @@ character soldier1
   name:"Nervous Guard"
 
 character soldier2
-  name:"Veteran Guard"
+  name:"Slightly Less Nervous Guard"
 
 beat soldier_callout_1
   soldier1: "Is that...?"
   soldier2: "It is. Let him through."
   timeout(1)
   soldier2: "Hark, challenger! Head to the arena up ahead."
-  soldier2: "The King hath answered your provocation."

@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bhbkxm5uoeqf3" path="res://scripts/stamina_marker_manager.gd" id="5_4vth2"]
 [ext_resource type="Texture2D" uid="uid://bf5ar4mkltuns" path="res://icon.svg" id="6_yxe1x"]
 [ext_resource type="Script" uid="uid://14an4j5nwxnn" path="res://scripts/enemy_manager.gd" id="7_jrl6a"]
+[ext_resource type="Texture2D" uid="uid://ddygm00kbhknn" path="res://sprites/portraits/player/player_neutral.png" id="8_8ldib"]
 [ext_resource type="PackedScene" uid="uid://bcs7ck8bsbe0q" path="res://scenes/instantiable/enemies/enemy_mosquito.tscn" id="8_wcunu"]
 [ext_resource type="PackedScene" uid="uid://danhtn6x5yh2h" path="res://scenes/instantiable/enemies/enemy_ranger.tscn" id="9_2j6ol"]
 [ext_resource type="Script" uid="uid://b32r0eqcdgkju" path="res://scripts/player_manager.gd" id="10_8ldib"]
@@ -84,7 +85,7 @@ shader_parameter/aspect_ratio = 1.77777
 shader_parameter/offset = 0.786000037335
 shader_parameter/falloff_distance = 18.000000855
 shader_parameter/lotus_texture = ExtResource("24_2j6ol")
-shader_parameter/is_active = true
+shader_parameter/is_active = false
 
 [node name="GameManager" type="Node3D" unique_id=2133842653 node_paths=PackedStringArray("player_manager", "enemy_manager", "player_fx_relay", "main_camera", "dialogue_manager", "ui_manager", "scene_manager", "data_manager", "transition_manager")]
 script = ExtResource("1_cjvif")
@@ -232,10 +233,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -409.0
-offset_top = -214.0
-offset_right = 391.0
-offset_bottom = -14.0
+offset_left = -520.0
+offset_top = -315.0
+offset_right = 480.0
+offset_bottom = -15.0
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset_ratio = Vector2(0.5, 0.5)
@@ -243,10 +244,10 @@ texture = ExtResource("6_yxe1x")
 
 [node name="Label" type="Label" parent="UI_Manager/CanvasLayer/Dialogue/TextBox" unique_id=1950885355]
 layout_mode = 0
-offset_left = 196.0
-offset_top = 36.0
-offset_right = 751.0
-offset_bottom = 176.0
+offset_left = 251.0
+offset_top = 30.0
+offset_right = 951.0
+offset_bottom = 270.0
 text = "Sample text sample text sample text Sample text sample text sample text Sample text sample text sample text Sample text sample text sample text Sample text sample text sample text Sample text sample text sample text Sample text sample text sample text Sample text sample text sample text 
 "
 label_settings = SubResource("LabelSettings_6gfwt")
@@ -256,17 +257,18 @@ text_overrun_behavior = 2
 [node name="TextureRect" type="TextureRect" parent="UI_Manager/CanvasLayer/Dialogue/TextBox" unique_id=773471372]
 layout_mode = 0
 offset_left = 27.0
-offset_top = 23.0
-offset_right = 173.0
-offset_bottom = 169.0
-texture = ExtResource("6_yxe1x")
+offset_top = 30.5
+offset_right = 268.0
+offset_bottom = 269.5
+texture = ExtResource("8_8ldib")
+expand_mode = 2
 
 [node name="OptionContainer" type="VBoxContainer" parent="UI_Manager/CanvasLayer/Dialogue" unique_id=1234780541]
 layout_mode = 0
 offset_left = -263.0
-offset_top = -464.0
+offset_top = -558.0
 offset_right = 277.0
-offset_bottom = -190.0
+offset_bottom = -284.0
 alignment = 2
 
 [node name="OptionButton" type="Button" parent="UI_Manager/CanvasLayer/Dialogue/OptionContainer" unique_id=734077332]
