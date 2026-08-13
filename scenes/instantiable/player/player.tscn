@@ -31,7 +31,7 @@
 [ext_resource type="Script" uid="uid://b8otkaxytoq5s" path="res://scenes/instantiable/player/stamina_manager.gd" id="23_qsdt6"]
 [ext_resource type="Texture2D" uid="uid://ducnlfo8dkqus" path="res://sprites/Interaction.png" id="29_7r8gw"]
 [ext_resource type="Script" uid="uid://b38lxd2rtvvve" path="res://scenes/instantiable/player/interaction_icon.gd" id="29_c7xul"]
-[ext_resource type="SpriteFrames" uid="uid://bnkunkh3224ry" path="res://sprites/animations/player/idle.tres" id="29_pcexo"]
+[ext_resource type="SpriteFrames" uid="uid://bnkunkh3224ry" path="res://sprites/animations/player/player_animations.tres" id="29_pcexo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ppyta"]
 radius = 0.40527344
@@ -203,11 +203,10 @@ movement_speed = 1.0
 acceleration = 0.2
 air_drag = 10
 
-[node name="Death" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=571698945 node_paths=PackedStringArray("visual_manager", "hurtbox")]
+[node name="Death" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=571698945 node_paths=PackedStringArray("hurtbox")]
 script = ExtResource("9_gnc5k")
 upward_velocity = 8.0
 backward_velocity = 10.0
-visual_manager = NodePath("")
 hurtbox = NodePath("../../HitAndHurt/Hurtbox/Hurtbox")
 
 [node name="DashState" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1986417408 node_paths=PackedStringArray("stamina_manager", "grounded_state")]
@@ -432,8 +431,7 @@ shaded = true
 alpha_cut = 2
 texture_filter = 1
 sprite_frames = ExtResource("29_pcexo")
-animation = &"idle"
-frame_progress = 0.03367711
+animation = &"unsheathe"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="FrogCharacter/Visual" unique_id=698354499]
 visible = false

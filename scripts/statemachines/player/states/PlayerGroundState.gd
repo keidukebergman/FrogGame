@@ -22,6 +22,10 @@ func _enter_state():
 	is_active = true
 	super._enter_state()
 	root.axis_lock_linear_y = true
+	if (state_machine.renderer as AnimatedSprite3D).animation != "idle":
+		(state_machine.renderer as AnimatedSprite3D).animation = "idle"
+		(state_machine.renderer as AnimatedSprite3D).play()
+		
 	pass
 
 func _exit_state():

@@ -50,6 +50,8 @@ func _enter_state():
 	wind_up = false
 	current_attack.can_take_attack_knockback = true
 	attack_state = AttackState.Windup
+	(state_machine.renderer as AnimatedSprite3D).animation = "unsheathe"
+	(state_machine.renderer as AnimatedSprite3D).play()
 	super._enter_state()
 
 func _start_attack():
@@ -87,6 +89,8 @@ func _state_update(_delta: float):
 		AttackState.Windup:
 			if attack_timer > current_attack.attack_windup_time:
 				attack_state = AttackState.Attack
+				(state_machine.renderer as AnimatedSprite3D).animation = "attack"
+				(state_machine.renderer as AnimatedSprite3D).play()
 				_start_attack()
 		AttackState.Attack:
 			if attack_timer > current_attack.attack_time + current_attack.attack_windup_time:
