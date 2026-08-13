@@ -29,6 +29,8 @@ func _ready():
 		current_state = get_child(0)
 		if not get_child(0):
 			push_error("No children detected")
+	(renderer as AnimatedSprite3D).animation = "idle"
+	(renderer as AnimatedSprite3D).play();
 	_change_state(current_state)
 
 func _change_state(new_state: State):

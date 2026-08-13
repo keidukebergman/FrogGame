@@ -27,11 +27,11 @@
 [ext_resource type="Script" uid="uid://bjei6ecclrv4i" path="res://scenes/instantiable/player/player_dialogue_state.gd" id="18_v47df"]
 [ext_resource type="Texture2D" uid="uid://bf5ar4mkltuns" path="res://icon.svg" id="19_c3khl"]
 [ext_resource type="Texture2D" uid="uid://ditgtgoaurqhl" path="res://sprites/Slash.png" id="20_8o3c5"]
-[ext_resource type="Texture2D" uid="uid://chxbdgiwpr16x" path="res://sprites/Pondtus.png" id="21_ijgvy"]
 [ext_resource type="Script" uid="uid://cionpm6je6331" path="res://scripts/ground_polling.gd" id="23_7hh1b"]
 [ext_resource type="Script" uid="uid://b8otkaxytoq5s" path="res://scenes/instantiable/player/stamina_manager.gd" id="23_qsdt6"]
 [ext_resource type="Texture2D" uid="uid://ducnlfo8dkqus" path="res://sprites/Interaction.png" id="29_7r8gw"]
 [ext_resource type="Script" uid="uid://b38lxd2rtvvve" path="res://scenes/instantiable/player/interaction_icon.gd" id="29_c7xul"]
+[ext_resource type="SpriteFrames" uid="uid://bnkunkh3224ry" path="res://sprites/animations/player/idle.tres" id="29_pcexo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ppyta"]
 radius = 0.40527344
@@ -207,7 +207,7 @@ air_drag = 10
 script = ExtResource("9_gnc5k")
 upward_velocity = 8.0
 backward_velocity = 10.0
-visual_manager = NodePath("../../../Visual/Sprite3D")
+visual_manager = NodePath("")
 hurtbox = NodePath("../../HitAndHurt/Hurtbox/Hurtbox")
 
 [node name="DashState" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1986417408 node_paths=PackedStringArray("stamina_manager", "grounded_state")]
@@ -426,12 +426,14 @@ alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("20_8o3c5")
 
-[node name="Sprite3D" type="Sprite3D" parent="FrogCharacter/Visual" unique_id=2092100773]
-transform = Transform3D(5, 0, 0, 0, 4.890738, 1.0395585, 0, -1.0395585, 4.890738, -0.0842151, 0.0060310364, -8.31124e-09)
+[node name="Sprite3D" type="AnimatedSprite3D" parent="FrogCharacter/Visual" unique_id=179237137]
+transform = Transform3D(0.3, 0, 0, 0, 0.2934443, 0.06237351, 0, -0.06237351, 0.2934443, -0.0842151, 0.0060310364, -8.31124e-09)
 shaded = true
 alpha_cut = 2
-texture_filter = 0
-texture = ExtResource("21_ijgvy")
+texture_filter = 1
+sprite_frames = ExtResource("29_pcexo")
+animation = &"idle"
+frame_progress = 0.03367711
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="FrogCharacter/Visual" unique_id=698354499]
 visible = false
