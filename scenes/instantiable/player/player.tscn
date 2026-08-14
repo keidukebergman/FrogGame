@@ -426,12 +426,12 @@ texture_filter = 0
 texture = ExtResource("20_8o3c5")
 
 [node name="Sprite3D" type="AnimatedSprite3D" parent="FrogCharacter/Visual" unique_id=179237137]
-transform = Transform3D(0.3, 0, 0, 0, 0.2934443, 0.06237351, 0, -0.06237351, 0.2934443, -0.0842151, 0.0060310364, -8.31124e-09)
+transform = Transform3D(0.25, 0, 0, 0, 0.2445369, 0.05197792, 0, -0.05197792, 0.2445369, -0.0842151, 0.030540705, -8.31124e-09)
 shaded = true
 alpha_cut = 2
 texture_filter = 1
 sprite_frames = ExtResource("29_pcexo")
-animation = &"unsheathe"
+animation = &"hold"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="FrogCharacter/Visual" unique_id=698354499]
 visible = false

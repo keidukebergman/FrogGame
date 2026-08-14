@@ -16,6 +16,8 @@ func _initialize_state(state_machine_node:FiniteStateMachine, root_node:Node):
 
 func _enter_state():
 	super._enter_state()
+	(state_machine.renderer as AnimatedSprite3D).animation = "hold"
+	(state_machine.renderer as AnimatedSprite3D).play()
 	charge_up_timer = 0
 
 func _exit_state():

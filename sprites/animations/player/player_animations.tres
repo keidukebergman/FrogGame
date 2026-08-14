@@ -1,12 +1,19 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://bnkunkh3224ry"]
 
 [ext_resource type="Texture2D" uid="uid://hqgqt020s8gq" path="res://sprites/animations/player/idle/idle0000.png" id="1_f3dmv"]
+[ext_resource type="Texture2D" uid="uid://bt28wqr1fwidm" path="res://sprites/animations/player/hold/hold0000.png" id="1_xcow0"]
+[ext_resource type="Texture2D" uid="uid://dwldl8wcsvcoi" path="res://sprites/animations/player/hold/hold0003.png" id="2_nswg2"]
 [ext_resource type="Texture2D" uid="uid://bkyy7q32wa3nw" path="res://sprites/animations/player/idle/idle0003.png" id="2_s1nq5"]
+[ext_resource type="Texture2D" uid="uid://bkhyi48tk2l1b" path="res://sprites/animations/player/hold/hold0006.png" id="3_6xoap"]
 [ext_resource type="Texture2D" uid="uid://y6dhgpshy6ml" path="res://sprites/animations/player/idle/idle0006.png" id="3_26hri"]
+[ext_resource type="Texture2D" uid="uid://byfsg5p40wmxg" path="res://sprites/animations/player/hold/hold0009.png" id="4_3tb5c"]
 [ext_resource type="Texture2D" uid="uid://6bo530xkl7aq" path="res://sprites/animations/player/idle/idle0009.png" id="4_ocn4n"]
+[ext_resource type="Texture2D" uid="uid://ctkbgftaelc7g" path="res://sprites/animations/player/hold/hold0012.png" id="5_8gt3v"]
 [ext_resource type="Texture2D" uid="uid://bx7j5a7x1fdsm" path="res://sprites/animations/player/idle/idle0012.png" id="5_e4801"]
+[ext_resource type="Texture2D" uid="uid://doiqbr6hxaym" path="res://sprites/animations/player/hold/hold0015.png" id="6_7huyo"]
 [ext_resource type="Texture2D" uid="uid://ckkid1hkeyhmg" path="res://sprites/animations/player/idle/idle0015.png" id="6_31d68"]
 [ext_resource type="Texture2D" uid="uid://c706a3hc1g3fc" path="res://sprites/animations/player/idle/idle0018.png" id="7_68n4q"]
+[ext_resource type="Texture2D" uid="uid://tob5c4cx3auu" path="res://sprites/animations/player/hold/hold0018.png" id="7_kfubh"]
 [ext_resource type="Texture2D" uid="uid://c25lwude5qlo8" path="res://sprites/animations/player/idle/idle0021.png" id="8_xcow0"]
 [ext_resource type="Texture2D" uid="uid://ckjxhblhq38yu" path="res://sprites/animations/player/idle/idle0024.png" id="9_nswg2"]
 [ext_resource type="Texture2D" uid="uid://be31j7ku88e8k" path="res://sprites/animations/player/idle/idle0027.png" id="10_6xoap"]
@@ -30,6 +37,32 @@ animations = [{
 "loop": 1,
 "name": &"heavy_attack",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_xcow0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_nswg2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6xoap")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3tb5c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_8gt3v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7huyo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_kfubh")
+}],
+"loop": 1,
+"name": &"hold",
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
