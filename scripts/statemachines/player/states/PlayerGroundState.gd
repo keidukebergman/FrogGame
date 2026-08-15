@@ -25,7 +25,6 @@ func _enter_state():
 	if (state_machine.renderer as AnimatedSprite3D).animation != "idle":
 		(state_machine.renderer as AnimatedSprite3D).animation = "idle"
 		(state_machine.renderer as AnimatedSprite3D).play()
-		
 	pass
 
 func _exit_state():

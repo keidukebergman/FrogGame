@@ -50,14 +50,16 @@ func _enter_state():
 	wind_up = false
 	current_attack.can_take_attack_knockback = true
 	attack_state = AttackState.Windup
-	(state_machine.renderer as AnimatedSprite3D).animation = "unsheathe"
-	(state_machine.renderer as AnimatedSprite3D).play()
 	super._enter_state()
+	(state_machine.renderer as AnimatedSprite3D).animation = "attack_draw"
+	(state_machine.renderer as AnimatedSprite3D).play()
 
 func _start_attack():
 	root.add_force(attack_direction * current_attack.slice_movement_force)
 	start_registering_hits()
 	current_attack.slash_fx.visible = true;
+	(state_machine.renderer as AnimatedSprite3D).animation = "attack"
+	(state_machine.renderer as AnimatedSprite3D).play()
 
 func _stop_attack():
 	stop_registering_hits()
@@ -89,8 +91,6 @@ func _state_update(_delta: float):
 		AttackState.Windup:
 			if attack_timer > current_attack.attack_windup_time:
 				attack_state = AttackState.Attack
-				(state_machine.renderer as AnimatedSprite3D).animation = "attack"
-				(state_machine.renderer as AnimatedSprite3D).play()
 				_start_attack()
 		AttackState.Attack:
 			if attack_timer > current_attack.attack_time + current_attack.attack_windup_time:
