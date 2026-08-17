@@ -203,10 +203,11 @@ movement_speed = 1.0
 acceleration = 0.2
 air_drag = 10
 
-[node name="Death" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=571698945 node_paths=PackedStringArray("hurtbox")]
+[node name="Death" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=571698945 node_paths=PackedStringArray("visual_manager", "hurtbox")]
 script = ExtResource("9_gnc5k")
 upward_velocity = 8.0
 backward_velocity = 10.0
+visual_manager = NodePath("../../../Visual/Sprite3D")
 hurtbox = NodePath("../../HitAndHurt/Hurtbox/Hurtbox")
 
 [node name="DashState" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1986417408 node_paths=PackedStringArray("stamina_manager", "grounded_state")]

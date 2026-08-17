@@ -73,6 +73,9 @@ func _on_player_taken_damage(_damage, current_health):
 
 func _on_player_death():
 	main_camera.on_player_death()
+	await get_tree().create_timer(10).timeout
+	#scene_manager.async_switch_level()
+	print("timeout")
 	pass
 
 func on_player_bounced():

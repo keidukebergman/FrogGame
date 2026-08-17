@@ -36,6 +36,18 @@
 [ext_resource type="Texture2D" uid="uid://bqcqmhipr6hlw" path="res://sprites/animations/player/un_sheathe/unsheathe0006.png" id="16_r8gwj"]
 [ext_resource type="Texture2D" uid="uid://b65hb8vix30p6" path="res://sprites/animations/player/un_sheathe/unsheathe0009.png" id="17_k8r57"]
 [ext_resource type="Texture2D" uid="uid://jadfvydt7qoh" path="res://sprites/animations/player/un_sheathe/unsheathe0012.png" id="18_hvauk"]
+[ext_resource type="Texture2D" uid="uid://dj7ege5fmltfu" path="res://sprites/animations/player/walk/walk0000.png" id="37_uy1e8"]
+[ext_resource type="Texture2D" uid="uid://bc0bd64tsweuw" path="res://sprites/animations/player/walk/walk0002.png" id="38_kuwiw"]
+[ext_resource type="Texture2D" uid="uid://brm08yagfkrtn" path="res://sprites/animations/player/walk/walk0004.png" id="39_jlb0a"]
+[ext_resource type="Texture2D" uid="uid://brfnai88nue6n" path="res://sprites/animations/player/walk/walk0006.png" id="40_fcagp"]
+[ext_resource type="Texture2D" uid="uid://c2qrtvnglejfm" path="res://sprites/animations/player/walk/walk0008.png" id="41_ioe6c"]
+[ext_resource type="Texture2D" uid="uid://dhxuu0i605nh4" path="res://sprites/animations/player/walk/walk0010.png" id="42_638qk"]
+[ext_resource type="Texture2D" uid="uid://43iixm4mkkyr" path="res://sprites/animations/player/walk/walk0012.png" id="44_n1qmv"]
+[ext_resource type="Texture2D" uid="uid://cvhh21o5trmbd" path="res://sprites/animations/player/walk/walk0014.png" id="45_vbc04"]
+[ext_resource type="Texture2D" uid="uid://bsege0osmhhhg" path="res://sprites/animations/player/walk/walk0016.png" id="46_4vuur"]
+[ext_resource type="Texture2D" uid="uid://beu4tk1u1044x" path="res://sprites/animations/player/walk/walk0018.png" id="47_vp5r8"]
+[ext_resource type="Texture2D" uid="uid://crls83cnw5h7d" path="res://sprites/animations/player/walk/walk0020.png" id="48_41xcv"]
+[ext_resource type="Texture2D" uid="uid://c53k5wjj1o07" path="res://sprites/animations/player/walk/walk0022.png" id="49_leref"]
 
 [resource]
 animations = [{
@@ -180,6 +192,9 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("18_hvauk")
+}, {
+"duration": 1.0,
 "texture": ExtResource("14_kfubh")
 }, {
 "duration": 1.0,
@@ -190,11 +205,49 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("17_k8r57")
-}, {
-"duration": 1.0,
-"texture": ExtResource("18_hvauk")
 }],
 "loop": 1,
 "name": &"unsheathe",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("37_uy1e8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_kuwiw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_jlb0a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_fcagp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_ioe6c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_638qk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_n1qmv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_vbc04")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_4vuur")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_vp5r8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_41xcv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_leref")
+}],
+"loop": 1,
+"name": &"walk",
 "speed": 12.0
 }]
