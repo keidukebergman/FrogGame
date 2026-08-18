@@ -42,7 +42,7 @@ func _state_update(_delta: float):
 	root.move_and_slide()
 	if dash_timer < dash_duration:
 		return
-	state_machine._change_state(grounded_state)
+	state_machine._change_state(airborne_state)
 
 func _state_physics_update(_delta: float):
 	root.move_and_slide()

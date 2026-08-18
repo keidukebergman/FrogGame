@@ -34,8 +34,12 @@
 [ext_resource type="Texture2D" uid="uid://d4m3ug16oa1gj" path="res://sprites/animations/player/un_sheathe/unsheathe0000.png" id="14_kfubh"]
 [ext_resource type="Texture2D" uid="uid://c5cp8m1cghvje" path="res://sprites/animations/player/un_sheathe/unsheathe0003.png" id="15_h1rft"]
 [ext_resource type="Texture2D" uid="uid://bqcqmhipr6hlw" path="res://sprites/animations/player/un_sheathe/unsheathe0006.png" id="16_r8gwj"]
+[ext_resource type="Texture2D" uid="uid://bq0nx100d0dse" path="res://sprites/animations/player/fall/fall0000.png" id="17_fcagp"]
 [ext_resource type="Texture2D" uid="uid://b65hb8vix30p6" path="res://sprites/animations/player/un_sheathe/unsheathe0009.png" id="17_k8r57"]
 [ext_resource type="Texture2D" uid="uid://jadfvydt7qoh" path="res://sprites/animations/player/un_sheathe/unsheathe0012.png" id="18_hvauk"]
+[ext_resource type="Texture2D" uid="uid://bqwd3s3bl8r7r" path="res://sprites/animations/player/fall/fall0002.png" id="18_ioe6c"]
+[ext_resource type="Texture2D" uid="uid://bvxbsescsnyw1" path="res://sprites/animations/player/fall/fall0004.png" id="19_638qk"]
+[ext_resource type="Texture2D" uid="uid://foq7wchhcyqc" path="res://sprites/animations/player/fall/fall0006.png" id="20_tdkeh"]
 [ext_resource type="Texture2D" uid="uid://dj7ege5fmltfu" path="res://sprites/animations/player/walk/walk0000.png" id="37_uy1e8"]
 [ext_resource type="Texture2D" uid="uid://bc0bd64tsweuw" path="res://sprites/animations/player/walk/walk0002.png" id="38_kuwiw"]
 [ext_resource type="Texture2D" uid="uid://brm08yagfkrtn" path="res://sprites/animations/player/walk/walk0004.png" id="39_jlb0a"]
@@ -114,6 +118,23 @@ animations = [{
 "loop": 1,
 "name": &"attack_draw",
 "speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_fcagp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_ioe6c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_638qk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_tdkeh")
+}],
+"loop": 1,
+"name": &"fall",
+"speed": 12.0
 }, {
 "frames": [],
 "loop": 1,

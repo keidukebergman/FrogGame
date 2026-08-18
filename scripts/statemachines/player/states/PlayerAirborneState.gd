@@ -15,7 +15,9 @@ func _initialize_state(state_machine_node:FiniteStateMachine, root_node:Node):
 	root = root_node
 
 func _enter_state():
-	fall_timer = 0
+	print("PlayAirborneState")
+	(state_machine.renderer as AnimatedSprite3D).animation = "fall"
+	(state_machine.renderer as AnimatedSprite3D).play()
 	root.axis_lock_angular_z =true
 	super._enter_state()
 
@@ -29,7 +31,7 @@ func _state_update(_delta: float):
 	horizontal_velocity.y = 0
 	horizontal_velocity = lerp(horizontal_velocity, input_vector * movement_speed, _delta * acceleration)
 	if(state_machine._is_grounded()):
-			print("Go back to ground!!")
+			fall_timer = 0
 			tongue_attack_handler.active = true
 			state_machine._change_state(grounded_state)
 			return
