@@ -385,7 +385,7 @@ shape = SubResource("BoxShape3D_ajshl")
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 0, 0, 0)
 
 [node name="Sprite3D" type="Sprite3D" parent="FrogCharacter/Visual/slash_1/Node3D" unique_id=601824553]
-transform = Transform3D(-2.1855695e-07, -5.0000005, 2.1855696e-07, 1.9106854e-14, 2.1855696e-07, 5.0000005, -5, 2.1855696e-07, 9.553428e-15, 0.57455003, -0.002635479, 0)
+transform = Transform3D(-2.1855695e-07, -5.0000005, 2.1855696e-07, 1.9106854e-14, 2.1855696e-07, 5.0000005, -5, 2.1855703e-07, 9.553428e-15, 1.0140661, -0.002635479, 0)
 cast_shadow = 0
 alpha_cut = 2
 texture_filter = 0
@@ -397,7 +397,7 @@ texture = ExtResource("20_8o3c5")
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 0, 0, 0)
 
 [node name="Sprite3D" type="Sprite3D" parent="FrogCharacter/Visual/slash_2/Node3D" unique_id=1547998236]
-transform = Transform3D(-2.1855695e-07, -5.0000005, 2.1855696e-07, 1.9106854e-14, 2.1855696e-07, 5.0000005, -5, 2.1855696e-07, 9.553428e-15, 0.57455003, -0.002635479, 0)
+transform = Transform3D(-2.1855695e-07, -5.0000005, 2.1855696e-07, 1.9106854e-14, 2.1855696e-07, 5.0000005, -5, 2.1855703e-07, 9.553428e-15, 1.0140661, -0.002635479, 0)
 cast_shadow = 0
 modulate = Color(4.235506e-06, 0.6405625, 0.85088956, 1)
 alpha_cut = 2
@@ -410,7 +410,7 @@ texture = ExtResource("20_8o3c5")
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 0, 0, 0)
 
 [node name="Sprite3D" type="Sprite3D" parent="FrogCharacter/Visual/slash_3/Node3D" unique_id=2028909697]
-transform = Transform3D(-2.1855695e-07, -5.0000005, 2.1855696e-07, 1.9106854e-14, 2.1855696e-07, 5.0000005, -5, 2.1855696e-07, 9.553428e-15, 0.57455003, -0.002635479, 0)
+transform = Transform3D(-2.1855695e-07, -5.0000005, 2.1855696e-07, 1.9106854e-14, 2.1855696e-07, 5.0000005, -5, 2.1855703e-07, 9.553428e-15, 1.0140661, -0.002635479, 0)
 cast_shadow = 0
 modulate = Color(0.46897024, 0.58979595, 0, 1)
 alpha_cut = 2
@@ -423,7 +423,7 @@ texture = ExtResource("20_8o3c5")
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 0, 0, 0)
 
 [node name="Sprite3D" type="Sprite3D" parent="FrogCharacter/Visual/slash_H_1/Node3D" unique_id=1135273636]
-transform = Transform3D(-2.1855695e-07, -5.0000005, 2.1855696e-07, 1.9106854e-14, 2.1855696e-07, 5.0000005, -5, 2.1855696e-07, 9.553428e-15, 0.57455003, -0.002635479, 0)
+transform = Transform3D(-2.1855695e-07, -5.0000005, 2.1855696e-07, 1.9106854e-14, 2.1855696e-07, 5.0000005, -5, 2.1855703e-07, 9.553428e-15, 1.0140661, -0.002635479, 0)
 cast_shadow = 0
 modulate = Color(0.4906661, 0.74608916, 0.8014995, 1)
 alpha_cut = 2
