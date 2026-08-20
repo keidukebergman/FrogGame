@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://b4ye0343qbd4y" path="res://scripts/aggromanager.gd" id="7_gtwn5"]
 [ext_resource type="Script" uid="uid://cjvxfjyo5woxi" path="res://scripts/statemachines/enemy_fall_state.gd" id="8_n1xq6"]
 [ext_resource type="Script" uid="uid://b03jolxit32hw" path="res://scripts/damage_manager.gd" id="8_qhggb"]
+[ext_resource type="Script" uid="uid://dyyk8d0t137ir" path="res://scenes/instantiable/enemies/enemy_stagger_state.gd" id="9_jde4i"]
 [ext_resource type="Script" uid="uid://bujy08xidy0g7" path="res://scripts/death_manager.gd" id="9_o6hy7"]
 [ext_resource type="Script" uid="uid://1rqaiis71irb" path="res://scripts/health_manager.gd" id="10_340vr"]
 [ext_resource type="Script" uid="uid://eu8pfa82x6aq" path="res://scripts/water_splash_manager.gd" id="11_04pfb"]
@@ -99,6 +100,9 @@ knockback_amount = 7.0
 
 [node name="FallState" type="Node3D" parent="Mosquitoknight/Systems/StateManager" unique_id=2065644958]
 script = ExtResource("8_n1xq6")
+
+[node name="StaggerState" type="Node3D" parent="Mosquitoknight/Systems/StateManager" unique_id=1859463531]
+script = ExtResource("9_jde4i")
 
 [node name="Aggromanager" type="Node3D" parent="Mosquitoknight/Systems" unique_id=1507595778]
 script = ExtResource("7_gtwn5")
