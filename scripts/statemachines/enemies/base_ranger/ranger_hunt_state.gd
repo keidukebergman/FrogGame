@@ -14,6 +14,7 @@ var movement_direction:Vector3
 
 @export var attack_state:State
 @export var fall_state:State
+@export var stagger_state:State
 
 @export var ideal_target_distance:float = 5;
 @export var distance_tolerance:float = 3;

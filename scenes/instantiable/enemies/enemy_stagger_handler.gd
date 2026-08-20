@@ -1,0 +1,1 @@
+class_name EnemyStaggerHandler extends Node3D

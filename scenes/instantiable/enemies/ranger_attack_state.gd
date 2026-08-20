@@ -6,6 +6,7 @@ class_name RangerAttackState
 @export var attack_time:float = 0.3
 
 @export var next_state:State
+@export var stagger_state:State
 var attack_direction:Vector3
 @export var can_take_attack_knockback:bool
 @export var attack_knockback_force:float
