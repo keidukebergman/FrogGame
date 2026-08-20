@@ -215,11 +215,16 @@ script = ExtResource("5_gnc5k")
 stamina_manager = NodePath("../../Resources/StaminaManager")
 airborne_state = NodePath("../Airborne")
 grounded_state = NodePath("../Grounded")
+dash_duration = 0.15
+dash_invulnerability = 0.15
+dash_velocity_attenuation = 35
+dash_velocity = 12
 
-[node name="GroundLightAttack" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1317969824 node_paths=PackedStringArray("attacks", "airborne_state", "ground_state", "effect_manager")]
+[node name="GroundLightAttack" type="Node3D" parent="FrogCharacter/Systems/StateMachine" unique_id=1317969824 node_paths=PackedStringArray("attacks", "dash_state", "airborne_state", "ground_state", "effect_manager")]
 script = ExtResource("4_isv8f")
 attacks = [NodePath("Combo1_1"), NodePath("Combo1_2"), NodePath("Combo1_3")]
 combo_time = 0.19
+dash_state = NodePath("../DashState")
 airborne_state = NodePath("../Airborne")
 ground_state = NodePath("../Grounded")
 effect_manager = NodePath("../../EffectManager")

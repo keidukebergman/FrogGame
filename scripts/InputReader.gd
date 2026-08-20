@@ -9,7 +9,7 @@ var dash_input = ButtonInput.new()
 
 
 class ButtonInput:
-	var button_string = "attack"
+	var button_string = ""
 	var is_still_pressed = false
 	var press_timer = 0
 	
@@ -21,11 +21,10 @@ class ButtonInput:
 		return press_timer > 0
 
 	func queue_update(input_queue_time, _delta):
-		if Input.is_action_just_pressed("attack"):
+		if Input.is_action_just_pressed(button_string):
 			press_timer = input_queue_time
 			is_still_pressed = true
-			print("Updated attack timer")
-		if Input.is_action_just_released("attack"):
+		if Input.is_action_just_released(button_string):
 			is_still_pressed = false
 		if !is_still_pressed && press_timer > 0:
 			press_timer -= _delta
@@ -39,6 +38,7 @@ func _ready() -> void:
 func _process(_delta:float) -> void:
 	movement_vector = Input.get_vector("right", "left", "up", "down")
 	attack_input.queue_update(input_queue_time, _delta)
+	dash_input.queue_update(input_queue_time, _delta)
 
 func _get_attack_direction(object):
 	if joystick:
