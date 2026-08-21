@@ -6,6 +6,9 @@ class_name RangerAttackState
 @export var attack_time:float = 0.3
 
 @export var next_state:State
+@export var stagger_state:State
+@export var stagger_handler:EnemyStaggerHandler
+@export var effect_handler:EffectManager
 var attack_direction:Vector3
 @export var can_take_attack_knockback:bool
 @export var attack_knockback_force:float
@@ -25,7 +28,9 @@ func _enter_state():
 			state_machine._change_state(next_state)
 			return
 		attack_direction = (aggro_manager.target.global_position - root.global_position).normalized()
+		stagger_handler.is_active = true
 		await get_tree().create_timer(windup_time).timeout
+		stagger_handler.is_active = true
 		if aggro_manager.target == null:
 			state_machine._change_state(next_state)
 			return
@@ -36,9 +41,6 @@ func _enter_state():
 
 func _exit_state():
 	is_active = false
-
-func _state_update(_delta: float):
-	pass
 
 func _state_physics_update(_delta: float):
 	var yvel = root.velocity.y
@@ -71,3 +73,8 @@ func _calculate_intercept_time(delta_pos:Vector2):
 func _calculate_intercept(delta_pos:Vector2, velocity:Vector2, time:float):
 	var final_pos = delta_pos + velocity * time
 	return -atan2(final_pos.y, final_pos.x) + PI/2 
+
+func _on_staggered():
+	if is_active:
+		pass
+	pass

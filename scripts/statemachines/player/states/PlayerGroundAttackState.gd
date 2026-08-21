@@ -18,6 +18,7 @@ var wind_up = false
 var attack_direction:Vector3
 
 @export var jump_state:PlayerJumpState
+@export var dash_state:PlayerDashState
 @export var airborne_state:PlayerAirborneState
 @export var ground_state:PlayerGroundState
 @export var effect_manager:EffectManager
@@ -104,6 +105,8 @@ func _state_update(_delta: float):
 					state_machine._change_state(airborne_state)
 
 	if attack_timer >= current_attack.cancel_time * (current_attack.attack_winddown_time + current_attack.attack_time + current_attack.attack_windup_time):
+		if InputReader.dash_input.is_active():
+			state_machine._change_state(dash_state)
 		if InputReader.attack_input.is_active():
 			state_machine._change_state(ground_state)
 
