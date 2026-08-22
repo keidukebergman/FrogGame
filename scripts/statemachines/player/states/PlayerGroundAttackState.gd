@@ -124,7 +124,7 @@ func apply_damage(hurtbox:Hurtbox):
 	data.attacking_hitbox = current_attack.slash_hitbox
 	data.damage = current_attack.damage
 	var knockback_direction = Vector3(attack_direction.x, 0, attack_direction.z)
-	data.effects = {"knockback" : current_attack.knockback_amount * knockback_direction}
+	data.effects = {"knockback" : current_attack.knockback_amount * knockback_direction, "stagger" : 2}
 	hurtbox.apply_attack(data)
 
 func set_hitbox_rotation():

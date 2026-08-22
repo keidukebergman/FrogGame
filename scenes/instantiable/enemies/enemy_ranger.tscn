@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cosaprbtt63s3" path="res://scenes/instantiable/projectiles/projectile.tscn" id="7_0x6lq"]
 [ext_resource type="Script" uid="uid://cjvxfjyo5woxi" path="res://scripts/statemachines/enemy_fall_state.gd" id="8_h3iop"]
 [ext_resource type="Script" uid="uid://b4ye0343qbd4y" path="res://scripts/aggromanager.gd" id="9_ji4wv"]
+[ext_resource type="Script" uid="uid://dyyk8d0t137ir" path="res://scenes/instantiable/enemies/enemy_stagger_state.gd" id="9_lvvt3"]
 [ext_resource type="Script" uid="uid://b03jolxit32hw" path="res://scripts/damage_manager.gd" id="10_8eau4"]
 [ext_resource type="Script" uid="uid://bujy08xidy0g7" path="res://scripts/death_manager.gd" id="11_fqenq"]
 [ext_resource type="Script" uid="uid://1rqaiis71irb" path="res://scripts/health_manager.gd" id="12_8my1e"]
@@ -61,7 +62,7 @@ script = ExtResource("5_1jdny")
 current_state = NodePath("RangerHuntState")
 root = NodePath("../..")
 
-[node name="RangerHuntState" type="Node3D" parent="Mosquitoranger/Systems/StateManager" unique_id=1316184007 node_paths=PackedStringArray("aggro_manager", "nav", "body", "ground_poller", "attack_state", "fall_state", "stagger_handler")]
+[node name="RangerHuntState" type="Node3D" parent="Mosquitoranger/Systems/StateManager" unique_id=1316184007 node_paths=PackedStringArray("aggro_manager", "nav", "body", "ground_poller", "attack_state", "fall_state", "stagger_state", "stagger_handler")]
 script = ExtResource("5_qtv6h")
 aggro_manager = NodePath("../../Aggromanager")
 nav = NodePath("../../../NavigationAgent3D")
@@ -72,20 +73,30 @@ deceleration = 30.0
 ground_poller = NodePath("../../../GroundPolling")
 attack_state = NodePath("../RangerAttackState")
 fall_state = NodePath("../FallState")
+stagger_state = NodePath("../EnemyStaggerState")
 stagger_handler = NodePath("../../EffectManager/StaggerHandler")
 distance_tolerance = 1.0
 
-[node name="RangerAttackState" type="Node3D" parent="Mosquitoranger/Systems/StateManager" unique_id=1049232979 node_paths=PackedStringArray("aggro_manager", "next_state")]
+[node name="RangerAttackState" type="Node3D" parent="Mosquitoranger/Systems/StateManager" unique_id=1049232979 node_paths=PackedStringArray("aggro_manager", "next_state", "stagger_state", "stagger_handler", "effect_handler")]
 script = ExtResource("6_tao5y")
 aggro_manager = NodePath("../../Aggromanager")
 attack_time = 1.2
 next_state = NodePath("../RangerHuntState")
+stagger_state = NodePath("../EnemyStaggerState")
+stagger_handler = NodePath("../../EffectManager/StaggerHandler")
+effect_handler = NodePath("../../EffectManager")
 projectile_speed = 7.0
 shots = 3
 projectile = ExtResource("7_0x6lq")
 
 [node name="FallState" type="Node3D" parent="Mosquitoranger/Systems/StateManager" unique_id=1249741245]
 script = ExtResource("8_h3iop")
+
+[node name="EnemyStaggerState" type="Node" parent="Mosquitoranger/Systems/StateManager" unique_id=727933996 node_paths=PackedStringArray("stagger_manager", "fallback_state")]
+script = ExtResource("9_lvvt3")
+stagger_manager = NodePath("../../EffectManager/StaggerHandler")
+fallback_state = NodePath("../RangerHuntState")
+metadata/_custom_type_script = "uid://dyyk8d0t137ir"
 
 [node name="Aggromanager" type="Node3D" parent="Mosquitoranger/Systems" unique_id=1291779488]
 script = ExtResource("9_ji4wv")

@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://bgtk8eoxqk1wt" path="res://scripts/Draggable.gd" id="15_cvtpr"]
 [ext_resource type="Script" uid="uid://bi5fwt04sq1jq" path="res://scripts/Hurtbox_draggable.gd" id="16_gcqci"]
 [ext_resource type="Script" uid="uid://c7g7jvcrqudgm" path="res://scripts/Hitbox.gd" id="17_1o1ck"]
+[ext_resource type="Script" uid="uid://725cjofvyd3i" path="res://scenes/instantiable/enemies/enemy_stagger_handler.gd" id="18_ej604"]
 [ext_resource type="Script" uid="uid://cionpm6je6331" path="res://scripts/ground_polling.gd" id="19_feaxh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ajshl"]
@@ -101,8 +102,10 @@ knockback_amount = 7.0
 [node name="FallState" type="Node3D" parent="Mosquitoknight/Systems/StateManager" unique_id=2065644958]
 script = ExtResource("8_n1xq6")
 
-[node name="StaggerState" type="Node3D" parent="Mosquitoknight/Systems/StateManager" unique_id=1859463531]
+[node name="StaggerState" type="Node3D" parent="Mosquitoknight/Systems/StateManager" unique_id=1859463531 node_paths=PackedStringArray("stagger_manager", "fallback_state")]
 script = ExtResource("9_jde4i")
+stagger_manager = NodePath("../../EffectManager/StaggerHandler")
+fallback_state = NodePath("../SimpleHuntstate")
 
 [node name="Aggromanager" type="Node3D" parent="Mosquitoknight/Systems" unique_id=1507595778]
 script = ExtResource("7_gtwn5")
@@ -133,6 +136,10 @@ hurtbox = NodePath("../HitAndHurt/Hurtbox")
 
 [node name="KnockbackManager" type="Node3D" parent="Mosquitoknight/Systems/EffectManager" unique_id=1341901522 node_paths=PackedStringArray("body")]
 script = ExtResource("14_4cpg3")
+body = NodePath("../../..")
+
+[node name="StaggerHandler" type="Node3D" parent="Mosquitoknight/Systems/EffectManager" unique_id=1581710785 node_paths=PackedStringArray("body")]
+script = ExtResource("18_ej604")
 body = NodePath("../../..")
 
 [node name="DragabilityManager" type="Node3D" parent="Mosquitoknight/Systems" unique_id=421196037 node_paths=PackedStringArray("body", "hurtbox")]

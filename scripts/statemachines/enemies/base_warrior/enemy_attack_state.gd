@@ -27,7 +27,7 @@ func _enter_state():
 	is_active = true
 	_entry_id += 1
 	var my_id = _entry_id
-	if aggro_manager.target == null:
+	if aggro_manager.target == null || !is_active:
 		state_machine._change_state(next_state)
 		return
  	
@@ -36,7 +36,7 @@ func _enter_state():
 	set_slash_indicator_rotation()
 
 	await get_tree().create_timer(windup_time).timeout
-	if not is_active or my_id != _entry_id:
+	if not is_active or my_id != _entry_id or !is_active:
 		return 
 
 	registering = true
@@ -45,8 +45,6 @@ func _enter_state():
 	root.add_force(attack_direction * attack_velocity)
 
 	await get_tree().create_timer(attack_time).timeout
-	if not is_active or my_id != _entry_id:
-		return
 
 	hitbox.stop_detecting_hits()
 	attack_visual.visible = false
