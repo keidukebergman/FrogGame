@@ -1,7 +1,12 @@
 extends FiniteStateMachine
 class_name EnemyStateMachine
 
+@export var stagger_handler: EnemyStaggerHandler
+@export var stagger_state: State
+var can_be_staggered: bool = false
+
 func _ready():
+	if stagger_handler: stagger_handler.was_staggered.connect(on_stagger_signal)
 	states.resize(get_child_count())
 	var actual_size = 0
 	for child in get_children():
@@ -31,4 +36,6 @@ func _process(delta):
 func _physics_process(delta):
 	current_state._state_physics_update(delta)
 	
- 
+func on_stagger_signal(_stagger_amnt):
+	if can_be_staggered:
+		_change_state(stagger_state)

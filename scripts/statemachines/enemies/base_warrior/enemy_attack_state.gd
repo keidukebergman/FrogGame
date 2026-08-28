@@ -30,6 +30,7 @@ func _enter_state():
 	if aggro_manager.target == null || !is_active:
 		state_machine._change_state(next_state)
 		return
+	state_machine.can_be_staggered = true
  	
 	attack_direction = (aggro_manager.target.global_position - root.global_position).normalized()
 	set_hitbox_rotation()
@@ -55,6 +56,7 @@ func _exit_state():
 	is_active = false
 	hitbox.stop_detecting_hits()
 	attack_visual.visible = false
+	state_machine.can_be_staggered = false
 
 func hit_object(object):
 	var hurtbox = object

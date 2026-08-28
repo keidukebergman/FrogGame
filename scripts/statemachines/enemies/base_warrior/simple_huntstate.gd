@@ -26,6 +26,7 @@ func _initialize_state(state_machine_node:FiniteStateMachine, root_node:Node):
 
 func _enter_state():
 	super._enter_state()
+	state_machine.can_be_staggered = true
 
 var spawn_position:Vector3;
 
@@ -54,6 +55,7 @@ var destination_query_timeout:float = 0;
 
 func _exit_state():
 	super._exit_state()
+	state_machine.can_be_staggered = false
 
 
 var nav_velocity:Vector3 = Vector3.ZERO

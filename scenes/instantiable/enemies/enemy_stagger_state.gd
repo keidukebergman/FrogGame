@@ -8,7 +8,6 @@ var stagger_time:float = 1
 func _enter_state():
 	print("is staggered!!!")
 	super._enter_state()
-	stagger_manager.is_active = false
 	stagger_manager.was_staggered.connect(on_stagger_received)
 
 func on_stagger_received(force):

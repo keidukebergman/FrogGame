@@ -68,12 +68,14 @@ texture = ExtResource("3_feaxh")
 
 [node name="Systems" type="Node3D" parent="Mosquitoknight" unique_id=1792654320]
 
-[node name="StateManager" type="Node3D" parent="Mosquitoknight/Systems" unique_id=1180063668 node_paths=PackedStringArray("current_state", "root")]
+[node name="StateManager" type="Node3D" parent="Mosquitoknight/Systems" unique_id=1180063668 node_paths=PackedStringArray("stagger_handler", "stagger_state", "current_state", "root")]
 script = ExtResource("4_n1xq6")
+stagger_handler = NodePath("../EffectManager/StaggerHandler")
+stagger_state = NodePath("StaggerState")
 current_state = NodePath("SimpleHuntstate")
 root = NodePath("../..")
 
-[node name="SimpleHuntstate" type="Node3D" parent="Mosquitoknight/Systems/StateManager" unique_id=352460185 node_paths=PackedStringArray("aggro_manager", "nav", "body", "ground_poller", "attack_state")]
+[node name="SimpleHuntstate" type="Node3D" parent="Mosquitoknight/Systems/StateManager" unique_id=352460185 node_paths=PackedStringArray("aggro_manager", "nav", "body", "ground_poller", "attack_state", "fall_state")]
 script = ExtResource("5_jde4i")
 aggro_manager = NodePath("../../Aggromanager")
 nav = NodePath("../../../NavigationAgent3D")
@@ -83,6 +85,7 @@ acceleration = 30.0
 deceleration = 30.0
 ground_poller = NodePath("../../../GroundPolling")
 attack_state = NodePath("../MosquitoAttackState")
+fall_state = NodePath("../FallState")
 
 [node name="MosquitoAttackState" type="Node3D" parent="Mosquitoknight/Systems/StateManager" unique_id=614694876 node_paths=PackedStringArray("aggro_manager", "nav", "hitbox", "attack_visual", "next_state")]
 script = ExtResource("6_ej604")
