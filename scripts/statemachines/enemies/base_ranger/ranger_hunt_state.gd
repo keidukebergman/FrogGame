@@ -14,8 +14,6 @@ var movement_direction:Vector3
 
 @export var attack_state:State
 @export var fall_state:State
-@export var stagger_state:State
-@export var stagger_handler:EnemyStaggerHandler
 
 @export var ideal_target_distance:float = 5;
 @export var distance_tolerance:float = 3;
@@ -30,11 +28,12 @@ func _initialize_state(state_machine_node:FiniteStateMachine, root_node:Node):
 	nav.velocity_computed.connect(_on_velocity_computed)
 
 func _enter_state() -> void:
-	stagger_handler.is_active = true
+	state_machine.can_be_staggered = true
 	super._enter_state()
 	_set_nav_target()
 
 func _exit_state() -> void:
+	state_machine.can_be_staggered = false
 	super._exit_state()
 
 var spawn_position:Vector3;
@@ -96,9 +95,3 @@ func _state_physics_update(delta: float) -> void:
 func _on_velocity_computed(safe_velocity: Vector3) -> void:
 	if is_active:
 		nav_velocity = safe_velocity
-		
-
-func _on_staggered():
-	if is_active:
-		pass
-	pass

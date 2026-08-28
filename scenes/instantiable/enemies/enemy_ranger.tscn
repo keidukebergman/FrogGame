@@ -57,12 +57,14 @@ texture = ExtResource("3_tao5y")
 
 [node name="Systems" type="Node3D" parent="Mosquitoranger" unique_id=1205201443]
 
-[node name="StateManager" type="Node3D" parent="Mosquitoranger/Systems" unique_id=957040991 node_paths=PackedStringArray("current_state", "root")]
+[node name="StateManager" type="Node3D" parent="Mosquitoranger/Systems" unique_id=957040991 node_paths=PackedStringArray("stagger_handler", "stagger_state", "current_state", "root")]
 script = ExtResource("5_1jdny")
+stagger_handler = NodePath("../EffectManager/StaggerHandler")
+stagger_state = NodePath("EnemyStaggerState")
 current_state = NodePath("RangerHuntState")
 root = NodePath("../..")
 
-[node name="RangerHuntState" type="Node3D" parent="Mosquitoranger/Systems/StateManager" unique_id=1316184007 node_paths=PackedStringArray("aggro_manager", "nav", "body", "ground_poller", "attack_state", "fall_state", "stagger_state", "stagger_handler")]
+[node name="RangerHuntState" type="Node3D" parent="Mosquitoranger/Systems/StateManager" unique_id=1316184007 node_paths=PackedStringArray("aggro_manager", "nav", "body", "ground_poller", "attack_state", "fall_state")]
 script = ExtResource("5_qtv6h")
 aggro_manager = NodePath("../../Aggromanager")
 nav = NodePath("../../../NavigationAgent3D")
@@ -73,8 +75,6 @@ deceleration = 30.0
 ground_poller = NodePath("../../../GroundPolling")
 attack_state = NodePath("../RangerAttackState")
 fall_state = NodePath("../FallState")
-stagger_state = NodePath("../EnemyStaggerState")
-stagger_handler = NodePath("../../EffectManager/StaggerHandler")
 distance_tolerance = 1.0
 
 [node name="RangerAttackState" type="Node3D" parent="Mosquitoranger/Systems/StateManager" unique_id=1049232979 node_paths=PackedStringArray("aggro_manager", "next_state", "stagger_state", "stagger_handler", "effect_handler")]

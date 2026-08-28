@@ -22,6 +22,7 @@ func _initialize_state(state_machine_node:FiniteStateMachine, root_node:Node):
 	super._initialize_state(state_machine_node, root_node)
 
 func _enter_state():
+	state_machine.can_be_staggered = true
 	is_active = true
 	for n in shots:
 		if aggro_manager.target == null:
@@ -40,6 +41,7 @@ func _enter_state():
 	state_machine._change_state(next_state)
 
 func _exit_state():
+	state_machine.can_be_staggered = false
 	is_active = false
 
 func _state_physics_update(_delta: float):
@@ -73,8 +75,3 @@ func _calculate_intercept_time(delta_pos:Vector2):
 func _calculate_intercept(delta_pos:Vector2, velocity:Vector2, time:float):
 	var final_pos = delta_pos + velocity * time
 	return -atan2(final_pos.y, final_pos.x) + PI/2 
-
-func _on_staggered():
-	if is_active:
-		pass
-	pass

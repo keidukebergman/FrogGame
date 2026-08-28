@@ -36,7 +36,7 @@ func _ready():
 func _change_state(new_state: State):
 	print("swapping state ", current_state, " to ", new_state)
 	if new_state == current_state:
-		push_warning("Attempting to set state to current state.")
+		push_warning("Attempting to set state to current state. This might be ok, esp for initialization.")
 	if current_state is State:
 		current_state._exit_state()
 	new_state._enter_state()
