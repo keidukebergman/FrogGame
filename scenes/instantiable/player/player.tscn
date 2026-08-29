@@ -235,7 +235,6 @@ slice_movement_force = 6.0
 slice_movement_curve = SubResource("Curve_isv8f")
 attack_deceleration = 30.0
 attack_time = 0.2
-attack_windup_time = 0.25
 attack_winddown_time = 0.2
 cancel_time = 0.692
 slash_hitbox = NodePath("../../../HitAndHurt/Hitboxes/slash_1")

@@ -125,8 +125,8 @@ root = NodePath("../../..")
 
 [node name="HealthManager" type="Node3D" parent="Mosquitoknight/Systems" unique_id=2006210337]
 script = ExtResource("10_340vr")
-health = 30.0
-max_health = 30.0
+health = 50.0
+max_health = 50.0
 
 [node name="WaterSplashManager" type="Node3D" parent="Mosquitoknight/Systems" unique_id=702034483 node_paths=PackedStringArray("hurtbox")]
 script = ExtResource("11_04pfb")

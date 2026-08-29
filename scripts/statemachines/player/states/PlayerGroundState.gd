@@ -25,6 +25,7 @@ func _enter_state():
 	if (state_machine.renderer as AnimatedSprite3D).animation != "idle" || (state_machine.renderer as AnimatedSprite3D).animation != "walk":
 		(state_machine.renderer as AnimatedSprite3D).animation = "idle"
 		(state_machine.renderer as AnimatedSprite3D).play()
+		print("Set idle anim")
 	pass
 
 func _exit_state():
@@ -67,6 +68,9 @@ func _state_update(_delta: float):
 	else:
 		renderer.flip_h = true
 	var input_vector = Vector3(-InputReader.movement_vector.x, 0, InputReader.movement_vector.y).normalized()
+	
+	if !is_active:
+		return
 	if input_vector.length() > 0:
 		if(state_machine.renderer as AnimatedSprite3D).animation != "walk":
 			(state_machine.renderer as AnimatedSprite3D).animation = "walk"
@@ -75,6 +79,7 @@ func _state_update(_delta: float):
 		if	(state_machine.renderer as AnimatedSprite3D).animation != "idle":
 			(state_machine.renderer as AnimatedSprite3D).animation = "idle"
 			(state_machine.renderer as AnimatedSprite3D).play()
+			print("Set idle anim s2")
 
 func calculate_new_velocity(target_velocity:Vector3, current_velocity:Vector3, delta:float) -> Vector3:
 	var new_velocity:Vector3 = current_velocity

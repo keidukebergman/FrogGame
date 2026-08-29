@@ -54,6 +54,7 @@ func _enter_state():
 	super._enter_state()
 	(state_machine.renderer as AnimatedSprite3D).animation = "attack_draw"
 	(state_machine.renderer as AnimatedSprite3D).play()
+	print((state_machine.renderer as AnimatedSprite3D).animation)
 	print("playing attack anim")
 
 func _start_attack():
@@ -84,7 +85,7 @@ func _exit_state():
 func _state_update(_delta: float):
 	root.move_and_slide()
 	attack_timer += _delta
-
+	print((state_machine.renderer as AnimatedSprite3D).animation)
 	if current_attack.can_take_attack_knockback:
 		root.velocity = root.velocity.move_toward(Vector3.ZERO, _delta * current_attack.attack_deceleration)
 	else:

@@ -117,7 +117,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"attack_draw",
-"speed": 24.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -213,9 +213,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("18_hvauk")
-}, {
-"duration": 1.0,
 "texture": ExtResource("14_kfubh")
 }, {
 "duration": 1.0,
@@ -226,6 +223,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("17_k8r57")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_hvauk")
 }],
 "loop": 1,
 "name": &"unsheathe",
