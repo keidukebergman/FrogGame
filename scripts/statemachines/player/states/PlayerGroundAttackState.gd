@@ -54,6 +54,7 @@ func _enter_state():
 	super._enter_state()
 	(state_machine.renderer as AnimatedSprite3D).animation = "attack_draw"
 	(state_machine.renderer as AnimatedSprite3D).play()
+	print("playing attack anim")
 
 func _start_attack():
 	root.add_force(attack_direction * current_attack.slice_movement_force)

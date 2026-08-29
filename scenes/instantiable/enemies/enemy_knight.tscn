@@ -72,7 +72,7 @@ script = ExtResource("5_wds1x")
 current_state = NodePath("SimpleHuntstate")
 root = NodePath("../..")
 
-[node name="SimpleHuntstate" type="Node3D" parent="Knight/Systems/StateManager" unique_id=352460185 node_paths=PackedStringArray("aggro_manager", "nav", "body", "ground_poller", "attack_state")]
+[node name="SimpleHuntstate" type="Node3D" parent="Knight/Systems/StateManager" unique_id=352460185 node_paths=PackedStringArray("aggro_manager", "nav", "body", "ground_poller")]
 script = ExtResource("6_dh7st")
 aggro_manager = NodePath("../../Aggromanager")
 nav = NodePath("../../../NavigationAgent3D")
@@ -81,7 +81,6 @@ movement_speed = 4.0
 acceleration = 30.0
 deceleration = 30.0
 ground_poller = NodePath("../../../GroundPolling")
-attack_state = NodePath("")
 
 [node name="FallState" type="Node3D" parent="Knight/Systems/StateManager" unique_id=2065644958]
 script = ExtResource("8_6qubc")
