@@ -88,6 +88,18 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("11_6mltf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_k8r57")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_r8gwj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_h1rft")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_kfubh")
 }],
 "loop": 1,
 "name": &"attack",
@@ -213,6 +225,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("18_hvauk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_k8r57")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_r8gwj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_h1rft")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_kfubh")
+}],
+"loop": 1,
+"name": &"sheathe",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("14_kfubh")
 }, {
 "duration": 1.0,
@@ -270,5 +302,5 @@ animations = [{
 }],
 "loop": 1,
 "name": &"walk",
-"speed": 16.0
+"speed": 14.0
 }]

@@ -80,7 +80,7 @@ script = ExtResource("5_jde4i")
 aggro_manager = NodePath("../../Aggromanager")
 nav = NodePath("../../../NavigationAgent3D")
 body = NodePath("../../..")
-movement_speed = 4.0
+movement_speed = 3.0
 acceleration = 30.0
 deceleration = 30.0
 ground_poller = NodePath("../../../GroundPolling")
@@ -192,5 +192,6 @@ shape = SubResource("SphereShape3D_ppyta")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="Mosquitoknight" unique_id=486916392]
 avoidance_enabled = true
+radius = 2.58
 
 [connection signal="exited_water" from="Mosquitoknight/Systems/WaterSplashManager" to="Mosquitoknight/Systems/DeathManager" method="_on_water_splash_manager_exited_water"]

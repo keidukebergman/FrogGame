@@ -235,7 +235,7 @@ slice_movement_force = 6.0
 slice_movement_curve = SubResource("Curve_isv8f")
 attack_deceleration = 30.0
 attack_time = 0.2
-attack_winddown_time = 0.2
+attack_winddown_time = 0.4
 cancel_time = 0.692
 slash_hitbox = NodePath("../../../HitAndHurt/Hitboxes/slash_1")
 slash_fx = NodePath("../../../../Visual/slash_1/Node3D")
@@ -248,9 +248,9 @@ slice_movement_curve = SubResource("Curve_isv8f")
 attack_deceleration = 30.0
 attack_time = 0.2
 attack_windup_time = 0.1
-attack_winddown_time = 0.2
+attack_winddown_time = 0.4
 cancel_time = 0.692
-slash_hitbox = NodePath("../../../HitAndHurt/Hitboxes/slash_2")
+slash_hitbox = NodePath("")
 slash_fx = NodePath("../../../../Visual/slash_2/Node3D")
 metadata/_custom_type_script = "uid://bc1n5f7xdhbsb"
 
@@ -263,10 +263,10 @@ slice_movement_curve = SubResource("Curve_isv8f")
 attack_deceleration = 30.0
 attack_time = 0.2
 attack_windup_time = 0.1
-attack_winddown_time = 0.2
+attack_winddown_time = 0.4
 can_cancel = false
 cancel_time = 1.0
-slash_hitbox = NodePath("../../../HitAndHurt/Hitboxes/slash_3")
+slash_hitbox = NodePath("../../../HitAndHurt/Hitboxes/slash_1")
 slash_fx = NodePath("../../../../Visual/slash_3/Node3D")
 metadata/_custom_type_script = "uid://bc1n5f7xdhbsb"
 
@@ -338,24 +338,6 @@ collision_mask = 41
 script = ExtResource("15_wq28r")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FrogCharacter/Systems/HitAndHurt/Hitboxes/slash_1" unique_id=421570624]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46287537, 0, 0)
-shape = SubResource("BoxShape3D_uacia")
-
-[node name="slash_2" type="Area3D" parent="FrogCharacter/Systems/HitAndHurt/Hitboxes" unique_id=2006084339]
-collision_layer = 0
-collision_mask = 41
-script = ExtResource("15_wq28r")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="FrogCharacter/Systems/HitAndHurt/Hitboxes/slash_2" unique_id=221670821]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46287537, 0, 0)
-shape = SubResource("BoxShape3D_uacia")
-
-[node name="slash_3" type="Area3D" parent="FrogCharacter/Systems/HitAndHurt/Hitboxes" unique_id=1040192488]
-collision_layer = 0
-collision_mask = 41
-script = ExtResource("15_wq28r")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="FrogCharacter/Systems/HitAndHurt/Hitboxes/slash_3" unique_id=560144788]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46287537, 0, 0)
 shape = SubResource("BoxShape3D_uacia")
 

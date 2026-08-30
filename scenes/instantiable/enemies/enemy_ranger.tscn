@@ -179,5 +179,6 @@ shape = SubResource("SphereShape3D_ppyta")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="Mosquitoranger" unique_id=273321959]
 avoidance_enabled = true
+radius = 3.28
 
 [connection signal="exited_water" from="Mosquitoranger/Systems/WaterSplashManager" to="Mosquitoranger/Systems/DeathManager" method="_on_water_splash_manager_exited_water"]
