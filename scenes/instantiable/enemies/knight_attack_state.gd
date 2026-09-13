@@ -3,7 +3,7 @@ class_name KnightAttackState
 @export var aggro_manager:AggroManager
 @export var nav:NavigationAgent3D
 @export var hitbox:Hitbox
-@export var attack_visual:Node3D
+@export var max_range: float = 30
 @export var windup_time:float = 0.6
 @export var attack_time:float = 0.3
 @export var next_state:State
@@ -21,7 +21,6 @@ var _entry_id:int = 0
 func _initialize_state(state_machine_node:FiniteStateMachine, root_node:Node):
 	super._initialize_state(state_machine_node, root_node)
 	hitbox.hit_entity.connect(hit_object)
-	attack_visual.visible = false
 
 func _enter_state():
 	is_active = true
@@ -41,7 +40,6 @@ func _enter_state():
 
 	registering = true
 	hitbox.start_detecting_hits()
-	attack_visual.visible = true
 	root.add_force(attack_direction * attack_velocity)
 
 	await get_tree().create_timer(attack_time).timeout
@@ -49,14 +47,12 @@ func _enter_state():
 		return
 
 	hitbox.stop_detecting_hits()
-	attack_visual.visible = false
 	state_machine._change_state(next_state)
 
 func _exit_state():
 	registering = false
 	is_active = false
 	hitbox.stop_detecting_hits()
-	attack_visual.visible = false
 
 func hit_object(object):
 	var hurtbox = object
@@ -90,4 +86,3 @@ func set_hitbox_rotation():
 func set_slash_indicator_rotation():
 	var dir:Vector2 = Vector2(attack_direction.z, attack_direction.x)
 	var angle = -atan2(dir.x, dir.y)
-	attack_visual.rotation = Vector3(attack_visual.rotation.x, angle, attack_visual.rotation.z)

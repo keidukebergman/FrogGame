@@ -85,10 +85,10 @@ movement_speed = 4.0
 acceleration = 30.0
 deceleration = 30.0
 ground_poller = NodePath("../../../GroundPolling")
-attack_state = NodePath("../MosquitoAttackState")
+attack_state = NodePath("../KnightAttack")
 fall_state = NodePath("../FallState")
 
-[node name="MosquitoAttackState" type="Node3D" parent="ToadKnight/Systems/StateManager" unique_id=614694876]
+[node name="KnightAttack" type="Node3D" parent="ToadKnight/Systems/StateManager" unique_id=614694876]
 script = ExtResource("7_lyynm")
 
 [node name="FallState" type="Node3D" parent="ToadKnight/Systems/StateManager" unique_id=2065644958]
